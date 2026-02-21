@@ -13,10 +13,10 @@ app.get('/', (c) => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="حوّل محتواك إلى آلة تجذب العملاء - خدمة مونتاج احترافي + نظام نمو + جلسات توجيه مع البروفيسورة" />
   <meta name="keywords" content="مونتاج فيديو, تعديل فيديو, صانع محتوى, نمو محتوى, كريتور, ريلز, يوتيوب" />
-  <meta property="og:title" content="ContentPro | حوّل محتواك إلى آلة تجذب العملاء" />
+  <meta property="og:title" content="CreatorHub | حوّل محتواك إلى آلة تجذب العملاء" />
   <meta property="og:description" content="مش مجرد مونتاج فيديو… نظام متكامل يساعدك تنشر محتوى احترافي وتحوّل المشاهدين إلى عملاء" />
   <meta property="og:type" content="website" />
-  <title>ContentPro | حوّل محتواك إلى آلة تجذب العملاء</title>
+  <title>CreatorHub | حوّل محتواك إلى آلة تجذب العملاء</title>
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,7 +42,7 @@ app.get('/', (c) => {
     <div class="container nav-inner">
       <div class="logo">
         <span class="logo-icon"><i class="fas fa-film"></i></span>
-        <span class="logo-text">Content<span class="accent">Pro</span></span>
+        <span class="logo-text">Creator<span class="accent">Hub</span></span>
       </div>
       <div class="nav-actions">
         <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
@@ -463,8 +463,8 @@ app.get('/', (c) => {
       <div class="section-tag ar-text">المقارنة</div>
       <div class="section-tag en-text" style="display:none">COMPARISON</div>
 
-      <h2 class="section-title ar-text">ليه <span class="gradient-text">ContentPro</span> ومش غيرنا؟</h2>
-      <h2 class="section-title en-text" style="display:none">Why <span class="gradient-text">ContentPro</span> and Not Others?</h2>
+      <h2 class="section-title ar-text">ليه <span class="gradient-text">CreatorHub</span> ومش غيرنا؟</h2>
+      <h2 class="section-title en-text" style="display:none">Why <span class="gradient-text">CreatorHub</span> and Not Others?</h2>
 
       <div class="comparison-grid">
         <div class="compare-card compare-others animate-on-scroll">
@@ -492,7 +492,7 @@ app.get('/', (c) => {
         <div class="compare-card compare-us animate-on-scroll">
           <div class="compare-header">
             <i class="fas fa-check-circle"></i>
-            <span>ContentPro</span>
+            <span>CreatorHub</span>
           </div>
           <ul class="compare-list">
             <li class="ar-text"><i class="fas fa-check"></i> نظام متكامل من الاستراتيجية للمونتاج</li>
@@ -646,8 +646,8 @@ app.get('/', (c) => {
       <div class="testimonials-grid">
         <div class="testimonial-card animate-on-scroll">
           <div class="stars">★★★★★</div>
-          <p class="ar-text">"قبل ContentPro كنت بنشر فيديوهات ومعنديش أي نتيجة. بعد أول شهر معاهم وصلت لـ 50K متابع جديد!"</p>
-          <p class="en-text" style="display:none">"Before ContentPro I was posting with zero results. After the first month with them I gained 50K new followers!"</p>
+          <p class="ar-text">"قبل CreatorHub كنت بنشر فيديوهات ومعنديش أي نتيجة. بعد أول شهر معاهم وصلت لـ 50K متابع جديد!"</p>
+          <p class="en-text" style="display:none">"Before CreatorHub I was posting with zero results. After the first month with them I gained 50K new followers!"</p>
           <div class="testimonial-author">
             <div class="author-avatar">م</div>
             <div>
@@ -937,10 +937,10 @@ app.get('/', (c) => {
       <div class="footer-inner">
         <div class="footer-logo">
           <span class="logo-icon"><i class="fas fa-film"></i></span>
-          <span class="logo-text">Content<span class="accent">Pro</span></span>
+          <span class="logo-text">Creator<span class="accent">Hub</span></span>
         </div>
-        <p class="ar-text">© 2025 ContentPro — جميع الحقوق محفوظة</p>
-        <p class="en-text" style="display:none">© 2025 ContentPro — All Rights Reserved</p>
+        <p class="ar-text">© 2025 CreatorHub — جميع الحقوق محفوظة</p>
+        <p class="en-text" style="display:none">© 2025 CreatorHub — All Rights Reserved</p>
         <div class="footer-socials">
           <a href="https://wa.me/201068400789" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
