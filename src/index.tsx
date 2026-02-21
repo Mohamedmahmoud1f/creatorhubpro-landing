@@ -772,56 +772,279 @@ app.get('/', (c) => {
   ============================= -->
   <section class="testimonials-section section-padding" id="testimonials">
     <div class="container">
-      <div class="section-tag ar-text">آراء العملاء</div>
-      <div class="section-tag en-text" style="display:none">CLIENT REVIEWS</div>
 
-      <h2 class="section-title ar-text">ماذا قالوا <span class="gradient-text">عن التجربة؟</span></h2>
-      <h2 class="section-title en-text" style="display:none">What Did They <span class="gradient-text">Say About It?</span></h2>
+      <div class="section-tag ar-text">آراء حقيقية</div>
+      <div class="section-tag en-text" style="display:none">REAL REVIEWS</div>
 
-      <div class="testimonials-grid">
-        <div class="testimonial-card animate-on-scroll">
-          <div class="stars">★★★★★</div>
-          <p class="ar-text">"قبل CreatorPro كنت بنشر فيديوهات ومعنديش أي نتيجة. بعد أول شهر معاهم وصلت لـ 50K متابع جديد!"</p>
-          <p class="en-text" style="display:none">"Before CreatorPro I was posting with zero results. After the first month with them I gained 50K new followers!"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">م</div>
-            <div>
-              <strong class="ar-text">محمد علي</strong>
-              <strong class="en-text" style="display:none">Mohamed Ali</strong>
-              <span class="ar-text">كريتور — لايف ستايل</span>
-              <span class="en-text" style="display:none">Creator — Lifestyle</span>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card animate-on-scroll">
-          <div class="stars">★★★★★</div>
-          <p class="ar-text">"جلسة البروفيسورة غيّرت طريقة تفكيري في المحتوى. المونتاج احترافي جداً والتسليم في الوقت دايماً."</p>
-          <p class="en-text" style="display:none">"The Professor's session completely changed how I think about content. The editing is super professional and always on time."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">ن</div>
-            <div>
-              <strong class="ar-text">نورا إبراهيم</strong>
-              <strong class="en-text" style="display:none">Nora Ibrahim</strong>
-              <span class="ar-text">صاحبة بيزنس — أزياء</span>
-              <span class="en-text" style="display:none">Business Owner — Fashion</span>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card animate-on-scroll">
-          <div class="stars">★★★★★</div>
-          <p class="ar-text">"زادت مبيعاتي 3 أضعاف بعد ما غيّروا طريقة تقديم محتوى الشركة. الاستراتيجية دي بتشتغل فعلاً!"</p>
-          <p class="en-text" style="display:none">"My sales tripled after they changed how my business presents content. This strategy actually works!"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">أ</div>
-            <div>
-              <strong class="ar-text">أحمد سامي</strong>
-              <strong class="en-text" style="display:none">Ahmed Sami</strong>
-              <span class="ar-text">مؤسس شركة — تك</span>
-              <span class="en-text" style="display:none">Startup Founder — Tech</span>
-            </div>
-          </div>
+      <!-- Trust counter -->
+      <div class="testi-trust-bar animate-on-scroll">
+        <div class="testi-trust-inner">
+          <span class="testi-trust-icon"><i class="fas fa-shield-alt"></i></span>
+          <p class="ar-text">أكثر من <strong>100+</strong> صانع محتوى وبيزنس وثقوا بنا وحققوا نتائج حقيقية</p>
+          <p class="en-text" style="display:none">Over <strong>100+</strong> content creators and businesses trusted us and got real results</p>
         </div>
       </div>
+
+      <h2 class="section-title ar-text">ماذا قالوا عن <span class="gradient-text">التجربة؟</span></h2>
+      <h2 class="section-title en-text" style="display:none">What People Are <span class="gradient-text">Saying</span></h2>
+
+      <!-- ── TIER 1: مبتدئين ── -->
+      <div class="testi-tier-label ar-text"><i class="fas fa-seedling"></i> المبتدئون — بداية الرحلة</div>
+      <div class="testi-tier-label en-text" style="display:none"><i class="fas fa-seedling"></i> Beginners — Starting the Journey</div>
+
+      <div class="testimonials-grid">
+
+        <!-- T1 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"كنت بصور فيديوهات من موبايلي ومحدش بيشوفها… بعد ما بدأت معاهم بقى عندي ناس بتتواصل معايا وتسأل عن شغلي. الفيديو اتغيّر تماماً."</p>
+          <p class="en-text testi-quote" style="display:none">"I was recording videos on my phone and nobody watched them… after starting with them people started reaching out asking about my work. The video quality changed completely."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-purple">م</div>
+            <div class="author-info">
+              <strong>مريم</strong>
+              <span class="ar-text">ببيع منتجات يدوية من البيت</span>
+              <span class="en-text" style="display:none">Sells handmade products from home</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T2 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"كنت مش عارف أبدأ منين خالص… دخلت الجلسة مع البروفيسور وطلعت بخطة واضحة خطوة خطوة. ده أول مرة أحس إن عندي اتجاه صح."</p>
+          <p class="en-text testi-quote" style="display:none">"I had no idea where to start at all… I went into the Professor's session and came out with a clear step-by-step plan. First time I felt like I had the right direction."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-blue">ع</div>
+            <div class="author-info">
+              <strong>عمر</strong>
+              <span class="ar-text">عنده صفحة صغيرة على إنستجرام ولسه بيبدأ</span>
+              <span class="en-text" style="display:none">Has a small Instagram page and just starting out</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T3 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"كنت خايف أبدأ لأني مش متأكد إن المحتوى بتاعي كويس… لكن بعد أول فيديو معاهم شفت إن الناس بدأت تتفاعل فعلاً. الفيديوهات بقت بتشد."</p>
+          <p class="en-text testi-quote" style="display:none">"I was scared to start because I wasn't sure my content was good enough… but after the first video with them I saw people actually engaging. The videos started hooking people."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-green">س</div>
+            <div class="author-info">
+              <strong>سارة</strong>
+              <span class="ar-text">بتقدم خدمات أونلاين وعايزة تبني حضور</span>
+              <span class="en-text" style="display:none">Offers online services and wants to build a presence</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T4 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"كنت بضيع ساعات في المونتاج ومش طالع حاجة تنفع… دلوقتي بوفر وقتي كله وبتفرغ للشغل الأساسي. التسليم سريع وبيشتغل بجد."</p>
+          <p class="en-text testi-quote" style="display:none">"I used to waste hours editing and nothing good came out… now I save all that time and focus on my core work. Delivery is fast and they really deliver."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-orange">ك</div>
+            <div class="author-info">
+              <strong>كريم</strong>
+              <span class="ar-text">عنده براند بسيط ولسه بيبدأ على السوشيال</span>
+              <span class="en-text" style="display:none">Has a small brand and just getting started on social media</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T5 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"أنا مش خبير في التصوير ومش عارف المونتاج… بس معاهم حسيت إن عندي فريق بيشتغل معايا. أول ريلز عمله وصل لـ 8 آلاف مشاهدة."</p>
+          <p class="en-text testi-quote" style="display:none">"I'm no expert in filming or editing… but with them I felt like I had a team working with me. The first reel we made reached 8,000 views."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-pink">ر</div>
+            <div class="author-info">
+              <strong>ريم</strong>
+              <span class="ar-text">بتبيع كورسات أونلاين صغيرة</span>
+              <span class="en-text" style="display:none">Sells small online courses</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── TIER 2: متوسطين ── -->
+      <div class="testi-tier-label testi-tier-mid ar-text"><i class="fas fa-chart-line"></i> المتوسطون — في طريق النمو</div>
+      <div class="testi-tier-label testi-tier-mid en-text" style="display:none"><i class="fas fa-chart-line"></i> Intermediate — On the Growth Path</div>
+
+      <div class="testimonials-grid">
+
+        <!-- T6 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"كنت بنزل محتوى بانتظام بس التفاعل واقف… جلسة واحدة مع البروفيسور غيّرت طريقة تفكيري في الهوك والأول ثواني. التفاعل زاد 3 مرات في شهر."</p>
+          <p class="en-text testi-quote" style="display:none">"I was posting consistently but engagement was flat… one session with the Professor changed how I think about hooks and the first seconds. Engagement tripled in a month."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-teal">ي</div>
+            <div class="author-info">
+              <strong>ياسمين</strong>
+              <span class="ar-text">بتعمل فيديوهات تعليمية وعايزة تكبّر</span>
+              <span class="en-text" style="display:none">Creates educational videos and wants to grow</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T7 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"كنت شايل كل حاجة لوحدي — التصوير والمونتاج والبوستات… بقيت بسلّم الخام وأستلم المحتوى جاهز. بقى عندي وقت أفكر في النمو بدل ما أتعب في التنفيذ."</p>
+          <p class="en-text testi-quote" style="display:none">"I was doing everything alone — filming, editing, posting… now I hand over the raw footage and receive ready content. I have time to think about growth instead of getting exhausted in execution."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-indigo">ط</div>
+            <div class="author-info">
+              <strong>طارق</strong>
+              <span class="ar-text">بقدم استشارات أونلاين ومحتاج حضور قوي</span>
+              <span class="en-text" style="display:none">Offers online consulting and needs a strong presence</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T8 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"عندي بيزنس صغير وكنت بجرب السوشيال بدون خطة… البروفيسور فهّمني إزاي أحوّل المشاهدات لعملاء فعليين. دلوقتي بيجيلي استفسارات كل يوم من الريلز."</p>
+          <p class="en-text testi-quote" style="display:none">"I have a small business and was trying social media with no plan… the Professor showed me how to turn views into actual clients. Now I get inquiries every day from reels."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-amber">ن</div>
+            <div class="author-info">
+              <strong>نادر</strong>
+              <span class="ar-text">عنده بيزنس صغير وبيجرب السوشيال ميديا</span>
+              <span class="en-text" style="display:none">Has a small business and trying social media</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T9 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"كنت بعمل محتوى على تيك توك وعايز أكبر بس مش عارف كيف… لأول مرة حسيت إن في حد بيوجهني صح. وصلت لـ 20 ألف متابع في شهرين بس."</p>
+          <p class="en-text testi-quote" style="display:none">"I was making TikTok content and wanted to grow but didn't know how… for the first time I felt like someone was guiding me right. Reached 20K followers in just two months."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-rose">ل</div>
+            <div class="author-info">
+              <strong>لينا</strong>
+              <span class="ar-text">بتشتغل على TikTok وعايزة تكبر</span>
+              <span class="en-text" style="display:none">Works on TikTok and wants to grow</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T10 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"التوجيه مش بس في المونتاج — ده في طريقة تفكيري في المحتوى بالكامل. كنت بفكر في الفيديو كـ 'محتوى'… دلوقتي بفكر فيه كـ 'أداة بيع'. الفرق ضخم."</p>
+          <p class="en-text testi-quote" style="display:none">"The guidance isn't just about editing — it changed my entire way of thinking about content. I used to think of video as 'content'… now I think of it as a 'sales tool'. The difference is huge."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-cyan">ح</div>
+            <div class="author-info">
+              <strong>حسن</strong>
+              <span class="ar-text">بيصور محتوى لنفسه ولعملاء أونلاين</span>
+              <span class="en-text" style="display:none">Creates content for himself and online clients</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── TIER 3: متقدمين ── -->
+      <div class="testi-tier-label testi-tier-adv ar-text"><i class="fas fa-crown"></i> المتقدمون — نتائج حقيقية</div>
+      <div class="testi-tier-label testi-tier-adv en-text" style="display:none"><i class="fas fa-crown"></i> Advanced — Real Results</div>
+
+      <div class="testimonials-grid">
+
+        <!-- T11 -->
+        <div class="testimonial-card testimonial-featured animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"كنت ببيع منتجاتي من البيت والمبيعات كانت بطيئة جداً… بعد 3 شهور مع CreatorPro زادت مبيعاتي 4 أضعاف. الفيديوهات بقت هي أقوى أداة تسويق عندي."</p>
+          <p class="en-text testi-quote" style="display:none">"I was selling products from home and sales were very slow… after 3 months with CreatorPro my sales quadrupled. Videos became my strongest marketing tool."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-gold">د</div>
+            <div class="author-info">
+              <strong>داليا</strong>
+              <span class="ar-text">ببيع منتجاتها من البيت على إنستجرام</span>
+              <span class="en-text" style="display:none">Sells her products from home on Instagram</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T12 -->
+        <div class="testimonial-card testimonial-featured animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"جلسات البروفيسور غيّرت تفكيري بالكامل في المحتوى. مكنتش بعرف الفرق بين محتوى بيتفرج عليه ومحتوى بيبيع. دلوقتي بجيبلي عملاء من كل فيديو تقريباً."</p>
+          <p class="en-text testi-quote" style="display:none">"The Professor's sessions completely changed my thinking about content. I didn't know the difference between content people watch and content that sells. Now almost every video brings me clients."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-violet">ش</div>
+            <div class="author-info">
+              <strong>شيماء</strong>
+              <span class="ar-text">بتقدم خدمات تصميم أونلاين</span>
+              <span class="en-text" style="display:none">Offers online design services</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T13 -->
+        <div class="testimonial-card testimonial-featured animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"أنا ببيع كورسات أونلاين وكانت المبيعات متوقفة تقريباً… بعد ما غيّرنا شكل الفيديوهات والاستراتيجية، في شهر واحد باعت دورتي أكتر من 3 مرات قبل."</p>
+          <p class="en-text testi-quote" style="display:none">"I sell online courses and sales were almost at a standstill… after we changed the video style and strategy, in just one month my course sold more than 3x the previous rate."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-emerald">م</div>
+            <div class="author-info">
+              <strong>محمود</strong>
+              <span class="ar-text">ببيع كورسات تعليمية أونلاين</span>
+              <span class="en-text" style="display:none">Sells educational courses online</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T14 -->
+        <div class="testimonial-card testimonial-featured animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"البروفيسور مش بس بيعلّمك المونتاج — بيعلّمك كيف تفكر كـ براند. بعد الجلسات دي بقيت أفهم جمهوري أكتر وبقدر أعمل محتوى يلمسهم فعلاً. المتابعين زادوا 12 ألف في شهرين."</p>
+          <p class="en-text testi-quote" style="display:none">"The Professor doesn't just teach editing — he teaches you how to think like a brand. After those sessions I understood my audience more and could create content that truly resonates. Followers grew by 12K in two months."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-fuchsia">أ</div>
+            <div class="author-info">
+              <strong>أميرة</strong>
+              <span class="ar-text">عندها براند شخصي وبتبني جمهورها</span>
+              <span class="en-text" style="display:none">Has a personal brand and building her audience</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T15 -->
+        <div class="testimonial-card testimonial-featured animate-on-scroll">
+          <div class="testi-stars">★★★★★</div>
+          <p class="ar-text testi-quote">"كنت بشتغل على يوتيوب لوحدي وتعبت… المنظومة دي خفّفت عني 80٪ من الشغل. البوسترات والتامبنيلز والمونتاج — كل ده بيتعمل وأنا مركّز على المحتوى بس. القناة كبرت بجد."</p>
+          <p class="en-text testi-quote" style="display:none">"I was working on YouTube alone and was exhausted… this system took 80% of the work off my plate. Posters, thumbnails, editing — all done while I focus only on content. The channel genuinely grew."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar av-sky">ز</div>
+            <div class="author-info">
+              <strong>زياد</strong>
+              <span class="ar-text">يوتيوبر بيعمل محتوى تقني</span>
+              <span class="en-text" style="display:none">YouTuber creating tech content</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="testi-bottom-cta animate-on-scroll">
+        <p class="ar-text">أنت التالي — انضم لأكثر من 100 شخص حققوا نتائج حقيقية</p>
+        <p class="en-text" style="display:none">You're next — join 100+ people who got real results</p>
+        <a href="#form-section" class="btn btn-primary ar-text"><i class="fas fa-rocket"></i> ابدأ الآن</a>
+        <a href="#form-section" class="btn btn-primary en-text" style="display:none"><i class="fas fa-rocket"></i> Start Now</a>
+      </div>
+
     </div>
   </section>
 
