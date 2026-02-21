@@ -53,118 +53,248 @@ app.get('/', (c) => {
   </nav>
 
   <!-- ============================
-       HERO SECTION
+       HERO SECTION — CINEMATIC REDESIGN
   ============================= -->
-  <section class="hero-section" id="hero">
-    <div class="hero-bg-overlay"></div>
-    <div class="hero-particles" id="particles"></div>
-    <div class="container hero-inner">
-      <div class="hero-content animate-fade-up">
-        <div class="hero-badge ar-text">
-          <i class="fas fa-star"></i> نظام المحتوى الاحترافي
-        </div>
-        <div class="hero-badge en-text" style="display:none">
-          <i class="fas fa-star"></i> Professional Content System
+  <section class="hero-section hero-v2" id="hero">
+    <!-- Multi-layer cinematic background -->
+    <div class="hero-bg-v2">
+      <div class="hero-grad-layer-1"></div>
+      <div class="hero-grad-layer-2"></div>
+      <div class="hero-grain"></div>
+      <div class="hero-light-rays">
+        <div class="light-ray ray-1"></div>
+        <div class="light-ray ray-2"></div>
+        <div class="light-ray ray-3"></div>
+      </div>
+    </div>
+    <!-- Animated Particles Canvas -->
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+
+    <div class="container hero-v2-inner">
+
+      <!-- ===== RIGHT SIDE: Content ===== -->
+      <div class="hero-v2-content" id="heroContent">
+
+        <!-- Live badge -->
+        <div class="hero-live-badge">
+          <span class="live-dot"></span>
+          <span class="ar-text">نظام نمو المحتوى الاحترافي</span>
+          <span class="en-text" style="display:none">Professional Content Growth System</span>
         </div>
 
-        <h1 class="hero-headline ar-text">
-          حوّل محتواك إلى<br/>
-          <span class="gradient-text">آلة تجذب العملاء</span>
+        <!-- Main Headline -->
+        <h1 class="hero-v2-headline ar-text">
+          <span class="hero-line-top">حوّل محتواك إلى</span>
+          <span class="hero-line-gradient">آلة تجذب العملاء</span>
         </h1>
-        <h1 class="hero-headline en-text" style="display:none">
-          Turn Your Content Into a<br/>
-          <span class="gradient-text">Client-Generating Machine</span>
+        <h1 class="hero-v2-headline en-text" style="display:none">
+          <span class="hero-line-top">Turn Your Content Into a</span>
+          <span class="hero-line-gradient">Client-Generating Machine</span>
         </h1>
 
-        <p class="hero-sub ar-text">
-          مش مجرد مونتاج فيديو… نظام متكامل يساعدك تنشر محتوى احترافي
-          <br/>وتحوّل المشاهدين إلى عملاء حقيقيين
+        <!-- System tagline -->
+        <div class="hero-tagline ar-text">
+          <i class="fas fa-infinity"></i>
+          مش مجرد مونتاج… هذا نظام نمو كامل
+        </div>
+        <div class="hero-tagline en-text" style="display:none">
+          <i class="fas fa-infinity"></i>
+          Not just editing… this is a complete growth system
+        </div>
+
+        <!-- Sub description -->
+        <p class="hero-v2-sub ar-text">
+          نظام متكامل يجمع بين <strong>المونتاج الاحترافي</strong> و<strong>التوجيه الاستراتيجي</strong>
+          <br/>ليحوّل مشاهديك إلى عملاء حقيقيين — كل شهر أحسن من اللي قبله
         </p>
-        <p class="hero-sub en-text" style="display:none">
-          Not just video editing… a complete system that helps you publish professional content
-          <br/>and turn viewers into real paying clients
+        <p class="hero-v2-sub en-text" style="display:none">
+          A complete system combining <strong>professional editing</strong> and <strong>strategic coaching</strong>
+          <br/>to turn your viewers into real paying clients — growing every single month
         </p>
 
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-num">+200</span>
-            <span class="stat-label ar-text">كريتور استفاد</span>
-            <span class="stat-label en-text" style="display:none">Creators Served</span>
+        <!-- Trust badges (staggered animation) -->
+        <div class="hero-trust-row">
+          <div class="trust-badge trust-badge-1">
+            <i class="fas fa-users"></i>
+            <div>
+              <span class="trust-num" data-target="200">0</span><span class="trust-plus">+</span>
+              <span class="ar-text trust-desc">صانع محتوى استفاد</span>
+              <span class="en-text trust-desc" style="display:none">Creators Served</span>
+            </div>
           </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-num">98%</span>
-            <span class="stat-label ar-text">نسبة الرضا</span>
-            <span class="stat-label en-text" style="display:none">Satisfaction Rate</span>
+          <div class="trust-badge trust-badge-2">
+            <i class="fas fa-star"></i>
+            <div>
+              <span class="trust-num" data-target="98">0</span><span class="trust-plus">%</span>
+              <span class="ar-text trust-desc">نسبة الرضا</span>
+              <span class="en-text trust-desc" style="display:none">Satisfaction</span>
+            </div>
           </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-num">48h</span>
-            <span class="stat-label ar-text">وقت التسليم</span>
-            <span class="stat-label en-text" style="display:none">Delivery Time</span>
+          <div class="trust-badge trust-badge-3">
+            <i class="fas fa-bolt"></i>
+            <div>
+              <span class="trust-num" data-target="48">0</span><span class="trust-plus">h</span>
+              <span class="ar-text trust-desc">وقت التسليم</span>
+              <span class="en-text trust-desc" style="display:none">Delivery Time</span>
+            </div>
           </div>
         </div>
 
-        <div class="hero-cta">
-          <a href="#form-section" class="btn btn-primary ar-text">
-            <i class="fas fa-rocket"></i> ابدأ الآن
+        <!-- CTA Buttons -->
+        <div class="hero-v2-cta">
+          <a href="#form-section" class="btn btn-hero-primary ar-text" id="heroCta">
+            <span class="btn-glow-ring"></span>
+            <i class="fas fa-rocket"></i>
+            <span>ابدأ الآن</span>
+            <span class="btn-arrow">←</span>
           </a>
-          <a href="#form-section" class="btn btn-primary en-text" style="display:none">
-            <i class="fas fa-rocket"></i> Start Now
+          <a href="#form-section" class="btn btn-hero-primary en-text" id="heroCtaEn" style="display:none">
+            <span class="btn-glow-ring"></span>
+            <i class="fas fa-rocket"></i>
+            <span>Start Now</span>
+            <span class="btn-arrow">→</span>
           </a>
-          <a href="#coaching" class="btn btn-secondary ar-text">
-            <i class="fas fa-calendar-check"></i> احجز جلسة مجانية
+          <a href="#coaching" class="btn btn-hero-secondary ar-text">
+            <i class="fas fa-graduation-cap"></i>
+            احجز جلسة مجانية مع البروفيسور
           </a>
-          <a href="#coaching" class="btn btn-secondary en-text" style="display:none">
-            <i class="fas fa-calendar-check"></i> Book Free Session
+          <a href="#coaching" class="btn btn-hero-secondary en-text" style="display:none">
+            <i class="fas fa-graduation-cap"></i>
+            Book Free Session with Prof
           </a>
         </div>
+
+        <!-- Sub CTA note -->
+        <p class="hero-cta-note ar-text">
+          <i class="fas fa-shield-alt"></i> بدون التزام — جلستك الأولى مجانية تماماً
+        </p>
+        <p class="hero-cta-note en-text" style="display:none">
+          <i class="fas fa-shield-alt"></i> No commitment — your first session is completely free
+        </p>
       </div>
 
-      <div class="hero-visual animate-fade-left">
-        <div class="phone-mockup">
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <div class="video-placeholder">
-                <div class="video-inner">
-                  <div class="before-after-badge ar-text">قبل / بعد</div>
-                  <div class="before-after-badge en-text" style="display:none">Before / After</div>
-                  <div class="play-pulse">
-                    <div class="play-ring ring-1"></div>
-                    <div class="play-ring ring-2"></div>
-                    <div class="play-btn"><i class="fas fa-play"></i></div>
+      <!-- ===== LEFT SIDE: Floating Device ===== -->
+      <div class="hero-v2-visual" id="heroVisual">
+
+        <!-- Floating glass device -->
+        <div class="device-wrapper" id="deviceWrapper">
+
+          <!-- Ambient glow layers -->
+          <div class="device-glow-outer"></div>
+          <div class="device-glow-inner"></div>
+
+          <!-- Main phone frame -->
+          <div class="device-frame">
+            <div class="device-notch"></div>
+            <div class="device-screen">
+
+              <!-- Before/After animated split screen -->
+              <div class="screen-content">
+                <div class="screen-split">
+                  <div class="split-before">
+                    <span class="split-label ar-text">قبل</span>
+                    <span class="split-label en-text" style="display:none">Before</span>
+                    <div class="before-lines">
+                      <div class="bline bline-1"></div>
+                      <div class="bline bline-2"></div>
+                      <div class="bline bline-3"></div>
+                    </div>
                   </div>
-                  <div class="video-label">
-                    <i class="fas fa-film"></i>
-                    <span class="ar-text">ريلز احترافي</span>
-                    <span class="en-text" style="display:none">Pro Reels</span>
+                  <div class="split-divider">
+                    <div class="split-line"></div>
+                    <div class="split-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                  </div>
+                  <div class="split-after">
+                    <span class="split-label ar-text">بعد</span>
+                    <span class="split-label en-text" style="display:none">After</span>
+                    <div class="after-visual">
+                      <div class="av-circle av-c1"></div>
+                      <div class="av-circle av-c2"></div>
+                      <div class="av-spark av-s1"></div>
+                      <div class="av-spark av-s2"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="reel-stats">
-                <span><i class="fas fa-heart"></i> 24.5K</span>
-                <span><i class="fas fa-eye"></i> 180K</span>
-                <span><i class="fas fa-share"></i> 3.2K</span>
+
+                <!-- Play button center -->
+                <div class="screen-play-center">
+                  <div class="play-ring-v2 pr-1"></div>
+                  <div class="play-ring-v2 pr-2"></div>
+                  <div class="play-ring-v2 pr-3"></div>
+                  <div class="play-btn-v2">
+                    <i class="fas fa-play"></i>
+                  </div>
+                </div>
+
+                <!-- Stats overlay bottom -->
+                <div class="screen-stats-overlay">
+                  <div class="sstat-item">
+                    <i class="fas fa-heart"></i>
+                    <span class="sstat-num" data-target="24500" data-format="k">0K</span>
+                  </div>
+                  <div class="sstat-item">
+                    <i class="fas fa-eye"></i>
+                    <span class="sstat-num" data-target="180000" data-format="k">0K</span>
+                  </div>
+                  <div class="sstat-item">
+                    <i class="fas fa-share-nodes"></i>
+                    <span class="sstat-num" data-target="3200" data-format="k">0K</span>
+                  </div>
+                </div>
+
+                <!-- Live indicator top -->
+                <div class="screen-live-top">
+                  <span class="screen-live-dot"></span>
+                  <span class="ar-text">ريلز احترافي</span>
+                  <span class="en-text" style="display:none">Pro Reel</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="phone-glow"></div>
+
+          <!-- Orbit rings -->
+          <div class="orbit-ring orbit-1"></div>
+          <div class="orbit-ring orbit-2"></div>
         </div>
-        <div class="floating-card card-1 animate-float">
-          <i class="fas fa-chart-line"></i>
-          <span class="ar-text">+340% وصول</span>
-          <span class="en-text" style="display:none">+340% Reach</span>
+
+        <!-- Floating metric cards -->
+        <div class="metric-card mc-reach animate-float-v2">
+          <div class="mc-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="mc-data">
+            <span class="mc-num">+340%</span>
+            <span class="mc-label ar-text">نمو الوصول</span>
+            <span class="mc-label en-text" style="display:none">Reach Growth</span>
+          </div>
         </div>
-        <div class="floating-card card-2 animate-float-delay">
-          <i class="fas fa-users"></i>
-          <span class="ar-text">+120 عميل جديد</span>
-          <span class="en-text" style="display:none">+120 New Clients</span>
+
+        <div class="metric-card mc-clients animate-float-v2-delay">
+          <div class="mc-icon mc-green"><i class="fas fa-user-plus"></i></div>
+          <div class="mc-data">
+            <span class="mc-num">+120</span>
+            <span class="mc-label ar-text">عميل جديد</span>
+            <span class="mc-label en-text" style="display:none">New Clients</span>
+          </div>
         </div>
+
+        <div class="metric-card mc-views animate-float-v2-slow">
+          <div class="mc-icon mc-gold"><i class="fas fa-fire"></i></div>
+          <div class="mc-data">
+            <span class="mc-num">2.4M</span>
+            <span class="mc-label ar-text">مشاهدة هذا الشهر</span>
+            <span class="mc-label en-text" style="display:none">Views This Month</span>
+          </div>
+        </div>
+
       </div>
     </div>
-    <div class="hero-scroll-indicator">
-      <div class="scroll-dot"></div>
+
+    <!-- Scroll indicator -->
+    <div class="hero-scroll-v2">
+      <div class="scroll-track">
+        <div class="scroll-ball"></div>
+      </div>
+      <span class="ar-text scroll-hint-text">اكتشف النظام</span>
+      <span class="en-text scroll-hint-text" style="display:none">Discover the System</span>
     </div>
   </section>
 
@@ -1977,7 +2107,7 @@ app.get('/', (c) => {
                 <label class="radio-option ar-text">
                   <input type="radio" name="experience" value="beginner" required />
                   <span class="radio-custom"></span>
-                  مبتدئ — بازور في صناعة المحتوى
+                  مبتدئ — جديد في صناعة المحتوى
                 </label>
                 <label class="radio-option ar-text">
                   <input type="radio" name="experience" value="intermediate" required />
@@ -2321,6 +2451,279 @@ app.get('/', (c) => {
       document.addEventListener('DOMContentLoaded', observeModule);
     } else {
       observeModule();
+    }
+
+  })();
+  </script>
+
+  <!-- ============================
+       HERO V2 — CINEMATIC JS
+  ============================= -->
+  <script>
+  (function() {
+    'use strict';
+
+    /* ── Reduced motion check ── */
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ====================================================
+       1. PARTICLE CANVAS — lightweight canvas particles
+    ==================================================== */
+    function initHeroCanvas() {
+      var canvas = document.getElementById('heroCanvas');
+      if (!canvas || reduced) return;
+
+      var ctx = canvas.getContext('2d');
+      var W, H, particles = [];
+
+      function resize() {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+
+      /* Particle constructor */
+      function Particle() {
+        this.reset();
+      }
+
+      Particle.prototype.reset = function() {
+        this.x  = Math.random() * W;
+        this.y  = Math.random() * H + H;
+        this.r  = Math.random() * 2.5 + 0.5;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = -(Math.random() * 0.8 + 0.3);
+        this.alpha = 0;
+        this.maxAlpha = Math.random() * 0.5 + 0.15;
+        this.phase = 'fadein';
+        this.life = 0;
+        this.maxLife = Math.random() * 200 + 150;
+        /* colour: purple or gold accent */
+        this.hue = Math.random() > 0.75 ? 45 : 270;
+        this.sat = Math.random() > 0.75 ? 90 : 70;
+      };
+
+      Particle.prototype.update = function() {
+        this.life++;
+        this.x += this.vx;
+        this.y += this.vy;
+
+        var progress = this.life / this.maxLife;
+        if (progress < 0.15) {
+          this.alpha = (progress / 0.15) * this.maxAlpha;
+        } else if (progress < 0.8) {
+          this.alpha = this.maxAlpha;
+        } else {
+          this.alpha = ((1 - progress) / 0.2) * this.maxAlpha;
+        }
+
+        if (this.life >= this.maxLife || this.y < -20) this.reset();
+      };
+
+      Particle.prototype.draw = function() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.fillStyle = 'hsl(' + this.hue + ',' + this.sat + '%,65%)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      };
+
+      /* Create 60 particles with staggered start */
+      for (var i = 0; i < 60; i++) {
+        var p = new Particle();
+        p.y = Math.random() * H; /* spread vertically on load */
+        p.life = Math.floor(Math.random() * p.maxLife);
+        particles.push(p);
+      }
+
+      /* RAF loop */
+      var raf;
+      function loop() {
+        ctx.clearRect(0, 0, W, H);
+        for (var j = 0; j < particles.length; j++) {
+          particles[j].update();
+          particles[j].draw();
+        }
+        raf = requestAnimationFrame(loop);
+      }
+
+      /* Only run when visible */
+      if (window.IntersectionObserver) {
+        var heroSec = document.getElementById('hero');
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              if (!raf) loop();
+            } else {
+              if (raf) { cancelAnimationFrame(raf); raf = null; }
+            }
+          });
+        }, { threshold: 0.05 });
+        if (heroSec) obs.observe(heroSec);
+        else loop();
+      } else {
+        loop();
+      }
+    }
+
+    /* ====================================================
+       2. MOUSE PARALLAX — device + floating cards
+    ==================================================== */
+    function initParallax() {
+      if (reduced) return;
+      var device = document.getElementById('deviceWrapper');
+      if (!device) return;
+
+      var heroSection = document.getElementById('hero');
+      var mouseX = 0, mouseY = 0;
+      var curX = 0, curY = 0;
+      var active = false;
+      var raf;
+
+      heroSection && heroSection.addEventListener('mousemove', function(e) {
+        var rect = heroSection.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+        mouseY = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+        active = true;
+        if (!raf) rafLoop();
+      });
+
+      heroSection && heroSection.addEventListener('mouseleave', function() {
+        active = false;
+        /* smoothly return to center */
+        function returnToCenter() {
+          curX += (0 - curX) * 0.06;
+          curY += (0 - curY) * 0.06;
+          applyTransform();
+          if (Math.abs(curX) > 0.001 || Math.abs(curY) > 0.001) {
+            requestAnimationFrame(returnToCenter);
+          } else {
+            curX = 0; curY = 0;
+            applyTransform();
+          }
+        }
+        cancelAnimationFrame(raf);
+        raf = null;
+        returnToCenter();
+      });
+
+      function applyTransform() {
+        var tiltX  = curY * 8;
+        var tiltY  = curX * -8;
+        var moveX  = curX * 12;
+        var moveY  = curY * 8;
+        device.style.transform =
+          'translateY(' + moveY + 'px) translateX(' + moveX + 'px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
+      }
+
+      function rafLoop() {
+        raf = requestAnimationFrame(function() {
+          curX += (mouseX - curX) * 0.08;
+          curY += (mouseY - curY) * 0.08;
+          applyTransform();
+          if (active) rafLoop();
+          else raf = null;
+        });
+      }
+    }
+
+    /* ====================================================
+       3. COUNT-UP — trust badges + screen stats
+    ==================================================== */
+    function countUp(el, target, duration) {
+      if (!el || reduced) {
+        if (el) {
+          var fmt = el.dataset.format;
+          if (fmt === 'k') { el.textContent = (target >= 1000 ? (target/1000).toFixed(1) : target) + 'K'; }
+          else { el.textContent = target; }
+        }
+        return;
+      }
+      var start = 0;
+      var startTime = null;
+      var fmt = el.dataset.format;
+
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var elapsed = ts - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        /* easeOutQuart */
+        var ease = 1 - Math.pow(1 - progress, 4);
+        var val = Math.floor(start + (target - start) * ease);
+
+        if (fmt === 'k') {
+          el.textContent = val >= 1000 ? (val/1000).toFixed(1) + 'K' : val + '';
+        } else {
+          el.textContent = val;
+        }
+
+        if (progress < 1) requestAnimationFrame(step);
+        else {
+          if (fmt === 'k') {
+            el.textContent = target >= 1000 ? (target/1000).toFixed(1) + 'K' : target + '';
+          } else {
+            el.textContent = target;
+          }
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    function initCounters() {
+      /* Trust badges — trigger immediately (hero visible on load) */
+      var delay = reduced ? 0 : 1500; /* after entrance anims */
+      setTimeout(function() {
+        document.querySelectorAll('.trust-num').forEach(function(el) {
+          var t = parseInt(el.dataset.target, 10);
+          if (!isNaN(t)) countUp(el, t, 900);
+        });
+      }, delay);
+
+      /* Screen stats — trigger on scroll into view */
+      var screenStats = document.querySelectorAll('.sstat-num');
+      if (screenStats.length === 0) return;
+
+      function runScreenStats() {
+        screenStats.forEach(function(el) {
+          var t = parseInt(el.dataset.target, 10);
+          if (!isNaN(t)) countUp(el, t, 1200);
+        });
+      }
+
+      if (window.IntersectionObserver) {
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              runScreenStats();
+              obs.disconnect();
+            }
+          });
+        }, { threshold: 0.3 });
+        var device = document.getElementById('heroVisual');
+        if (device) obs.observe(device);
+        else runScreenStats();
+      } else {
+        runScreenStats();
+      }
+    }
+
+    /* ====================================================
+       4. BOOT
+    ==================================================== */
+    function boot() {
+      initHeroCanvas();
+      initParallax();
+      initCounters();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
     }
 
   })();
