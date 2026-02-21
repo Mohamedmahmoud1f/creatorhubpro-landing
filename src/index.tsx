@@ -225,90 +225,272 @@ app.get('/', (c) => {
   ============================= -->
   <section class="solution-section section-padding" id="solution">
     <div class="container">
-      <div class="section-tag ar-text">الحل</div>
+
+      <!-- ── Shock stat banner ── -->
+      <div class="sol-shock-bar animate-on-scroll">
+        <div class="sol-shock-inner">
+          <span class="sol-shock-bolt"><i class="fas fa-bolt"></i></span>
+          <p class="ar-text">
+            ⚡ <strong>90%</strong> من صناع المحتوى بيفشلوا… مش بسبب الجودة فقط، لكن بسبب <strong>غياب النظام</strong>
+          </p>
+          <p class="en-text" style="display:none">
+            ⚡ <strong>90%</strong> of content creators fail… not just because of quality, but because of <strong>the absence of a system</strong>
+          </p>
+        </div>
+      </div>
+
+      <!-- ── Section header ── -->
+      <div class="section-tag ar-text">النظام</div>
       <div class="section-tag en-text" style="display:none">THE SOLUTION</div>
 
+      <div class="sol-micro-copy ar-text">
+        <i class="fas fa-quote-right" style="font-size:0.75em;opacity:0.6;margin-left:6px;"></i>
+        ليه معظم المحتوى بيفشل؟ لأن مفيش نظام
+        <i class="fas fa-quote-left" style="font-size:0.75em;opacity:0.6;margin-right:6px;"></i>
+      </div>
+      <div class="sol-micro-copy en-text" style="display:none">
+        <i class="fas fa-quote-left" style="font-size:0.75em;opacity:0.6;margin-right:6px;"></i>
+        Most content fails because there's no system
+        <i class="fas fa-quote-right" style="font-size:0.75em;opacity:0.6;margin-left:6px;"></i>
+      </div>
+
       <h2 class="section-title ar-text">
-        الحل مش فيديو…<br/><span class="gradient-text">الحل نظام</span>
+        مش خدمة…<br/><span class="gradient-text">ده نظام كامل لنمو محتواك</span>
       </h2>
       <h2 class="section-title en-text" style="display:none">
-        It's Not About a Video…<br/><span class="gradient-text">It's About a System</span>
+        Not a Service…<br/><span class="gradient-text">A Complete System for Your Content Growth</span>
       </h2>
 
       <p class="section-subtitle ar-text">
-        نحن لا نعدل فيديوهاتك فقط — نبني معك منظومة متكاملة لصناعة محتوى يحقق نتائج
+        نحن ما بنعملكش فيديوهات بس — نبني معاك نظام متكامل يحوّل محتواك إلى أداة بيع وتأثير حقيقي
       </p>
       <p class="section-subtitle en-text" style="display:none">
-        We don't just edit your videos — we build a complete system for creating content that converts
+        We don't just make videos — we build a complete system that turns your content into a real sales and influence machine
       </p>
 
+      <!-- ── 3 Cards ── -->
       <div class="solutions-grid">
-        <div class="solution-card animate-on-scroll">
+
+        <!-- ════ CARD 1 — VIDEO EDITING ════ -->
+        <div class="solution-card sol-card-v2 sol-card-editing animate-on-scroll">
+          <div class="sol-outcome-tag ar-text">📈 النتيجة: تفاعل أعلى وظهور أكثر</div>
+          <div class="sol-outcome-tag en-text" style="display:none">📈 Outcome: Higher Engagement & More Reach</div>
+
+          <div class="sol-step-tag ar-text">الركيزة الأولى</div>
+          <div class="sol-step-tag en-text" style="display:none">Pillar One</div>
           <div class="sol-num">01</div>
-          <div class="sol-icon"><i class="fas fa-cut"></i></div>
-          <h3 class="ar-text">مونتاج احترافي</h3>
-          <h3 class="en-text" style="display:none">Professional Editing</h3>
-          <p class="ar-text">مونتاج يشد الانتباه من الثانية الأولى ويخلي الناس تكمل المشاهدة</p>
-          <p class="en-text" style="display:none">Editing that hooks from the first second and keeps people watching</p>
-          <ul class="sol-list ar-text">
-            <li><i class="fas fa-check"></i> كابشن وترجمة</li>
-            <li><i class="fas fa-check"></i> موسيقى وإضاءة</li>
-            <li><i class="fas fa-check"></i> تأثيرات بصرية</li>
+          <div class="sol-icon sol-icon-v2 sol-icon-pulse"><i class="fas fa-film"></i></div>
+
+          <h3 class="ar-text">مونتاج يوقّف التمرير ويجبر الناس تكمّل</h3>
+          <h3 class="en-text" style="display:none">Editing That Stops the Scroll & Forces People to Keep Watching</h3>
+
+          <p class="sol-desc ar-text">
+            الناس بتقرر في <strong style="color:#a78bfa">0.3 ثانية</strong> هتكمل ولا لأ —<br/>
+            إحنا بنضمن إن فيديوهاتك تعدي هذا الاختبار وتوصل لأكبر عدد ممكن
+          </p>
+          <p class="sol-desc en-text" style="display:none">
+            People decide in <strong style="color:#a78bfa">0.3 seconds</strong> whether to keep watching —<br/>
+            we make sure your videos pass that test and reach the maximum audience
+          </p>
+
+          <ul class="sol-list sol-list-v2 ar-text">
+            <li><i class="fas fa-check"></i> Hook مقنع في أول 3 ثواني يشد من أول لحظة</li>
+            <li><i class="fas fa-check"></i> إيقاع مونتاج ديناميكي يمنع الملل ويزيد المشاهدة</li>
+            <li><i class="fas fa-check"></i> تحسين لوني وبصري يخلي المحتوى يبان احترافي</li>
+            <li><i class="fas fa-check"></i> موسيقى وmood يتناسب مع جمهورك ومحتواك</li>
+            <li><i class="fas fa-check"></i> تحسين الصوت بحيث يكون واضح وجذاب</li>
           </ul>
-          <ul class="sol-list en-text" style="display:none">
-            <li><i class="fas fa-check"></i> Captions & Subtitles</li>
-            <li><i class="fas fa-check"></i> Music & Color Grading</li>
-            <li><i class="fas fa-check"></i> Visual Effects</li>
+          <ul class="sol-list sol-list-v2 en-text" style="display:none">
+            <li><i class="fas fa-check"></i> Compelling hook in the first 3 seconds</li>
+            <li><i class="fas fa-check"></i> Dynamic editing rhythm that prevents boredom</li>
+            <li><i class="fas fa-check"></i> Color grading that makes content look cinematic</li>
+            <li><i class="fas fa-check"></i> Music & mood that matches your brand and audience</li>
+            <li><i class="fas fa-check"></i> Crystal clear audio enhancement</li>
           </ul>
+
+          <div class="sol-benefit-line ar-text">
+            <i class="fas fa-fire"></i> محتواك يستحق إنه يتشاف — خلينا نخليه يتشاف فعلاً
+          </div>
+          <div class="sol-benefit-line en-text" style="display:none">
+            <i class="fas fa-fire"></i> Your content deserves to be seen — let us make it actually seen
+          </div>
+
+          <div class="sol-trigger ar-text">
+            <i class="fas fa-eye"></i> المشاهد يتوقف… ويكمل… ويتفاعل
+          </div>
+          <div class="sol-trigger en-text" style="display:none">
+            <i class="fas fa-eye"></i> Viewer stops… watches… engages
+          </div>
         </div>
-        <div class="solution-card solution-card-featured animate-on-scroll">
-          <div class="featured-badge ar-text">⭐ الأهم</div>
-          <div class="featured-badge en-text" style="display:none">⭐ Key Feature</div>
-          <div class="sol-num">02</div>
-          <div class="sol-icon"><i class="fas fa-brain"></i></div>
-          <h3 class="ar-text">توجيه استراتيجي</h3>
-          <h3 class="en-text" style="display:none">Strategic Direction</h3>
-          <p class="ar-text">مع البروفيسورة نحلل محتواك ونبني خطة نمو واضحة ومخصصة ليك</p>
-          <p class="en-text" style="display:none">With the Professor, we analyze your content and build a clear, personalized growth plan</p>
-          <ul class="sol-list ar-text">
-            <li><i class="fas fa-check"></i> تحليل حساباتك</li>
-            <li><i class="fas fa-check"></i> تحسين الـ Hook</li>
-            <li><i class="fas fa-check"></i> أفكار محتوى</li>
+
+        <!-- ════ CARD 2 — STRATEGY / FEATURED ════ -->
+        <div class="solution-card solution-card-featured sol-card-v2 sol-card-center sol-card-strategy animate-on-scroll">
+          <div class="sol-star-glow"></div>
+          <div class="featured-badge ar-text">🎓 الميزة الحصرية — مع البروفيسور</div>
+          <div class="featured-badge en-text" style="display:none">🎓 Exclusive USP — With the Professor</div>
+
+          <div class="sol-outcome-tag sol-outcome-gold ar-text">💡 النتيجة: محتوى هادف يحقق نتائج قابلة للقياس</div>
+          <div class="sol-outcome-tag sol-outcome-gold en-text" style="display:none">💡 Outcome: Purposeful Content That Drives Measurable Results</div>
+
+          <div class="sol-step-tag sol-step-tag-gold ar-text">الركيزة الثانية — الأهم</div>
+          <div class="sol-step-tag sol-step-tag-gold en-text" style="display:none">Pillar Two — The Key</div>
+          <div class="sol-num sol-num-gold">02</div>
+          <div class="sol-icon sol-icon-v2 sol-icon-gold sol-icon-glow"><i class="fas fa-graduation-cap"></i></div>
+
+          <h3 class="ar-text">التوجيه الاستراتيجي — أعرف تعمل إيه، وليه، وإمتى</h3>
+          <h3 class="en-text" style="display:none">Strategic Guidance — Know What, Why & When to Create</h3>
+
+          <p class="sol-desc ar-text sol-desc-gold">
+            الفيديو الكويس لوحده <strong>مش بيكفي</strong> —<br/>
+            اللي بيصنع الفرق هو الاستراتيجية اللي وراه.<br/>
+            مع البروفيسور، <strong>مش هتشتغل عشوائي تاني أبداً</strong>
+          </p>
+          <p class="sol-desc en-text sol-desc-gold" style="display:none">
+            A good video alone <strong>isn't enough</strong> —<br/>
+            what makes the difference is the strategy behind it.<br/>
+            With the Professor, <strong>you'll never work randomly again</strong>
+          </p>
+
+          <ul class="sol-list sol-list-v2 sol-list-gold ar-text">
+            <li><i class="fas fa-check"></i> تحليل كامل لحسابك، جمهورك، ومنافسيك</li>
+            <li><i class="fas fa-check"></i> تحديد الـ niche والرسالة اللي بتتميز بيها</li>
+            <li><i class="fas fa-check"></i> أفكار محتوى مخصصة لك وجاهزة للتنفيذ فوراً</li>
+            <li><i class="fas fa-check"></i> تحسين الـ hooks والعناوين لتحقيق أعلى reach</li>
+            <li><i class="fas fa-check"></i> خطة محتوى شهرية واضحة ومنظمة</li>
           </ul>
-          <ul class="sol-list en-text" style="display:none">
-            <li><i class="fas fa-check"></i> Account Analysis</li>
-            <li><i class="fas fa-check"></i> Hook Improvement</li>
-            <li><i class="fas fa-check"></i> Content Ideas</li>
+          <ul class="sol-list sol-list-v2 sol-list-gold en-text" style="display:none">
+            <li><i class="fas fa-check"></i> Full audit of your account, audience & competitors</li>
+            <li><i class="fas fa-check"></i> Define your niche and unique message</li>
+            <li><i class="fas fa-check"></i> Custom content ideas ready to execute immediately</li>
+            <li><i class="fas fa-check"></i> Hook & title optimization for maximum reach</li>
+            <li><i class="fas fa-check"></i> Clear organized monthly content calendar</li>
           </ul>
+
+          <!-- Professor box -->
+          <div class="sol-prof-box ar-text">
+            <div class="sol-prof-avatar"><i class="fas fa-user-tie"></i></div>
+            <div class="sol-prof-text">
+              <strong>البروفيسور معاك مباشرة</strong>
+              <span>جلسات تعليمية حية + استشارات منتظمة + توجيه مستمر = تغيير حقيقي في طريقة تفكيرك</span>
+            </div>
+          </div>
+          <div class="sol-prof-box en-text" style="display:none">
+            <div class="sol-prof-avatar"><i class="fas fa-user-tie"></i></div>
+            <div class="sol-prof-text">
+              <strong>The Professor is with you directly</strong>
+              <span>Live sessions + regular consulting + ongoing guidance = real shift in how you think about content</span>
+            </div>
+          </div>
+
+          <div class="sol-benefit-line sol-benefit-gold ar-text">
+            <i class="fas fa-brain"></i> مش بس خدمة — ده تغيير في طريقة تفكيرك في المحتوى
+          </div>
+          <div class="sol-benefit-line sol-benefit-gold en-text" style="display:none">
+            <i class="fas fa-brain"></i> Not just a service — it's a mindset shift in how you create
+          </div>
+
+          <div class="sol-trigger sol-trigger-gold ar-text">
+            <i class="fas fa-ban"></i> مش هتبقى تشتغل عشوائي تاني
+          </div>
+          <div class="sol-trigger sol-trigger-gold en-text" style="display:none">
+            <i class="fas fa-ban"></i> You'll never work randomly again
+          </div>
         </div>
-        <div class="solution-card animate-on-scroll">
+
+        <!-- ════ CARD 3 — CONTINUOUS GROWTH ════ -->
+        <div class="solution-card sol-card-v2 sol-card-growth animate-on-scroll">
+          <div class="sol-outcome-tag sol-outcome-green ar-text">🚀 النتيجة: نمو متراكم ومستدام لا يتوقف</div>
+          <div class="sol-outcome-tag sol-outcome-green en-text" style="display:none">🚀 Outcome: Compounding, Sustainable Growth That Never Stops</div>
+
+          <div class="sol-step-tag ar-text">الركيزة الثالثة</div>
+          <div class="sol-step-tag en-text" style="display:none">Pillar Three</div>
           <div class="sol-num">03</div>
-          <div class="sol-icon"><i class="fas fa-chart-line"></i></div>
-          <h3 class="ar-text">تطوير مستمر</h3>
-          <h3 class="en-text" style="display:none">Continuous Growth</h3>
-          <p class="ar-text">مش شغلة مرة وخلاص — نتابع معك ونطور الأداء باستمرار</p>
-          <p class="en-text" style="display:none">Not a one-time thing — we track and continuously improve your performance</p>
-          <ul class="sol-list ar-text">
-            <li><i class="fas fa-check"></i> تحليل الأرقام</li>
-            <li><i class="fas fa-check"></i> تحسين الاستراتيجية</li>
-            <li><i class="fas fa-check"></i> نمو مستدام</li>
+          <div class="sol-icon sol-icon-v2 sol-icon-green sol-icon-pulse-green"><i class="fas fa-chart-line"></i></div>
+
+          <h3 class="ar-text">نمو حقيقي يتراكم — مش مجرد بوست وانتهى</h3>
+          <h3 class="en-text" style="display:none">Real Compounding Growth — Not Just Post & Forget</h3>
+
+          <p class="sol-desc ar-text">
+            معظم الناس بتنشر وتنسى —<br/>
+            إحنا بنتابع كل فيديو، بنحلل النتائج، و<strong style="color:#34d399">بنطور الاستراتيجية باستمرار</strong> علشان كل شهر أحسن من اللي قبله
+          </p>
+          <p class="sol-desc en-text" style="display:none">
+            Most people post and forget —<br/>
+            we follow every video, analyze results, and <strong style="color:#34d399">continuously evolve the strategy</strong> so every month outperforms the last
+          </p>
+
+          <ul class="sol-list sol-list-v2 ar-text">
+            <li><i class="fas fa-check"></i> تحليل أداء مفصّل لكل فيديو ومحتوى</li>
+            <li><i class="fas fa-check"></i> تعديل وتطوير الاستراتيجية بناءً على البيانات الحقيقية</li>
+            <li><i class="fas fa-check"></i> اكتشاف الـ content patterns اللي بتشتغل مع جمهورك</li>
+            <li><i class="fas fa-check"></i> تنمية المجتمع والتفاعل مع الجمهور المستهدف</li>
+            <li><i class="fas fa-check"></i> نمو حقيقي في المتابعين والعملاء المحتملين</li>
           </ul>
-          <ul class="sol-list en-text" style="display:none">
-            <li><i class="fas fa-check"></i> Analytics Review</li>
-            <li><i class="fas fa-check"></i> Strategy Optimization</li>
-            <li><i class="fas fa-check"></i> Sustainable Growth</li>
+          <ul class="sol-list sol-list-v2 en-text" style="display:none">
+            <li><i class="fas fa-check"></i> Detailed performance analysis for every piece of content</li>
+            <li><i class="fas fa-check"></i> Strategy adjustment based on real data</li>
+            <li><i class="fas fa-check"></i> Discover content patterns that work for your audience</li>
+            <li><i class="fas fa-check"></i> Community growth and targeted audience engagement</li>
+            <li><i class="fas fa-check"></i> Real growth in followers and potential clients</li>
           </ul>
+
+          <div class="sol-benefit-line sol-benefit-green ar-text">
+            <i class="fas fa-infinity"></i> مش وقفة — ده نظام بيتحسن كل يوم
+          </div>
+          <div class="sol-benefit-line sol-benefit-green en-text" style="display:none">
+            <i class="fas fa-infinity"></i> Not a one-time thing — a system that improves every day
+          </div>
+
+          <div class="sol-trigger sol-trigger-green ar-text">
+            <i class="fas fa-arrow-trend-up"></i> كل شهر أقوى من اللي قبله — مضمون
+          </div>
+          <div class="sol-trigger sol-trigger-green en-text" style="display:none">
+            <i class="fas fa-arrow-trend-up"></i> Every month stronger than the last — guaranteed
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── Journey connector ── -->
+      <div class="sol-journey-bar ar-text animate-on-scroll">
+        <span class="sol-j-step"><i class="fas fa-film" style="margin-left:6px"></i> إنتاج احترافي</span>
+        <span class="sol-j-arrow"><i class="fas fa-arrow-left"></i></span>
+        <span class="sol-j-step sol-j-step-gold"><i class="fas fa-graduation-cap" style="margin-left:6px"></i> توجيه استراتيجي</span>
+        <span class="sol-j-arrow"><i class="fas fa-arrow-left"></i></span>
+        <span class="sol-j-step sol-j-step-green"><i class="fas fa-rocket" style="margin-left:6px"></i> نمو مستمر 🚀</span>
+      </div>
+      <div class="sol-journey-bar en-text animate-on-scroll" style="display:none">
+        <span class="sol-j-step"><i class="fas fa-film" style="margin-right:6px"></i> Pro Production</span>
+        <span class="sol-j-arrow"><i class="fas fa-arrow-right"></i></span>
+        <span class="sol-j-step sol-j-step-gold"><i class="fas fa-graduation-cap" style="margin-right:6px"></i> Strategic Guidance</span>
+        <span class="sol-j-arrow"><i class="fas fa-arrow-right"></i></span>
+        <span class="sol-j-step sol-j-step-green"><i class="fas fa-rocket" style="margin-right:6px"></i> Continuous Growth 🚀</span>
+      </div>
+
+      <!-- ── Bottom CTA ── -->
+      <div class="sol-bottom-cta animate-on-scroll">
+        <p class="sol-cta-promise ar-text">
+          <i class="fas fa-shield-halved"></i> إحنا ما بنبيعكش خدمة — إحنا بنبني معاك مستقبل محتواك
+        </p>
+        <p class="sol-cta-promise en-text" style="display:none">
+          <i class="fas fa-shield-halved"></i> We don't sell you a service — we build the future of your content together
+        </p>
+        <div class="sol-cta-btns">
+          <a href="#form-section" class="btn btn-primary ar-text">
+            <i class="fas fa-rocket"></i> ابدأ نظامك الآن
+          </a>
+          <a href="#form-section" class="btn btn-primary en-text" style="display:none">
+            <i class="fas fa-rocket"></i> Start Your System Now
+          </a>
+          <a href="https://wa.me/201068400789?text=مرحبًا%2C%20أرسلت%20بياناتي%20عبر%20الموقع%20وأرغب%20في%20البدء" target="_blank" class="btn btn-wa-outline ar-text">
+            <i class="fab fa-whatsapp"></i> اسأل البروفيسور الآن
+          </a>
+          <a href="https://wa.me/201068400789?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20the%20system" target="_blank" class="btn btn-wa-outline en-text" style="display:none">
+            <i class="fab fa-whatsapp"></i> Ask the Professor Now
+          </a>
         </div>
       </div>
 
-      <div class="cta-center">
-        <a href="#form-section" class="btn btn-primary ar-text">
-          <i class="fas fa-rocket"></i> ابدأ رحلتك الآن
-        </a>
-        <a href="#form-section" class="btn btn-primary en-text" style="display:none">
-          <i class="fas fa-rocket"></i> Start Your Journey
-        </a>
-      </div>
     </div>
   </section>
 
