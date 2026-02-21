@@ -1183,6 +1183,136 @@ app.get('/', (c) => {
   </section>
 
   <!-- ============================
+       SCARCITY / CAPACITY MODULE
+  ============================= -->
+  <section class="scarcity-section section-padding" id="scarcity">
+    <div class="container">
+
+      <!-- ── Module wrapper (entrance animation target) ── -->
+      <div class="scr-module animate-on-scroll" id="scr-module">
+
+        <!-- ══ TOP: label + live dot ══ -->
+        <div class="scr-top-bar">
+          <div class="scr-live-pill ar-text">
+            <span class="scr-live-dot" id="scr-live-dot"></span>
+            <span id="scr-live-label-ar">متاح الانضمام حاليًا</span>
+          </div>
+          <div class="scr-live-pill en-text" style="display:none">
+            <span class="scr-live-dot" id="scr-live-dot-en"></span>
+            <span id="scr-live-label-en">Open for enrollment</span>
+          </div>
+          <div class="scr-week-label ar-text">هذا الأسبوع</div>
+          <div class="scr-week-label en-text" style="display:none">This week</div>
+        </div>
+
+        <!-- ══ MAIN BODY ══ -->
+        <div class="scr-body">
+
+          <!-- Left: numbers + text -->
+          <div class="scr-left">
+            <div class="scr-count-wrap ar-text">
+              <span class="scr-num-current" id="scr-current">0</span>
+              <span class="scr-num-sep">/</span>
+              <span class="scr-num-max" id="scr-max">20</span>
+              <span class="scr-num-unit">عميل</span>
+            </div>
+            <div class="scr-count-wrap en-text" style="display:none">
+              <span class="scr-num-current" id="scr-current-en">0</span>
+              <span class="scr-num-sep">/</span>
+              <span class="scr-num-max">20</span>
+              <span class="scr-num-unit">clients</span>
+            </div>
+            <p class="scr-sub ar-text">عدد العملاء الحاليين هذا الأسبوع</p>
+            <p class="scr-sub en-text" style="display:none">Current clients enrolled this week</p>
+
+            <!-- Spots remaining badge -->
+            <div class="scr-spots-badge" id="scr-spots-badge">
+              <i class="fas fa-circle-dot scr-badge-icon" id="scr-badge-icon"></i>
+              <span id="scr-spots-text-ar" class="ar-text">متبقي 4 أماكن فقط</span>
+              <span id="scr-spots-text-en" class="en-text" style="display:none">Only 4 spots remaining</span>
+            </div>
+          </div>
+
+          <!-- Right: progress bar -->
+          <div class="scr-right">
+            <div class="scr-bar-label ar-text">
+              <span>نسبة الامتلاء الحالية</span>
+              <span class="scr-pct-text" id="scr-pct">0%</span>
+            </div>
+            <div class="scr-bar-label en-text" style="display:none">
+              <span>Current capacity</span>
+              <span class="scr-pct-text" id="scr-pct-en">0%</span>
+            </div>
+            <div class="scr-bar-track">
+              <div class="scr-bar-fill" id="scr-bar-fill"></div>
+              <!-- Threshold markers -->
+              <div class="scr-marker" style="right:25%"><span>25%</span></div>
+              <div class="scr-marker" style="right:50%"><span>50%</span></div>
+              <div class="scr-marker" style="right:75%"><span>75%</span></div>
+            </div>
+            <p class="scr-quality-note ar-text">
+              <i class="fas fa-shield-halved"></i>
+              نحدد عدد العملاء للحفاظ على جودة التنفيذ والمتابعة
+            </p>
+            <p class="scr-quality-note en-text" style="display:none">
+              <i class="fas fa-shield-halved"></i>
+              We limit client slots to protect quality and follow-up standards
+            </p>
+          </div>
+
+        </div>
+
+        <!-- ══ PROFESSOR NOTE ══ -->
+        <div class="scr-prof-note ar-text">
+          <i class="fas fa-graduation-cap"></i>
+          جلسات البروفيسور محدودة أسبوعيًا لضمان الجودة
+        </div>
+        <div class="scr-prof-note en-text" style="display:none">
+          <i class="fas fa-graduation-cap"></i>
+          Professor sessions are limited weekly to ensure quality
+        </div>
+
+        <!-- ══ CTA ROW ══ -->
+        <div class="scr-cta-row" id="scr-cta-normal">
+          <a href="#form-section" class="btn btn-primary scr-cta-btn ar-text">
+            <i class="fas fa-lock-open"></i> احجز مكانك الآن
+          </a>
+          <a href="#form-section" class="btn btn-primary scr-cta-btn en-text" style="display:none">
+            <i class="fas fa-lock-open"></i> Reserve Your Spot Now
+          </a>
+          <p class="scr-cta-micro ar-text">قبل ما تمتلئ الأماكن — لا تضيع الفرصة</p>
+          <p class="scr-cta-micro en-text" style="display:none">Before spots fill up — don't miss your chance</p>
+        </div>
+
+        <!-- ══ WAITLIST ROW (shown when full) ══ -->
+        <div class="scr-cta-row scr-waitlist-row" id="scr-cta-waitlist" style="display:none">
+          <div class="scr-full-badge ar-text">
+            <i class="fas fa-hourglass-end"></i>
+            تم اكتمال العدد الحالي
+          </div>
+          <div class="scr-full-badge en-text" style="display:none">
+            <i class="fas fa-hourglass-end"></i>
+            Current batch is full
+          </div>
+          <p class="scr-full-sub ar-text">يمكنك الانضمام لقائمة الانتظار أو الحجز للدفعة القادمة</p>
+          <p class="scr-full-sub en-text" style="display:none">You can join the waitlist or book for the next batch</p>
+          <a href="https://wa.me/201068400789?text=مرحبًا%2C%20أريد%20الانضمام%20لقائمة%20الانتظار%20للدفعة%20القادمة"
+             target="_blank" class="btn btn-primary scr-cta-btn ar-text">
+            <i class="fas fa-clock"></i> احجز مكانك في الدفعة القادمة
+          </a>
+          <a href="https://wa.me/201068400789?text=Hello%2C%20I%20want%20to%20join%20the%20waitlist%20for%20the%20next%20batch"
+             target="_blank" class="btn btn-primary scr-cta-btn en-text" style="display:none">
+            <i class="fas fa-clock"></i> Join Next Batch Waitlist
+          </a>
+        </div>
+
+      </div>
+      <!-- /scr-module -->
+
+    </div>
+  </section>
+
+  <!-- ============================
        SOCIAL PROOF / TESTIMONIALS
   ============================= -->
   <section class="testimonials-section section-padding" id="testimonials">
@@ -1739,6 +1869,190 @@ app.get('/', (c) => {
       <i class="fab fa-whatsapp"></i>
     </a>
   </div>
+
+  <script>
+  /* ═══════════════════════════════════════════════════
+     SCARCITY MODULE — Capacity-based urgency engine
+     Config: edit SCR_CONFIG to update capacity numbers
+     ═══════════════════════════════════════════════════ */
+  (function () {
+    'use strict';
+
+    /* ─────────────────────────────────────────────
+       ★ EDITABLE CONFIG — update these values manually
+         or connect to your backend/CMS later
+       ─────────────────────────────────────────────
+       status: 'green' | 'yellow' | 'red' | 'full'
+         green  → 0–60%   fill  (متاح)
+         yellow → 61–85%  fill  (أماكن محدودة)
+         red    → 86–99%  fill  (متبقي قليل)
+         full   → 100%    fill  (مكتمل — waitlist mode)
+    */
+    var SCR_CONFIG = {
+      current:  16,   /* current enrolled clients */
+      max:      20,   /* max capacity             */
+      spotsLeft: 4    /* remaining spots          */
+    };
+    /* ─────────────────────────────────────────────── */
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasRun  = false;
+
+    /* ── Derive state from config ── */
+    function getState(current, max) {
+      var pct = current / max;
+      if (current >= max)  return 'full';
+      if (pct >= 0.86)     return 'red';
+      if (pct >= 0.61)     return 'yellow';
+      return 'green';
+    }
+
+    /* ── Smooth count-up ── */
+    function countUp(el, target, duration) {
+      if (!el) return;
+      if (reduced) { el.textContent = target; return; }
+      var start     = performance.now();
+      var startVal  = 0;
+      function step(now) {
+        var elapsed  = now - start;
+        var progress = Math.min(elapsed / duration, 1);
+        /* ease-out cubic */
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(startVal + (target - startVal) * eased);
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    /* ── Apply state classes & copy ── */
+    function applyState(state, pct, spotsLeft) {
+      var pills   = document.querySelectorAll('.scr-live-pill');
+      var badge   = document.getElementById('scr-spots-badge');
+      var fill    = document.getElementById('scr-bar-fill');
+      var pctEls  = document.querySelectorAll('#scr-pct, #scr-pct-en');
+      var normalCTA   = document.getElementById('scr-cta-normal');
+      var waitlistCTA = document.getElementById('scr-cta-waitlist');
+
+      /* Progress bar colour */
+      if (fill) {
+        fill.classList.remove('scr-fill-red', 'scr-fill-yellow');
+        if      (state === 'full' || state === 'red')    fill.classList.add('scr-fill-red');
+        else if (state === 'yellow') fill.classList.add('scr-fill-yellow');
+      }
+
+      /* Percentage text */
+      pctEls.forEach(function(el) { el.textContent = pct + '%'; });
+
+      /* Pill status */
+      pills.forEach(function(pill) {
+        pill.classList.remove('scr-status-red', 'scr-status-yellow');
+      });
+
+      /* Spots badge */
+      if (badge) {
+        badge.classList.remove('scr-badge-red', 'scr-badge-yellow');
+      }
+
+      var labelAr = document.getElementById('scr-live-label-ar');
+      var labelEn = document.getElementById('scr-live-label-en');
+      var spotsAr = document.getElementById('scr-spots-text-ar');
+      var spotsEn = document.getElementById('scr-spots-text-en');
+
+      if (state === 'green') {
+        if (labelAr) labelAr.textContent = 'متاح الانضمام حاليًا';
+        if (labelEn) labelEn.textContent = 'Open for enrollment';
+        if (spotsAr) spotsAr.textContent = 'أماكن متاحة — انضم الآن';
+        if (spotsEn) spotsEn.textContent = 'Spots available — join now';
+      } else if (state === 'yellow') {
+        pills.forEach(function(p) { p.classList.add('scr-status-yellow'); });
+        if (badge) badge.classList.add('scr-badge-yellow');
+        if (labelAr) labelAr.textContent = 'أماكن محدودة متبقية';
+        if (labelEn) labelEn.textContent = 'Limited spots remaining';
+        if (spotsAr) spotsAr.textContent = 'أماكن محدودة — سارع بالحجز';
+        if (spotsEn) spotsEn.textContent = 'Limited spots — book soon';
+      } else if (state === 'red') {
+        pills.forEach(function(p) { p.classList.add('scr-status-red'); });
+        if (badge) badge.classList.add('scr-badge-red');
+        if (labelAr) labelAr.textContent = 'متبقي ' + spotsLeft + ' أماكن فقط';
+        if (labelEn) labelEn.textContent = 'Only ' + spotsLeft + ' spots left';
+        if (spotsAr) spotsAr.textContent = 'متبقي ' + spotsLeft + ' أماكن فقط';
+        if (spotsEn) spotsEn.textContent = 'Only ' + spotsLeft + ' spots left';
+      } else if (state === 'full') {
+        pills.forEach(function(p) { p.classList.add('scr-status-red'); });
+        if (badge) badge.classList.add('scr-badge-red');
+        if (labelAr) labelAr.textContent = 'تم اكتمال العدد';
+        if (labelEn) labelEn.textContent = 'Batch is full';
+        if (spotsAr) spotsAr.textContent = 'تم اكتمال الأماكن';
+        if (spotsEn) spotsEn.textContent = 'All spots filled';
+        /* Swap CTA rows */
+        if (normalCTA)   normalCTA.style.display   = 'none';
+        if (waitlistCTA) waitlistCTA.style.display  = 'flex';
+      }
+    }
+
+    /* ── Main init (runs once on IntersectionObserver trigger) ── */
+    function initScarcity() {
+      var cfg    = SCR_CONFIG;
+      var pct    = Math.round((cfg.current / cfg.max) * 100);
+      var state  = getState(cfg.current, cfg.max);
+
+      /* Entrance animation */
+      var module = document.getElementById('scr-module');
+      if (module && !reduced) {
+        module.classList.add('scr-entered');
+      }
+
+      /* Count-up: current number */
+      var elCur   = document.getElementById('scr-current');
+      var elCurEn = document.getElementById('scr-current-en');
+      countUp(elCur,   cfg.current, 800);
+      countUp(elCurEn, cfg.current, 800);
+
+      /* Progress bar fill — slight delay after count-up starts */
+      var fill = document.getElementById('scr-bar-fill');
+      if (fill) {
+        setTimeout(function () {
+          fill.style.width = pct + '%';
+        }, reduced ? 0 : 120);
+      }
+
+      /* Apply dynamic state */
+      applyState(state, pct, cfg.spotsLeft);
+    }
+
+    /* ── IntersectionObserver — fire once on first view ── */
+    function observeModule() {
+      var module = document.getElementById('scr-module');
+      if (!module) return;
+
+      if (!window.IntersectionObserver) {
+        /* Fallback: just run immediately */
+        initScarcity();
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !hasRun) {
+            hasRun = true;
+            initScarcity();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.25 });
+
+      observer.observe(module);
+    }
+
+    /* ── Boot ── */
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', observeModule);
+    } else {
+      observeModule();
+    }
+
+  })();
+  </script>
 
   <script src="/static/app.js"></script>
 </body>
