@@ -184,223 +184,159 @@ app.get('/', (c) => {
         </p>
       </div>
 
-      <!-- ===== LEFT SIDE: Story Device ===== -->
-      <div class="story-device-wrap" id="heroVisual">
+      <!-- ===== LEFT SIDE: Static Performance Dashboard ===== -->
+      <div class="pm-wrap" id="heroVisual">
 
-        <!-- ── Glow field behind phone ── -->
-        <div class="sdw-glow-field" id="sdwGlow">
-          <div class="sdw-glow-core"></div>
-          <div class="sdw-glow-ring sdw-ring-a"></div>
-          <div class="sdw-glow-ring sdw-ring-b"></div>
-          <div class="sdw-glow-ring sdw-ring-c"></div>
-        </div>
+        <!-- Soft background glow — single layer, no animation complexity -->
+        <div class="pm-glow-bg"></div>
 
-        <!-- ── Phone shell ── -->
-        <div class="sdw-phone" id="storyPhone">
-          <div class="sdw-dynamic-island">
-            <div class="sdi-camera"></div>
-            <div class="sdi-sensor"></div>
+        <!-- ══════════════════════════════════
+             PHONE FRAME
+        ══════════════════════════════════ -->
+        <div class="pm-phone" id="pmPhone">
+
+          <!-- Dynamic Island -->
+          <div class="pm-island">
+            <div class="pm-island-cam"></div>
+            <div class="pm-island-dot"></div>
           </div>
-          <div class="sdw-screen-area">
 
-            <!-- ═══════════════════════════
-                 PHASE A: BEFORE
-                 (full-screen weak content)
-            ═══════════════════════════ -->
-            <div class="sdw-phase sdw-phase-before" id="phaseBefore">
+          <!-- ── SCREEN CONTENT ── -->
+          <div class="pm-screen">
 
-              <!-- dim grainy overlay -->
-              <div class="before-overlay"></div>
-
-              <!-- Fake dull video content -->
-              <div class="before-video-sim">
-                <!-- muted scene: blurry, desaturated bars -->
-                <div class="bv-bar bv-b1"></div>
-                <div class="bv-bar bv-b2"></div>
-                <div class="bv-bar bv-b3"></div>
-                <div class="bv-bar bv-b4"></div>
-                <div class="bv-person-silhouette">
-                  <div class="bvp-head"></div>
-                  <div class="bvp-body"></div>
-                </div>
-                <!-- Bad caption: blurred, no style -->
-                <div class="before-caption">
-                  <span>هنا بدأت رحلتي في المحتوى...</span>
-                </div>
-                <!-- Low engagement bar -->
-                <div class="before-eng-bar">
-                  <div class="beng-fill" style="width:12%"></div>
-                </div>
+            <!-- ▸ SCREEN HEADER -->
+            <div class="pm-screen-header">
+              <div class="pm-app-icon"><i class="fas fa-chart-bar"></i></div>
+              <div class="pm-header-text">
+                <span class="pm-app-name ar-text">CreatorPro</span>
+                <span class="pm-app-name en-text" style="display:none">CreatorPro</span>
+                <span class="pm-sub ar-text">لوحة الأداء</span>
+                <span class="pm-sub en-text" style="display:none">Dashboard</span>
               </div>
-
-              <!-- Top label -->
-              <div class="phase-top-label before-top">
-                <span class="ptl-dot ptl-red"></span>
-                <span class="ar-text">قبل CreatorPro</span>
-                <span class="en-text" style="display:none">Before CreatorPro</span>
+              <div class="pm-live-dot-wrap">
+                <span class="pm-live-dot-pulse"></span>
+                <span class="pm-live-text">LIVE</span>
               </div>
-
-              <!-- Dead stats (weak numbers) -->
-              <div class="before-stats-row">
-                <div class="bsr-item">
-                  <i class="fas fa-heart"></i>
-                  <span>47</span>
-                </div>
-                <div class="bsr-item">
-                  <i class="fas fa-eye"></i>
-                  <span>320</span>
-                </div>
-                <div class="bsr-item">
-                  <i class="fas fa-comment"></i>
-                  <span>3</span>
-                </div>
-              </div>
-
             </div>
 
-            <!-- ═══════════════════════════
-                 TRANSITION: Wand sweep
-            ═══════════════════════════ -->
-            <div class="sdw-wand-sweep" id="wandSweep">
-              <div class="wand-line"></div>
-              <div class="wand-sparkle ws-1"><i class="fas fa-sparkles"></i></div>
-              <div class="wand-sparkle ws-2"><i class="fas fa-star"></i></div>
-              <div class="wand-sparkle ws-3"><i class="fas fa-sparkles"></i></div>
-              <div class="wand-label ar-text">✨ CreatorPro يحوّل المحتوى</div>
-              <div class="wand-label en-text" style="display:none">✨ CreatorPro transforms content</div>
+            <!-- ▸ TOP LABEL: "نتائج حسابك بعد التطوير" -->
+            <div class="pm-result-label">
+              <i class="fas fa-trophy pm-trophy-ico"></i>
+              <span class="ar-text">نتائج حسابك بعد التطوير</span>
+              <span class="en-text" style="display:none">Your account results after development</span>
             </div>
 
-            <!-- ═══════════════════════════
-                 PHASE B: AFTER
-                 (full-screen premium result)
-            ═══════════════════════════ -->
-            <div class="sdw-phase sdw-phase-after" id="phaseAfter">
-
-              <!-- Rich vibrant background -->
-              <div class="after-bg-rich"></div>
-
-              <!-- Animated cinematic bars (cuts simulation) -->
-              <div class="after-cuts">
-                <div class="ac-bar ac-1"></div>
-                <div class="ac-bar ac-2"></div>
-                <div class="ac-bar ac-3"></div>
+            <!-- ▸ MAIN STATS ROW -->
+            <div class="pm-stats-grid">
+              <!-- Views -->
+              <div class="pm-stat-card pm-stat-views">
+                <div class="pm-stat-icon pm-si-blue"><i class="fas fa-eye"></i></div>
+                <div class="pm-stat-info">
+                  <span class="pm-stat-num">180K</span>
+                  <span class="pm-stat-lbl ar-text">مشاهدة</span>
+                  <span class="pm-stat-lbl en-text" style="display:none">Views</span>
+                </div>
+                <div class="pm-stat-badge pm-badge-up">▲ 12x</div>
               </div>
-
-              <!-- Stylish creator silhouette with glow -->
-              <div class="after-creator">
-                <div class="ac-glow-halo"></div>
-                <div class="ac-person">
-                  <div class="acp-head"></div>
-                  <div class="acp-body"></div>
-                  <div class="acp-mic"><i class="fas fa-microphone"></i></div>
+              <!-- Likes -->
+              <div class="pm-stat-card pm-stat-likes">
+                <div class="pm-stat-icon pm-si-red"><i class="fas fa-heart"></i></div>
+                <div class="pm-stat-info">
+                  <span class="pm-stat-num">22.8K</span>
+                  <span class="pm-stat-lbl ar-text">إعجاب</span>
+                  <span class="pm-stat-lbl en-text" style="display:none">Likes</span>
+                </div>
+                <div class="pm-stat-badge pm-badge-up">▲ 8x</div>
+              </div>
+              <!-- Growth -->
+              <div class="pm-stat-card pm-stat-growth">
+                <div class="pm-stat-icon pm-si-gold"><i class="fas fa-arrow-trend-up"></i></div>
+                <div class="pm-stat-info">
+                  <span class="pm-stat-num">+340%</span>
+                  <span class="pm-stat-lbl ar-text">نمو الوصول</span>
+                  <span class="pm-stat-lbl en-text" style="display:none">Reach Growth</span>
+                </div>
+                <div class="pm-bar-wrap">
+                  <div class="pm-bar-fill" style="width:85%"></div>
                 </div>
               </div>
-
-              <!-- Professional caption with style -->
-              <div class="after-caption-pro">
-                <div class="acp-line acp-l1 ar-text">🔥 سر النجاح في المحتوى</div>
-                <div class="acp-line acp-l1 en-text" style="display:none">🔥 The Secret to Content Success</div>
-                <div class="acp-line acp-l2 ar-text">احجز مجاناً الآن ←</div>
-                <div class="acp-line acp-l2 en-text" style="display:none">Book Free Now →</div>
-              </div>
-
-              <!-- Motion text effects -->
-              <div class="after-motion-tag amt-1 ar-text">🎬 مونتاج احترافي</div>
-              <div class="after-motion-tag amt-1 en-text" style="display:none">🎬 Pro Editing</div>
-              <div class="after-motion-tag amt-2 ar-text">⚡ نمو حقيقي</div>
-              <div class="after-motion-tag amt-2 en-text" style="display:none">⚡ Real Growth</div>
-
-              <!-- Top label (after phase) -->
-              <div class="phase-top-label after-top">
-                <span class="ptl-dot ptl-green"></span>
-                <span class="ar-text">بعد CreatorPro</span>
-                <span class="en-text" style="display:none">After CreatorPro</span>
-              </div>
-
-              <!-- ── INTEGRATED LIVE STATS (the hero) ── -->
-              <div class="after-live-stats" id="afterLiveStats">
-
-                <div class="als-item als-heart" id="alsHeart">
-                  <div class="als-icon"><i class="fas fa-heart"></i></div>
-                  <div class="als-data">
-                    <span class="als-num" id="alsHeartNum">24.5K</span>
-                    <span class="als-bar-wrap"><span class="als-bar" style="width:0%"></span></span>
-                  </div>
-                </div>
-
-                <div class="als-item als-views" id="alsViews">
-                  <div class="als-icon als-icon-purple"><i class="fas fa-eye"></i></div>
-                  <div class="als-data">
-                    <span class="als-num" id="alsViewsNum">180K</span>
-                    <span class="als-bar-wrap"><span class="als-bar als-bar-purple" style="width:0%"></span></span>
-                  </div>
-                </div>
-
-                <div class="als-item als-growth" id="alsGrowth">
-                  <div class="als-icon als-icon-gold"><i class="fas fa-arrow-trend-up"></i></div>
-                  <div class="als-data">
-                    <span class="als-num" id="alsGrowthNum">+340%</span>
-                    <span class="als-bar-wrap"><span class="als-bar als-bar-gold" style="width:0%"></span></span>
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- Engagement progress ring (circular) -->
-              <div class="after-eng-ring" id="engRing">
-                <svg viewBox="0 0 44 44" class="eng-svg">
-                  <circle cx="22" cy="22" r="18" class="eng-track"/>
-                  <circle cx="22" cy="22" r="18" class="eng-fill" id="engCircle"/>
-                </svg>
-                <span class="eng-pct ar-text">نمو</span>
-                <span class="eng-pct en-text" style="display:none">Growth</span>
-              </div>
-
             </div>
 
-            <!-- ── Bottom story strip ── -->
-            <div class="sdw-bottom-strip">
-              <span class="ar-text">نتائج حقيقية خلال 30 يوم</span>
-              <span class="en-text" style="display:none">Real results within 30 days</span>
+            <!-- ▸ CONTENT PREVIEW BLOCK (mock post) -->
+            <div class="pm-post-preview">
+              <!-- Thumbnail -->
+              <div class="pm-thumb">
+                <div class="pm-thumb-grad"></div>
+                <div class="pm-thumb-play"><i class="fas fa-play"></i></div>
+                <div class="pm-thumb-badge ar-text">مميز ✨</div>
+                <div class="pm-thumb-badge en-text" style="display:none">Featured ✨</div>
+              </div>
+              <!-- Post meta -->
+              <div class="pm-post-meta">
+                <p class="pm-post-title ar-text">سر النجاح في المحتوى</p>
+                <p class="pm-post-title en-text" style="display:none">The Secret to Content Success</p>
+                <p class="pm-post-caption ar-text">ده مثال لفيديو تم تطويره ضمن النظام</p>
+                <p class="pm-post-caption en-text" style="display:none">Example video developed inside the system</p>
+                <!-- mini stats row -->
+                <div class="pm-post-stats">
+                  <span><i class="fas fa-eye"></i> 180K</span>
+                  <span><i class="fas fa-heart"></i> 22.8K</span>
+                  <span><i class="fas fa-share-nodes"></i> 3.2K</span>
+                </div>
+              </div>
             </div>
 
+            <!-- ▸ PROOF STRIP: "دي نتائج حقيقية خلال أول 30 يوم" -->
+            <div class="pm-proof-strip">
+              <i class="fas fa-shield-halved pm-shield-ico"></i>
+              <span class="ar-text">دي نتائج حقيقية خلال أول 30 يوم</span>
+              <span class="en-text" style="display:none">Real results in the first 30 days</span>
+            </div>
+
+            <!-- ▸ CTA INSIDE MOBILE -->
+            <div class="pm-screen-cta">
+              <a href="#form-section" class="pm-cta-btn">
+                <i class="fas fa-bolt pm-cta-ico"></i>
+                <span class="ar-text">ابدأ تطوير محتواك</span>
+                <span class="en-text" style="display:none">Start Developing Your Content</span>
+              </a>
+            </div>
+
+          </div><!-- /pm-screen -->
+
+          <!-- Physical side buttons -->
+          <div class="pm-side-btn pm-vol-up"></div>
+          <div class="pm-side-btn pm-vol-dn"></div>
+          <div class="pm-side-btn pm-power"></div>
+
+        </div><!-- /pm-phone -->
+
+        <!-- ══════════════════════════════════════
+             ONLY 2 FLOATING CHIPS — Clean & Focused
+        ══════════════════════════════════════ -->
+
+        <!-- RIGHT TOP: +340% نمو الوصول -->
+        <div class="pm-chip pm-chip-rt">
+          <div class="pm-chip-icon pm-ci-purple"><i class="fas fa-chart-line"></i></div>
+          <div class="pm-chip-body">
+            <span class="pm-chip-val">340%+</span>
+            <span class="pm-chip-lbl ar-text">نمو الوصول</span>
+            <span class="pm-chip-lbl en-text" style="display:none">Reach Growth</span>
           </div>
-          <!-- side buttons decoration -->
-          <div class="sdw-side-btn sdw-btn-vol-up"></div>
-          <div class="sdw-side-btn sdw-btn-vol-dn"></div>
-          <div class="sdw-side-btn sdw-btn-power"></div>
+          <span class="pm-chip-arrow">↑</span>
         </div>
 
-        <!-- ── Attached floating chip cards (anchored to phone) ── -->
-        <div class="chip-card chip-top-right" id="chipReach">
-          <div class="chip-icon"><i class="fas fa-chart-line"></i></div>
-          <div class="chip-body">
-            <span class="chip-val" id="chipReachVal">+340%</span>
-            <span class="chip-lbl ar-text">وصول</span>
-            <span class="chip-lbl en-text" style="display:none">Reach</span>
-          </div>
-          <div class="chip-spark"><i class="fas fa-arrow-up"></i></div>
-        </div>
-
-        <div class="chip-card chip-bottom-left" id="chipClients">
-          <div class="chip-icon chip-green"><i class="fas fa-user-plus"></i></div>
-          <div class="chip-body">
-            <span class="chip-val" id="chipClientsVal">+120</span>
-            <span class="chip-lbl ar-text">عميل جديد / شهر</span>
-            <span class="chip-lbl en-text" style="display:none">New clients / mo</span>
+        <!-- RIGHT BOTTOM: 2.4M مشاهدة / شهر -->
+        <div class="pm-chip pm-chip-rb">
+          <div class="pm-chip-icon pm-ci-gold"><i class="fas fa-fire-flame-curved"></i></div>
+          <div class="pm-chip-body">
+            <span class="pm-chip-val">2.4M</span>
+            <span class="pm-chip-lbl ar-text">مشاهدة / شهر</span>
+            <span class="pm-chip-lbl en-text" style="display:none">Views / month</span>
           </div>
         </div>
 
-        <div class="chip-card chip-mid-right" id="chipViews">
-          <div class="chip-icon chip-gold"><i class="fas fa-fire-flame-curved"></i></div>
-          <div class="chip-body">
-            <span class="chip-val">2.4M</span>
-            <span class="chip-lbl ar-text">مشاهدة / شهر</span>
-            <span class="chip-lbl en-text" style="display:none">views / month</span>
-          </div>
-        </div>
-
-      </div>
+      </div><!-- /pm-wrap -->
     </div>
 
     <!-- Scroll indicator -->
@@ -2845,312 +2781,71 @@ app.get('/', (c) => {
   </script>
 
   <!-- ============================
-       STORY DEVICE — TRANSFORMATION JS
+       STATIC DASHBOARD — Minimal JS
+       Only: subtle glow pulse on phone + hover lift on chips
   ============================= -->
   <script>
   (function() {
     'use strict';
+    /* No complex animation. Phone content is fully static and visible instantly.
+       Only light effects: glow pulse via CSS, chip hover via CSS.
+       This block handles: navbar scroll, smooth scroll, optional navbar active. */
 
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    /* ──────────────────────────────────────
-       STORY DEVICE CONTROLLER
-       Phases: BEFORE (3.5s) → SWEEP (1.8s) → AFTER (5s) → loop
-    ────────────────────────────────────── */
-
-    var TIMINGS = {
-      BEFORE_HOLD   : 3500,   /* ms showing BEFORE phase */
-      SWEEP_DUR     : 1800,   /* ms for wand sweep transition */
-      AFTER_HOLD    : 5000,   /* ms showing AFTER phase */
-      STATS_DELAY   : 400,    /* ms after AFTER appears before stats count up */
-      CHIP_DELAY    : 600,    /* ms after AFTER for chip cards to appear */
-    };
-
-    if (reduced) {
-      /* Skip all animations — just show AFTER state immediately */
-      TIMINGS.BEFORE_HOLD = 0;
-      TIMINGS.SWEEP_DUR   = 0;
+    /* ── Navbar scroll shadow ── */
+    var navbar = document.getElementById('navbar');
+    if (navbar) {
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 20) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+      }, { passive: true });
     }
 
-    var phaseBefore = document.getElementById('phaseBefore');
-    var phaseAfter  = document.getElementById('phaseAfter');
-    var wandSweep   = document.getElementById('wandSweep');
-    var afterStats  = document.getElementById('afterLiveStats');
-    var engRing     = document.getElementById('engRing');
-    var engCircle   = document.getElementById('engCircle');
-
-    /* Chip cards */
-    var chips = [
-      document.getElementById('chipReach'),
-      document.getElementById('chipClients'),
-      document.getElementById('chipViews')
-    ];
-
-    var cycleRunning = false;
-
-    /* ── Mini count-up for screen stats ── */
-    function countUpText(el, finalText, duration) {
-      if (!el || reduced) { if (el) el.textContent = finalText; return; }
-      /* Parse number from text like "24.5K", "180K", "+340%", "2.4M" */
-      var raw = finalText.replace(/[^0-9.]/g, '');
-      var suffix = finalText.replace(/[0-9.]/g, '');
-      var target = parseFloat(raw) || 0;
-      var start = 0;
-      var startTime = null;
-
-      function step(ts) {
-        if (!startTime) startTime = ts;
-        var p = Math.min((ts - startTime) / duration, 1);
-        var ease = 1 - Math.pow(1 - p, 3);
-        var val = start + (target - start) * ease;
-        /* Format same as original */
-        var display = (Math.round(val * 10) / 10);
-        if (display >= 1000 && suffix.indexOf('M') === -1 && suffix.indexOf('K') === -1) {
-          display = (display / 1000).toFixed(1) + 'K' + suffix.replace('K','');
-        } else {
-          display = display + suffix;
+    /* ── Smooth scroll for all anchor links ── */
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        el.textContent = display;
-        if (p < 1) requestAnimationFrame(step);
-        else el.textContent = finalText;
-      }
-      requestAnimationFrame(step);
-    }
-
-    /* ── Animate engagement SVG ring ── */
-    function animateEngRing(targetPct) {
-      if (!engCircle) return;
-      var circumference = 113; /* 2π × 18 ≈ 113 */
-      var offset = circumference - (targetPct / 100) * circumference;
-
-      if (reduced) {
-        engCircle.style.strokeDashoffset = offset;
-        return;
-      }
-
-      /* Small delay so ring is visible first */
-      setTimeout(function() {
-        engCircle.style.strokeDashoffset = offset;
-      }, 300);
-    }
-
-    /* ── Show AFTER phase with cascaded reveals ── */
-    function showAfterState() {
-      if (phaseAfter)  phaseAfter.classList.add('phase-enter');
-      if (phaseBefore) phaseBefore.style.display = 'none';
-
-      if (reduced) {
-        /* Instant reveal everything */
-        if (afterStats) {
-          afterStats.querySelectorAll('.als-item').forEach(function(el) {
-            el.classList.add('als-visible');
-          });
-          afterStats.querySelectorAll('.als-bar').forEach(function(el) {
-            el.style.width = el.dataset.w || '85%';
-          });
-        }
-        if (engRing) {
-          engRing.classList.add('ring-visible');
-          animateEngRing(82);
-        }
-        chips.forEach(function(c) { if (c) c.classList.add('chip-visible'); });
-        return;
-      }
-
-      /* Stagger stats items */
-      setTimeout(function() {
-        if (!afterStats) return;
-        var items = afterStats.querySelectorAll('.als-item');
-        items.forEach(function(item, i) {
-          setTimeout(function() {
-            item.classList.add('als-visible');
-          }, i * 180);
-        });
-
-        /* Animate bars */
-        setTimeout(function() {
-          var bars = [
-            { el: afterStats.querySelector('.als-heart .als-bar'),  w: '72%'  },
-            { el: afterStats.querySelector('.als-views .als-bar'),  w: '88%'  },
-            { el: afterStats.querySelector('.als-growth .als-bar'), w: '95%'  }
-          ];
-          bars.forEach(function(b) {
-            if (b.el) b.el.style.width = b.w;
-          });
-        }, 300);
-
-        /* Count-up numbers */
-        var heartEl  = document.getElementById('alsHeartNum');
-        var viewsEl  = document.getElementById('alsViewsNum');
-        var growthEl = document.getElementById('alsGrowthNum');
-
-        setTimeout(function() {
-          countUpText(heartEl,  '24.5K', 900);
-          setTimeout(function() { countUpText(viewsEl, '180K', 900); },  150);
-          setTimeout(function() { countUpText(growthEl, '+340%', 900); }, 300);
-        }, 200);
-
-      }, TIMINGS.STATS_DELAY);
-
-      /* Engagement ring */
-      setTimeout(function() {
-        if (engRing) engRing.classList.add('ring-visible');
-        animateEngRing(82);
-      }, TIMINGS.STATS_DELAY + 400);
-
-      /* Chip cards */
-      setTimeout(function() {
-        chips.forEach(function(c, i) {
-          if (!c) return;
-          setTimeout(function() {
-            c.classList.add('chip-visible');
-          }, i * 200);
-        });
-      }, TIMINGS.CHIP_DELAY);
-    }
-
-    /* ── Reset to BEFORE state ── */
-    function resetToBefore() {
-      if (phaseBefore) {
-        phaseBefore.style.display = '';
-        phaseBefore.classList.remove('phase-exit');
-      }
-      if (phaseAfter) phaseAfter.classList.remove('phase-enter');
-      if (wandSweep)  wandSweep.classList.remove('sweep-active');
-
-      if (afterStats) {
-        afterStats.querySelectorAll('.als-item').forEach(function(el) {
-          el.classList.remove('als-visible');
-        });
-        afterStats.querySelectorAll('.als-bar').forEach(function(el) {
-          el.style.width = '0%';
-        });
-        var heartEl  = document.getElementById('alsHeartNum');
-        var viewsEl  = document.getElementById('alsViewsNum');
-        var growthEl = document.getElementById('alsGrowthNum');
-        if (heartEl)  heartEl.textContent  = '0K';
-        if (viewsEl)  viewsEl.textContent  = '0K';
-        if (growthEl) growthEl.textContent = '0%';
-      }
-
-      if (engRing) engRing.classList.remove('ring-visible');
-      if (engCircle) engCircle.style.strokeDashoffset = '113';
-
-      chips.forEach(function(c) { if (c) c.classList.remove('chip-visible'); });
-    }
-
-    /* ── Full cycle ── */
-    function runCycle() {
-      if (cycleRunning) return;
-      cycleRunning = true;
-
-      if (reduced) {
-        /* Just show after immediately, no looping */
-        showAfterState();
-        return;
-      }
-
-      /* Step 1: Show BEFORE for a bit */
-      setTimeout(function() {
-        /* Step 2: Trigger wand sweep */
-        if (phaseBefore) phaseBefore.classList.add('phase-exit');
-        if (wandSweep) wandSweep.classList.add('sweep-active');
-
-        /* Step 3: After sweep, reveal AFTER */
-        setTimeout(function() {
-          showAfterState();
-
-          /* Step 4: After AFTER is shown, schedule reset and repeat */
-          setTimeout(function() {
-            /* Fade chips out */
-            chips.forEach(function(c) { if (c) c.classList.remove('chip-visible'); });
-
-            setTimeout(function() {
-              resetToBefore();
-              cycleRunning = false;
-              /* Restart */
-              setTimeout(runCycle, 600);
-            }, 600);
-
-          }, TIMINGS.AFTER_HOLD);
-
-        }, TIMINGS.SWEEP_DUR);
-
-      }, TIMINGS.BEFORE_HOLD);
-    }
-
-    /* ── Mouse parallax for phone only ── */
-    function initPhoneParallax() {
-      if (reduced) return;
-      var phone = document.querySelector('.sdw-phone');
-      if (!phone) return;
-
-      var heroSec = document.getElementById('hero');
-      var mx = 0, my = 0, cx = 0, cy = 0;
-      var active = false, raf;
-
-      heroSec && heroSec.addEventListener('mousemove', function(e) {
-        var r = heroSec.getBoundingClientRect();
-        mx = ((e.clientX - r.left) / r.width  - 0.5) * 2;
-        my = ((e.clientY - r.top)  / r.height - 0.5) * 2;
-        active = true;
-        if (!raf) tick();
       });
+    });
 
-      heroSec && heroSec.addEventListener('mouseleave', function() {
-        active = false;
-        (function ease() {
-          cx += (0 - cx) * 0.07; cy += (0 - cy) * 0.07;
-          apply();
-          if (Math.abs(cx) > 0.001 || Math.abs(cy) > 0.001) {
-            cancelAnimationFrame(raf); raf = requestAnimationFrame(ease);
-          } else { cx = cy = 0; apply(); raf = null; }
-        })();
-      });
+    /* ── Subtle phone tilt on hero mousemove (desktop only) ── */
+    var phone = document.getElementById('pmPhone');
+    var hero  = document.getElementById('hero');
+    if (phone && hero && window.innerWidth >= 768) {
+      var tiltActive = false, tiltRaf = null;
+      var tx = 0, ty = 0, cx = 0, cy = 0;
 
-      function apply() {
-        phone.style.transform =
-          'translateY(' + (cy * 10) + 'px) translateX(' + (cx * 8) + 'px)' +
-          ' rotateX(' + (cy * -7) + 'deg) rotateY(' + (cx * -7) + 'deg)';
-      }
+      hero.addEventListener('mousemove', function(e) {
+        var r = hero.getBoundingClientRect();
+        tx = ((e.clientX - r.left) / r.width  - 0.5) * 10;
+        ty = ((e.clientY - r.top)  / r.height - 0.5) * 8;
+        tiltActive = true;
+        if (!tiltRaf) tiltLoop();
+      }, { passive: true });
 
-      function tick() {
-        raf = requestAnimationFrame(function() {
-          cx += (mx - cx) * 0.09; cy += (my - cy) * 0.09;
-          apply();
-          if (active) tick(); else raf = null;
-        });
-      }
-    }
+      hero.addEventListener('mouseleave', function() {
+        tiltActive = false;
+        tx = 0; ty = 0;
+        tiltLoop();
+      }, { passive: true });
 
-    /* ── Boot on intersection ── */
-    function boot() {
-      initPhoneParallax();
-
-      var heroSec = document.getElementById('hero');
-      if (!heroSec) { runCycle(); return; }
-
-      if (!window.IntersectionObserver) { runCycle(); return; }
-
-      var fired = false;
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting && !fired) {
-            fired = true;
-            /* Small delay to let page render settle */
-            setTimeout(runCycle, 500);
-            obs.disconnect();
+      function tiltLoop() {
+        tiltRaf = requestAnimationFrame(function() {
+          cx += (tx - cx) * 0.1;
+          cy += (ty - cy) * 0.1;
+          phone.style.transform =
+            'rotateX(' + (-cy * 0.5) + 'deg) rotateY(' + (cx * 0.5) + 'deg) translateY(-4px)';
+          if (Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05 || tiltActive) {
+            tiltLoop();
+          } else {
+            phone.style.transform = 'translateY(-4px)';
+            tiltRaf = null;
           }
         });
-      }, { threshold: 0.3 });
-
-      obs.observe(heroSec);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', boot);
-    } else {
-      boot();
+      }
     }
 
   })();
