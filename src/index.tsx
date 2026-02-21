@@ -42,7 +42,17 @@ app.get('/', (c) => {
     <div class="container nav-inner">
       <div class="logo">
         <span class="logo-icon"><i class="fas fa-film"></i></span>
-        <span class="logo-text">Creator<span class="accent">Pro</span></span>
+        <div class="logo-stack">
+          <span class="logo-text">Creator<span class="accent">Hub</span></span>
+          <div class="logo-slogan-v2">
+            <span class="lsv2-prefix ar-text">نظام ينمّي</span>
+            <span class="lsv2-prefix en-text" style="display:none">Grow Your</span>
+            <span class="lsv2-pill" id="lsv2Pill">
+              <span class="lsv2-cursor"></span>
+              <span class="lsv2-text" id="lsv2Text">محتواك</span>
+            </span>
+          </div>
+        </div>
       </div>
       <div class="nav-actions">
         <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
@@ -2293,7 +2303,7 @@ app.get('/', (c) => {
       <div class="footer-inner">
         <div class="footer-logo">
           <span class="logo-icon"><i class="fas fa-film"></i></span>
-          <span class="logo-text">Creator<span class="accent">Pro</span></span>
+          <span class="logo-text">Creator<span class="accent">Hub</span></span>
         </div>
         <p class="ar-text">© 2025 CreatorPro — جميع الحقوق محفوظة</p>
         <p class="en-text" style="display:none">© 2025 CreatorPro — All Rights Reserved</p>
@@ -2852,6 +2862,66 @@ app.get('/', (c) => {
   </script>
 
   <script src="/static/app.js"></script>
+
+  <script>
+  /* ── LOGO TYPEWRITER V2 ── */
+  (function(){
+    var el = document.getElementById('lsv2Text');
+    if (!el) return;
+
+    var arWords = ['محتواك','عملاءك','علامتك','نتائجك'];
+    var enWords = ['Content','Clients','Brand','Results'];
+
+    // Detect language
+    function isAr(){ return document.documentElement.lang !== 'en'; }
+
+    var idx = 0;
+    var typing = false;
+
+    function getWords(){ return isAr() ? arWords : enWords; }
+
+    function erase(cb){
+      var txt = el.textContent || '';
+      if (txt.length === 0){ cb(); return; }
+      el.style.opacity = '0.7';
+      var t = setInterval(function(){
+        txt = txt.slice(0, -1);
+        el.textContent = txt;
+        if (txt.length === 0){ clearInterval(t); el.style.opacity = '1'; cb(); }
+      }, 55);
+    }
+
+    function type(word, cb){
+      var i = 0;
+      el.textContent = '';
+      el.style.opacity = '1';
+      var t = setInterval(function(){
+        el.textContent += word[i];
+        i++;
+        if (i >= word.length){ clearInterval(t); cb(); }
+      }, 80);
+    }
+
+    function cycle(){
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        el.textContent = getWords()[0];
+        return;
+      }
+      var words = getWords();
+      setTimeout(function(){
+        erase(function(){
+          idx = (idx + 1) % words.length;
+          type(words[idx], function(){
+            setTimeout(cycle, 2400);
+          });
+        });
+      }, 2800);
+    }
+
+    // Start after logo is visible
+    setTimeout(cycle, 1600);
+  })();
+  </script>
 </body>
 </html>`)
 })

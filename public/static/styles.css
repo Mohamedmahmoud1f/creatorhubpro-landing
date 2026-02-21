@@ -7922,3 +7922,190 @@ body.en-active .nb-cap-text { justify-content: flex-start; text-align: left; }
   .pm-cta-btn    { transition: none !important; }
 }
 
+
+/* ═══════════════════════════════════════
+   NAVBAR LOGO SLOGAN — Creative tagline
+   ═══════════════════════════════════════ */
+
+/* Stack: name on top, slogan below */
+.logo-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1;
+}
+
+/* Slogan row */
+.logo-slogan {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+}
+
+/* Each word slides in from bottom on load */
+.ls-word {
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  opacity: 0;
+  transform: translateY(5px);
+  animation: lsReveal 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+
+/* "وقّف / Stop" — soft red */
+.ls-stop {
+  color: #f87171;
+  animation-delay: 0.6s;
+}
+
+/* Separator dot */
+.ls-sep {
+  font-size: 0.4rem;
+  color: rgba(255,255,255,0.2);
+  opacity: 0;
+  animation: lsReveal 0.4s ease forwards 0.85s;
+}
+
+/* "ابدأ / Start" — emerald green */
+.ls-start {
+  color: #34d399;
+  text-shadow: 0 0 8px rgba(52,211,153,0.45);
+  animation-delay: 0.75s;
+}
+
+@keyframes lsReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ls-word, .ls-sep {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ================================================
+   LOGO SLOGAN V2 — CREATIVE TYPEWRITER PILL
+   ================================================ */
+
+/* Remove old slogan styles conflict */
+.logo-slogan { display: none !important; }
+
+/* New slogan wrapper */
+.logo-slogan-v2 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 1px;
+  opacity: 0;
+  animation: lsv2FadeIn 0.6s ease forwards 0.4s;
+}
+
+@keyframes lsv2FadeIn {
+  to { opacity: 1; }
+}
+
+/* Prefix text */
+.lsv2-prefix {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(200, 180, 255, 0.75);
+  font-family: 'Tajawal', 'Inter', sans-serif;
+  white-space: nowrap;
+}
+
+/* Animated pill */
+.lsv2-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 7px 1px 6px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,
+    rgba(139, 92, 246, 0.25) 0%,
+    rgba(99, 102, 241, 0.20) 100%
+  );
+  border: 1px solid rgba(139, 92, 246, 0.45);
+  box-shadow:
+    0 0 8px rgba(139, 92, 246, 0.30),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  /* Glow pulse */
+  animation: lsv2PillGlow 3s ease-in-out infinite 1s;
+}
+
+@keyframes lsv2PillGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(139,92,246,0.30), inset 0 1px 0 rgba(255,255,255,0.06); }
+  50%       { box-shadow: 0 0 14px rgba(139,92,246,0.55), inset 0 1px 0 rgba(255,255,255,0.10); }
+}
+
+/* Shimmer effect across the pill */
+.lsv2-pill::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -120%;
+  width: 80%; height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255,255,255,0.12),
+    transparent
+  );
+  animation: lsv2Shimmer 4s ease-in-out infinite 1.5s;
+}
+
+@keyframes lsv2Shimmer {
+  0%   { left: -120%; }
+  40%  { left: 120%; }
+  100% { left: 120%; }
+}
+
+/* Typewriter text */
+.lsv2-text {
+  font-size: 0.60rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #c4b5fd;
+  font-family: 'Tajawal', 'Inter', sans-serif;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+/* Blinking cursor */
+.lsv2-cursor {
+  display: inline-block;
+  width: 1.5px;
+  height: 0.65rem;
+  background: #a78bfa;
+  border-radius: 1px;
+  margin-left: 1px;
+  animation: lsv2Blink 0.85s step-end infinite;
+}
+
+@keyframes lsv2Blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Dot indicator (optional small star spark) */
+.lsv2-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #7c3aed;
+  box-shadow: 0 0 4px #7c3aed;
+  flex-shrink: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .lsv2-pill::before   { animation: none !important; }
+  .lsv2-cursor         { animation: none !important; opacity: 1; }
+  .lsv2-pill           { animation: none !important; }
+  .logo-slogan-v2      { animation: none !important; opacity: 1; }
+}
