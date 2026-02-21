@@ -262,7 +262,7 @@ app.get('/', (c) => {
       </h2>
 
       <p class="section-subtitle ar-text">
-        نحن ما بنعملكش فيديوهات بس — نبني معاك نظام متكامل يحوّل محتواك إلى أداة بيع وتأثير حقيقي
+        احنا مش بنمنتج فيديوهات بس — نبني معاك نظام متكامل يحوّل محتواك إلى أداة بيع وتأثير حقيقي
       </p>
       <p class="section-subtitle en-text" style="display:none">
         We don't just make videos — we build a complete system that turns your content into a real sales and influence machine
@@ -642,54 +642,287 @@ app.get('/', (c) => {
   ============================= -->
   <section class="comparison-section section-padding" id="why">
     <div class="container">
-      <div class="section-tag ar-text">المقارنة</div>
-      <div class="section-tag en-text" style="display:none">COMPARISON</div>
 
-      <h2 class="section-title ar-text">ليه <span class="gradient-text">CreatorPro</span> ومش غيرنا؟</h2>
-      <h2 class="section-title en-text" style="display:none">Why <span class="gradient-text">CreatorPro</span> and Not Others?</h2>
+      <!-- ── Urgency label ── -->
+      <div class="section-tag cmp-tag-danger ar-text">القرار الفاصل</div>
+      <div class="section-tag cmp-tag-danger en-text" style="display:none">THE DECISIVE CHOICE</div>
 
-      <div class="comparison-grid">
-        <div class="compare-card compare-others animate-on-scroll">
-          <div class="compare-header">
-            <i class="fas fa-times-circle"></i>
-            <span class="ar-text">الآخرون</span>
-            <span class="en-text" style="display:none">Others</span>
+      <!-- ── Main header ── -->
+      <h2 class="section-title ar-text">
+        أنت بتختار <span class="gradient-text">إيه</span> فعلاً؟
+      </h2>
+      <h2 class="section-title en-text" style="display:none">
+        What Are You <span class="gradient-text">Really</span> Choosing?
+      </h2>
+
+      <!-- ── Subtext ── -->
+      <p class="section-subtitle cmp-subtext ar-text">
+        مش كل مونتاج واحد… <strong>الفرق هنا بيحدد نتيجتك</strong>
+      </p>
+      <p class="section-subtitle cmp-subtext en-text" style="display:none">
+        Not all editing is equal… <strong>this difference defines your outcome</strong>
+      </p>
+
+      <!-- ── Reality pill ── -->
+      <div class="cmp-reality-bar animate-on-scroll">
+        <span class="cmp-reality-dot"></span>
+        <p class="ar-text">الواقع: معظم الناس بتختار الأرخص… وبتدفع تمن ده من وقتها ونتايجها</p>
+        <p class="en-text" style="display:none">Reality: most people choose the cheapest… and pay the price with their time and results</p>
+      </div>
+
+      <!-- ── Cards grid ── -->
+      <div class="comparison-grid cmp-grid-v2">
+
+        <!-- ═══ RED SIDE — OTHERS ═══ -->
+        <div class="compare-card compare-others cmp-card-v2 cmp-card-pain animate-on-scroll">
+
+          <!-- Danger ribbon -->
+          <div class="cmp-ribbon cmp-ribbon-danger ar-text">
+            <i class="fas fa-triangle-exclamation"></i> الخطر
           </div>
-          <ul class="compare-list">
-            <li class="ar-text"><i class="fas fa-times"></i> مونتاج فقط بدون استراتيجية</li>
-            <li class="en-text" style="display:none"><i class="fas fa-times"></i> Just editing with no strategy</li>
-            <li class="ar-text"><i class="fas fa-times"></i> لا توجيه ولا دعم</li>
-            <li class="en-text" style="display:none"><i class="fas fa-times"></i> No guidance or support</li>
-            <li class="ar-text"><i class="fas fa-times"></i> محتوى عشوائي</li>
-            <li class="en-text" style="display:none"><i class="fas fa-times"></i> Random content</li>
-            <li class="ar-text"><i class="fas fa-times"></i> نتائج غير مضمونة</li>
-            <li class="en-text" style="display:none"><i class="fas fa-times"></i> No guaranteed results</li>
-            <li class="ar-text"><i class="fas fa-times"></i> لا تواصل بعد التسليم</li>
-            <li class="en-text" style="display:none"><i class="fas fa-times"></i> No follow-up after delivery</li>
+          <div class="cmp-ribbon cmp-ribbon-danger en-text" style="display:none">
+            <i class="fas fa-triangle-exclamation"></i> Danger
+          </div>
+
+          <div class="compare-header cmp-header-pain">
+            <div class="cmp-header-icon cmp-icon-danger">
+              <i class="fas fa-scissors"></i>
+            </div>
+            <div>
+              <h3 class="cmp-title-pain ar-text">مونتاج بدون نظام</h3>
+              <h3 class="cmp-title-pain en-text" style="display:none">Editing Without a System</h3>
+              <p class="cmp-pos-line cmp-pos-danger ar-text">شكل حلو… بدون نتيجة</p>
+              <p class="cmp-pos-line cmp-pos-danger en-text" style="display:none">Looks good… delivers nothing</p>
+            </div>
+          </div>
+
+          <ul class="compare-list cmp-list-v2 ar-text">
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>فيديوهات شكلها كويس… بس بدون هدف</strong>
+                <span>بتتعب في المحتوى ومفيش حد بيوصله</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>بتنزل محتوى ومفيش تفاعل حقيقي</strong>
+                <span>الخوارزمية مش بتكافئك لأن المحتوى مش محسوب</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>مفيش حد يقولك تعمل إيه</strong>
+                <span>بتجرب وبتغلط وبتخسر وقت بدون توجيه</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>بتضيع وقت ومجهود بدون نتيجة واضحة</strong>
+                <span>شهور من الشغل ومفيش عملاء ولا نمو</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>كل فيديو منفصل… بدون خطة</strong>
+                <span>مفيش بناء تراكمي — كل مرة من الأول</span>
+              </div>
+            </li>
           </ul>
+          <ul class="compare-list cmp-list-v2 en-text" style="display:none">
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>Videos look nice… but have no goal</strong>
+                <span>You work hard on content but no one sees it</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>You post content but get no real engagement</strong>
+                <span>The algorithm doesn't reward unstrategic content</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>No one tells you what to do</strong>
+                <span>You try, fail, and waste time without guidance</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>Wasting time and effort with no clear result</strong>
+                <span>Months of work — no clients, no growth</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-x-icon"><i class="fas fa-xmark"></i></span>
+              <div>
+                <strong>Every video is separate… no plan</strong>
+                <span>No compounding — you restart every time</span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Emotional closer -->
+          <div class="cmp-closer cmp-closer-pain ar-text">
+            <i class="fas fa-hourglass-half"></i>
+            بتشتغل كتير… بدون ما توصل
+          </div>
+          <div class="cmp-closer cmp-closer-pain en-text" style="display:none">
+            <i class="fas fa-hourglass-half"></i>
+            Working hard… never arriving
+          </div>
+
         </div>
 
-        <div class="compare-vs">VS</div>
-
-        <div class="compare-card compare-us animate-on-scroll">
-          <div class="compare-header">
-            <i class="fas fa-check-circle"></i>
-            <span>CreatorPro</span>
+        <!-- ═══ CENTER VS ═══ -->
+        <div class="compare-vs cmp-vs-v2">
+          <div class="cmp-vs-inner">
+            <span class="cmp-vs-text">VS</span>
+            <p class="ar-text">الفرق مش في الفيديو…<br/><strong>الفرق في النتيجة</strong></p>
+            <p class="en-text" style="display:none">The difference isn't in the video…<br/><strong>it's in the result</strong></p>
           </div>
-          <ul class="compare-list">
-            <li class="ar-text"><i class="fas fa-check"></i> نظام متكامل من الاستراتيجية للمونتاج</li>
-            <li class="en-text" style="display:none"><i class="fas fa-check"></i> Full system from strategy to editing</li>
-            <li class="ar-text"><i class="fas fa-check"></i> جلسات توجيه مع البروفيسورة</li>
-            <li class="en-text" style="display:none"><i class="fas fa-check"></i> Coaching sessions with the Professor</li>
-            <li class="ar-text"><i class="fas fa-check"></i> محتوى موجّه لتحقيق أهداف</li>
-            <li class="en-text" style="display:none"><i class="fas fa-check"></i> Goal-driven content</li>
-            <li class="ar-text"><i class="fas fa-check"></i> نتائج قابلة للقياس</li>
-            <li class="en-text" style="display:none"><i class="fas fa-check"></i> Measurable results</li>
-            <li class="ar-text"><i class="fas fa-check"></i> متابعة ودعم مستمر</li>
-            <li class="en-text" style="display:none"><i class="fas fa-check"></i> Ongoing support & follow-up</li>
+        </div>
+
+        <!-- ═══ GREEN SIDE — CREATORPRO ═══ -->
+        <div class="compare-card compare-us cmp-card-v2 cmp-card-win animate-on-scroll">
+
+          <!-- Winner ribbon -->
+          <div class="cmp-ribbon cmp-ribbon-win ar-text">
+            <i class="fas fa-crown"></i> الاختيار الذكي
+          </div>
+          <div class="cmp-ribbon cmp-ribbon-win en-text" style="display:none">
+            <i class="fas fa-crown"></i> The Smart Choice
+          </div>
+
+          <div class="compare-header cmp-header-win">
+            <div class="cmp-header-icon cmp-icon-win">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div>
+              <h3 class="cmp-title-win">CreatorPro System</h3>
+              <p class="cmp-pos-line cmp-pos-win ar-text">مش خدمة… ده نظام بيشتغل معاك</p>
+              <p class="cmp-pos-line cmp-pos-win en-text" style="display:none">Not a service… a system that works with you</p>
+            </div>
+          </div>
+
+          <ul class="compare-list cmp-list-v2 ar-text">
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>محتوى مبني على هدف واضح (مش عشوائي)</strong>
+                <span>كل فيديو بيتعمل عشان نتيجة محددة مش عشان الحجم</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>كل فيديو ليه دور في زيادة التفاعل أو المبيعات</strong>
+                <span>مش بنعمل محتوى — بنبني مسار بيوصّل للعميل</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>جلسات توجيه تخليك عارف تعمل إيه كل مرة</strong>
+                <span>مع البروفيسور مباشرة — مش بتخمّن ومش بتجرب لوحدك</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>متابعة مستمرة لحد ما تشوف نتيجة فعلية</strong>
+                <span>إحنا معاك في كل خطوة — مش بنسلّم وبنمشي</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>نظام قابل للقياس والتطوير</strong>
+                <span>بنحلل الأداء ونطور الاستراتيجية مع كل فيديو</span>
+              </div>
+            </li>
           </ul>
+          <ul class="compare-list cmp-list-v2 en-text" style="display:none">
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>Content built on a clear goal (not random)</strong>
+                <span>Every video is made for a specific result, not just volume</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>Every video plays a role in growing engagement or sales</strong>
+                <span>We don't make content — we build a path to your client</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>Coaching sessions so you know exactly what to do every time</strong>
+                <span>Directly with the Professor — no guessing, no going it alone</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>Continuous follow-up until you see real results</strong>
+                <span>We're with you at every step — we don't deliver and disappear</span>
+              </div>
+            </li>
+            <li>
+              <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
+              <div>
+                <strong>A measurable, scalable system</strong>
+                <span>We analyse performance and evolve strategy with every video</span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Emotional closer -->
+          <div class="cmp-closer cmp-closer-win ar-text">
+            <i class="fas fa-lightbulb"></i>
+            بتشتغل وأنت فاهم… مش بتجرب
+          </div>
+          <div class="cmp-closer cmp-closer-win en-text" style="display:none">
+            <i class="fas fa-lightbulb"></i>
+            You work knowing exactly why… not just trying
+          </div>
+
+          <!-- CTA inside card -->
+          <a href="#form-section" class="btn btn-primary cmp-card-cta ar-text">
+            <i class="fas fa-arrow-left"></i> ابدأ مع CreatorPro
+          </a>
+          <a href="#form-section" class="btn btn-primary cmp-card-cta en-text" style="display:none">
+            <i class="fas fa-arrow-right"></i> Start with CreatorPro
+          </a>
+
         </div>
       </div>
+
+      <!-- ── Micro urgency bar ── -->
+      <div class="cmp-urgency-bar animate-on-scroll">
+        <i class="fas fa-bolt cmp-urgency-icon"></i>
+        <p class="ar-text">
+          الاختيار ده هو الفرق بين محتوى <strong>بيضيع وقتك</strong>…
+          ومحتوى <strong>بيجيب لك عملاء</strong>
+        </p>
+        <p class="en-text" style="display:none">
+          This choice is the difference between content that <strong>wastes your time</strong>…
+          and content that <strong>brings you clients</strong>
+        </p>
+      </div>
+
     </div>
   </section>
 
