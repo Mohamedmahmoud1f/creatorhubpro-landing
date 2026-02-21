@@ -13,10 +13,10 @@ app.get('/', (c) => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="حوّل محتواك إلى آلة تجذب العملاء - خدمة مونتاج احترافي + نظام نمو + جلسات توجيه مع البروفيسورة" />
   <meta name="keywords" content="مونتاج فيديو, تعديل فيديو, صانع محتوى, نمو محتوى, كريتور, ريلز, يوتيوب" />
-  <meta property="og:title" content="CreatorPro | حوّل محتواك إلى آلة تجذب العملاء" />
+  <meta property="og:title" content="CreatorHub | حوّل محتواك إلى آلة تجذب العملاء" />
   <meta property="og:description" content="مش مجرد مونتاج فيديو… نظام متكامل يساعدك تنشر محتوى احترافي وتحوّل المشاهدين إلى عملاء" />
   <meta property="og:type" content="website" />
-  <title>CreatorPro | حوّل محتواك إلى آلة تجذب العملاء</title>
+  <title>CreatorHub | حوّل محتواك إلى آلة تجذب العملاء</title>
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -218,8 +218,8 @@ app.get('/', (c) => {
             <div class="pm-screen-header">
               <div class="pm-app-icon"><i class="fas fa-chart-bar"></i></div>
               <div class="pm-header-text">
-                <span class="pm-app-name ar-text">CreatorPro</span>
-                <span class="pm-app-name en-text" style="display:none">CreatorPro</span>
+                <span class="pm-app-name ar-text">CreatorHub</span>
+                <span class="pm-app-name en-text" style="display:none">CreatorHub</span>
                 <span class="pm-sub ar-text">لوحة الأداء</span>
                 <span class="pm-sub en-text" style="display:none">Dashboard</span>
               </div>
@@ -855,11 +855,11 @@ app.get('/', (c) => {
 
         <div class="brd-diff-cols">
 
-          <!-- CreatorPro side -->
+          <!-- CreatorHub side -->
           <div class="brd-diff-col brd-diff-win">
             <div class="brd-diff-col-header">
               <div class="brd-diff-dot brd-dot-green"></div>
-              <span>CreatorPro</span>
+              <span>CreatorHub</span>
             </div>
             <ul class="brd-diff-list ar-text">
               <li><i class="fas fa-check brd-ic-green"></i> نظام متكامل من A إلى Z</li>
@@ -1268,7 +1268,7 @@ app.get('/', (c) => {
               <i class="fas fa-rocket"></i>
             </div>
             <div>
-              <h3 class="cmp-title-win">CreatorPro System</h3>
+              <h3 class="cmp-title-win">CreatorHub System</h3>
               <p class="cmp-pos-line cmp-pos-win ar-text">مش خدمة… ده نظام بيشتغل معاك</p>
               <p class="cmp-pos-line cmp-pos-win en-text" style="display:none">Not a service… a system that works with you</p>
             </div>
@@ -1361,10 +1361,10 @@ app.get('/', (c) => {
 
           <!-- CTA inside card -->
           <a href="#form-section" class="btn btn-primary cmp-card-cta ar-text">
-            <i class="fas fa-arrow-left"></i> ابدأ مع CreatorPro
+            <i class="fas fa-arrow-left"></i> ابدأ مع CreatorHub
           </a>
           <a href="#form-section" class="btn btn-primary cmp-card-cta en-text" style="display:none">
-            <i class="fas fa-arrow-right"></i> Start with CreatorPro
+            <i class="fas fa-arrow-right"></i> Start with CreatorHub
           </a>
 
         </div>
@@ -1971,8 +1971,8 @@ app.get('/', (c) => {
         <!-- T11 -->
         <div class="testimonial-card testimonial-featured animate-on-scroll">
           <div class="testi-stars">★★★★★</div>
-          <p class="ar-text testi-quote">"كنت ببيع منتجاتي من البيت والمبيعات كانت بطيئة جداً… بعد 3 شهور مع CreatorPro زادت مبيعاتي 4 أضعاف. الفيديوهات بقت هي أقوى أداة تسويق عندي."</p>
-          <p class="en-text testi-quote" style="display:none">"I was selling products from home and sales were very slow… after 3 months with CreatorPro my sales quadrupled. Videos became my strongest marketing tool."</p>
+          <p class="ar-text testi-quote">"كنت ببيع منتجاتي من البيت والمبيعات كانت بطيئة جداً… بعد 3 شهور مع CreatorHub زادت مبيعاتي 4 أضعاف. الفيديوهات بقت هي أقوى أداة تسويق عندي."</p>
+          <p class="en-text testi-quote" style="display:none">"I was selling products from home and sales were very slow… after 3 months with CreatorHub my sales quadrupled. Videos became my strongest marketing tool."</p>
           <div class="testimonial-author">
             <div class="author-avatar av-gold">د</div>
             <div class="author-info">
@@ -2305,8 +2305,8 @@ app.get('/', (c) => {
           <span class="logo-icon"><i class="fas fa-film"></i></span>
           <span class="logo-text">Creator<span class="accent">Hub</span></span>
         </div>
-        <p class="ar-text">© 2025 CreatorPro — جميع الحقوق محفوظة</p>
-        <p class="en-text" style="display:none">© 2025 CreatorPro — All Rights Reserved</p>
+        <p class="ar-text">© 2025 CreatorHub — جميع الحقوق محفوظة</p>
+        <p class="en-text" style="display:none">© 2025 CreatorHub — All Rights Reserved</p>
         <div class="footer-socials">
           <a href="https://wa.me/201068400789" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
