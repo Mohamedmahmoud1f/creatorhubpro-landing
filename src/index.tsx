@@ -780,8 +780,8 @@ app.get('/', (c) => {
       <div class="testi-trust-bar animate-on-scroll">
         <div class="testi-trust-inner">
           <span class="testi-trust-icon"><i class="fas fa-shield-alt"></i></span>
-          <p class="ar-text">أكثر من <strong>100+</strong> صانع محتوى وبيزنس وثقوا بنا وحققوا نتائج حقيقية</p>
-          <p class="en-text" style="display:none">Over <strong>100+</strong> content creators and businesses trusted us and got real results</p>
+          <p class="ar-text">أكثر من <strong>250+</strong> صانع محتوى وبيزنس وثقوا بنا وحققوا نتائج حقيقية</p>
+          <p class="en-text" style="display:none">Over <strong>250+</strong> content creators and businesses trusted us and got real results</p>
         </div>
       </div>
 
@@ -1039,8 +1039,8 @@ app.get('/', (c) => {
 
       <!-- Bottom CTA -->
       <div class="testi-bottom-cta animate-on-scroll">
-        <p class="ar-text">أنت التالي — انضم لأكثر من 100 شخص حققوا نتائج حقيقية</p>
-        <p class="en-text" style="display:none">You're next — join 100+ people who got real results</p>
+        <p class="ar-text">أنت التالي — انضم لأكثر من 250 شخص حققوا نتائج حقيقية</p>
+        <p class="en-text" style="display:none">You're next — join 250+ people who got real results</p>
         <a href="#form-section" class="btn btn-primary ar-text"><i class="fas fa-rocket"></i> ابدأ الآن</a>
         <a href="#form-section" class="btn btn-primary en-text" style="display:none"><i class="fas fa-rocket"></i> Start Now</a>
       </div>
