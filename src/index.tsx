@@ -13,10 +13,10 @@ app.get('/', (c) => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="حوّل محتواك إلى آلة تجذب العملاء - خدمة مونتاج احترافي + نظام نمو + جلسات توجيه مع البروفيسورة" />
   <meta name="keywords" content="مونتاج فيديو, تعديل فيديو, صانع محتوى, نمو محتوى, كريتور, ريلز, يوتيوب" />
-  <meta property="og:title" content="CreatorHub | حوّل محتواك إلى آلة تجذب العملاء" />
+  <meta property="og:title" content="CreatorPro | حوّل محتواك إلى آلة تجذب العملاء" />
   <meta property="og:description" content="مش مجرد مونتاج فيديو… نظام متكامل يساعدك تنشر محتوى احترافي وتحوّل المشاهدين إلى عملاء" />
   <meta property="og:type" content="website" />
-  <title>CreatorHub | حوّل محتواك إلى آلة تجذب العملاء</title>
+  <title>CreatorPro | حوّل محتواك إلى آلة تجذب العملاء</title>
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,7 +42,7 @@ app.get('/', (c) => {
     <div class="container nav-inner">
       <div class="logo">
         <span class="logo-icon"><i class="fas fa-film"></i></span>
-        <span class="logo-text">Creator<span class="accent">Hub</span></span>
+        <span class="logo-text">Creator<span class="accent">Pro</span></span>
       </div>
       <div class="nav-actions">
         <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
@@ -83,50 +83,47 @@ app.get('/', (c) => {
 
     <div class="container hero-v2-inner">
 
-      <!-- ===== RIGHT SIDE: CRO-Optimised Content ===== -->
+      <!-- ===== RIGHT SIDE: Content ===== -->
       <div class="hero-v2-content" id="heroContent">
 
-        <!-- ① Live credibility badge -->
+        <!-- Live badge -->
         <div class="hero-live-badge">
           <span class="live-dot"></span>
           <span class="ar-text">نظام نمو المحتوى الاحترافي</span>
           <span class="en-text" style="display:none">Professional Content Growth System</span>
         </div>
 
-        <!-- ② PRIMARY SLOGAN — H1 — largest, glowed -->
-        <div class="hero-slogan-wrap">
-          <h1 class="hero-primary-slogan ar-text">
-            <span class="hps-line hps-line-1">محتوى <em class="hps-sells">يبيع</em></span>
-            <span class="hps-line hps-line-2">مش بس يتشاف</span>
-          </h1>
-          <h1 class="hero-primary-slogan en-text" style="display:none">
-            <span class="hps-line hps-line-1">Content That <em class="hps-sells">Sells</em></span>
-            <span class="hps-line hps-line-2">Not Just Looks Good</span>
-          </h1>
-          <!-- Subtle glow behind slogan -->
-          <div class="hps-glow" aria-hidden="true"></div>
+        <!-- Main Headline -->
+        <h1 class="hero-v2-headline ar-text">
+          <span class="hero-line-top">حوّل محتواك إلى</span>
+          <span class="hero-line-gradient">آلة تجذب العملاء</span>
+        </h1>
+        <h1 class="hero-v2-headline en-text" style="display:none">
+          <span class="hero-line-top">Turn Your Content Into a</span>
+          <span class="hero-line-gradient">Client-Generating Machine</span>
+        </h1>
+
+        <!-- System tagline -->
+        <div class="hero-tagline ar-text">
+          <i class="fas fa-infinity"></i>
+          مش مجرد مونتاج… هذا نظام نمو كامل
+        </div>
+        <div class="hero-tagline en-text" style="display:none">
+          <i class="fas fa-infinity"></i>
+          Not just editing… this is a complete growth system
         </div>
 
-        <!-- ③ SECONDARY SLOGAN — pattern interrupt — slides in -->
-        <div class="hero-trigger-line" aria-label="psychological trigger">
-          <span class="htl-stop ar-text">وقّف النشر.</span>
-          <span class="htl-stop en-text" style="display:none">Stop Posting.</span>
-          <span class="htl-divider" aria-hidden="true"></span>
-          <span class="htl-start ar-text">ابدأ التحويل.</span>
-          <span class="htl-start en-text" style="display:none">Start Converting.</span>
-        </div>
-
-        <!-- ④ SUPPORTING TEXT — brief, clear -->
-        <p class="hero-support-text ar-text">
-          مش مجرد مونتاج فيديو… نظام متكامل يساعدك تحوّل المحتوى إلى عملاء حقيقيين
-          ويطوّر أداءك باستمرار
+        <!-- Sub description -->
+        <p class="hero-v2-sub ar-text">
+          نظام متكامل يجمع بين <strong>المونتاج الاحترافي</strong> و<strong>التوجيه الاستراتيجي</strong>
+          <br/>ليحوّل مشاهديك إلى عملاء حقيقيين — كل شهر أحسن من اللي قبله
         </p>
-        <p class="hero-support-text en-text" style="display:none">
-          Not just video editing… a complete system that turns your content into real clients
-          and continuously grows your performance
+        <p class="hero-v2-sub en-text" style="display:none">
+          A complete system combining <strong>professional editing</strong> and <strong>strategic coaching</strong>
+          <br/>to turn your viewers into real paying clients — growing every single month
         </p>
 
-        <!-- Trust badges -->
+        <!-- Trust badges (staggered animation) -->
         <div class="hero-trust-row">
           <div class="trust-badge trust-badge-1">
             <i class="fas fa-users"></i>
@@ -154,9 +151,8 @@ app.get('/', (c) => {
           </div>
         </div>
 
-        <!-- ⑤ CTA BUTTONS -->
+        <!-- CTA Buttons -->
         <div class="hero-v2-cta">
-          <!-- Primary -->
           <a href="#form-section" class="btn btn-hero-primary ar-text" id="heroCta">
             <span class="btn-glow-ring"></span>
             <i class="fas fa-rocket"></i>
@@ -169,25 +165,23 @@ app.get('/', (c) => {
             <span>Start Now</span>
             <span class="btn-arrow">→</span>
           </a>
-          <!-- Secondary -->
           <a href="#coaching" class="btn btn-hero-secondary ar-text">
-            <i class="fas fa-calendar-check"></i>
-            احجز جلسة مجانية
+            <i class="fas fa-graduation-cap"></i>
+            احجز جلسة مجانية مع البروفيسور
           </a>
           <a href="#coaching" class="btn btn-hero-secondary en-text" style="display:none">
-            <i class="fas fa-calendar-check"></i>
-            Book Free Session
+            <i class="fas fa-graduation-cap"></i>
+            Book Free Session with Prof
           </a>
         </div>
 
-        <!-- Reassurance note -->
+        <!-- Sub CTA note -->
         <p class="hero-cta-note ar-text">
           <i class="fas fa-shield-alt"></i> بدون التزام — جلستك الأولى مجانية تماماً
         </p>
         <p class="hero-cta-note en-text" style="display:none">
           <i class="fas fa-shield-alt"></i> No commitment — your first session is completely free
         </p>
-
       </div>
 
       <!-- ===== LEFT SIDE: Static Performance Dashboard ===== -->
@@ -214,8 +208,8 @@ app.get('/', (c) => {
             <div class="pm-screen-header">
               <div class="pm-app-icon"><i class="fas fa-chart-bar"></i></div>
               <div class="pm-header-text">
-                <span class="pm-app-name ar-text">CreatorHub</span>
-                <span class="pm-app-name en-text" style="display:none">CreatorHub</span>
+                <span class="pm-app-name ar-text">CreatorPro</span>
+                <span class="pm-app-name en-text" style="display:none">CreatorPro</span>
                 <span class="pm-sub ar-text">لوحة الأداء</span>
                 <span class="pm-sub en-text" style="display:none">Dashboard</span>
               </div>
@@ -389,7 +383,7 @@ app.get('/', (c) => {
           <div class="problem-icon"><i class="fas fa-compass"></i></div>
           <h3 class="ar-text">مفيش توجيه</h3>
           <h3 class="en-text" style="display:none">No Guidance</h3>
-          <p class="ar-text">بتشتغل لوحدك وما فى حد يقولك الطريق الصح</p>
+          <p class="ar-text">بتشتغل لوحدك وملقيش حد يقولك الطريق الصح</p>
           <p class="en-text" style="display:none">Working alone with no one guiding you in the right direction</p>
         </div>
         <div class="problem-card animate-on-scroll">
@@ -851,11 +845,11 @@ app.get('/', (c) => {
 
         <div class="brd-diff-cols">
 
-          <!-- CreatorHub side -->
+          <!-- CreatorPro side -->
           <div class="brd-diff-col brd-diff-win">
             <div class="brd-diff-col-header">
               <div class="brd-diff-dot brd-dot-green"></div>
-              <span>CreatorHub</span>
+              <span>CreatorPro</span>
             </div>
             <ul class="brd-diff-list ar-text">
               <li><i class="fas fa-check brd-ic-green"></i> نظام متكامل من A إلى Z</li>
@@ -1264,7 +1258,7 @@ app.get('/', (c) => {
               <i class="fas fa-rocket"></i>
             </div>
             <div>
-              <h3 class="cmp-title-win">CreatorHub System</h3>
+              <h3 class="cmp-title-win">CreatorPro System</h3>
               <p class="cmp-pos-line cmp-pos-win ar-text">مش خدمة… ده نظام بيشتغل معاك</p>
               <p class="cmp-pos-line cmp-pos-win en-text" style="display:none">Not a service… a system that works with you</p>
             </div>
@@ -1357,10 +1351,10 @@ app.get('/', (c) => {
 
           <!-- CTA inside card -->
           <a href="#form-section" class="btn btn-primary cmp-card-cta ar-text">
-            <i class="fas fa-arrow-left"></i> ابدأ مع CreatorHub
+            <i class="fas fa-arrow-left"></i> ابدأ مع CreatorPro
           </a>
           <a href="#form-section" class="btn btn-primary cmp-card-cta en-text" style="display:none">
-            <i class="fas fa-arrow-right"></i> Start with CreatorHub
+            <i class="fas fa-arrow-right"></i> Start with CreatorPro
           </a>
 
         </div>
@@ -1967,8 +1961,8 @@ app.get('/', (c) => {
         <!-- T11 -->
         <div class="testimonial-card testimonial-featured animate-on-scroll">
           <div class="testi-stars">★★★★★</div>
-          <p class="ar-text testi-quote">"كنت ببيع منتجاتي من البيت والمبيعات كانت بطيئة جداً… بعد 3 شهور مع CreatorHub زادت مبيعاتي 4 أضعاف. الفيديوهات بقت هي أقوى أداة تسويق عندي."</p>
-          <p class="en-text testi-quote" style="display:none">"I was selling products from home and sales were very slow… after 3 months with CreatorHub my sales quadrupled. Videos became my strongest marketing tool."</p>
+          <p class="ar-text testi-quote">"كنت ببيع منتجاتي من البيت والمبيعات كانت بطيئة جداً… بعد 3 شهور مع CreatorPro زادت مبيعاتي 4 أضعاف. الفيديوهات بقت هي أقوى أداة تسويق عندي."</p>
+          <p class="en-text testi-quote" style="display:none">"I was selling products from home and sales were very slow… after 3 months with CreatorPro my sales quadrupled. Videos became my strongest marketing tool."</p>
           <div class="testimonial-author">
             <div class="author-avatar av-gold">د</div>
             <div class="author-info">
@@ -2299,10 +2293,10 @@ app.get('/', (c) => {
       <div class="footer-inner">
         <div class="footer-logo">
           <span class="logo-icon"><i class="fas fa-film"></i></span>
-          <span class="logo-text">Creator<span class="accent">Hub</span></span>
+          <span class="logo-text">Creator<span class="accent">Pro</span></span>
         </div>
-        <p class="ar-text">© 2025 CreatorHub — جميع الحقوق محفوظة</p>
-        <p class="en-text" style="display:none">© 2025 CreatorHub — All Rights Reserved</p>
+        <p class="ar-text">© 2025 CreatorPro — جميع الحقوق محفوظة</p>
+        <p class="en-text" style="display:none">© 2025 CreatorPro — All Rights Reserved</p>
         <div class="footer-socials">
           <a href="https://wa.me/201068400789" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
