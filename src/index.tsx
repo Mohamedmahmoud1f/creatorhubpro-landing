@@ -497,145 +497,414 @@ app.get('/', (c) => {
   <!-- ============================
        HOW IT WORKS
   ============================= -->
-  <section class="how-section section-padding" id="how">
-    <div class="container">
-      <div class="section-tag ar-text">العملية</div>
-      <div class="section-tag en-text" style="display:none">THE PROCESS</div>
-
-      <h2 class="section-title ar-text">كيف بيشتغل النظام؟</h2>
-      <h2 class="section-title en-text" style="display:none">How Does It Work?</h2>
-
-      <div class="steps-container">
-        <div class="step-item animate-on-scroll">
-          <div class="step-number">1</div>
-          <div class="step-icon-wrap">
-            <div class="step-icon"><i class="fab fa-google-drive"></i></div>
-          </div>
-          <div class="step-content">
-            <h3 class="ar-text">ارفع الفيديو</h3>
-            <h3 class="en-text" style="display:none">Upload Your Video</h3>
-            <p class="ar-text">ارفع المحتوى الخام على Google Drive بضغطة زر</p>
-            <p class="en-text" style="display:none">Upload your raw footage to Google Drive with one click</p>
-          </div>
-        </div>
-
-        <div class="step-connector"><i class="fas fa-arrow-left ar-text"></i><i class="fas fa-arrow-right en-text" style="display:none"></i></div>
-
-        <div class="step-item animate-on-scroll">
-          <div class="step-number">2</div>
-          <div class="step-icon-wrap">
-            <div class="step-icon"><i class="fas fa-magic"></i></div>
-          </div>
-          <div class="step-content">
-            <h3 class="ar-text">نحلل ونعدّل</h3>
-            <h3 class="en-text" style="display:none">We Analyze & Edit</h3>
-            <p class="ar-text">فريقنا يحلل المحتوى ويعدله باحترافية خلال 48 ساعة</p>
-            <p class="en-text" style="display:none">Our team analyzes and edits your content professionally within 48 hours</p>
-          </div>
-        </div>
-
-        <div class="step-connector"><i class="fas fa-arrow-left ar-text"></i><i class="fas fa-arrow-right en-text" style="display:none"></i></div>
-
-        <div class="step-item animate-on-scroll">
-          <div class="step-number">3</div>
-          <div class="step-icon-wrap">
-            <div class="step-icon"><i class="fas fa-award"></i></div>
-          </div>
-          <div class="step-content">
-            <h3 class="ar-text">استلم وانشر</h3>
-            <h3 class="en-text" style="display:none">Receive & Publish</h3>
-            <p class="ar-text">تستلم الفيديو النهائي وتنشره — نحن نطور باستمرار معك</p>
-            <p class="en-text" style="display:none">Receive the final video and publish it — we keep improving with you</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============================
-       COACHING / PROFESSOR SECTION
+       BRIDGE SECTION — SYSTEM → VALUE → DECISION
   ============================= -->
-  <section class="coaching-section section-padding" id="coaching">
-    <div class="coaching-bg-pattern"></div>
+  <section class="bridge-section section-padding" id="how">
     <div class="container">
-      <div class="coaching-inner animate-on-scroll">
-        <div class="coaching-badge">
-          <i class="fas fa-gift"></i>
-          <span class="ar-text">مجاناً تماماً</span>
-          <span class="en-text" style="display:none">Completely Free</span>
+
+      <!-- ══════════════════════════════════
+           HEADER
+      ══════════════════════════════════ -->
+      <div class="section-tag ar-text">النظام</div>
+      <div class="section-tag en-text" style="display:none">THE SYSTEM</div>
+
+      <h2 class="section-title ar-text">
+        كيف نحوّل محتواك إلى <span class="gradient-text">نتائج فعلية؟</span>
+      </h2>
+      <h2 class="section-title en-text" style="display:none">
+        How We Turn Your Content Into <span class="gradient-text">Real Results?</span>
+      </h2>
+
+      <p class="section-subtitle brd-subtitle ar-text">
+        هذا ليس مونتاج… هذا <strong>نظام نمو متكامل</strong>
+      </p>
+      <p class="section-subtitle brd-subtitle en-text" style="display:none">
+        This is not editing… this is a <strong>complete growth system</strong>
+      </p>
+
+      <!-- ══════════════════════════════════
+           PART 1 — 3 TRANSFORMATION STAGES
+      ══════════════════════════════════ -->
+      <div class="brd-stages-grid">
+
+        <!-- ─── STAGE 1 ─── -->
+        <div class="brd-stage-card animate-on-scroll">
+          <div class="brd-stage-num">01</div>
+          <div class="brd-stage-icon brd-icon-purple">
+            <i class="fas fa-crosshairs"></i>
+          </div>
+          <div class="brd-stage-connector brd-conn-right ar-text"><i class="fas fa-arrow-left"></i></div>
+          <div class="brd-stage-connector brd-conn-right en-text" style="display:none"><i class="fas fa-arrow-right"></i></div>
+
+          <h3 class="ar-text">وضوح البداية</h3>
+          <h3 class="en-text" style="display:none">Clarity First</h3>
+
+          <p class="brd-stage-desc ar-text">
+            نحلل المحتوى أو الفكرة ونحدد الاتجاه الصحيح بدل التخمين
+          </p>
+          <p class="brd-stage-desc en-text" style="display:none">
+            We analyze your content or idea and define the right direction — no more guessing
+          </p>
+
+          <ul class="brd-stage-list ar-text">
+            <li><i class="fas fa-check"></i> تحليل سريع وعميق</li>
+            <li><i class="fas fa-check"></i> تحديد الهدف بدقة</li>
+            <li><i class="fas fa-check"></i> وضوح الرسالة الكاملة</li>
+          </ul>
+          <ul class="brd-stage-list en-text" style="display:none">
+            <li><i class="fas fa-check"></i> Fast & deep analysis</li>
+            <li><i class="fas fa-check"></i> Precise goal definition</li>
+            <li><i class="fas fa-check"></i> Full message clarity</li>
+          </ul>
+
+          <div class="brd-stage-trigger ar-text">
+            <i class="fas fa-quote-right brd-q-icon"></i>
+            أول مرة تعرف بالضبط ماذا تنشر ولماذا
+          </div>
+          <div class="brd-stage-trigger en-text" style="display:none">
+            <i class="fas fa-quote-left brd-q-icon"></i>
+            For the first time — you know exactly what to post and why
+          </div>
         </div>
 
-        <h2 class="coaching-title ar-text">
-          🎓 احجز جلسة مجانية مع<br/>
-          <span class="professor-name">البروفيسورة</span>
-        </h2>
-        <h2 class="coaching-title en-text" style="display:none">
-          🎓 Book Your Free Session with<br/>
-          <span class="professor-name">The Professor</span>
-        </h2>
+        <!-- ─── STAGE 2 ─── -->
+        <div class="brd-stage-card brd-stage-featured animate-on-scroll">
+          <div class="brd-stage-num brd-num-gold">02</div>
+          <div class="brd-stage-icon brd-icon-gold">
+            <i class="fas fa-film"></i>
+          </div>
+          <div class="brd-stage-connector brd-conn-right ar-text"><i class="fas fa-arrow-left"></i></div>
+          <div class="brd-stage-connector brd-conn-right en-text" style="display:none"><i class="fas fa-arrow-right"></i></div>
 
-        <p class="coaching-sub ar-text">
-          نحلل محتواك ونقولك تعمل إيه بالظبط — جلسة واحدة تغيّر مسارك بالكامل
-        </p>
-        <p class="coaching-sub en-text" style="display:none">
-          We analyze your content and tell you exactly what to do — one session that changes everything
-        </p>
+          <h3 class="ar-text">تنفيذ يخدم الهدف</h3>
+          <h3 class="en-text" style="display:none">Execution That Serves the Goal</h3>
 
-        <div class="coaching-benefits">
-          <div class="benefit-item">
-            <div class="benefit-icon"><i class="fas fa-search-plus"></i></div>
-            <div class="benefit-text">
-              <strong class="ar-text">تحليل حسابك</strong>
-              <strong class="en-text" style="display:none">Account Audit</strong>
-              <p class="ar-text">مراجعة شاملة لكل محتواك</p>
-              <p class="en-text" style="display:none">Full review of your content</p>
-            </div>
+          <p class="brd-stage-desc ar-text">
+            نحوّل الفكرة إلى فيديو احترافي مبني على استراتيجية وليس عشوائية
+          </p>
+          <p class="brd-stage-desc en-text" style="display:none">
+            We turn the idea into a pro video built on strategy — not random trial and error
+          </p>
+
+          <ul class="brd-stage-list brd-list-gold ar-text">
+            <li><i class="fas fa-check"></i> تحسين الـ Hook من الثانية الأولى</li>
+            <li><i class="fas fa-check"></i> مونتاج احترافي موجّه بالهدف</li>
+            <li><i class="fas fa-check"></i> توجيه مباشر من البروفيسور</li>
+          </ul>
+          <ul class="brd-stage-list brd-list-gold en-text" style="display:none">
+            <li><i class="fas fa-check"></i> Hook improvement from second one</li>
+            <li><i class="fas fa-check"></i> Goal-driven professional editing</li>
+            <li><i class="fas fa-check"></i> Direct guidance from the Professor</li>
+          </ul>
+
+          <div class="brd-stage-trigger brd-trigger-gold ar-text">
+            <i class="fas fa-quote-right brd-q-icon"></i>
+            كل فيديو له دور واضح في نموك
           </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><i class="fas fa-bolt"></i></div>
-            <div class="benefit-text">
-              <strong class="ar-text">تحسين الـ Hook</strong>
-              <strong class="en-text" style="display:none">Hook Improvement</strong>
-              <p class="ar-text">افتتاحيات تشد الانتباه فوراً</p>
-              <p class="en-text" style="display:none">Openings that grab attention instantly</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><i class="fas fa-lightbulb"></i></div>
-            <div class="benefit-text">
-              <strong class="ar-text">أفكار محتوى</strong>
-              <strong class="en-text" style="display:none">Content Ideas</strong>
-              <p class="ar-text">أفكار مخصصة لمجالك</p>
-              <p class="en-text" style="display:none">Ideas tailored to your niche</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><i class="fas fa-road"></i></div>
-            <div class="benefit-text">
-              <strong class="ar-text">اتجاه النمو</strong>
-              <strong class="en-text" style="display:none">Growth Direction</strong>
-              <p class="ar-text">خطة واضحة للخطوات القادمة</p>
-              <p class="en-text" style="display:none">Clear plan for your next steps</p>
-            </div>
+          <div class="brd-stage-trigger brd-trigger-gold en-text" style="display:none">
+            <i class="fas fa-quote-left brd-q-icon"></i>
+            Every video plays a clear role in your growth
           </div>
         </div>
 
-        <div class="coaching-urgency ar-text">
-          <i class="fas fa-clock"></i> تبقى <strong>7 أماكن</strong> فقط هذا الأسبوع
-        </div>
-        <div class="coaching-urgency en-text" style="display:none">
-          <i class="fas fa-clock"></i> Only <strong>7 spots</strong> left this week
+        <!-- ─── STAGE 3 ─── -->
+        <div class="brd-stage-card animate-on-scroll">
+          <div class="brd-stage-num">03</div>
+          <div class="brd-stage-icon brd-icon-green">
+            <i class="fas fa-chart-line"></i>
+          </div>
+
+          <h3 class="ar-text">نمو مستمر لا يتوقف</h3>
+          <h3 class="en-text" style="display:none">Continuous Growth That Never Stops</h3>
+
+          <p class="brd-stage-desc ar-text">
+            نراقب الأداء ونطور المحتوى باستمرار للوصول لنتائج حقيقية وقابلة للقياس
+          </p>
+          <p class="brd-stage-desc en-text" style="display:none">
+            We monitor performance and evolve content continuously to reach real, measurable results
+          </p>
+
+          <ul class="brd-stage-list brd-list-green ar-text">
+            <li><i class="fas fa-check"></i> تحليل أداء مفصّل بعد كل فيديو</li>
+            <li><i class="fas fa-check"></i> تحسين مستمر بناءً على البيانات</li>
+            <li><i class="fas fa-check"></i> تطوير الاستراتيجية كل شهر</li>
+          </ul>
+          <ul class="brd-stage-list brd-list-green en-text" style="display:none">
+            <li><i class="fas fa-check"></i> Detailed performance analysis per video</li>
+            <li><i class="fas fa-check"></i> Continuous data-driven improvement</li>
+            <li><i class="fas fa-check"></i> Monthly strategy evolution</li>
+          </ul>
+
+          <div class="brd-stage-trigger brd-trigger-green ar-text">
+            <i class="fas fa-quote-right brd-q-icon"></i>
+            مش فيديو… هذا نظام نمو كامل
+          </div>
+          <div class="brd-stage-trigger brd-trigger-green en-text" style="display:none">
+            <i class="fas fa-quote-left brd-q-icon"></i>
+            Not a video… this is a complete growth system
+          </div>
         </div>
 
-        <a href="#form-section" class="btn btn-coaching ar-text">
-          <i class="fas fa-calendar-plus"></i> احجز الآن — مجاناً
-        </a>
-        <a href="#form-section" class="btn btn-coaching en-text" style="display:none">
-          <i class="fas fa-calendar-plus"></i> Book Now — It's Free
-        </a>
       </div>
+      <!-- /brd-stages-grid -->
+
+      <!-- ══════════════════════════════════
+           PART 2 — DIFFERENTIATION STRIP
+      ══════════════════════════════════ -->
+      <div class="brd-diff-strip animate-on-scroll">
+        <div class="brd-diff-headline ar-text">
+          الفرق بين محتوى <span class="brd-diff-hl-bad">ينشر</span>…
+          ومحتوى <span class="brd-diff-hl-good">ينمو</span>
+        </div>
+        <div class="brd-diff-headline en-text" style="display:none">
+          The difference between content that <span class="brd-diff-hl-bad">posts</span>…
+          and content that <span class="brd-diff-hl-good">grows</span>
+        </div>
+
+        <div class="brd-diff-cols">
+
+          <!-- CreatorPro side -->
+          <div class="brd-diff-col brd-diff-win">
+            <div class="brd-diff-col-header">
+              <div class="brd-diff-dot brd-dot-green"></div>
+              <span>CreatorPro</span>
+            </div>
+            <ul class="brd-diff-list ar-text">
+              <li><i class="fas fa-check brd-ic-green"></i> نظام متكامل من A إلى Z</li>
+              <li><i class="fas fa-check brd-ic-green"></i> استراتيجية + تنفيذ في آن واحد</li>
+              <li><i class="fas fa-check brd-ic-green"></i> متابعة مستمرة حتى النتيجة</li>
+              <li><i class="fas fa-check brd-ic-green"></i> نتائج قابلة للقياس والتطوير</li>
+            </ul>
+            <ul class="brd-diff-list en-text" style="display:none">
+              <li><i class="fas fa-check brd-ic-green"></i> Complete system from A to Z</li>
+              <li><i class="fas fa-check brd-ic-green"></i> Strategy + execution combined</li>
+              <li><i class="fas fa-check brd-ic-green"></i> Ongoing follow-up until results</li>
+              <li><i class="fas fa-check brd-ic-green"></i> Measurable and scalable results</li>
+            </ul>
+          </div>
+
+          <!-- VS divider -->
+          <div class="brd-diff-vs">
+            <span>VS</span>
+          </div>
+
+          <!-- Others side -->
+          <div class="brd-diff-col brd-diff-pain">
+            <div class="brd-diff-col-header brd-header-red">
+              <div class="brd-diff-dot brd-dot-red"></div>
+              <span class="ar-text">الآخرون</span>
+              <span class="en-text" style="display:none">Others</span>
+            </div>
+            <ul class="brd-diff-list ar-text">
+              <li><i class="fas fa-xmark brd-ic-red"></i> مونتاج فقط — بدون أي استراتيجية</li>
+              <li><i class="fas fa-xmark brd-ic-red"></i> بدون توجيه أو تحليل</li>
+              <li><i class="fas fa-xmark brd-ic-red"></i> بدون متابعة بعد التسليم</li>
+              <li><i class="fas fa-xmark brd-ic-red"></i> نتائج عشوائية غير مضمونة</li>
+            </ul>
+            <ul class="brd-diff-list en-text" style="display:none">
+              <li><i class="fas fa-xmark brd-ic-red"></i> Editing only — zero strategy</li>
+              <li><i class="fas fa-xmark brd-ic-red"></i> No guidance or analysis</li>
+              <li><i class="fas fa-xmark brd-ic-red"></i> No follow-up after delivery</li>
+              <li><i class="fas fa-xmark brd-ic-red"></i> Random, unguaranteed results</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <!-- /brd-diff-strip -->
+
+      <!-- ══════════════════════════════════
+           PART 3 — PROFESSOR HOOK (USP)
+      ══════════════════════════════════ -->
+      <div class="brd-prof-box animate-on-scroll">
+        <div class="brd-prof-glow"></div>
+
+        <div class="brd-prof-top">
+          <div class="brd-prof-avatar">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div>
+            <h3 class="ar-text">🎓 البروفيسور — سر النمو الحقيقي</h3>
+            <h3 class="en-text" style="display:none">🎓 The Professor — The Secret to Real Growth</h3>
+            <p class="brd-prof-tagline ar-text">هنا يبدأ الفرق الحقيقي</p>
+            <p class="brd-prof-tagline en-text" style="display:none">This is where the real difference begins</p>
+          </div>
+        </div>
+
+        <p class="brd-prof-desc ar-text">
+          أنت لا تحصل على مونتاج فقط… بل على <strong>توجيه احترافي</strong> يساعدك على
+          فهم المحتوى وبناء استراتيجية واضحة تجعل كل فيديو خطوة نحو نمو حقيقي
+        </p>
+        <p class="brd-prof-desc en-text" style="display:none">
+          You don't just get editing… you get <strong>professional guidance</strong> that helps you
+          understand content and build a clear strategy — making every video a step toward real growth
+        </p>
+
+        <div class="brd-prof-features">
+          <div class="brd-prof-feat">
+            <i class="fas fa-comments"></i>
+            <div>
+              <strong class="ar-text">جلسات استشارية حية</strong>
+              <strong class="en-text" style="display:none">Live Consulting Sessions</strong>
+              <span class="ar-text">تحدث مباشرة مع البروفيسور</span>
+              <span class="en-text" style="display:none">Direct access to the Professor</span>
+            </div>
+          </div>
+          <div class="brd-prof-feat">
+            <i class="fas fa-magnifying-glass-chart"></i>
+            <div>
+              <strong class="ar-text">تحليل المحتوى المتعمق</strong>
+              <strong class="en-text" style="display:none">Deep Content Analysis</strong>
+              <span class="ar-text">نكتشف ما يعيق نموك فعلاً</span>
+              <span class="en-text" style="display:none">We uncover what's really blocking your growth</span>
+            </div>
+          </div>
+          <div class="brd-prof-feat">
+            <i class="fas fa-wand-magic-sparkles"></i>
+            <div>
+              <strong class="ar-text">أفكار جاهزة للتنفيذ الفوري</strong>
+              <strong class="en-text" style="display:none">Ready-to-Execute Content Ideas</strong>
+              <span class="ar-text">مش أفكار نظرية — أفكار تُنفَّذ غداً</span>
+              <span class="en-text" style="display:none">Not theory — ideas you execute tomorrow</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="brd-prof-cta">
+          <a href="#form-section" class="btn btn-coaching ar-text">
+            <i class="fas fa-calendar-plus"></i> احجز جلستك المجانية مع البروفيسور
+          </a>
+          <a href="#form-section" class="btn btn-coaching en-text" style="display:none">
+            <i class="fas fa-calendar-plus"></i> Book Your Free Session with the Professor
+          </a>
+          <div class="brd-prof-trust ar-text">
+            <i class="fas fa-shield-halved"></i> مجانية تماماً — بدون أي التزام
+          </div>
+          <div class="brd-prof-trust en-text" style="display:none">
+            <i class="fas fa-shield-halved"></i> Completely free — zero commitment
+          </div>
+        </div>
+      </div>
+      <!-- /brd-prof-box -->
+
+      <!-- ══════════════════════════════════
+           PART 4 — PACKAGE BRIDGE
+      ══════════════════════════════════ -->
+      <div class="brd-pkg-bridge animate-on-scroll">
+
+        <p class="brd-pkg-bridge-intro ar-text">
+          بناءً على احتياجك… اختر النظام المناسب لك
+        </p>
+        <p class="brd-pkg-bridge-intro en-text" style="display:none">
+          Based on your need… choose the right system for you
+        </p>
+
+        <div class="brd-pkg-previews">
+
+          <!-- START -->
+          <a href="#packages" class="brd-pkg-preview brd-pkg-start">
+            <div class="brd-pkg-prev-icon"><i class="fas fa-seedling"></i></div>
+            <div>
+              <strong>START</strong>
+              <span class="brd-pkg-prev-sub ar-text">بداية منظمة لصناعة محتوى احترافي</span>
+              <span class="brd-pkg-prev-sub en-text" style="display:none">An organized start for professional content</span>
+            </div>
+            <i class="fas fa-arrow-left brd-pkg-arr ar-text"></i>
+            <i class="fas fa-arrow-right brd-pkg-arr en-text" style="display:none"></i>
+          </a>
+
+          <!-- GROWTH — featured -->
+          <a href="#packages" class="brd-pkg-preview brd-pkg-growth brd-pkg-featured">
+            <div class="brd-pkg-featured-badge ar-text">🔥 الأكثر طلبًا</div>
+            <div class="brd-pkg-featured-badge en-text" style="display:none">🔥 Most Popular</div>
+            <div class="brd-pkg-prev-icon brd-icon-fire"><i class="fas fa-rocket"></i></div>
+            <div>
+              <strong>GROWTH</strong>
+              <span class="brd-pkg-prev-sub ar-text">النظام الأكثر طلبًا لبناء نمو فعلي</span>
+              <span class="brd-pkg-prev-sub en-text" style="display:none">The most-requested system for real growth</span>
+            </div>
+            <i class="fas fa-arrow-left brd-pkg-arr ar-text"></i>
+            <i class="fas fa-arrow-right brd-pkg-arr en-text" style="display:none"></i>
+          </a>
+
+          <!-- SCALE -->
+          <a href="#packages" class="brd-pkg-preview brd-pkg-scale">
+            <div class="brd-pkg-prev-icon brd-icon-crown"><i class="fas fa-crown"></i></div>
+            <div>
+              <strong>SCALE</strong>
+              <span class="brd-pkg-prev-sub ar-text">نظام كامل بدون حدود للنمو</span>
+              <span class="brd-pkg-prev-sub en-text" style="display:none">Full unlimited growth system</span>
+            </div>
+            <i class="fas fa-arrow-left brd-pkg-arr ar-text"></i>
+            <i class="fas fa-arrow-right brd-pkg-arr en-text" style="display:none"></i>
+          </a>
+
+        </div>
+      </div>
+      <!-- /brd-pkg-bridge -->
+
+      <!-- ══════════════════════════════════
+           PART 5 — FINAL PUSH CTA
+      ══════════════════════════════════ -->
+      <div class="brd-final-push animate-on-scroll">
+        <div class="brd-final-push-inner">
+          <div class="brd-final-bg-glow"></div>
+
+          <p class="brd-fomo-line ar-text">
+            ابدأ الآن… أو استمر في التخمين
+          </p>
+          <p class="brd-fomo-line en-text" style="display:none">
+            Start now… or keep guessing
+          </p>
+
+          <h3 class="brd-final-title ar-text">
+            احجز مكالمتك الاستكشافية الآن
+          </h3>
+          <h3 class="brd-final-title en-text" style="display:none">
+            Book Your Discovery Call Now
+          </h3>
+
+          <p class="brd-final-sub ar-text">
+            جلسة مجانية مع البروفيسور لتحديد اتجاهك الصحيح
+          </p>
+          <p class="brd-final-sub en-text" style="display:none">
+            A free session with the Professor to define your right direction
+          </p>
+
+          <div class="brd-final-btns">
+            <a href="#form-section" class="btn btn-primary brd-final-cta ar-text">
+              <i class="fas fa-rocket"></i> احجز مكالمتك الاستكشافية — مجاناً
+            </a>
+            <a href="#form-section" class="btn btn-primary brd-final-cta en-text" style="display:none">
+              <i class="fas fa-rocket"></i> Book Your Discovery Call — Free
+            </a>
+            <a href="#packages" class="btn brd-btn-packages ar-text">
+              <i class="fas fa-layer-group"></i> شوف الباقات أولاً
+            </a>
+            <a href="#packages" class="btn brd-btn-packages en-text" style="display:none">
+              <i class="fas fa-layer-group"></i> View Packages First
+            </a>
+          </div>
+
+          <div class="brd-final-trust-row ar-text">
+            <span><i class="fas fa-shield-halved"></i> جلسة مجانية بالكامل</span>
+            <span><i class="fas fa-clock"></i> مدتها 30 دقيقة فقط</span>
+            <span><i class="fas fa-ban"></i> بدون أي التزام</span>
+          </div>
+          <div class="brd-final-trust-row en-text" style="display:none">
+            <span><i class="fas fa-shield-halved"></i> 100% Free</span>
+            <span><i class="fas fa-clock"></i> Only 30 minutes</span>
+            <span><i class="fas fa-ban"></i> Zero commitment</span>
+          </div>
+
+        </div>
+      </div>
+      <!-- /brd-final-push -->
+
     </div>
   </section>
+  <!-- /bridge-section -->
 
   <!-- ============================
        WHY US — COMPARISON
