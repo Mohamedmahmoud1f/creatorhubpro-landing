@@ -522,96 +522,231 @@ app.get('/', (c) => {
       <h2 class="section-title ar-text">اختار الباقة <span class="gradient-text">المناسبة</span> ليك</h2>
       <h2 class="section-title en-text" style="display:none">Choose the Package <span class="gradient-text">That Fits</span> You</h2>
 
+      <p class="section-subtitle ar-text">كل باقة مصممة لمرحلة مختلفة من رحلتك — ابدأ من أي مكان وارتقِ متى تريد</p>
+      <p class="section-subtitle en-text" style="display:none">Each plan is designed for a different stage of your journey — start anywhere and upgrade when ready</p>
+
       <div class="packages-grid">
 
-        <!-- START -->
+        <!-- ══════ START ══════ -->
         <div class="package-card animate-on-scroll">
+
+          <div class="pkg-plan-label ar-text">باقة الانطلاقة</div>
+          <div class="pkg-plan-label en-text" style="display:none">Starter Plan</div>
+
           <div class="pkg-header">
             <div class="pkg-icon"><i class="fas fa-seedling"></i></div>
             <h3>START</h3>
-            <p class="ar-text">للبداية القوية</p>
-            <p class="en-text" style="display:none">Strong Start</p>
+            <p class="pkg-en-subtitle">Content Engine</p>
           </div>
+
+          <div class="pkg-price-wrap">
+            <div class="pkg-price">
+              <span class="price-num">3,990</span>
+              <span class="price-currency ar-text">جنيه</span>
+              <span class="price-currency en-text" style="display:none">EGP</span>
+            </div>
+            <span class="price-period ar-text">/ شهريًا</span>
+            <span class="price-period en-text" style="display:none">/ month</span>
+          </div>
+
+          <p class="pkg-position ar-text">بداية قوية لمحتوى احترافي</p>
+          <p class="pkg-position en-text" style="display:none">A strong start for professional content</p>
+
+          <div class="pkg-divider"></div>
+
           <ul class="pkg-features ar-text">
-            <li><i class="fas fa-check"></i> 4 فيديوهات / شهر</li>
-            <li><i class="fas fa-check"></i> مونتاج أساسي احترافي</li>
-            <li><i class="fas fa-check"></i> كابشن عربي/إنجليزي</li>
-            <li><i class="fas fa-check"></i> تسليم خلال 48 ساعة</li>
-            <li class="disabled"><i class="fas fa-times"></i> جلسة توجيه</li>
-            <li class="disabled"><i class="fas fa-times"></i> استراتيجية محتوى</li>
+            <li><i class="fas fa-check"></i> <span>10 فيديوهات قصيرة (Reels / Shorts) بمونتاج احترافي</span></li>
+            <li><i class="fas fa-check"></i> <span>10 بوسترات سوشيال ميديا بتصميم جذاب</span></li>
+            <li><i class="fas fa-check"></i> <span>تحسين جودة الصوت والصورة</span></li>
+            <li><i class="fas fa-check"></i> <span>تسليم سريع ومنظم</span></li>
+            <li><i class="fas fa-check"></i> <span>تعديل واحد لكل فيديو</span></li>
+            <li class="disabled"><i class="fas fa-times"></i> <span>جلسات مع البروفيسور</span></li>
+            <li class="disabled"><i class="fas fa-times"></i> <span>استراتيجية محتوى</span></li>
           </ul>
           <ul class="pkg-features en-text" style="display:none">
-            <li><i class="fas fa-check"></i> 4 Videos / Month</li>
-            <li><i class="fas fa-check"></i> Basic Pro Editing</li>
-            <li><i class="fas fa-check"></i> Arabic/English Captions</li>
-            <li><i class="fas fa-check"></i> 48-Hour Delivery</li>
-            <li class="disabled"><i class="fas fa-times"></i> Coaching Session</li>
-            <li class="disabled"><i class="fas fa-times"></i> Content Strategy</li>
+            <li><i class="fas fa-check"></i> <span>10 Short Videos (Reels / Shorts) — Pro Editing</span></li>
+            <li><i class="fas fa-check"></i> <span>10 Social Media Posters — Creative Design</span></li>
+            <li><i class="fas fa-check"></i> <span>Audio & Visual Quality Enhancement</span></li>
+            <li><i class="fas fa-check"></i> <span>Fast & Organized Delivery</span></li>
+            <li><i class="fas fa-check"></i> <span>1 Revision per Video</span></li>
+            <li class="disabled"><i class="fas fa-times"></i> <span>Professor Sessions</span></li>
+            <li class="disabled"><i class="fas fa-times"></i> <span>Content Strategy</span></li>
           </ul>
-          <a href="#form-section" class="btn btn-pkg ar-text">ابدأ الآن</a>
-          <a href="#form-section" class="btn btn-pkg en-text" style="display:none">Start Now</a>
+
+          <div class="pkg-value-line ar-text">
+            <i class="fas fa-quote-right"></i> كل ما تحتاجه للانطلاق بمحتوى منظم واحترافي
+          </div>
+          <div class="pkg-value-line en-text" style="display:none">
+            <i class="fas fa-quote-left"></i> Everything you need to launch with organised, professional content
+          </div>
+
+          <a href="#form-section" class="btn btn-pkg ar-text"><i class="fas fa-rocket"></i> ابدأ الآن</a>
+          <a href="#form-section" class="btn btn-pkg en-text" style="display:none"><i class="fas fa-rocket"></i> Start Now</a>
         </div>
 
-        <!-- GROWTH (FEATURED) -->
+        <!-- ══════ GROWTH (FEATURED) ══════ -->
         <div class="package-card package-featured animate-on-scroll">
-          <div class="pkg-popular ar-text">🔥 الأكثر طلباً</div>
-          <div class="pkg-popular en-text" style="display:none">🔥 Most Popular</div>
+
+          <div class="pkg-popular ar-text">⭐ الأكثر اختيارًا</div>
+          <div class="pkg-popular en-text" style="display:none">⭐ Most Popular</div>
+
+          <div class="pkg-plan-label pkg-plan-label-gold ar-text">باقة النمو</div>
+          <div class="pkg-plan-label pkg-plan-label-gold en-text" style="display:none">Growth Plan</div>
+
           <div class="pkg-header">
-            <div class="pkg-icon"><i class="fas fa-rocket"></i></div>
+            <div class="pkg-icon pkg-icon-gold"><i class="fas fa-rocket"></i></div>
             <h3>GROWTH</h3>
-            <p class="ar-text">للنمو الحقيقي</p>
-            <p class="en-text" style="display:none">Real Growth</p>
+            <p class="pkg-en-subtitle">Creator Growth System</p>
           </div>
+
+          <div class="pkg-price-wrap">
+            <div class="pkg-price pkg-price-gold">
+              <span class="price-num">7,990</span>
+              <span class="price-currency ar-text">جنيه</span>
+              <span class="price-currency en-text" style="display:none">EGP</span>
+            </div>
+            <span class="price-period ar-text">/ شهريًا</span>
+            <span class="price-period en-text" style="display:none">/ month</span>
+          </div>
+
+          <p class="pkg-position ar-text">أفضل توازن بين الجودة والنتائج</p>
+          <p class="pkg-position en-text" style="display:none">The best balance between quality and results</p>
+
+          <div class="pkg-divider pkg-divider-gold"></div>
+
+          <!-- Content Block -->
+          <div class="pkg-block-title ar-text"><i class="fas fa-film"></i> المحتوى والتصميم</div>
+          <div class="pkg-block-title en-text" style="display:none"><i class="fas fa-film"></i> Content & Design</div>
           <ul class="pkg-features ar-text">
-            <li><i class="fas fa-check"></i> 8 فيديوهات / شهر</li>
-            <li><i class="fas fa-check"></i> مونتاج احترافي متقدم</li>
-            <li><i class="fas fa-check"></i> كابشن + ترجمة</li>
-            <li><i class="fas fa-check"></i> موشن جرافيك أساسي</li>
-            <li><i class="fas fa-check"></i> جلسة توجيه شهرية</li>
-            <li><i class="fas fa-check"></i> خطة محتوى شهرية</li>
+            <li><i class="fas fa-check"></i> <span>25 فيديو قصير بمونتاج احترافي متقدم</span></li>
+            <li><i class="fas fa-check"></i> <span>25 بوستر سوشيال ميديا بتصميم احترافي</span></li>
+            <li><i class="fas fa-check"></i> <span>25 غلاف فيديو (Thumbnail) احترافي</span></li>
+            <li><i class="fas fa-check"></i> <span>تحسين الهوك ورفع معدل المشاهدة</span></li>
+            <li><i class="fas fa-check"></i> <span>تعديلان لكل فيديو</span></li>
           </ul>
           <ul class="pkg-features en-text" style="display:none">
-            <li><i class="fas fa-check"></i> 8 Videos / Month</li>
-            <li><i class="fas fa-check"></i> Advanced Pro Editing</li>
-            <li><i class="fas fa-check"></i> Captions + Translation</li>
-            <li><i class="fas fa-check"></i> Basic Motion Graphics</li>
-            <li><i class="fas fa-check"></i> Monthly Coaching Session</li>
-            <li><i class="fas fa-check"></i> Monthly Content Plan</li>
+            <li><i class="fas fa-check"></i> <span>25 Short Videos — Advanced Pro Editing</span></li>
+            <li><i class="fas fa-check"></i> <span>25 Social Media Posters — Pro Design</span></li>
+            <li><i class="fas fa-check"></i> <span>25 Professional Video Thumbnails</span></li>
+            <li><i class="fas fa-check"></i> <span>Hook Optimisation & Watch-Rate Boost</span></li>
+            <li><i class="fas fa-check"></i> <span>2 Revisions per Video</span></li>
           </ul>
+
+          <!-- Professor USP Block -->
+          <div class="pkg-usp-block">
+            <div class="pkg-block-title ar-text"><i class="fas fa-graduation-cap"></i> مع البروفيسور — USP حصري</div>
+            <div class="pkg-block-title en-text" style="display:none"><i class="fas fa-graduation-cap"></i> With the Professor — Exclusive USP</div>
+            <ul class="pkg-features pkg-features-usp ar-text">
+              <li><i class="fas fa-star"></i> <span>بثوث تعليمية مباشرة مع البروفيسور</span></li>
+              <li><i class="fas fa-star"></i> <span>جلسات استشارية منتظمة لتطوير المحتوى</span></li>
+              <li><i class="fas fa-star"></i> <span>رد مستمر على الاستفسارات والأسئلة</span></li>
+              <li><i class="fas fa-star"></i> <span>توجيه مباشر لزيادة المبيعات والنمو</span></li>
+            </ul>
+            <ul class="pkg-features pkg-features-usp en-text" style="display:none">
+              <li><i class="fas fa-star"></i> <span>Live Educational Sessions with the Professor</span></li>
+              <li><i class="fas fa-star"></i> <span>Regular Consulting Sessions for Content Growth</span></li>
+              <li><i class="fas fa-star"></i> <span>Ongoing Q&amp;A and Continuous Support</span></li>
+              <li><i class="fas fa-star"></i> <span>Direct Guidance to Boost Sales &amp; Reach</span></li>
+            </ul>
+          </div>
+
+          <div class="pkg-value-line pkg-value-line-gold ar-text">
+            <i class="fas fa-quote-right"></i> ليست مجرد خدمة… بل نظام يساعدك على النمو الحقيقي
+          </div>
+          <div class="pkg-value-line pkg-value-line-gold en-text" style="display:none">
+            <i class="fas fa-quote-left"></i> Not just a service… a system built for real growth
+          </div>
+
           <a href="#form-section" class="btn btn-pkg-featured ar-text">
-            <i class="fas fa-star"></i> الأفضل — ابدأ الآن
+            <i class="fas fa-star"></i> اختار الأفضل — ابدأ الآن
           </a>
           <a href="#form-section" class="btn btn-pkg-featured en-text" style="display:none">
-            <i class="fas fa-star"></i> Best — Start Now
+            <i class="fas fa-star"></i> Choose the Best — Start Now
           </a>
         </div>
 
-        <!-- SCALE -->
-        <div class="package-card animate-on-scroll">
+        <!-- ══════ SCALE ══════ -->
+        <div class="package-card package-scale animate-on-scroll">
+
+          <div class="pkg-plan-label pkg-plan-label-red ar-text">باقة الاحتراف</div>
+          <div class="pkg-plan-label pkg-plan-label-red en-text" style="display:none">Pro Plan</div>
+
           <div class="pkg-header">
-            <div class="pkg-icon"><i class="fas fa-crown"></i></div>
+            <div class="pkg-icon pkg-icon-red"><i class="fas fa-crown"></i></div>
             <h3>SCALE</h3>
-            <p class="ar-text">للنمو السريع</p>
-            <p class="en-text" style="display:none">Fast Scale</p>
+            <p class="pkg-en-subtitle">Content + Strategy Machine</p>
           </div>
+
+          <div class="pkg-price-wrap">
+            <div class="pkg-price">
+              <span class="price-num">16,990</span>
+              <span class="price-currency ar-text">جنيه</span>
+              <span class="price-currency en-text" style="display:none">EGP</span>
+            </div>
+            <span class="price-period ar-text">/ شهريًا</span>
+            <span class="price-period en-text" style="display:none">/ month</span>
+          </div>
+
+          <p class="pkg-position ar-text">لصناع المحتوى الجادين والبراندات</p>
+          <p class="pkg-position en-text" style="display:none">For serious content creators &amp; brands</p>
+
+          <div class="pkg-divider pkg-divider-red"></div>
+
+          <!-- Content Block -->
+          <div class="pkg-block-title ar-text"><i class="fas fa-infinity"></i> إنتاج بلا حدود</div>
+          <div class="pkg-block-title en-text" style="display:none"><i class="fas fa-infinity"></i> Unlimited Production</div>
           <ul class="pkg-features ar-text">
-            <li><i class="fas fa-check"></i> فيديوهات غير محدودة</li>
-            <li><i class="fas fa-check"></i> مونتاج سينمائي متقدم</li>
-            <li><i class="fas fa-check"></i> موشن جرافيك كامل</li>
-            <li><i class="fas fa-check"></i> جلسات توجيه أسبوعية</li>
-            <li><i class="fas fa-check"></i> استراتيجية نمو متكاملة</li>
-            <li><i class="fas fa-check"></i> أولوية في التسليم</li>
+            <li><i class="fas fa-check"></i> <span>عدد غير محدود من الفيديوهات بمونتاج احترافي عالٍ</span></li>
+            <li><i class="fas fa-check"></i> <span>عدد غير محدود من البوسترات الاحترافية</span></li>
+            <li><i class="fas fa-check"></i> <span>عدد غير محدود من أغلفة الفيديو (Thumbnails)</span></li>
+            <li><i class="fas fa-check"></i> <span>تعديلات مرنة بدون قيود</span></li>
+            <li><i class="fas fa-check"></i> <span>أولوية تنفيذ وتسليم فائق السرعة</span></li>
           </ul>
           <ul class="pkg-features en-text" style="display:none">
-            <li><i class="fas fa-check"></i> Unlimited Videos</li>
-            <li><i class="fas fa-check"></i> Advanced Cinematic Editing</li>
-            <li><i class="fas fa-check"></i> Full Motion Graphics</li>
-            <li><i class="fas fa-check"></i> Weekly Coaching Sessions</li>
-            <li><i class="fas fa-check"></i> Full Growth Strategy</li>
-            <li><i class="fas fa-check"></i> Priority Delivery</li>
+            <li><i class="fas fa-check"></i> <span>Unlimited Videos — High-End Pro Editing</span></li>
+            <li><i class="fas fa-check"></i> <span>Unlimited Professional Posters</span></li>
+            <li><i class="fas fa-check"></i> <span>Unlimited Video Thumbnails</span></li>
+            <li><i class="fas fa-check"></i> <span>Flexible Revisions — No Limits</span></li>
+            <li><i class="fas fa-check"></i> <span>Priority Execution &amp; Ultra-Fast Delivery</span></li>
           </ul>
-          <a href="#form-section" class="btn btn-pkg ar-text">للنمو السريع</a>
-          <a href="#form-section" class="btn btn-pkg en-text" style="display:none">Scale Fast</a>
+
+          <!-- Strategy USP Block -->
+          <div class="pkg-usp-block pkg-usp-block-red">
+            <div class="pkg-block-title ar-text"><i class="fas fa-chess"></i> استراتيجية متقدمة مع البروفيسور</div>
+            <div class="pkg-block-title en-text" style="display:none"><i class="fas fa-chess"></i> Advanced Strategy with the Professor</div>
+            <ul class="pkg-features pkg-features-usp-red ar-text">
+              <li><i class="fas fa-star"></i> <span>جلسات استراتيجية متقدمة مع البروفيسور</span></li>
+              <li><i class="fas fa-star"></i> <span>بناء نظام محتوى متكامل ومخصص</span></li>
+              <li><i class="fas fa-star"></i> <span>تحليل الأداء وتحسين مستمر للنتائج</span></li>
+              <li><i class="fas fa-star"></i> <span>أفكار محتوى مخصصة لمجالك وجمهورك</span></li>
+            </ul>
+            <ul class="pkg-features pkg-features-usp-red en-text" style="display:none">
+              <li><i class="fas fa-star"></i> <span>Advanced Strategy Sessions with the Professor</span></li>
+              <li><i class="fas fa-star"></i> <span>Full Custom Content System Built for You</span></li>
+              <li><i class="fas fa-star"></i> <span>Performance Analysis &amp; Continuous Optimisation</span></li>
+              <li><i class="fas fa-star"></i> <span>Custom Content Ideas for Your Niche &amp; Audience</span></li>
+            </ul>
+          </div>
+
+          <div class="pkg-value-line pkg-value-line-red ar-text">
+            <i class="fas fa-quote-right"></i> نحوّل محتواك إلى نظام تسويق كامل
+          </div>
+          <div class="pkg-value-line pkg-value-line-red en-text" style="display:none">
+            <i class="fas fa-quote-left"></i> We turn your content into a complete marketing machine
+          </div>
+
+          <a href="#form-section" class="btn btn-pkg-scale ar-text"><i class="fas fa-crown"></i> ابدأ التوسع</a>
+          <a href="#form-section" class="btn btn-pkg-scale en-text" style="display:none"><i class="fas fa-crown"></i> Scale Now</a>
+        </div>
+
+      </div>
+
+      <!-- URGENCY BAR -->
+      <div class="packages-urgency animate-on-scroll">
+        <div class="urgency-inner">
+          <span class="urgency-icon">⚠️</span>
+          <p class="ar-text">نعمل مع <strong>عدد محدود</strong> من العملاء شهريًا للحفاظ على أعلى مستوى من الجودة</p>
+          <p class="en-text" style="display:none">We only accept a <strong>limited number</strong> of clients each month to maintain the highest quality</p>
         </div>
       </div>
 
@@ -620,10 +755,10 @@ app.get('/', (c) => {
         <div class="single-video-inner">
           <i class="fas fa-film single-video-icon"></i>
           <div>
-            <h3 class="ar-text">أو اطلب فيديو واحد فقط</h3>
-            <h3 class="en-text" style="display:none">Or Order Just One Video</h3>
-            <p class="ar-text">جرّب الخدمة بفيديو واحد وشوف الفرق بنفسك</p>
-            <p class="en-text" style="display:none">Try the service with a single video and see the difference yourself</p>
+            <h3 class="ar-text">يمكنك أيضًا طلب فيديو واحد حسب احتياجك</h3>
+            <h3 class="en-text" style="display:none">You can also order a single video based on your needs</h3>
+            <p class="ar-text">جرّب الفرق بنفسك قبل الالتزام بأي باقة</p>
+            <p class="en-text" style="display:none">Experience the difference yourself before committing to a plan</p>
           </div>
           <a href="#form-section" class="btn btn-single ar-text">اطلب الآن</a>
           <a href="#form-section" class="btn btn-single en-text" style="display:none">Order Now</a>
