@@ -1318,7 +1318,7 @@ app.get('/', (c) => {
 
           <!-- Professor USP Block -->
           <div class="pkg-usp-block">
-            <div class="pkg-block-title ar-text"><i class="fas fa-graduation-cap"></i> مع البروفيسور — USP حصري</div>
+            <div class="pkg-block-title ar-text"><i class="fas fa-graduation-cap"></i> مع البروفيسور</div>
             <div class="pkg-block-title en-text" style="display:none"><i class="fas fa-graduation-cap"></i> With the Professor — Exclusive USP</div>
             <ul class="pkg-features pkg-features-usp ar-text">
               <li><i class="fas fa-star"></i> <span>بثوث تعليمية مباشرة مع البروفيسور</span></li>
@@ -1381,6 +1381,7 @@ app.get('/', (c) => {
           <div class="pkg-block-title en-text" style="display:none"><i class="fas fa-infinity"></i> Unlimited Production</div>
           <ul class="pkg-features ar-text">
             <li><i class="fas fa-check"></i> <span>عدد غير محدود من الفيديوهات بمونتاج احترافي عالٍ</span></li>
+            <li><i class="fas fa-check"></i> <span>مونتاج مقاطع يوتيوب</span></li>
             <li><i class="fas fa-check"></i> <span>عدد غير محدود من البوسترات الاحترافية</span></li>
             <li><i class="fas fa-check"></i> <span>عدد غير محدود من أغلفة الفيديو (Thumbnails)</span></li>
             <li><i class="fas fa-check"></i> <span>تعديلات مرنة بدون قيود</span></li>
@@ -1402,7 +1403,9 @@ app.get('/', (c) => {
               <li><i class="fas fa-star"></i> <span>جلسات استراتيجية متقدمة مع البروفيسور</span></li>
               <li><i class="fas fa-star"></i> <span>بناء نظام محتوى متكامل ومخصص</span></li>
               <li><i class="fas fa-star"></i> <span>تحليل الأداء وتحسين مستمر للنتائج</span></li>
-              <li><i class="fas fa-star"></i> <span>أفكار محتوى مخصصة لمجالك وجمهورك</span></li>
+              <li><i class="fas fa-star"></i> <span>سكربتات تناسب محتواك</span></li>
+              <li><i class="fas fa-star"></i> <span>أفكار إبداعية لمقاطعك</span></li>
+              <li><i class="fas fa-star"></i> <span>أولوية للانضمام لمجتمع UGC Creators</span></li>
             </ul>
             <ul class="pkg-features pkg-features-usp-red en-text" style="display:none">
               <li><i class="fas fa-star"></i> <span>Advanced Strategy Sessions with the Professor</span></li>
@@ -2065,7 +2068,7 @@ app.get('/', (c) => {
       <div class="final-cta-inner animate-on-scroll">
         <h2 class="final-cta-title ar-text">
           مستني إيه؟ <br/>
-          <span class="gradient-text">ابدأ الآن</span> قبل ما تملى الأماكن
+          <span class="gradient-text">ابدأ الآن</span> قبل اكتمال العدد
         </h2>
         <h2 class="final-cta-title en-text" style="display:none">
           What Are You Waiting For? <br/>
