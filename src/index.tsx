@@ -1554,6 +1554,13 @@ app.get('/', (c) => {
             <p class="pkg-en-subtitle">Content + Strategy Machine</p>
           </div>
 
+          <div class="pkg-includes-badge ar-text">
+            <i class="fas fa-layer-group"></i> جميع مميزات باقة النمو وأكثر
+          </div>
+          <div class="pkg-includes-badge en-text" style="display:none">
+            <i class="fas fa-layer-group"></i> All Growth Plan features &amp; more
+          </div>
+
           <div class="pkg-price-wrap">
             <div class="pkg-price">
               <span class="price-num">16,990</span>
