@@ -1402,18 +1402,30 @@ app.get('/', (c) => {
 
       <div class="packages-grid">
 
-        <!-- ══════ START ══════ -->
-        <div class="package-card animate-on-scroll">
+        <!-- ══════ START PLAN V2 — CONVERSION OPTIMISED ══════ -->
+        <div class="package-card pkg-start-v2 animate-on-scroll">
 
-          <div class="pkg-plan-label ar-text">باقة الانطلاقة</div>
-          <div class="pkg-plan-label en-text" style="display:none">Starter Plan</div>
-
-          <div class="pkg-header">
-            <div class="pkg-icon"><i class="fas fa-seedling"></i></div>
-            <h3>START</h3>
-            <p class="pkg-en-subtitle">Content Engine</p>
+          <!-- Speed Badge -->
+          <div class="pkg-speed-badge ar-text">
+            <i class="fas fa-bolt"></i> أسرع طريق للبداية الصحيحة
+          </div>
+          <div class="pkg-speed-badge en-text" style="display:none">
+            <i class="fas fa-bolt"></i> Fastest Way to Start Without Confusion
           </div>
 
+          <!-- Plan Label -->
+          <div class="pkg-plan-label pkg-plan-label-blue ar-text">باقة الانطلاقة</div>
+          <div class="pkg-plan-label pkg-plan-label-blue en-text" style="display:none">Start Plan</div>
+
+          <!-- Header -->
+          <div class="pkg-header">
+            <div class="pkg-icon pkg-icon-blue"><i class="fas fa-seedling"></i></div>
+            <h3>START</h3>
+            <p class="pkg-en-subtitle ar-text">ابدأ بثقة. أنتج بذكاء.</p>
+            <p class="pkg-en-subtitle en-text" style="display:none">Start Smart. Create with Confidence.</p>
+          </div>
+
+          <!-- Price -->
           <div class="pkg-price-wrap">
             <div class="pkg-price">
               <span class="price-num">3,990</span>
@@ -1424,39 +1436,122 @@ app.get('/', (c) => {
             <span class="price-period en-text" style="display:none">/ month</span>
           </div>
 
-          <p class="pkg-position ar-text">بداية قوية لمحتوى احترافي</p>
-          <p class="pkg-position en-text" style="display:none">A strong start for professional content</p>
+          <!-- Sub Description -->
+          <p class="pkg-position pkg-start-desc ar-text">
+            مش محتاج تبدأ من الصفر — كل اللي تحتاجه جاهز قدامك
+          </p>
+          <p class="pkg-position pkg-start-desc en-text" style="display:none">
+            No more guessing. Everything you need to go from zero to content that works — fast.
+          </p>
 
-          <div class="pkg-divider"></div>
+          <div class="pkg-divider pkg-divider-blue"></div>
 
-          <ul class="pkg-features ar-text">
-            <li><i class="fas fa-check"></i> <span>10 فيديوهات قصيرة (Reels / Shorts) بمونتاج احترافي</span></li>
-            <li><i class="fas fa-check"></i> <span>10 بوسترات سوشيال ميديا بتصميم جذاب</span></li>
-            <li><i class="fas fa-check"></i> <span>تحسين جودة الصوت والصورة</span></li>
-            <li><i class="fas fa-check"></i> <span>تسليم سريع ومنظم</span></li>
-            <li><i class="fas fa-check"></i> <span>تعديل واحد لكل فيديو</span></li>
-            <li class="disabled"><i class="fas fa-times"></i> <span>جلسات مع البروفيسور</span></li>
-            <li class="disabled"><i class="fas fa-times"></i> <span>استراتيجية محتوى</span></li>
+          <!-- Features — Arabic -->
+          <ul class="pkg-features pkg-features-start ar-text">
+
+            <li class="pkg-start-item">
+              <span class="psi-num">01</span>
+              <span class="psi-body">
+                <span class="psi-name">خطة المحتوى الأساسية <em>(PDF + خطة الشهر الأول)</em></span>
+                <span class="psi-desc">وضّح هدفك وابدأ شهرك الأول بخطوات واضحة بدون تشتت</span>
+              </span>
+            </li>
+
+            <li class="pkg-start-item">
+              <span class="psi-num">02</span>
+              <span class="psi-body">
+                <span class="psi-name">20 قالب Hook جاهز للاستخدام</span>
+                <span class="psi-desc">افتح فيديوهاتك بجمل تشد الانتباه وتوقف التمرير فوراً</span>
+              </span>
+            </li>
+
+            <li class="pkg-start-item">
+              <span class="psi-num">03</span>
+              <span class="psi-body">
+                <span class="psi-name">إطار كتابة الكابشن البسيط</span>
+                <span class="psi-desc">اكتب كابشنات مؤثرة في دقائق تحوّل المتابع لعميل</span>
+              </span>
+            </li>
+
+            <li class="pkg-start-item">
+              <span class="psi-num">04</span>
+              <span class="psi-body">
+                <span class="psi-name">هيكل الفيديو الجاهز <em>(مقدمة / جسم / CTA)</em></span>
+                <span class="psi-desc">سكربت واضح لكل فيديو — يشد، يقنع، ويحوّل</span>
+              </span>
+            </li>
+
+            <li class="pkg-start-item">
+              <span class="psi-num">05</span>
+              <span class="psi-body">
+                <span class="psi-name">تقويم محتوى شهري جاهز للاستخدام</span>
+                <span class="psi-desc">خطط شهرك كاملاً — لا تتساءل بعد اليوم "أنشر إيه؟"</span>
+              </span>
+            </li>
+
           </ul>
-          <ul class="pkg-features en-text" style="display:none">
-            <li><i class="fas fa-check"></i> <span>10 Short Videos (Reels / Shorts) — Pro Editing</span></li>
-            <li><i class="fas fa-check"></i> <span>10 Social Media Posters — Creative Design</span></li>
-            <li><i class="fas fa-check"></i> <span>Audio & Visual Quality Enhancement</span></li>
-            <li><i class="fas fa-check"></i> <span>Fast & Organized Delivery</span></li>
-            <li><i class="fas fa-check"></i> <span>1 Revision per Video</span></li>
-            <li class="disabled"><i class="fas fa-times"></i> <span>Professor Sessions</span></li>
-            <li class="disabled"><i class="fas fa-times"></i> <span>Content Strategy</span></li>
+
+          <!-- Features — English -->
+          <ul class="pkg-features pkg-features-start en-text" style="display:none">
+
+            <li class="pkg-start-item">
+              <span class="psi-num">01</span>
+              <span class="psi-body">
+                <span class="psi-name">Content Starter Blueprint <em>(PDF + Month 1 Plan)</em></span>
+                <span class="psi-desc">Start your first month with a clear roadmap — no confusion, no wasted time</span>
+              </span>
+            </li>
+
+            <li class="pkg-start-item">
+              <span class="psi-num">02</span>
+              <span class="psi-body">
+                <span class="psi-name">20 Ready-to-Use Hook Templates</span>
+                <span class="psi-desc">Open every video with a line that stops the scroll and earns the watch</span>
+              </span>
+            </li>
+
+            <li class="pkg-start-item">
+              <span class="psi-num">03</span>
+              <span class="psi-body">
+                <span class="psi-name">Simple Caption Framework</span>
+                <span class="psi-desc">Write captions that convert followers into buyers — in minutes, every time</span>
+              </span>
+            </li>
+
+            <li class="pkg-start-item">
+              <span class="psi-num">04</span>
+              <span class="psi-body">
+                <span class="psi-name">Ready Video Structure <em>(Intro / Body / CTA)</em></span>
+                <span class="psi-desc">A plug-and-play script flow that hooks, educates, and converts</span>
+              </span>
+            </li>
+
+            <li class="pkg-start-item">
+              <span class="psi-num">05</span>
+              <span class="psi-body">
+                <span class="psi-name">Monthly Content Calendar <em>(Ready to Use)</em></span>
+                <span class="psi-desc">Plan your entire month in one sitting — never ask "what do I post?" again</span>
+              </span>
+            </li>
+
           </ul>
 
-          <div class="pkg-value-line ar-text">
-            <i class="fas fa-quote-right"></i> كل ما تحتاجه للانطلاق بمحتوى منظم واحترافي
+          <!-- Value line -->
+          <div class="pkg-value-line pkg-value-line-blue ar-text">
+            <i class="fas fa-quote-right"></i> بدون تجربة مسبقة — بدون تشتت — فقط ابدأ
           </div>
-          <div class="pkg-value-line en-text" style="display:none">
-            <i class="fas fa-quote-left"></i> Everything you need to launch with organised, professional content
+          <div class="pkg-value-line pkg-value-line-blue en-text" style="display:none">
+            <i class="fas fa-quote-left"></i> No experience needed. No confusion. Just start.
           </div>
 
-          <a href="#form-section" class="btn btn-pkg ar-text"><i class="fas fa-rocket"></i> ابدأ الآن</a>
-          <a href="#form-section" class="btn btn-pkg en-text" style="display:none"><i class="fas fa-rocket"></i> Start Now</a>
+          <!-- CTA -->
+          <a href="#form-section" class="btn btn-pkg-start ar-text">
+            <i class="fas fa-bolt"></i> ابدأ رحلتك — كل الأدوات جاهزة
+          </a>
+          <a href="#form-section" class="btn btn-pkg-start en-text" style="display:none">
+            <i class="fas fa-bolt"></i> Get Started — Everything is Ready
+          </a>
+
         </div>
 
         <!-- ══════ GROWTH (FEATURED) ══════ -->
