@@ -1546,12 +1546,26 @@ app.get('/', (c) => {
               <li><i class="fas fa-star"></i> <span>جلسات استشارية منتظمة لتطوير المحتوى</span></li>
               <li><i class="fas fa-star"></i> <span>رد مستمر على الاستفسارات والأسئلة</span></li>
               <li><i class="fas fa-star"></i> <span>توجيه مباشر لزيادة المبيعات والنمو</span></li>
+              <li><i class="fas fa-star"></i> <span>Content Strategy Call مع البروفيسور</span></li>
+              <li><i class="fas fa-star"></i> <span>تحليل حساب العميل (Audit)</span></li>
+              <li><i class="fas fa-star"></i> <span>Competitor Breakdown</span></li>
+              <li><i class="fas fa-star"></i> <span>Hook Optimization System</span></li>
+              <li><i class="fas fa-star"></i> <span>Caption Writing + CTA Optimization</span></li>
+              <li><i class="fas fa-star"></i> <span>A/B Testing للأفكار</span></li>
+              <li><i class="fas fa-star"></i> <span>Weekly Performance Insights</span></li>
             </ul>
             <ul class="pkg-features pkg-features-usp en-text" style="display:none">
               <li><i class="fas fa-star"></i> <span>Live Educational Sessions with the Professor</span></li>
               <li><i class="fas fa-star"></i> <span>Regular Consulting Sessions for Content Growth</span></li>
               <li><i class="fas fa-star"></i> <span>Ongoing Q&amp;A and Continuous Support</span></li>
               <li><i class="fas fa-star"></i> <span>Direct Guidance to Boost Sales &amp; Reach</span></li>
+              <li><i class="fas fa-star"></i> <span>Content Strategy Call with the Professor</span></li>
+              <li><i class="fas fa-star"></i> <span>Account Audit &amp; Deep Analysis</span></li>
+              <li><i class="fas fa-star"></i> <span>Competitor Breakdown</span></li>
+              <li><i class="fas fa-star"></i> <span>Hook Optimization System</span></li>
+              <li><i class="fas fa-star"></i> <span>Caption Writing + CTA Optimization</span></li>
+              <li><i class="fas fa-star"></i> <span>A/B Testing for Content Ideas</span></li>
+              <li><i class="fas fa-star"></i> <span>Weekly Performance Insights</span></li>
             </ul>
           </div>
 
