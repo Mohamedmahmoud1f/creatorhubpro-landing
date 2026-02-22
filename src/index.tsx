@@ -1446,105 +1446,38 @@ app.get('/', (c) => {
 
           <div class="pkg-divider pkg-divider-blue"></div>
 
-          <!-- Features — Arabic -->
-          <ul class="pkg-features pkg-features-start ar-text">
-
-            <li class="pkg-start-item">
-              <span class="psi-num">01</span>
-              <span class="psi-body">
-                <span class="psi-name">خطة المحتوى الأساسية <em>(PDF + خطة الشهر الأول)</em></span>
-                <span class="psi-desc">وضّح هدفك وابدأ شهرك الأول بخطوات واضحة بدون تشتت</span>
-              </span>
-            </li>
-
-            <li class="pkg-start-item">
-              <span class="psi-num">02</span>
-              <span class="psi-body">
-                <span class="psi-name">20 قالب Hook جاهز للاستخدام</span>
-                <span class="psi-desc">افتح فيديوهاتك بجمل تشد الانتباه وتوقف التمرير فوراً</span>
-              </span>
-            </li>
-
-            <li class="pkg-start-item">
-              <span class="psi-num">03</span>
-              <span class="psi-body">
-                <span class="psi-name">إطار كتابة الكابشن البسيط</span>
-                <span class="psi-desc">اكتب كابشنات مؤثرة في دقائق تحوّل المتابع لعميل</span>
-              </span>
-            </li>
-
-            <li class="pkg-start-item">
-              <span class="psi-num">04</span>
-              <span class="psi-body">
-                <span class="psi-name">هيكل الفيديو الجاهز <em>(مقدمة / جسم / CTA)</em></span>
-                <span class="psi-desc">سكربت واضح لكل فيديو — يشد، يقنع، ويحوّل</span>
-              </span>
-            </li>
-
-            <li class="pkg-start-item">
-              <span class="psi-num">05</span>
-              <span class="psi-body">
-                <span class="psi-name">تقويم محتوى شهري جاهز للاستخدام</span>
-                <span class="psi-desc">خطط شهرك كاملاً — لا تتساءل بعد اليوم "أنشر إيه؟"</span>
-              </span>
-            </li>
-
+          <!-- Features — Arabic only -->
+          <ul class="pkg-features ar-text">
+            <li><i class="fas fa-check"></i> <span>10 فيديوهات قصيرة (Reels / Shorts) بمونتاج احترافي</span></li>
+            <li><i class="fas fa-check"></i> <span>10 بوسترات سوشيال ميديا بتصميم جذاب</span></li>
+            <li><i class="fas fa-check"></i> <span>تحسين جودة الصوت والصورة</span></li>
+            <li><i class="fas fa-check"></i> <span>تسليم سريع ومنظم</span></li>
+            <li><i class="fas fa-check"></i> <span>تعديل واحد لكل فيديو</span></li>
+            <li><i class="fas fa-check"></i> <span>خطة المحتوى الأساسية (PDF + خطة الشهر الأول)</span></li>
+            <li><i class="fas fa-check"></i> <span>20 قالب Hook جاهز للاستخدام</span></li>
+            <li><i class="fas fa-check"></i> <span>إطار كتابة الكابشن البسيط</span></li>
+            <li><i class="fas fa-check"></i> <span>هيكل الفيديو الجاهز (مقدمة / جسم / CTA)</span></li>
+            <li><i class="fas fa-check"></i> <span>تقويم محتوى شهري جاهز للاستخدام</span></li>
+          </ul>
+          <ul class="pkg-features en-text" style="display:none">
+            <li><i class="fas fa-check"></i> <span>10 Short Videos (Reels / Shorts) — Pro Editing</span></li>
+            <li><i class="fas fa-check"></i> <span>10 Social Media Posters — Creative Design</span></li>
+            <li><i class="fas fa-check"></i> <span>Audio & Visual Quality Enhancement</span></li>
+            <li><i class="fas fa-check"></i> <span>Fast & Organized Delivery</span></li>
+            <li><i class="fas fa-check"></i> <span>1 Revision per Video</span></li>
+            <li><i class="fas fa-check"></i> <span>Content Starter Blueprint (PDF + Month 1 Plan)</span></li>
+            <li><i class="fas fa-check"></i> <span>20 Ready-to-Use Hook Templates</span></li>
+            <li><i class="fas fa-check"></i> <span>Simple Caption Framework</span></li>
+            <li><i class="fas fa-check"></i> <span>Ready Video Structure (Intro / Body / CTA)</span></li>
+            <li><i class="fas fa-check"></i> <span>Monthly Content Calendar (Ready to Use)</span></li>
           </ul>
 
-          <!-- Features — English -->
-          <ul class="pkg-features pkg-features-start en-text" style="display:none">
-
-            <li class="pkg-start-item">
-              <span class="psi-num">01</span>
-              <span class="psi-body">
-                <span class="psi-name">Content Starter Blueprint <em>(PDF + Month 1 Plan)</em></span>
-                <span class="psi-desc">Start your first month with a clear roadmap — no confusion, no wasted time</span>
-              </span>
-            </li>
-
-            <li class="pkg-start-item">
-              <span class="psi-num">02</span>
-              <span class="psi-body">
-                <span class="psi-name">20 Ready-to-Use Hook Templates</span>
-                <span class="psi-desc">Open every video with a line that stops the scroll and earns the watch</span>
-              </span>
-            </li>
-
-            <li class="pkg-start-item">
-              <span class="psi-num">03</span>
-              <span class="psi-body">
-                <span class="psi-name">Simple Caption Framework</span>
-                <span class="psi-desc">Write captions that convert followers into buyers — in minutes, every time</span>
-              </span>
-            </li>
-
-            <li class="pkg-start-item">
-              <span class="psi-num">04</span>
-              <span class="psi-body">
-                <span class="psi-name">Ready Video Structure <em>(Intro / Body / CTA)</em></span>
-                <span class="psi-desc">A plug-and-play script flow that hooks, educates, and converts</span>
-              </span>
-            </li>
-
-            <li class="pkg-start-item">
-              <span class="psi-num">05</span>
-              <span class="psi-body">
-                <span class="psi-name">Monthly Content Calendar <em>(Ready to Use)</em></span>
-                <span class="psi-desc">Plan your entire month in one sitting — never ask "what do I post?" again</span>
-              </span>
-            </li>
-
-          </ul>
-
-          <!-- Value line -->
+          <!-- Value line — Arabic only -->
           <div class="pkg-value-line pkg-value-line-blue ar-text">
             <i class="fas fa-quote-right"></i> بدون تجربة مسبقة — بدون تشتت — فقط ابدأ
           </div>
-          <div class="pkg-value-line pkg-value-line-blue en-text" style="display:none">
-            <i class="fas fa-quote-left"></i> No experience needed. No confusion. Just start.
-          </div>
 
-          <!-- CTA -->
+          <!-- CTA — Arabic only -->
           <a href="#form-section" class="btn btn-pkg-start ar-text">
             <i class="fas fa-bolt"></i> ابدأ رحلتك — كل الأدوات جاهزة
           </a>
