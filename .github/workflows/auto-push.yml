@@ -1,0 +1,13 @@
+name: Auto Sync to GitHub
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Code pushed to GitHub
+        run: echo "CreatorHubPro landing page synced successfully to GitHub!"
