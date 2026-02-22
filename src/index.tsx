@@ -1497,14 +1497,16 @@ app.get('/', (c) => {
             <li><i class="fas fa-check"></i> <span>25 بوستر سوشيال ميديا بتصميم احترافي</span></li>
             <li><i class="fas fa-check"></i> <span>25 غلاف فيديو (Thumbnail) احترافي</span></li>
             <li><i class="fas fa-check"></i> <span>تحسين الهوك ورفع معدل المشاهدة</span></li>
-            <li><i class="fas fa-check"></i> <span>تعديلان لكل فيديو</span></li>
+            <li><i class="fas fa-check"></i> <span>توصيات احترافية مضمونة للتطور</span></li>
+            <li><i class="fas fa-check"></i> <span>تحديثات لأحدث تطورات الخوارزميات</span></li>
           </ul>
           <ul class="pkg-features en-text" style="display:none">
             <li><i class="fas fa-check"></i> <span>25 Short Videos — Advanced Pro Editing</span></li>
             <li><i class="fas fa-check"></i> <span>25 Social Media Posters — Pro Design</span></li>
             <li><i class="fas fa-check"></i> <span>25 Professional Video Thumbnails</span></li>
             <li><i class="fas fa-check"></i> <span>Hook Optimisation & Watch-Rate Boost</span></li>
-            <li><i class="fas fa-check"></i> <span>2 Revisions per Video</span></li>
+            <li><i class="fas fa-check"></i> <span>Professional Guaranteed Growth Tips</span></li>
+            <li><i class="fas fa-check"></i> <span>Latest Algorithm Updates & Insights</span></li>
           </ul>
 
           <!-- Professor USP Block -->
