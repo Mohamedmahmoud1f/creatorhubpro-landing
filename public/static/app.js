@@ -1,5 +1,5 @@
 /* =============================================
-   ContentPro Landing Page — Main JavaScript
+   CreatorHubPro Landing Page — Main JavaScript
    Form Logic | WhatsApp Redirect | Animations
    ============================================= */
 
@@ -468,21 +468,7 @@ function showSuccessMessage() {
 }
 
 // ─── VIDEO PLACEHOLDER INTERACTIONS ────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const videoPlaceholder = document.querySelector('.video-placeholder');
-  if (videoPlaceholder) {
-    videoPlaceholder.addEventListener('click', () => {
-      // Simulate play interaction
-      const playBtn = videoPlaceholder.querySelector('.play-btn');
-      if (playBtn) {
-        playBtn.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-          playBtn.style.transform = 'scale(1)';
-        }, 150);
-      }
-    });
-  }
-});
+// (removed: .video-placeholder no longer in DOM)
 
 // ─── PACKAGE CARD HOVER EFFECTS ────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -509,21 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ─── PHONE MOCKUP — REEL STATS COUNTER ─────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const reelStats = document.querySelector('.reel-stats');
-  if (!reelStats) return;
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        reelStats.style.animation = 'fadeUp 0.8s 0.5s ease both';
-        observer.unobserve(reelStats);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  observer.observe(reelStats);
-});
+// (removed: .reel-stats no longer in DOM — replaced by .pm-* dashboard)
 
 // ─── FORM FIELD FOCUS EFFECTS ─────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -561,16 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ─── URGENCY COUNTDOWN (SLOTS) ────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  // Random number between 5-9 for "spots remaining"
-  const spots = Math.floor(Math.random() * 5) + 5;
-  const urgencyEls = document.querySelectorAll('.coaching-urgency strong');
-  urgencyEls.forEach(el => {
-    if (el.textContent.includes('7') || el.textContent.includes('spots')) {
-      el.textContent = spots;
-    }
-  });
-});
+// (removed: .coaching-urgency no longer in DOM — scarcity handled by scr-module)
 
 // ─── COMPARISON SECTION HIGHLIGHT ─────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -616,4 +579,4 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-console.log('%c ContentPro 🚀 ', 'background: #7c3aed; color: white; font-size: 16px; font-weight: bold; padding: 8px 16px; border-radius: 4px;');
+console.log('%c CreatorHubPro 🚀 ', 'background: #7c3aed; color: white; font-size: 16px; font-weight: bold; padding: 8px 16px; border-radius: 4px;');

@@ -242,7 +242,7 @@ app.get('/', (c) => {
               <div class="pm-stat-card pm-stat-views">
                 <div class="pm-stat-icon pm-si-blue"><i class="fas fa-eye"></i></div>
                 <div class="pm-stat-info">
-                  <span class="pm-stat-num">180K</span>
+                  <span class="pm-stat-num sstat-num" data-target="180000" data-format="k">180K</span>
                   <span class="pm-stat-lbl ar-text">مشاهدة</span>
                   <span class="pm-stat-lbl en-text" style="display:none">Views</span>
                 </div>
@@ -252,7 +252,7 @@ app.get('/', (c) => {
               <div class="pm-stat-card pm-stat-likes">
                 <div class="pm-stat-icon pm-si-red"><i class="fas fa-heart"></i></div>
                 <div class="pm-stat-info">
-                  <span class="pm-stat-num">22.8K</span>
+                  <span class="pm-stat-num sstat-num" data-target="22800" data-format="k">22.8K</span>
                   <span class="pm-stat-lbl ar-text">إعجاب</span>
                   <span class="pm-stat-lbl en-text" style="display:none">Likes</span>
                 </div>
@@ -262,7 +262,7 @@ app.get('/', (c) => {
               <div class="pm-stat-card pm-stat-growth">
                 <div class="pm-stat-icon pm-si-gold"><i class="fas fa-arrow-trend-up"></i></div>
                 <div class="pm-stat-info">
-                  <span class="pm-stat-num">+340%</span>
+                  <span class="pm-stat-num sstat-num" data-target="340" data-format="pct">+340%</span>
                   <span class="pm-stat-lbl ar-text">نمو الوصول</span>
                   <span class="pm-stat-lbl en-text" style="display:none">Reach Growth</span>
                 </div>
@@ -1631,6 +1631,7 @@ app.get('/', (c) => {
           </ul>
           <ul class="pkg-features en-text" style="display:none">
             <li><i class="fas fa-check"></i> <span>Unlimited Videos — High-End Pro Editing</span></li>
+            <li><i class="fas fa-check"></i> <span>YouTube Long-Form Video Editing</span></li>
             <li><i class="fas fa-check"></i> <span>Unlimited Professional Posters</span></li>
             <li><i class="fas fa-check"></i> <span>Unlimited Video Thumbnails</span></li>
             <li><i class="fas fa-check"></i> <span>Flexible Revisions — No Limits</span></li>
@@ -1659,6 +1660,7 @@ app.get('/', (c) => {
               <li><i class="fas fa-star"></i> <span>Advanced Strategy Sessions with the Professor</span></li>
               <li><i class="fas fa-star"></i> <span>Full Custom Content System Built for You</span></li>
               <li><i class="fas fa-star"></i> <span>Performance Analysis &amp; Continuous Optimisation</span></li>
+              <li><i class="fas fa-star"></i> <span>Custom Scripts Tailored to Your Content</span></li>
               <li><i class="fas fa-star"></i> <span>Custom Content Ideas for Your Niche &amp; Audience</span></li>
               <li><i class="fas fa-star"></i> <span>Priority for UGC Creators Community</span></li>
               <li><i class="fas fa-star"></i> <span>Full Content Direction (not just editing)</span></li>
@@ -2700,7 +2702,7 @@ app.get('/', (c) => {
     ==================================================== */
     function initParallax() {
       if (reduced) return;
-      var device = document.getElementById('deviceWrapper');
+      var device = document.getElementById('heroVisual');
       if (!device) return;
 
       var heroSection = document.getElementById('hero');
@@ -2815,7 +2817,26 @@ app.get('/', (c) => {
       function runScreenStats() {
         screenStats.forEach(function(el) {
           var t = parseInt(el.dataset.target, 10);
-          if (!isNaN(t)) countUp(el, t, 1200);
+          var fmt = el.dataset.format;
+          if (!isNaN(t)) {
+            /* For +340% we wrap countUp result manually */
+            if (fmt === 'pct') {
+              var orig = countUp;
+              /* inline: count then append % */
+              var start = 0, st = null;
+              function stepPct(ts) {
+                if (!st) st = ts;
+                var p = Math.min((ts - st) / 1200, 1);
+                var ease = 1 - Math.pow(1 - p, 4);
+                el.textContent = '+' + Math.floor(t * ease) + '%';
+                if (p < 1) requestAnimationFrame(stepPct);
+                else el.textContent = '+' + t + '%';
+              }
+              requestAnimationFrame(stepPct);
+            } else {
+              countUp(el, t, 1200);
+            }
+          }
         });
       }
 
