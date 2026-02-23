@@ -1,9 +1,9 @@
 import { Hono } from 'hono'
-import { serveStatic } from 'hono/cloudflare-workers'
 
 const app = new Hono()
 
-app.use('/static/*', serveStatic({ root: './public' }))
+// Static files are served automatically by Vercel from /public folder
+// No serveStatic needed — Vercel handles /static/* directly
 
 app.get('/', (c) => {
   return c.html(`<!DOCTYPE html>
