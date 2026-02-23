@@ -1472,9 +1472,12 @@ app.get('/', (c) => {
             <li><i class="fas fa-check"></i> <span>Monthly Content Calendar (Ready to Use)</span></li>
           </ul>
 
-          <!-- Value line — Arabic only -->
+          <!-- Value line -->
           <div class="pkg-value-line pkg-value-line-blue ar-text">
             <i class="fas fa-quote-right"></i> بدون تجربة مسبقة — بدون تشتت — فقط ابدأ
+          </div>
+          <div class="pkg-value-line pkg-value-line-blue en-text" style="display:none">
+            <i class="fas fa-quote-left"></i> No Experience Needed — No Confusion — Just Start
           </div>
 
           <!-- CTA — Arabic only -->

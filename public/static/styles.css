@@ -2495,31 +2495,40 @@ body.en-active .form-grid { text-align: left; }
   font-style: italic;
   color: var(--text-muted);
   background: rgba(255,255,255,0.03);
-  border-right: 3px solid rgba(124,58,237,0.4);
+  border-right: 3px solid rgba(124,58,237,0.4) !important;
+  border-right-style: solid !important;
+  border-right-color: rgba(124,58,237,0.4) !important;
+  border-right-width: 3px !important;
+  border-left: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
   padding: 10px 12px;
   border-radius: 0 8px 8px 0;
   margin: 16px 0;
   line-height: 1.5;
 }
 body.en-active .pkg-value-line {
-  border-right: none;
-  border-left: 3px solid rgba(124,58,237,0.4);
+  border-right: none !important;
+  border-left: 3px solid rgba(124,58,237,0.4) !important;
+  border-left-style: solid !important;
+  border-left-color: rgba(124,58,237,0.4) !important;
+  border-left-width: 3px !important;
   border-radius: 8px 0 0 8px;
 }
 .pkg-value-line i { color: rgba(124,58,237,0.5); font-size: 0.75rem; margin-top: 3px; flex-shrink: 0; }
 
 .pkg-value-line-gold {
-  border-right-color: rgba(245,158,11,0.5);
+  border-right-color: rgba(245,158,11,0.5) !important;
   background: rgba(245,158,11,0.04);
 }
-body.en-active .pkg-value-line-gold { border-left-color: rgba(245,158,11,0.5); }
+body.en-active .pkg-value-line-gold { border-left-color: rgba(245,158,11,0.5) !important; }
 .pkg-value-line-gold i { color: rgba(245,158,11,0.6); }
 
 .pkg-value-line-red {
-  border-right-color: rgba(239,68,68,0.4);
+  border-right-color: rgba(239,68,68,0.4) !important;
   background: rgba(239,68,68,0.03);
 }
-body.en-active .pkg-value-line-red { border-left-color: rgba(239,68,68,0.4); }
+body.en-active .pkg-value-line-red { border-left-color: rgba(239,68,68,0.4) !important; }
 .pkg-value-line-red i { color: rgba(239,68,68,0.5); }
 
 /* ── SCALE card border ── */
@@ -8311,11 +8320,28 @@ body.en-active .nb-cap-text { justify-content: flex-start; text-align: left; }
 /* Value line blue */
 .pkg-value-line-blue {
   background: linear-gradient(135deg,
-    rgba(99,102,241,0.12),
-    rgba(79,70,229,0.08)
+    rgba(99,102,241,0.14),
+    rgba(79,70,229,0.10)
   ) !important;
   border-right: 3px solid #6366f1 !important;
+  border-right-style: solid !important;
+  border-right-color: #6366f1 !important;
+  border-right-width: 3px !important;
   color: #a5b4fc !important;
+  box-shadow: inset 3px 0 0 0 transparent; /* override any Tailwind reset */
+}
+body:not(.en-active) .pkg-value-line-blue {
+  border-right-color: #6366f1 !important;
+  border-right-width: 3px !important;
+  border-right-style: solid !important;
+}
+body.en-active .pkg-value-line-blue {
+  border-right: none !important;
+  border-left: 3px solid #6366f1 !important;
+  border-left-style: solid !important;
+  border-left-color: #6366f1 !important;
+  border-left-width: 3px !important;
+  border-radius: 8px 0 0 8px !important;
 }
 
 /* CTA button */
