@@ -2369,20 +2369,105 @@ app.get('/', (c) => {
   ============================= -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-inner">
-        <div class="footer-logo">
-          <span class="logo-icon"><i class="fas fa-film"></i></span>
-          <span class="logo-text">CreatorHub<span class="accent">Pro</span></span>
+
+      <!-- TOP ROW: brand + nav columns -->
+      <div class="footer-top">
+
+        <!-- Brand column -->
+        <div class="footer-brand-col">
+          <div class="footer-logo-wrap">
+            <span class="footer-logo-icon"><i class="fas fa-film"></i></span>
+            <span class="footer-logo-text">CreatorHub<span class="accent">Pro</span></span>
+          </div>
+          <p class="footer-tagline ar-text">نحوّل محتواك إلى آلة تجذب العملاء —<br/>تحرير احترافي + استراتيجية نمو في نظام واحد</p>
+          <p class="footer-tagline en-text" style="display:none">We turn your content into a client-attracting machine —<br/>Pro editing + growth strategy in one system</p>
+
+          <!-- Social icons -->
+          <div class="footer-socials">
+            <a href="https://wa.me/201068400789" target="_blank" rel="noopener" class="fsoc-wa" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/creatorhubpro/" target="_blank" rel="noopener" class="fsoc-ig" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="fsoc-tk" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="#" class="fsoc-yt" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
         </div>
-        <p class="ar-text">© 2025 CreatorHubPro — جميع الحقوق محفوظة</p>
-        <p class="en-text" style="display:none">© 2025 CreatorHubPro — All Rights Reserved</p>
-        <div class="footer-socials">
-          <a href="https://wa.me/201068400789" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-tiktok"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
+
+        <!-- Quick links column -->
+        <div class="footer-links-col ar-text">
+          <h4>روابط سريعة</h4>
+          <ul>
+            <li><a href="#hero"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+            <li><a href="#solution"><i class="fas fa-chevron-left"></i> النظام</a></li>
+            <li><a href="#packages"><i class="fas fa-chevron-left"></i> الباقات</a></li>
+            <li><a href="#testimonials"><i class="fas fa-chevron-left"></i> آراء العملاء</a></li>
+            <li><a href="#form-section"><i class="fas fa-chevron-left"></i> ابدأ الآن</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col en-text" style="display:none">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#hero"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="#solution"><i class="fas fa-chevron-right"></i> The System</a></li>
+            <li><a href="#packages"><i class="fas fa-chevron-right"></i> Packages</a></li>
+            <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Reviews</a></li>
+            <li><a href="#form-section"><i class="fas fa-chevron-right"></i> Get Started</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact column -->
+        <div class="footer-contact-col">
+          <h4 class="ar-text">تواصل معنا</h4>
+          <h4 class="en-text" style="display:none">Contact Us</h4>
+          <div class="footer-contact-items">
+            <a href="https://wa.me/201068400789" target="_blank" rel="noopener" class="footer-contact-item">
+              <span class="fci-icon fci-green"><i class="fab fa-whatsapp"></i></span>
+              <div>
+                <span class="fci-label ar-text">واتساب مباشر</span>
+                <span class="fci-label en-text" style="display:none">WhatsApp</span>
+                <span class="fci-val">+20 106 840 0789</span>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/creatorhubpro/" target="_blank" rel="noopener" class="footer-contact-item">
+              <span class="fci-icon fci-ig"><i class="fab fa-instagram"></i></span>
+              <div>
+                <span class="fci-label">Instagram</span>
+                <span class="fci-val">@creatorhubpro</span>
+              </div>
+            </a>
+            <div class="footer-contact-item">
+              <span class="fci-icon fci-purple"><i class="fas fa-globe"></i></span>
+              <div>
+                <span class="fci-label ar-text">الموقع</span>
+                <span class="fci-label en-text" style="display:none">Website</span>
+                <span class="fci-val">creatorhubpro.io</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /footer-top -->
+
+      <!-- DIVIDER -->
+      <div class="footer-divider"></div>
+
+      <!-- BOTTOM ROW: copyright + trust badges -->
+      <div class="footer-bottom">
+        <p class="footer-copy ar-text">© 2025 CreatorHubPro — جميع الحقوق محفوظة</p>
+        <p class="footer-copy en-text" style="display:none">© 2025 CreatorHubPro — All Rights Reserved</p>
+        <div class="footer-trust">
+          <span><i class="fas fa-shield-alt"></i> <span class="ar-text">بيانات آمنة</span><span class="en-text" style="display:none">Secure Data</span></span>
+          <span><i class="fas fa-lock"></i> <span class="ar-text">خصوصية تامة</span><span class="en-text" style="display:none">Privacy Protected</span></span>
+          <span><i class="fas fa-certificate"></i> <span class="ar-text">جودة مضمونة</span><span class="en-text" style="display:none">Quality Guaranteed</span></span>
         </div>
       </div>
+
     </div>
   </footer>
 
