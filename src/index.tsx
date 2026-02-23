@@ -1648,12 +1648,25 @@ app.get('/', (c) => {
               <li><i class="fas fa-star"></i> <span>سكربتات تناسب محتواك</span></li>
               <li><i class="fas fa-star"></i> <span>أفكار إبداعية لمقاطعك</span></li>
               <li><i class="fas fa-star"></i> <span>أولوية للانضمام لمجتمع UGC Creators</span></li>
+              <li><i class="fas fa-star"></i> <span>Content Direction كامل (مش بس مونتاج)</span></li>
+              <li><i class="fas fa-star"></i> <span>Viral Content Playbook</span></li>
+              <li><i class="fas fa-star"></i> <span>Priority Editing Queue (سرعة أعلى)</span></li>
+              <li><i class="fas fa-star"></i> <span>Trend Tracking System</span></li>
+              <li><i class="fas fa-star"></i> <span>Performance Optimization مستمر</span></li>
+              <li><i class="fas fa-star"></i> <span>Ideas Pipeline جاهزة أسبوعياً</span></li>
             </ul>
             <ul class="pkg-features pkg-features-usp-red en-text" style="display:none">
               <li><i class="fas fa-star"></i> <span>Advanced Strategy Sessions with the Professor</span></li>
               <li><i class="fas fa-star"></i> <span>Full Custom Content System Built for You</span></li>
               <li><i class="fas fa-star"></i> <span>Performance Analysis &amp; Continuous Optimisation</span></li>
               <li><i class="fas fa-star"></i> <span>Custom Content Ideas for Your Niche &amp; Audience</span></li>
+              <li><i class="fas fa-star"></i> <span>Priority for UGC Creators Community</span></li>
+              <li><i class="fas fa-star"></i> <span>Full Content Direction (not just editing)</span></li>
+              <li><i class="fas fa-star"></i> <span>Viral Content Playbook</span></li>
+              <li><i class="fas fa-star"></i> <span>Priority Editing Queue (faster turnaround)</span></li>
+              <li><i class="fas fa-star"></i> <span>Trend Tracking System</span></li>
+              <li><i class="fas fa-star"></i> <span>Continuous Performance Optimization</span></li>
+              <li><i class="fas fa-star"></i> <span>Weekly Ready Ideas Pipeline</span></li>
             </ul>
           </div>
 
