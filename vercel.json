@@ -1,4 +1,23 @@
 {
   "version": 2,
-  "outputDirectory": "public"
+  "buildCommand": "echo 'no build needed'",
+  "outputDirectory": "public",
+  "framework": null,
+  "rewrites": [
+    { "source": "/((?!static/).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/index.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    }
+  ]
 }
