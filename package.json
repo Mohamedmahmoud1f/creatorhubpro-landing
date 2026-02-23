@@ -8,7 +8,7 @@
     "preview": "wrangler pages dev dist",
     "deploy": "npm run build && wrangler pages deploy dist",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
-    "vercel-build": "echo 'Static export ready'"
+    "vercel-build": "echo 'no build needed'"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.9",
