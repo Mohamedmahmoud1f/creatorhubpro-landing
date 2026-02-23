@@ -360,6 +360,133 @@ app.get('/', (c) => {
   </section>
 
   <!-- ============================
+       ABOUT V2 — Pre-frame "من نحن"
+       Positioned BEFORE problem section
+  ============================= -->
+  <section class="ab2-section" id="about">
+    <div class="container">
+      <div class="ab2-wrap animate-on-scroll">
+
+        <!-- ① Label -->
+        <div class="ab2-label-row">
+          <span class="ab2-label ar-text">من نحن</span>
+          <span class="ab2-label en-text" style="display:none">About Us</span>
+        </div>
+
+        <!-- ② Headline -->
+        <div class="ab2-headline-block">
+          <h2 class="ab2-headline ar-text">
+            مشكلتك مش في المحتوى…
+            <span class="ab2-headline-accent">مشكلتك إن محدش بيشوفه.</span>
+          </h2>
+          <h2 class="ab2-headline en-text" style="display:none">
+            Your problem isn't the content…
+            <span class="ab2-headline-accent">Your problem is — nobody's watching it.</span>
+          </h2>
+        </div>
+
+        <!-- ③ Two short paragraphs -->
+        <div class="ab2-paras ar-text">
+          <p class="ab2-para">
+            فيديوهات كتير بتتنشر…<br/>
+            <span class="ab2-para-soft">بس قليل اللي بيوقف الناس.</span>
+          </p>
+          <p class="ab2-para">
+            صناع محتوى بيشتغلوا بدون نمو،<br/>
+            <span class="ab2-para-soft">وأصحاب بيزنس بينزلوا فيديوهات بدون عملاء.</span>
+          </p>
+        </div>
+        <div class="ab2-paras en-text" style="display:none">
+          <p class="ab2-para">
+            Tons of videos are posted every day…<br/>
+            <span class="ab2-para-soft">but very few make people stop scrolling.</span>
+          </p>
+          <p class="ab2-para">
+            Creators grind without growth,<br/>
+            <span class="ab2-para-soft">businesses post without getting clients.</span>
+          </p>
+        </div>
+
+        <!-- ④ Transition line -->
+        <div class="ab2-transition">
+          <span class="ab2-transition-line"></span>
+          <p class="ab2-transition-text ar-text">
+            علشان كده عملنا <strong class="ab2-brand">CreatorHub<span class="accent">Pro</span></strong>
+          </p>
+          <p class="ab2-transition-text en-text" style="display:none">
+            That's exactly why we built <strong class="ab2-brand">CreatorHub<span class="accent">Pro</span></strong>
+          </p>
+          <span class="ab2-transition-line"></span>
+        </div>
+
+        <!-- ⑤ Service clarification -->
+        <div class="ab2-service">
+          <p class="ab2-service-text ar-text">
+            نحن بنقدّم <span class="ab2-service-hl">مونتاج فيديو احترافي</span>…
+            <br class="ab2-br-mobile"/>
+            لكن بهدف واحد: <strong>نتيجة.</strong>
+          </p>
+          <p class="ab2-service-text en-text" style="display:none">
+            We provide <span class="ab2-service-hl">professional video editing</span>…
+            <br class="ab2-br-mobile"/>
+            but with one goal only: <strong>results.</strong>
+          </p>
+        </div>
+
+        <!-- ⑥ Bullet grid (3 cards) -->
+        <div class="ab2-bullets">
+
+          <div class="ab2-bullet ab2-blt-gold animate-on-scroll">
+            <span class="ab2-blt-icon">⚡</span>
+            <span class="ab2-blt-text ar-text">يجذب الانتباه<br/><span class="ab2-blt-sub">من أول ثانية</span></span>
+            <span class="ab2-blt-text en-text" style="display:none">Hooks attention<br/><span class="ab2-blt-sub">in the first second</span></span>
+          </div>
+
+          <div class="ab2-bullet ab2-blt-violet animate-on-scroll">
+            <span class="ab2-blt-icon">👁</span>
+            <span class="ab2-blt-text ar-text">يخلي المشاهد<br/><span class="ab2-blt-sub">يكمل لآخره</span></span>
+            <span class="ab2-blt-text en-text" style="display:none">Keeps viewers<br/><span class="ab2-blt-sub">watching till the end</span></span>
+          </div>
+
+          <div class="ab2-bullet ab2-blt-green animate-on-scroll">
+            <span class="ab2-blt-icon">🎯</span>
+            <span class="ab2-blt-text ar-text">يوصل لقرار<br/><span class="ab2-blt-sub">تفاعل أو شراء</span></span>
+            <span class="ab2-blt-text en-text" style="display:none">Drives a decision<br/><span class="ab2-blt-sub">engagement or purchase</span></span>
+          </div>
+
+        </div>
+
+        <!-- ⑦ Closing quote -->
+        <div class="ab2-closing animate-on-scroll">
+          <div class="ab2-closing-inner">
+            <span class="ab2-quote-mark">"</span>
+            <div class="ab2-closing-content">
+              <p class="ab2-closing-line1 ar-text">مش فيديو شكله حلو…</p>
+              <p class="ab2-closing-line1 en-text" style="display:none">Not a video that looks good…</p>
+              <p class="ab2-closing-line2 ar-text">فيديو بيشتغل لصالحك.</p>
+              <p class="ab2-closing-line2 en-text" style="display:none">A video that works for you.</p>
+            </div>
+            <span class="ab2-quote-mark ab2-quote-close">"</span>
+          </div>
+        </div>
+
+        <!-- ⑧ Subtle CTA -->
+        <div class="ab2-cta-row">
+          <a href="#form-section" class="ab2-cta ar-text">
+            ابدأ الآن وجرّب الفرق بنفسك
+            <span class="ab2-cta-arrow">←</span>
+          </a>
+          <a href="#form-section" class="ab2-cta en-text" style="display:none">
+            Start now and feel the difference
+            <span class="ab2-cta-arrow">→</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
        PROBLEM SECTION
   ============================= -->
   <section class="problem-section section-padding" id="problem">
@@ -2360,119 +2487,6 @@ app.get('/', (c) => {
           <span><i class="fas fa-headset"></i> <span class="ar-text">دعم 24/7</span><span class="en-text" style="display:none">24/7 Support</span></span>
           <span><i class="fas fa-lock"></i> <span class="ar-text">بيانات آمنة</span><span class="en-text" style="display:none">Secure Data</span></span>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================
-       ABOUT SECTION — من نحن
-  ============================= -->
-  <section class="about-section" id="about">
-    <div class="container">
-      <div class="about-card animate-on-scroll">
-
-        <!-- Tag -->
-        <div class="about-tag ar-text">
-          <span class="about-tag-dot"></span> من نحن
-        </div>
-        <div class="about-tag en-text" style="display:none">
-          <span class="about-tag-dot"></span> About Us
-        </div>
-
-        <!-- Headline -->
-        <h2 class="about-headline ar-text">
-          مشكلتك مش في المحتوى…<br/>
-          <span class="about-hl-accent">مشكلتك إن محدش بيشوفه.</span>
-        </h2>
-        <h2 class="about-headline en-text" style="display:none">
-          Your problem isn't the content…<br/>
-          <span class="about-hl-accent">Your problem is — nobody's watching it.</span>
-        </h2>
-
-        <!-- Body lines -->
-        <div class="about-body ar-text">
-          <p class="about-line">
-            فيديوهات كتير بتتنشر…
-            <span class="about-line-soft">بس قليل اللي بيوقف الناس.</span>
-          </p>
-          <p class="about-line">
-            صناع محتوى بيشتغلوا بدون نمو،
-            <span class="about-line-soft">وأصحاب بيزنس بينزلوا فيديوهات بدون عملاء.</span>
-          </p>
-          <p class="about-line about-brand-line">
-            علشان كده عملنا <strong>CreatorHub<span class="accent">Pro</span></strong>.
-          </p>
-        </div>
-        <div class="about-body en-text" style="display:none">
-          <p class="about-line">
-            Tons of videos get posted every day…
-            <span class="about-line-soft">but very few make people stop.</span>
-          </p>
-          <p class="about-line">
-            Creators grind without growth,
-            <span class="about-line-soft">businesses post without getting clients.</span>
-          </p>
-          <p class="about-line about-brand-line">
-            That's why we built <strong>CreatorHub<span class="accent">Pro</span></strong>.
-          </p>
-        </div>
-
-        <!-- Divider micro -->
-        <div class="about-micro-divider"></div>
-
-        <!-- System promise block -->
-        <div class="about-promise ar-text">
-          <p class="about-promise-lead">
-            <i class="fas fa-film"></i>
-            نحن بنقدّم مونتاج فيديو احترافي…
-            <strong>لكن بهدف واحد: نتيجة.</strong>
-          </p>
-          <p class="about-promise-sub">نصمّم كل فيديو علشان:</p>
-          <ul class="about-checklist">
-            <li><span class="about-check"><i class="fas fa-bolt"></i></span> يجذب الانتباه من أول ثانية</li>
-            <li><span class="about-check"><i class="fas fa-eye"></i></span> يخلي المشاهد يكمل</li>
-            <li><span class="about-check"><i class="fas fa-bullseye"></i></span> ويوصل لقرار — تفاعل أو شراء</li>
-          </ul>
-        </div>
-        <div class="about-promise en-text" style="display:none">
-          <p class="about-promise-lead">
-            <i class="fas fa-film"></i>
-            We provide professional video editing…
-            <strong>but with one goal only: results.</strong>
-          </p>
-          <p class="about-promise-sub">We engineer every video to:</p>
-          <ul class="about-checklist">
-            <li><span class="about-check"><i class="fas fa-bolt"></i></span> Hook attention in the first second</li>
-            <li><span class="about-check"><i class="fas fa-eye"></i></span> Keep viewers watching till the end</li>
-            <li><span class="about-check"><i class="fas fa-bullseye"></i></span> Drive a decision — engagement or purchase</li>
-          </ul>
-        </div>
-
-        <!-- Closing bold statement -->
-        <div class="about-closing">
-          <div class="about-closing-bar"></div>
-          <p class="about-closing-text ar-text">
-            "مش فيديو شكله حلو…<br/>
-            <span class="about-closing-accent">فيديو بيشتغل لصالحك."</span>
-          </p>
-          <p class="about-closing-text en-text" style="display:none">
-            "Not a video that looks good…<br/>
-            <span class="about-closing-accent">a video that works for you."</span>
-          </p>
-        </div>
-
-        <!-- Subtle CTA -->
-        <div class="about-cta-row">
-          <a href="#form-section" class="about-cta-link ar-text">
-            ابدأ الآن وجرّب الفرق بنفسك
-            <i class="fas fa-arrow-left"></i>
-          </a>
-          <a href="#form-section" class="about-cta-link en-text" style="display:none">
-            Start now and feel the difference yourself
-            <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-
       </div>
     </div>
   </section>
