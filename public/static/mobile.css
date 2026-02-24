@@ -1,7 +1,8 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   CREATORHUBPRO — MOBILE-FIRST OVERRIDES
-   Target: iPhone / Android < 768px
+   CREATORHUBPRO — MOBILE-FIRST OVERRIDES v2.1
+   Target: iPhone / Android ≤ 768px
    Goal: Max conversion, readable, thumb-friendly, fast scroll
+   Last updated: 2026-02-24
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -21,7 +22,7 @@
 
   /* Global section vertical rhythm */
   .section-padding {
-    padding: 48px 0;
+    padding: 44px 0;
   }
 
   /* Hide all particle/canvas heavy backgrounds on mobile */
@@ -32,8 +33,19 @@
     display: none !important;
   }
 
-  /* Remove desktop grid from everything */
+  /* Normalize letter-spacing globally */
   * { letter-spacing: normal !important; }
+
+  /* Prevent any element from overflowing horizontally */
+  section,
+  .container,
+  .ab2-wrap,
+  .form-wrapper,
+  .package-card,
+  .brd-pkg-card {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
 
 } /* end base */
 
@@ -44,15 +56,16 @@
 
   .sticky-urgency-bar {
     font-size: 0.78rem;
-    padding: 9px 14px;
+    padding: 8px 14px;
     line-height: 1.4;
     letter-spacing: 0 !important;
+    text-align: center;
   }
 
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   2. NAVBAR
+   2. NAVBAR — compact, clean, thumb-friendly
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
@@ -73,7 +86,11 @@
 
   /* Hide typewriter slogan on small screens — saves space */
   .logo-slogan-v2 {
-    display: none;
+    display: none !important;
+  }
+
+  .logo-text {
+    font-size: 1.05rem;
   }
 
   .nav-actions {
@@ -89,7 +106,7 @@
 
   .btn-nav {
     padding: 8px 14px;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     min-height: 38px;
     border-radius: 10px;
   }
@@ -97,7 +114,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   3. HERO SECTION — single column, clear hierarchy
+   3. HERO SECTION — single column, above-fold optimized
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
@@ -108,7 +125,7 @@
   .hero-v2-inner {
     display: flex;
     flex-direction: column;
-    padding: 40px 0 36px;
+    padding: 36px 0 32px;
     gap: 0;
   }
 
@@ -127,7 +144,7 @@
   .hero-live-badge {
     font-size: 0.75rem;
     padding: 6px 14px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     gap: 7px;
   }
 
@@ -136,51 +153,51 @@
     height: 7px;
   }
 
-  /* H1 headline — large and punchy */
+  /* H1 headline — large and punchy, above-fold impact */
   .hero-v2-headline {
-    margin-bottom: 14px !important;
+    margin-bottom: 12px !important;
   }
 
   .hero-line-top {
-    font-size: clamp(1.6rem, 7.5vw, 2rem) !important;
+    font-size: clamp(1.55rem, 7vw, 1.95rem) !important;
     line-height: 1.3 !important;
     display: block;
   }
 
   .hero-line-gradient {
-    font-size: clamp(1.75rem, 8.5vw, 2.2rem) !important;
+    font-size: clamp(1.7rem, 8vw, 2.1rem) !important;
     line-height: 1.25 !important;
     display: block;
     margin-top: 4px;
   }
 
-  /* Tagline — one line */
+  /* Tagline — one line, compact */
   .hero-tagline {
     font-size: 0.88rem !important;
     padding: 9px 14px !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 14px !important;
     line-height: 1.5;
   }
 
-  /* Sub description — max 2 lines */
+  /* Sub description — readable, 2 lines max */
   .hero-v2-sub {
-    font-size: 0.95rem !important;
+    font-size: 0.93rem !important;
     line-height: 1.7 !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 18px !important;
   }
 
   .hero-v2-sub br {
     display: none;
   }
 
-  /* Trust badges — horizontal scroll row, compact */
+  /* Trust badges — horizontal scrollable row */
   .hero-trust-row {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     padding-bottom: 4px;
   }
 
@@ -198,19 +215,19 @@
   }
 
   .trust-num {
-    font-size: 1.1rem !important;
+    font-size: 1.05rem !important;
   }
 
   .trust-desc {
     font-size: 0.7rem !important;
   }
 
-  /* CTA buttons — stacked, full width */
+  /* CTA buttons — stacked, full width, thumb-friendly */
   .hero-v2-cta {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
 
   .btn-hero-primary,
@@ -239,24 +256,29 @@
     opacity: 0.8;
   }
 
-  /* Scroll hint */
+  /* Scroll hint — hide on mobile */
   .scroll-hint { display: none; }
 
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   4. ABOUT V2 SECTION
+   4. ABOUT V2 SECTION — pre-frame, clean hierarchy
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
   .ab2-section {
-    padding: 48px 0 44px;
+    padding: 44px 0 40px;
   }
 
   .ab2-wrap {
     padding: 28px 20px 32px;
     border-radius: 20px;
-    margin: 0 4px;
+    margin: 0 2px;
+  }
+
+  /* Label */
+  .ab2-label-row {
+    margin-bottom: 16px;
   }
 
   .ab2-label {
@@ -264,112 +286,169 @@
     padding: 5px 12px;
   }
 
+  /* Headline — bold, large, impactful */
+  .ab2-headline-block {
+    margin-bottom: 20px;
+  }
+
   .ab2-headline {
-    font-size: clamp(1.35rem, 6vw, 1.65rem) !important;
+    font-size: clamp(1.3rem, 5.8vw, 1.6rem) !important;
     line-height: 1.4 !important;
+    margin-bottom: 0;
   }
 
   .ab2-headline-accent {
-    font-size: clamp(1.4rem, 6.5vw, 1.75rem);
-    margin-top: 6px;
+    font-size: clamp(1.35rem, 6.2vw, 1.65rem);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* Paragraphs — readable cards */
+  .ab2-paras {
+    gap: 10px;
+    margin-bottom: 22px;
   }
 
   .ab2-para {
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     padding: 12px 14px;
     line-height: 1.75;
+    border-radius: 12px;
   }
 
+  /* Transition line */
   .ab2-transition {
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .ab2-transition-line {
-    width: 60px;
+    width: 50px;
     flex: none;
     margin: 0 auto;
   }
 
   .ab2-transition-text {
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     white-space: normal;
     text-align: center;
   }
 
+  /* Service box */
   .ab2-service {
-    padding: 16px 16px;
+    padding: 14px 16px;
     text-align: right;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
+    border-radius: 14px;
   }
 
   .ab2-service-text {
-    font-size: 1rem;
+    font-size: 0.97rem;
     line-height: 1.75;
   }
 
-  /* Bullets — stacked rows on mobile */
+  .ab2-br-mobile {
+    display: block !important; /* show line break on mobile */
+  }
+
+  /* ★ KEY FIX: Bullets — single column on mobile (was 3-col grid) */
   .ab2-bullets {
-    grid-template-columns: 1fr;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .ab2-bullet {
-    flex-direction: row;
+    display: flex !important;
+    flex-direction: row !important;
     align-items: center;
     text-align: right;
     padding: 14px 16px;
     gap: 14px;
+    border-radius: 14px;
+    /* Remove vertical layout */
+    justify-content: flex-start;
   }
 
   .ab2-blt-icon {
     font-size: 1.5rem;
     flex-shrink: 0;
+    /* Remove margin-bottom from desktop */
+    margin-bottom: 0 !important;
   }
 
   .ab2-blt-text {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     text-align: right;
+    line-height: 1.5;
+  }
+
+  .ab2-blt-sub {
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* Closing quote */
+  .ab2-closing {
+    margin-bottom: 22px;
   }
 
   .ab2-closing-inner {
     padding: 18px 16px;
     gap: 10px;
+    border-radius: 14px;
   }
 
   .ab2-quote-mark {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    align-self: flex-start;
   }
 
   .ab2-closing-line1 {
-    font-size: 0.95rem;
+    font-size: 0.93rem;
+    line-height: 1.6;
   }
 
   .ab2-closing-line2 {
-    font-size: 1.08rem;
+    font-size: 1.05rem;
+    line-height: 1.5;
   }
 
+  /* CTA */
   .ab2-cta-row {
     text-align: center;
   }
 
   .ab2-cta {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     padding-bottom: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   5. PROBLEM SECTION
+   5. PROBLEM SECTION — single column, impactful cards
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
   .problem-section {
-    padding: 48px 0;
+    padding: 44px 0;
+  }
+
+  /* ★ KEY FIX: Force single column (default was 2-col on mobile) */
+  .problems-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-top: 28px !important;
   }
 
   .problem-grid {
@@ -381,50 +460,82 @@
   .problem-card {
     padding: 18px 16px !important;
     border-radius: 14px !important;
+    /* Better visual hierarchy */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .problem-icon {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 1.1rem !important;
+    margin: 0 auto 12px !important;
   }
 
   .problem-card h3,
   .problem-card .prob-title {
     font-size: 1rem !important;
+    font-weight: 800 !important;
     margin-bottom: 6px !important;
+    text-align: center;
   }
 
   .problem-card p,
   .problem-card .prob-desc {
     font-size: 0.88rem !important;
     line-height: 1.65 !important;
+    text-align: center;
   }
 
+  .problem-arrow {
+    margin-top: 24px !important;
+    font-size: 1.6rem !important;
+  }
+
+  /* Section headers — global fix applied here */
   .section-tag {
     font-size: 0.7rem !important;
     padding: 5px 14px !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 10px !important;
   }
 
   .section-title {
-    font-size: clamp(1.4rem, 6vw, 1.8rem) !important;
+    font-size: clamp(1.35rem, 5.8vw, 1.75rem) !important;
     line-height: 1.35 !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 10px !important;
   }
 
   .section-subtitle {
     font-size: 0.9rem !important;
     line-height: 1.65 !important;
-    margin-bottom: 28px !important;
+    margin-bottom: 24px !important;
   }
 
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   6. SOLUTION SECTION
+   6. SOLUTION SECTION — column layout
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
   .solution-section {
-    padding: 48px 0;
+    padding: 44px 0;
   }
 
-  .solution-grid,
+  .sol-shock-bar {
+    padding: 14px 16px !important;
+    margin-bottom: 24px !important;
+    border-radius: 14px !important;
+  }
+
+  .sol-shock-inner {
+    font-size: 0.9rem !important;
+    line-height: 1.65 !important;
+  }
+
+  .solutions-grid,
   .sol-grid-v2 {
     display: flex !important;
     flex-direction: column !important;
@@ -435,9 +546,11 @@
   .sol-card-v2 {
     padding: 20px 18px !important;
     border-radius: 16px !important;
+    transform: none !important; /* remove any desktop transforms */
   }
 
   .sol-card-v2 .sol-icon,
+  .sol-card-v2 .sol-icon-v2,
   .solution-card .sol-icon {
     width: 44px !important;
     height: 44px !important;
@@ -457,6 +570,12 @@
     line-height: 1.65 !important;
   }
 
+  .sol-trigger,
+  .sol-trigger-gold {
+    font-size: 0.82rem !important;
+    padding: 8px 12px !important;
+  }
+
   .sol-journey-bar,
   .sol-bottom-cta {
     padding: 18px 16px !important;
@@ -467,6 +586,13 @@
     min-height: 50px !important;
     font-size: 0.95rem !important;
     padding: 13px 20px !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .sol-micro-copy {
+    font-size: 0.85rem !important;
+    margin-bottom: 10px !important;
   }
 
 }
@@ -477,7 +603,7 @@
 @media (max-width: 768px) {
 
   .comparison-section {
-    padding: 48px 0;
+    padding: 44px 0;
   }
 
   .compare-grid,
@@ -504,6 +630,14 @@
     padding: 16px !important;
     font-size: 0.88rem !important;
     border-radius: 12px !important;
+    line-height: 1.6 !important;
+  }
+
+  .cmp-urgency-bar {
+    padding: 14px 16px !important;
+    font-size: 0.88rem !important;
+    border-radius: 12px !important;
+    line-height: 1.6 !important;
   }
 
 }
@@ -515,7 +649,7 @@
 
   .bridge-section,
   .brd-section {
-    padding: 48px 0;
+    padding: 44px 0;
   }
 
   .brd-stage-grid {
@@ -530,7 +664,7 @@
   }
 
   .brd-stage-num {
-    font-size: 1.6rem !important;
+    font-size: 1.5rem !important;
     margin-bottom: 8px !important;
   }
 
@@ -545,9 +679,10 @@
   }
 
   .brd-diff-strip {
-    padding: 16px !important;
+    padding: 14px 16px !important;
     font-size: 0.88rem !important;
     border-radius: 12px !important;
+    line-height: 1.6 !important;
   }
 
   .brd-prof-box {
@@ -563,7 +698,7 @@
 @media (max-width: 768px) {
 
   .packages-section {
-    padding: 48px 0 40px;
+    padding: 44px 0 40px;
   }
 
   .packages-grid {
@@ -579,54 +714,142 @@
     padding: 22px 18px !important;
     border-radius: 18px !important;
     width: 100% !important;
+    /* Remove desktop scale/hover transforms */
+    transform: none !important;
   }
 
   .brd-pkg-featured,
   .package-card.featured {
-    transform: none !important; /* remove desktop scale */
+    transform: none !important;
     border-width: 2px !important;
   }
 
+  .pkg-speed-badge {
+    font-size: 0.75rem !important;
+    padding: 6px 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .pkg-plan-label {
+    font-size: 0.65rem !important;
+    padding: 4px 10px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .pkg-icon {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .package-card h3,
+  .brd-pkg-card h3 {
+    font-size: 1.1rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .pkg-en-subtitle {
+    font-size: 0.85rem !important;
+    margin-bottom: 0 !important;
+  }
+
   .pkg-price-wrap {
-    margin: 16px 0 !important;
+    margin: 14px 0 !important;
   }
 
   .pkg-price,
   .price-num {
-    font-size: clamp(1.8rem, 8vw, 2.2rem) !important;
+    font-size: clamp(1.75rem, 8vw, 2.1rem) !important;
+  }
+
+  .price-currency {
+    font-size: 0.9rem !important;
+  }
+
+  .price-period {
+    font-size: 0.82rem !important;
+  }
+
+  .pkg-position {
+    font-size: 0.88rem !important;
+    margin-bottom: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  .pkg-divider {
+    margin: 14px 0 !important;
   }
 
   .brd-pkg-features,
   .pkg-features {
-    margin: 14px 0 !important;
+    margin: 12px 0 !important;
+    gap: 0 !important;
   }
 
   .brd-pkg-feature,
-  .pkg-feature {
-    font-size: 0.88rem !important;
+  .pkg-feature,
+  .pkg-features li {
+    font-size: 0.87rem !important;
     padding: 8px 0 !important;
     line-height: 1.5;
   }
 
+  .pkg-features li i {
+    font-size: 0.8rem !important;
+    flex-shrink: 0;
+  }
+
   .btn-pkg-start,
-  .pkg-cta {
+  .btn-pkg-scale,
+  .btn-pkg-featured,
+  .pkg-cta,
+  .btn-pkg {
     width: 100% !important;
     min-height: 50px !important;
     font-size: 0.97rem !important;
     border-radius: 12px !important;
-    margin-top: 12px !important;
+    margin-top: 14px !important;
+    justify-content: center !important;
   }
 
   .brd-pkg-bridge {
-    padding: 18px !important;
-    margin: 16px 0 !important;
+    padding: 16px !important;
+    margin: 14px 0 !important;
     border-radius: 14px !important;
     font-size: 0.9rem !important;
+    line-height: 1.65 !important;
   }
 
   .brd-final-push {
     padding: 22px 18px !important;
     border-radius: 16px !important;
+    margin-top: 16px !important;
+  }
+
+  .brd-final-push h3 {
+    font-size: 1.1rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .brd-final-push p {
+    font-size: 0.88rem !important;
+    line-height: 1.65 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .brd-final-push a {
+    min-height: 50px !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .pkg-guarantee-row {
+    font-size: 0.78rem !important;
+    margin-top: 12px !important;
+    gap: 8px !important;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
 }
@@ -637,7 +860,7 @@
 @media (max-width: 768px) {
 
   .testimonials-section {
-    padding: 48px 0;
+    padding: 44px 0;
   }
 
   .testimonials-grid {
@@ -662,6 +885,11 @@
     font-size: 0.85rem !important;
   }
 
+  .testi-result-badge {
+    font-size: 0.72rem !important;
+    padding: 4px 10px !important;
+  }
+
   .testi-bottom-cta {
     padding: 18px !important;
     border-radius: 14px !important;
@@ -670,38 +898,40 @@
   .testi-bottom-cta a {
     min-height: 50px !important;
     font-size: 0.95rem !important;
+    width: 100% !important;
+    justify-content: center !important;
   }
 
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   11. FORM SECTION
+   11. FORM SECTION — max conversion, touch-optimized
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
   .form-section {
-    padding: 48px 0 100px; /* extra bottom for sticky bar */
+    padding: 44px 0 100px; /* extra bottom for sticky bar */
   }
 
   .form-wrapper {
     padding: 24px 18px !important;
     border-radius: 18px !important;
-    margin: 0 4px;
+    margin: 0 2px;
   }
 
   .form-title {
-    font-size: clamp(1.3rem, 5.5vw, 1.6rem) !important;
+    font-size: clamp(1.25rem, 5.5vw, 1.55rem) !important;
     line-height: 1.35 !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 8px !important;
   }
 
   .form-subtitle {
     font-size: 0.88rem !important;
     line-height: 1.6 !important;
-    margin-bottom: 22px !important;
+    margin-bottom: 20px !important;
   }
 
-  /* Inputs — large tap targets */
+  /* Inputs — large tap targets (48px+) */
   .form-group {
     margin-bottom: 14px !important;
   }
@@ -720,7 +950,7 @@
     border-radius: 12px !important;
   }
 
-  /* Radio options — larger tap */
+  /* Radio options — larger tap area */
   .radio-option {
     padding: 13px 14px !important;
     min-height: 50px !important;
@@ -735,6 +965,12 @@
     border-radius: 14px !important;
     margin-top: 8px !important;
     width: 100% !important;
+  }
+
+  .form-privacy {
+    font-size: 0.78rem !important;
+    margin-top: 12px !important;
+    line-height: 1.5;
   }
 
 }
@@ -754,13 +990,14 @@
   }
 
   .wa-title {
-    font-size: clamp(1.25rem, 5.5vw, 1.55rem) !important;
+    font-size: clamp(1.2rem, 5.5vw, 1.5rem) !important;
     line-height: 1.35 !important;
   }
 
   .wa-sub {
     font-size: 0.88rem !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 18px !important;
+    line-height: 1.65;
   }
 
   .wa-btn {
@@ -772,23 +1009,24 @@
   }
 
   .final-cta-section {
-    padding: 48px 0 100px;
+    padding: 44px 0 100px;
   }
 
   .final-cta-inner {
-    padding: 32px 20px !important;
+    padding: 30px 20px !important;
     border-radius: 18px !important;
   }
 
   .final-cta-title {
-    font-size: clamp(1.35rem, 6vw, 1.7rem) !important;
+    font-size: clamp(1.3rem, 5.8vw, 1.65rem) !important;
     line-height: 1.35 !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 10px !important;
   }
 
   .final-cta-sub {
     font-size: 0.9rem !important;
-    margin-bottom: 22px !important;
+    margin-bottom: 20px !important;
+    line-height: 1.65;
   }
 
   .final-cta-buttons {
@@ -808,7 +1046,7 @@
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-top: 18px;
+    margin-top: 16px;
   }
 
   .trust-badges span {
@@ -842,6 +1080,10 @@
     line-height: 1.6;
   }
 
+  .footer-tagline br {
+    display: none;
+  }
+
   .footer-socials {
     gap: 10px;
     margin-top: 14px;
@@ -860,29 +1102,63 @@
     margin-bottom: 12px !important;
   }
 
+  .footer-links-col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
   .footer-links-col ul li a {
     font-size: 0.88rem !important;
-    padding: 6px 0 !important;
-    min-height: 40px;
+    padding: 8px 0 !important;
+    min-height: 44px;
     display: flex;
     align-items: center;
+    gap: 6px;
+  }
+
+  .footer-contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .footer-contact-item {
-    padding: 10px 12px !important;
-    border-radius: 10px !important;
-    min-height: 52px;
+    padding: 12px 14px !important;
+    border-radius: 12px !important;
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .fci-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1rem !important;
+    flex-shrink: 0;
+  }
+
+  .fci-label {
+    font-size: 0.72rem !important;
+    display: block;
+    margin-bottom: 2px;
   }
 
   .fci-val {
-    font-size: 0.82rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 700;
+  }
+
+  .footer-divider {
+    margin: 24px 0 20px !important;
   }
 
   .footer-bottom {
     flex-direction: column !important;
     gap: 12px !important;
     text-align: center;
-    padding-top: 20px !important;
+    padding-top: 16px !important;
   }
 
   .footer-copy {
@@ -899,27 +1175,30 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   14. STICKY CTA BAR — mobile-optimized
+   14. STICKY CTA BAR — thumb-optimized, safe area
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
   .sticky-cta {
-    /* Already exists, just enhance */
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.45);
+    /* ensure it sits above everything */
+    z-index: 9999;
   }
 
   .sticky-cta-btn {
     min-height: 54px !important;
-    font-size: 0.97rem !important;
+    font-size: 1rem !important;
     font-weight: 900 !important;
     padding: 14px 16px !important;
     letter-spacing: 0 !important;
+    flex: 1;
   }
 
   .sticky-wa-btn {
     width: 56px !important;
     min-height: 54px !important;
     font-size: 1.5rem !important;
+    flex-shrink: 0;
   }
 
 }
@@ -927,6 +1206,8 @@
 /* ─────────────────────────────────────────────────────────────────────
    15. MID-PAGE MOBILE CTA STRIP
    ───────────────────────────────────────────────────────────────────── */
+
+/* Hidden on desktop by default */
 .mobile-cta-strip {
   display: none;
 }
@@ -936,13 +1217,13 @@
   .mobile-cta-strip {
     display: block;
     margin: 0;
-    padding: 20px 18px;
+    padding: 18px 18px;
     background: linear-gradient(135deg,
-      rgba(124,58,237,0.12) 0%,
-      rgba(245,158,11,0.08) 100%
+      rgba(124,58,237,0.1) 0%,
+      rgba(245,158,11,0.07) 100%
     );
-    border-top: 1px solid rgba(124,58,237,0.2);
-    border-bottom: 1px solid rgba(124,58,237,0.2);
+    border-top: 1px solid rgba(124,58,237,0.18);
+    border-bottom: 1px solid rgba(124,58,237,0.18);
   }
 
   .mobile-cta-strip a {
@@ -952,14 +1233,14 @@
     gap: 10px;
     width: 100%;
     min-height: 52px;
-    background: linear-gradient(135deg, var(--primary, #7c3aed), var(--primary-light, #a78bfa));
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
     color: white;
     font-size: 1rem;
     font-weight: 900;
     border-radius: 14px;
     text-decoration: none;
     box-shadow: 0 4px 18px rgba(124,58,237,0.35);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.15s, box-shadow 0.15s;
   }
 
   .mobile-cta-strip a:active {
@@ -967,6 +1248,7 @@
     box-shadow: 0 2px 10px rgba(124,58,237,0.25);
   }
 
+  /* WhatsApp variant */
   .mobile-cta-strip a.wa-strip {
     background: linear-gradient(135deg, #25d366, #1aab52);
     box-shadow: 0 4px 18px rgba(37,211,102,0.3);
@@ -975,7 +1257,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   16. SCARCITY MODULE — mobile compact
+   16. SCARCITY MODULE — compact, urgency preserved
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
@@ -989,16 +1271,31 @@
   }
 
   .scr-title {
-    font-size: clamp(1.1rem, 5vw, 1.3rem) !important;
+    font-size: clamp(1.05rem, 5vw, 1.25rem) !important;
     line-height: 1.4 !important;
+    margin-bottom: 12px !important;
   }
 
   .scr-bar-wrap {
-    margin: 14px 0 !important;
+    margin: 12px 0 !important;
   }
 
   .scr-slots-row {
     font-size: 0.82rem !important;
+    flex-wrap: wrap;
+    gap: 6px !important;
+  }
+
+  .scr-cta-row {
+    margin-top: 16px !important;
+  }
+
+  .scr-cta-btn {
+    min-height: 50px !important;
+    font-size: 0.97rem !important;
+    width: 100% !important;
+    justify-content: center !important;
+    border-radius: 12px !important;
   }
 
 }
@@ -1045,24 +1342,26 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   18. SECTION HEADER (global fix)
+   18. SECTION HEADER — global consistent fix
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
   .section-header {
-    margin-bottom: 28px !important;
+    margin-bottom: 24px !important;
   }
 
+  /* Already covered in problem section, repeated for global coverage */
   .section-tag {
     font-size: 0.68rem !important;
     padding: 5px 14px !important;
-    letter-spacing: 0.1em !important;
+    letter-spacing: 0.08em !important;
+    margin-bottom: 10px !important;
   }
 
   .section-title {
-    font-size: clamp(1.35rem, 5.5vw, 1.75rem) !important;
+    font-size: clamp(1.3rem, 5.5vw, 1.7rem) !important;
     line-height: 1.35 !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 8px !important;
   }
 
   .section-subtitle {
@@ -1080,15 +1379,19 @@
   .container { padding: 0 14px; }
 
   .hero-line-top {
-    font-size: 1.5rem !important;
+    font-size: 1.45rem !important;
   }
 
   .hero-line-gradient {
-    font-size: 1.65rem !important;
+    font-size: 1.6rem !important;
   }
 
   .ab2-headline {
-    font-size: 1.25rem !important;
+    font-size: 1.22rem !important;
+  }
+
+  .ab2-headline-accent {
+    font-size: 1.28rem !important;
   }
 
   .ab2-wrap {
@@ -1096,7 +1399,7 @@
   }
 
   .btn-hero-primary {
-    font-size: 0.97rem !important;
+    font-size: 0.95rem !important;
     min-height: 50px !important;
   }
 
@@ -1105,7 +1408,7 @@
   }
 
   .trust-num {
-    font-size: 1rem !important;
+    font-size: 0.98rem !important;
   }
 
   .footer-socials a {
@@ -1113,22 +1416,33 @@
     height: 38px !important;
   }
 
+  .package-card h3,
+  .brd-pkg-card h3 {
+    font-size: 1rem !important;
+  }
+
+  .price-num {
+    font-size: clamp(1.6rem, 8vw, 1.9rem) !important;
+  }
+
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   20. SMOOTH SCROLL & PERFORMANCE
+   20. PERFORMANCE OPTIMIZATIONS
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
-  /* Contain repaints */
+  /* Contain repaints to specific layers */
   .hero-bg-v2,
   .ab2-section,
   .problem-section,
-  .solution-section {
+  .solution-section,
+  .packages-section {
     will-change: auto;
+    contain: layout style;
   }
 
-  /* Reduce heavy blur on mobile */
+  /* Reduce heavy blur on mobile — performance */
   .hero-live-badge,
   .trust-badge,
   .navbar {
@@ -1136,21 +1450,13 @@
     -webkit-backdrop-filter: blur(8px) !important;
   }
 
-  /* Disable complex transforms on mobile */
+  /* Disable complex desktop transforms on mobile */
   .brd-pkg-featured,
-  .solution-card-featured {
+  .solution-card-featured,
+  .sol-card-v2:hover,
+  .solution-card:hover,
+  .problem-card:hover {
     transform: none !important;
-  }
-
-  /* Ensure no horizontal overflow */
-  section, .container, .ab2-wrap, .form-wrapper {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-
-  /* Lazy loading hint */
-  img {
-    loading: lazy;
   }
 
 }
@@ -1176,7 +1482,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   22. FOCUS VISIBLE — accessibility for mobile forms
+   22. FOCUS & ACCESSIBILITY — mobile forms
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
@@ -1187,23 +1493,58 @@
     outline-offset: 2px;
   }
 
-  /* Touch feedback on cards */
+  /* Touch feedback on interactive cards */
   .problem-card:active,
   .solution-card:active,
   .sol-card-v2:active,
   .testimonial-card:active,
-  .brd-pkg-card:active {
-    transform: scale(0.99);
-    transition: transform 0.1s;
+  .brd-pkg-card:active,
+  .package-card:active {
+    transform: scale(0.99) !important;
+    transition: transform 0.1s !important;
   }
 
-  /* No hover effects on touch */
+  /* No hover on touch devices — prevents sticky hover states */
   @media (hover: none) {
     .trust-badge:hover,
     .ab2-bullet:hover,
-    .footer-socials a:hover {
+    .footer-socials a:hover,
+    .problem-card:hover,
+    .testimonial-card:hover {
       transform: none !important;
+      box-shadow: inherit !important;
     }
+  }
+
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   23. ANIMATE-ON-SCROLL — mobile timing adjustment
+   ───────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Slightly faster animations on mobile for snappier feel */
+  .animate-on-scroll {
+    transition-duration: 0.5s !important;
+    transition-delay: 0s !important;
+  }
+
+  .animate-on-scroll:nth-child(2),
+  .animate-on-scroll:nth-child(3),
+  .animate-on-scroll:nth-child(4) {
+    transition-delay: 0s !important; /* remove staggered delay on mobile */
+  }
+
+  /* About V2 bullets — faster fade */
+  .ab2-bullet {
+    transition: none !important;
+  }
+
+  /* Remove glow/scale on focus for performance */
+  .btn:focus,
+  .ab2-cta:focus {
+    outline: 2px solid rgba(124,58,237,0.6);
+    outline-offset: 3px;
   }
 
 }
