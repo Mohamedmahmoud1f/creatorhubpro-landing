@@ -11,8 +11,8 @@ const CONFIG = {
   whatsappMsgAr: 'مرحبًا، أرسلت بياناتي عبر الموقع وأرغب في البدء',
   whatsappMsgEn: 'Hello, I submitted my information through the website and would like to start',
   redirectDelay: 2200,
-  // Google Apps Script Web App URL — يُستبدل بعد النشر
-  sheetsEndpoint: 'https://script.google.com/macros/s/AKfycbz7i9hF3h55Lhf6AQBUNRh7--dVUx0yBgmxgoskijzcFWTkaIWp8A3qVcy7oo-rkIqj/exec'
+  // Google Apps Script Web App URL — Production endpoint
+  sheetsEndpoint: 'https://script.google.com/macros/s/AKfycbwxmTqU_m3m0DqAEXd9zYFsO0RPVUv-Y5nDz2p8GUFYnDdkOFGBpwIUiOAS8ijZ8vE-/exec'
 };
 
 // ─── STATE ────────────────────────────────────────
@@ -452,13 +452,19 @@ Looking forward to hearing from you!`;
   }
 }
 
-// ─── GOOGLE SHEETS INTEGRATION ───────────────────────────────────────────────
-/**
- * يرسل بيانات الليد إلى Google Sheets عبر Apps Script Web App
- * يعمل بأسلوب fire-and-forget: لا يوقف تدفق الفورم حتى لو فشل الإرسال
- */
-// ─── GOOGLE SHEETS — Production-Ready v4 ─────────────────────────────────────
-// Strategy: POST + CORS (works from browser) with retry + localStorage backup
+// ─── GOOGLE SHEETS INTEGRATION — v5 Final Fix ───────────────────────────────
+//
+// ROOT CAUSE of previous failures:
+//   • mode:'no-cors' hides the request from DevTools Network tab
+//   • Content-Type:'text/plain' / 'application/json' caused preflight blocks
+//
+// THE CORRECT APPROACH (Simple Request = no preflight):
+//   • Method: POST
+//   • Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+//   • NO mode:'no-cors' — we need the real response + visibility in DevTools
+//   • Google Apps Script Web App (Execute as: Me, Access: Anyone) handles
+//     form-urlencoded natively via e.parameter
+// ─────────────────────────────────────────────────────────────────────────────
 
 const LABEL_MAPS = {
   business: {
@@ -490,44 +496,84 @@ function backupToLocalStorage(payload) {
     stored.push({ ...payload, _savedAt: new Date().toISOString() });
     localStorage.setItem(key, JSON.stringify(stored));
     console.warn('[Sheets] 💾 Backed up to localStorage. Total pending:', stored.length);
-  } catch (e) {
-    console.warn('[Sheets] localStorage backup failed:', e.message);
+  } catch (lsErr) {
+    console.warn('[Sheets] localStorage backup failed:', lsErr.message);
   }
 }
 
-// ── Single attempt to POST to Apps Script ────────────────────────────────────
-// IMPORTANT: Apps Script doesn't handle preflight (OPTIONS).
-// Sending Content-Type: application/json triggers a preflight → blocked.
-// Fix: send body as text/plain + mode:no-cors
-// Apps Script reads it via e.postData.contents and parses it as JSON.
-// Response is opaque with no-cors but data IS written server-side.
-async function attemptPost(endpoint, payload) {
-  const bodyStr = JSON.stringify(payload);
-  console.log('[Sheets] 📤 POST attempt to:', endpoint);
-  console.log('[Sheets] 📦 Payload:', bodyStr);
-
-  await fetch(endpoint, {
-    method:  'POST',
-    mode:    'no-cors',
-    headers: { 'Content-Type': 'text/plain' },
-    body:    bodyStr
-  });
-
-  // Response is opaque with no-cors — treat every non-exception as success
-  console.log('[Sheets] ✅ Request sent (no-cors, response opaque — data written server-side)');
-  return { status: 'ok' };
+// ── Show inline error below submit button ─────────────────────────────────────
+function showSheetsError(msg) {
+  let el = document.getElementById('sheetsErrorMsg');
+  if (!el) {
+    el = document.createElement('p');
+    el.id = 'sheetsErrorMsg';
+    el.style.cssText = 'color:#ef4444;text-align:center;margin-top:8px;font-size:14px;';
+    const btn = document.getElementById('submitBtn');
+    if (btn && btn.parentNode) btn.parentNode.insertBefore(el, btn.nextSibling);
+  }
+  el.textContent = msg;
+}
+function clearSheetsError() {
+  const el = document.getElementById('sheetsErrorMsg');
+  if (el) el.textContent = '';
 }
 
-// ── Main function — with 2 retries ───────────────────────────────────────────
+// ── Core POST using application/x-www-form-urlencoded (Simple Request) ────────
+async function attemptPost(endpoint, payload) {
+  // Build URL-encoded body — keys match Apps Script e.parameter exactly
+  const body = Object.keys(payload)
+    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(payload[k] || ''))
+    .join('&');
+
+  console.log('[Sheets] 📤 POST → endpoint:', endpoint);
+  console.log('[Sheets] 📦 URL-encoded body:', body);
+  console.log('[Sheets] 🕐 Fetch start:', new Date().toISOString());
+
+  // application/x-www-form-urlencoded is a "Simple Request" → NO preflight
+  // No mode:'no-cors' → request IS visible in DevTools, response IS readable
+  const resp = await fetch(endpoint, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    body:    body
+  });
+
+  console.log('[Sheets] 🕐 Fetch end:', new Date().toISOString());
+  console.log('[Sheets] 📥 HTTP status:', resp.status, resp.statusText);
+
+  // Apps Script redirects (302) are followed automatically by fetch
+  // Read the text response
+  const text = await resp.text();
+  console.log('[Sheets] 📄 Raw response text:', text.substring(0, 500));
+
+  // Try parse JSON
+  let json = {};
+  try {
+    json = JSON.parse(text);
+    console.log('[Sheets] ✅ Parsed JSON response:', json);
+  } catch (_) {
+    // Apps Script sometimes returns plain text on success — still treat as ok
+    console.log('[Sheets] ℹ️ Response is not JSON — treating as ok if status < 400');
+    json = { status: resp.ok ? 'ok' : 'error', raw: text.substring(0, 200) };
+  }
+
+  return json;
+}
+
+// ── Main entry — 2 retries + localStorage backup ──────────────────────────────
 async function saveToGoogleSheets(data) {
   const endpoint = CONFIG.sheetsEndpoint;
 
-  if (!endpoint || endpoint === 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
-    console.warn('[Sheets] ⚠️ endpoint not configured');
+  console.log('[Sheets] 🔑 endpoint value:', endpoint);
+
+  if (!endpoint || endpoint.includes('PASTE_YOUR')) {
+    console.error('[Sheets] ❌ endpoint not configured!');
+    showSheetsError('خطأ: رابط الـ Sheets غير مضبوط');
     return 'no-endpoint';
   }
 
-  // Build clean payload
+  clearSheetsError();
+
+  // Build clean payload — keys MUST match Apps Script e.parameter keys exactly
   const payload = {
     timestamp:  new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
     name:       data.name       || '',
@@ -540,34 +586,35 @@ async function saveToGoogleSheets(data) {
     lang:       (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'English' : 'عربي'
   };
 
-  console.log('[Sheets] 🚀 Sending lead:', payload);
+  console.log('[Sheets] 🚀 Full payload object:', payload);
 
   const MAX_RETRIES = 2;
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      console.log(`[Sheets] Attempt ${attempt}/${MAX_RETRIES}`);
+      console.log(`[Sheets] 🔄 Attempt ${attempt}/${MAX_RETRIES}`);
       const result = await attemptPost(endpoint, payload);
 
       if (result.status === 'ok') {
-        console.log('[Sheets] ✅ Saved to Sheet, row:', result.row);
+        console.log('[Sheets] ✅ SUCCESS — row saved:', result.row || '(row# not returned)');
+        clearSheetsError();
         return 'ok';
       } else {
-        console.warn(`[Sheets] ⚠️ Attempt ${attempt} — status:`, result.status, result.message || '');
+        console.warn(`[Sheets] ⚠️ Attempt ${attempt} — non-ok status:`, result);
       }
     } catch (err) {
-      console.warn(`[Sheets] ❌ Attempt ${attempt} failed:`, err.message);
-      if (attempt === MAX_RETRIES) {
-        // All retries failed — backup locally
-        backupToLocalStorage(payload);
-        return 'failed-backed-up';
+      console.error(`[Sheets] ❌ Attempt ${attempt} threw:`, err.message, err);
+      if (attempt < MAX_RETRIES) {
+        console.log('[Sheets] ⏳ Waiting 1s before retry...');
+        await new Promise(r => setTimeout(r, 1000));
       }
-      // Wait 1s before retry
-      await new Promise(r => setTimeout(r, 1000));
     }
   }
 
+  // All attempts failed
   backupToLocalStorage(payload);
+  showSheetsError('تم استلام بياناتك لكن فشل الحفظ التلقائي — سيتم التواصل معك قريباً');
+  console.error('[Sheets] ❌ All attempts failed. Data backed up to localStorage.');
   return 'failed-backed-up';
 }
 
