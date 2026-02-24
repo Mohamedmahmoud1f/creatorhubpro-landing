@@ -322,44 +322,58 @@ async function handleFormSubmit(e) {
   e.preventDefault();
   if (isSubmitting) return;
 
-  // Validate all fields
+  console.log('[Form] ▶ handleFormSubmit triggered');
+
+  // ── Validate ──
   const fieldsToValidate = ['name', 'whatsapp', 'business', 'platform', 'goal'];
   const fieldResults = fieldsToValidate.map(f => validateField(f));
   const experienceValid = validateExperience();
 
   if (fieldResults.some(r => !r) || !experienceValid) {
-    // Scroll to first error
     const firstError = document.querySelector('.error, .field-error.visible');
-    if (firstError) {
-      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
 
   isSubmitting = true;
+  clearSheetsError();
 
-  // Show loading state
-  const submitBtn = document.getElementById('submitBtn');
-  const btnLoader = document.getElementById('btnLoader');
-  if (submitBtn) {
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.8';
-    if (btnLoader) btnLoader.style.display = 'inline-block';
-    const span = submitBtn.querySelector('span');
-    if (span) span.textContent = currentLang === 'ar' ? 'جارٍ الإرسال...' : 'Sending...';
-  }
+  // ── Loading state ──
+  const submitBtn    = document.getElementById('submitBtn');
+  const submitBtnEn  = document.getElementById('submitBtnEn');
+  const btnLoader    = document.getElementById('btnLoader');
 
-  // Collect form data
+  [submitBtn, submitBtnEn].forEach(btn => {
+    if (!btn) return;
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    const sp = btn.querySelector('span');
+    if (sp) sp.textContent = currentLang === 'ar' ? 'جارٍ الإرسال...' : 'Sending...';
+  });
+  if (btnLoader) btnLoader.style.display = 'inline-block';
+
+  // ── Collect & send ──
   const formData = collectFormData();
+  console.log('[Form] 📋 Collected form data:', formData);
 
-  // ── إرسال البيانات إلى Google Sheets ──
   const saved = await saveToGoogleSheets(formData);
-  console.log('[Sheets] result:', saved);
+  console.log('[Form] 📊 saveToGoogleSheets result:', saved);
 
-  // Show success
+  // ── Re-enable button ──
+  [submitBtn, submitBtnEn].forEach(btn => {
+    if (!btn) return;
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    const sp = btn.querySelector('span');
+    if (sp) sp.textContent = currentLang === 'ar' ? 'أرسل بياناتي الآن' : 'Submit Now';
+  });
+  if (btnLoader) btnLoader.style.display = 'none';
+
+  // ── Show success (always — even if sheets failed, lead is backed up) ──
   showSuccessMessage();
 
   isSubmitting = false;
+  console.log('[Form] ✅ Submission complete. Sheets result:', saved);
 }
 
 function collectFormData() {
@@ -519,41 +533,50 @@ function clearSheetsError() {
 }
 
 // ── Core POST using application/x-www-form-urlencoded (Simple Request) ────────
+// WHY this works:
+//   • application/x-www-form-urlencoded = "Simple Request" per CORS spec
+//   • Browser sends NO preflight OPTIONS request
+//   • Apps Script receives data in e.parameter (auto-parsed by Google)
+//   • NO mode:'no-cors' — request IS visible in DevTools Network tab
+//   • Response IS readable — we can confirm {"status":"ok","row":N}
 async function attemptPost(endpoint, payload) {
-  // Build URL-encoded body — keys match Apps Script e.parameter exactly
-  const body = Object.keys(payload)
-    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(payload[k] || ''))
-    .join('&');
+  // URLSearchParams builds a safe url-encoded body automatically
+  const params = new URLSearchParams();
+  Object.keys(payload).forEach(k => params.append(k, payload[k] || ''));
 
   console.log('[Sheets] 📤 POST → endpoint:', endpoint);
-  console.log('[Sheets] 📦 URL-encoded body:', body);
+  console.log('[Sheets] 📦 URLSearchParams body:', params.toString());
   console.log('[Sheets] 🕐 Fetch start:', new Date().toISOString());
 
-  // application/x-www-form-urlencoded is a "Simple Request" → NO preflight
-  // No mode:'no-cors' → request IS visible in DevTools, response IS readable
-  const resp = await fetch(endpoint, {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-    body:    body
-  });
+  // 10-second timeout via AbortController
+  const controller = new AbortController();
+  const timeoutId  = setTimeout(() => controller.abort(), 10000);
+
+  let resp;
+  try {
+    resp = await fetch(endpoint, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body:    params,
+      signal:  controller.signal
+    });
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   console.log('[Sheets] 🕐 Fetch end:', new Date().toISOString());
-  console.log('[Sheets] 📥 HTTP status:', resp.status, resp.statusText);
+  console.log('[Sheets] 📥 HTTP status:', resp.status, resp.url);
 
-  // Apps Script redirects (302) are followed automatically by fetch
-  // Read the text response
   const text = await resp.text();
-  console.log('[Sheets] 📄 Raw response text:', text.substring(0, 500));
+  console.log('[Sheets] 📄 Raw response (first 500 chars):', text.substring(0, 500));
 
-  // Try parse JSON
   let json = {};
   try {
     json = JSON.parse(text);
-    console.log('[Sheets] ✅ Parsed JSON response:', json);
+    console.log('[Sheets] ✅ Parsed JSON:', json);
   } catch (_) {
-    // Apps Script sometimes returns plain text on success — still treat as ok
-    console.log('[Sheets] ℹ️ Response is not JSON — treating as ok if status < 400');
-    json = { status: resp.ok ? 'ok' : 'error', raw: text.substring(0, 200) };
+    console.log('[Sheets] ℹ️ Response not JSON — treating as ok if HTTP < 400');
+    json = { status: resp.ok ? 'ok' : 'error', httpStatus: resp.status, raw: text.substring(0, 200) };
   }
 
   return json;
