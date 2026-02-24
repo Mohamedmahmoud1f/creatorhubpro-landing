@@ -11,8 +11,9 @@ const CONFIG = {
   whatsappMsgAr: 'مرحبًا، أرسلت بياناتي عبر الموقع وأرغب في البدء',
   whatsappMsgEn: 'Hello, I submitted my information through the website and would like to start',
   redirectDelay: 2200,
-  // Google Apps Script Web App URL — Production endpoint
-  sheetsEndpoint: 'https://script.google.com/macros/s/AKfycbxffZ34BmcOEt5ZkL2TTSGN-pZ1EeERIGK4uLUrrh1xwm0JGcSx9Ob2B2ByIOWy_oX8/exec'
+  // ── Make (Integromat) Webhook URL ────────────────────────────────────────────
+  // لتغيير الـ webhook في المستقبل: فقط عدّل السطر التالي
+  makeWebhookUrl: 'PUT_WEBHOOK_URL_HERE'
 };
 
 // ─── STATE ────────────────────────────────────────
@@ -356,8 +357,8 @@ async function handleFormSubmit(e) {
   const formData = collectFormData();
   console.log('[Form] 📋 Collected form data:', formData);
 
-  const saved = await saveToGoogleSheets(formData);
-  console.log('[Form] 📊 saveToGoogleSheets result:', saved);
+  const saved = await sendToMakeWebhook(formData);
+  console.log('[Form] 📊 sendToMakeWebhook result:', saved);
 
   // ── Re-enable button ──
   [submitBtn, submitBtnEn].forEach(btn => {
@@ -373,7 +374,7 @@ async function handleFormSubmit(e) {
   showSuccessMessage();
 
   isSubmitting = false;
-  console.log('[Form] ✅ Submission complete. Sheets result:', saved);
+  console.log('[Form] ✅ Submission complete. Webhook result:', saved);
 }
 
 function collectFormData() {
@@ -480,18 +481,13 @@ Looking forward to hearing from you!`;
   }
 }
 
-// ─── GOOGLE SHEETS INTEGRATION — v5 Final Fix ───────────────────────────────
+// ─── MAKE (INTEGROMAT) WEBHOOK INTEGRATION ───────────────────────────────────
 //
-// ROOT CAUSE of previous failures:
-//   • mode:'no-cors' hides the request from DevTools Network tab
-//   • Content-Type:'text/plain' / 'application/json' caused preflight blocks
-//
-// THE CORRECT APPROACH (Simple Request = no preflight):
-//   • Method: POST
-//   • Content-Type: application/x-www-form-urlencoded;charset=UTF-8
-//   • NO mode:'no-cors' — we need the real response + visibility in DevTools
-//   • Google Apps Script Web App (Execute as: Me, Access: Anyone) handles
-//     form-urlencoded natively via e.parameter
+// الحل الجذري والنهائي:
+//   • الفورم يبعت JSON مباشرةً لـ Make webhook
+//   • Make يوزّع البيانات على Google Sheets وأي خدمة ثانية
+//   • يشتغل من كل جهاز (لابتوب + موبايل) بدون أي مشاكل CORS
+//   • لتغيير الـ webhook: CONFIG.makeWebhookUrl في أعلى الملف
 // ─────────────────────────────────────────────────────────────────────────────
 
 const LABEL_MAPS = {
@@ -516,20 +512,7 @@ const LABEL_MAPS = {
   }
 };
 
-// ── Save failed leads to localStorage as backup ───────────────────────────────
-function backupToLocalStorage(payload) {
-  try {
-    const key    = 'chp_leads_backup';
-    const stored = JSON.parse(localStorage.getItem(key) || '[]');
-    stored.push({ ...payload, _savedAt: new Date().toISOString() });
-    localStorage.setItem(key, JSON.stringify(stored));
-    console.warn('[Sheets] 💾 Backed up to localStorage. Total pending:', stored.length);
-  } catch (lsErr) {
-    console.warn('[Sheets] localStorage backup failed:', lsErr.message);
-  }
-}
-
-// ── Show inline error below submit button ─────────────────────────────────────
+// ── Show / clear inline error below submit button ─────────────────────────────
 function showSheetsError(msg) {
   let el = document.getElementById('sheetsErrorMsg');
   if (!el) {
@@ -546,49 +529,56 @@ function clearSheetsError() {
   if (el) el.textContent = '';
 }
 
-// ── Google Sheets Integration — via Cloudflare Worker Proxy ─────────────────
-// الحل الجذري: المتصفح يبعت لـ /api/submit (نفس الدومين = zero CORS)
-// الـ Worker يبعت لـ Apps Script من السيرفير بدون أي CORS مشاكل
-// يشتغل على لابتوب + موبايل + كل المتصفحات بدون استثناء
-
-// ── Show inline error below submit button ─────────────────────────────────────
-function showSheetsError(msg) {
-  let el = document.getElementById('sheetsErrorMsg');
-  if (!el) {
-    el = document.createElement('p');
-    el.id = 'sheetsErrorMsg';
-    el.style.cssText = 'color:#ef4444;text-align:center;margin-top:8px;font-size:14px;';
-    const btn = document.getElementById('submitBtn');
-    if (btn && btn.parentNode) btn.parentNode.insertBefore(el, btn.nextSibling);
-  }
-  el.textContent = msg;
-}
-function clearSheetsError() {
-  const el = document.getElementById('sheetsErrorMsg');
-  if (el) el.textContent = '';
-}
-
-// ── Save failed leads to localStorage as backup ───────────────────────────────
+// ── Backup failed leads to localStorage ───────────────────────────────────────
 function backupToLocalStorage(payload) {
   try {
     const key    = 'chp_leads_backup';
     const stored = JSON.parse(localStorage.getItem(key) || '[]');
     stored.push({ ...payload, _savedAt: new Date().toISOString() });
     localStorage.setItem(key, JSON.stringify(stored));
-    console.warn('[Sheets] 💾 Backed up to localStorage. Total pending:', stored.length);
+    console.warn('[Webhook] 💾 Backed up to localStorage. Total pending:', stored.length);
   } catch (lsErr) {
-    console.warn('[Sheets] localStorage backup failed:', lsErr.message);
+    console.warn('[Webhook] localStorage backup failed:', lsErr.message);
   }
 }
 
-// ── Main save function ────────────────────────────────────────────────────────
-async function saveToGoogleSheets(data) {
+/**
+ * sendToMakeWebhook — الدالة الرئيسية لإرسال بيانات الفورم إلى Make webhook
+ *
+ * @param {object} data — بيانات الفورم الخام من collectFormData()
+ * @returns {Promise<'ok'|'failed-backed-up'>}
+ *
+ * الـ payload المُرسَل (JSON):
+ * {
+ *   timestamp:  "24/2/2026, 10:30:00 م",   // توقيت القاهرة
+ *   name:       "أحمد محمد",
+ *   whatsapp:   "01234567890",              // نص بدون تحويل
+ *   business:   "كريتور - محتوى شخصي",      // مترجَم من LABEL_MAPS
+ *   platform:   "instagram",
+ *   goal:       "جذب عملاء",               // مترجَم من LABEL_MAPS
+ *   experience: "لا، بعاني أصلاً في الاستمرارية",
+ *   source:     "CreatorHubPro Landing Page",
+ *   lang:       "عربي" | "English"
+ * }
+ */
+async function sendToMakeWebhook(data) {
   clearSheetsError();
 
+  // ── webhook URL من CONFIG ─────────────────────────────────────────────────────
+  // لتغيير الـ webhook في المستقبل: عدّل CONFIG.makeWebhookUrl في أعلى الملف
+  const webhookUrl = CONFIG.makeWebhookUrl;
+
+  if (!webhookUrl || webhookUrl === 'PUT_WEBHOOK_URL_HERE') {
+    console.error('[Webhook] ❌ makeWebhookUrl غير محدد في CONFIG');
+    showSheetsError('حصل خطأ في الإعداد، جرّب تاني');
+    return 'failed-backed-up';
+  }
+
+  // ── بناء الـ payload ──────────────────────────────────────────────────────────
   const payload = {
     timestamp:  new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
     name:       data.name       || '',
-    whatsapp:   data.whatsapp   || '',
+    whatsapp:   String(data.whatsapp || ''),          // يبقى نص دائماً
     business:   LABEL_MAPS.business[data.business]     || data.business   || '',
     platform:   data.platform   || '',
     goal:       LABEL_MAPS.goal[data.goal]             || data.goal       || '',
@@ -597,50 +587,52 @@ async function saveToGoogleSheets(data) {
     lang:       (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'English' : 'عربي'
   };
 
-  console.log('[Sheets] 🚀 Sending payload:', payload);
+  console.log('[Webhook] 🚀 Sending to Make webhook:', webhookUrl);
+  console.log('[Webhook] 📋 Payload:', JSON.stringify(payload, null, 2));
 
-  const MAX_RETRIES = 3;
+  const MAX_RETRIES = 2;
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      console.log(`[Sheets] 🔄 Attempt ${attempt}/${MAX_RETRIES}`);
+      console.log(`[Webhook] 🔄 Attempt ${attempt}/${MAX_RETRIES}`);
 
+      // ── AbortController لـ timeout 10 ثواني ────────────────────────────────
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 15000);
+      const timer = setTimeout(() => controller.abort(), 10000);
 
       let resp;
       try {
-        resp = await fetch('/api/submit', {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(payload),
-          signal:  controller.signal
+        resp = await fetch(webhookUrl, {
+          method:    'POST',
+          headers:   { 'Content-Type': 'application/json' },
+          body:      JSON.stringify(payload),
+          keepalive: true,          // يضمن إرسال الطلب حتى لو المستخدم غادر الصفحة
+          signal:    controller.signal
         });
       } finally {
         clearTimeout(timer);
       }
 
-      console.log('[Sheets] 📥 HTTP status:', resp.status);
+      console.log('[Webhook] 📥 HTTP status:', resp.status);
 
       if (resp.ok) {
-        const json = await resp.json();
-        console.log('[Sheets] ✅ SUCCESS:', json);
+        console.log('[Webhook] ✅ تم الإرسال بنجاح إلى Make');
         clearSheetsError();
         return 'ok';
       } else {
-        console.warn(`[Sheets] ⚠️ HTTP ${resp.status} on attempt ${attempt}`);
+        console.warn(`[Webhook] ⚠️ HTTP ${resp.status} on attempt ${attempt}`);
       }
     } catch (err) {
-      console.error(`[Sheets] ❌ Attempt ${attempt} error:`, err.message);
+      console.error(`[Webhook] ❌ Attempt ${attempt} error:`, err.message);
       if (attempt < MAX_RETRIES) {
-        await new Promise(r => setTimeout(r, 1000 * attempt));
+        await new Promise(r => setTimeout(r, 1000));
       }
     }
   }
 
-  // كل المحاولات فشلت — backup
+  // ── كل المحاولات فشلت ─────────────────────────────────────────────────────────
   backupToLocalStorage(payload);
-  showSheetsError('تم استلام بياناتك — سيتم التواصل معك قريباً');
-  console.error('[Sheets] ❌ All attempts failed. Data backed up to localStorage.');
+  showSheetsError('حصل خطأ، جرّب تاني');
+  console.error('[Webhook] ❌ All attempts failed. Data backed up to localStorage.');
   return 'failed-backed-up';
 }
 
