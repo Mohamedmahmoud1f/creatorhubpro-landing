@@ -12,7 +12,7 @@ const CONFIG = {
   whatsappMsgEn: 'Hello, I submitted my information through the website and would like to start',
   redirectDelay: 2200,
   // Google Apps Script Web App URL — Production endpoint
-  sheetsEndpoint: 'https://script.google.com/macros/s/AKfycbwxmTqU_m3m0DqAEXd9zYFsO0RPVUv-Y5nDz2p8GUFYnDdkOFGBpwIUiOAS8ijZ8vE-/exec'
+  sheetsEndpoint: 'https://script.google.com/macros/s/AKfycbxffZ34BmcOEt5ZkL2TTSGN-pZ1EeERIGK4uLUrrh1xwm0JGcSx9Ob2B2ByIOWy_oX8/exec'
 };
 
 // ─── STATE ────────────────────────────────────────
