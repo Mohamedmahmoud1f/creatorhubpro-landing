@@ -1,47 +1,38 @@
 /**
- * ╔══════════════════════════════════════════════════════════════╗
- * ║        CreatorHubPro — Google Apps Script  v2               ║
- * ║  يُنسخ هذا الكود في: Extensions > Apps Script > Code.gs    ║
- * ║  Sheet ID: 19O2b1diIOLC2dy-ZWam1f6jThFE1YLS6ja7Yb3j6zRc   ║
- * ╚══════════════════════════════════════════════════════════════╝
- *
- * ⚠️ مهم — خطوات إعادة النشر بعد تحديث الكود:
- *  1. احذف الكود القديم في Code.gs والصق هذا الكود
- *  2. احفظ (Ctrl+S)
- *  3. Deploy > Manage Deployments > Edit (✏️) > New Version > Deploy
- *  4. استخدم نفس الـ URL السابق (لا تحتاج تغيير app.js)
+ * CreatorHubPro — Google Apps Script v3
+ * Sheet ID: 19O2b1diIOLC2dy-ZWam1f6jThFE1YLS6ja7Yb3j6zRc
  */
 
-const SHEET_NAME = 'Leads';
-const SHEET_ID   = '19O2b1diIOLC2dy-ZWam1f6jThFE1YLS6ja7Yb3j6zRc';
+var SHEET_ID   = '19O2b1diIOLC2dy-ZWam1f6jThFE1YLS6ja7Yb3j6zRc';
+var SHEET_NAME = 'Leads';
 
-const HEADERS = [
-  'التاريخ والوقت',
-  'الاسم',
-  'واتساب',
-  'النشاط',
-  'المنصة',
-  'الهدف',
-  'الاستمرارية',
-  'المصدر',
-  'اللغة'
-];
+function getOrCreateSheet() {
+  var ss    = SpreadsheetApp.openById(SHEET_ID);
+  var sheet = ss.getSheetByName(SHEET_NAME);
 
-// ─── دالة مشتركة لحفظ الصف في الـ Sheet ─────────────────────────────────────
-function saveRow(data) {
-  const ss    = SpreadsheetApp.openById(SHEET_ID);
-  let   sheet = ss.getSheetByName(SHEET_NAME);
-
-  // إنشاء الـ Sheet وتنسيقها إذا لم تكن موجودة
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
-    const hr = sheet.getRange(1, 1, 1, HEADERS.length);
-    hr.setValues([HEADERS]);
+
+    // كتابة العناوين مباشرة بالترتيب الصحيح
+    sheet.getRange('A1').setValue('التاريخ والوقت');
+    sheet.getRange('B1').setValue('الاسم');
+    sheet.getRange('C1').setValue('واتساب');
+    sheet.getRange('D1').setValue('النشاط');
+    sheet.getRange('E1').setValue('المنصة');
+    sheet.getRange('F1').setValue('الهدف');
+    sheet.getRange('G1').setValue('الاستمرارية');
+    sheet.getRange('H1').setValue('المصدر');
+    sheet.getRange('I1').setValue('اللغة');
+
+    // تنسيق العناوين
+    var hr = sheet.getRange('A1:I1');
     hr.setBackground('#4F46E5');
     hr.setFontColor('#FFFFFF');
     hr.setFontWeight('bold');
     hr.setHorizontalAlignment('center');
     sheet.setFrozenRows(1);
+
+    // عرض الأعمدة
     sheet.setColumnWidth(1, 160);
     sheet.setColumnWidth(2, 150);
     sheet.setColumnWidth(3, 140);
@@ -53,49 +44,52 @@ function saveRow(data) {
     sheet.setColumnWidth(9, 80);
   }
 
-  const row = [
-    data.timestamp  || new Date().toLocaleString('ar-EG', {timeZone:'Africa/Cairo'}),
-    data.name       || '',
-    data.whatsapp   || '',
-    data.business   || '',
-    data.platform   || '',
-    data.goal       || '',
-    data.experience || '',
-    data.source     || 'CreatorHubPro Landing Page',
-    data.lang       || 'عربي'
-  ];
-
-  sheet.appendRow(row);
-
-  // تلوين الصفوف بالتناوب
-  const lastRow  = sheet.getLastRow();
-  const rowRange = sheet.getRange(lastRow, 1, 1, HEADERS.length);
-  rowRange.setBackground(lastRow % 2 === 0 ? '#F3F4F6' : '#FFFFFF');
-  rowRange.setHorizontalAlignment('right');
-
-  return lastRow;
+  return sheet;
 }
 
-// ─── doGet — يستقبل البيانات كـ query params (الطريقة الوحيدة مع no-cors) ────
+function writeRow(sheet, data) {
+  var nextRow = sheet.getLastRow() + 1;
+  var ts = data.timestamp || new Date().toLocaleString('ar-EG', {timeZone: 'Africa/Cairo'});
+
+  // كتابة كل خلية بشكل مستقل لضمان الترتيب الصحيح
+  sheet.getRange(nextRow, 1).setValue(ts);
+  sheet.getRange(nextRow, 2).setValue(data.name       || '');
+  sheet.getRange(nextRow, 3).setValue(data.whatsapp   || '');
+  sheet.getRange(nextRow, 4).setValue(data.business   || '');
+  sheet.getRange(nextRow, 5).setValue(data.platform   || '');
+  sheet.getRange(nextRow, 6).setValue(data.goal       || '');
+  sheet.getRange(nextRow, 7).setValue(data.experience || '');
+  sheet.getRange(nextRow, 8).setValue(data.source     || 'CreatorHubPro Landing Page');
+  sheet.getRange(nextRow, 9).setValue(data.lang       || 'عربي');
+
+  // تلوين الصفوف بالتناوب
+  var bg = (nextRow % 2 === 0) ? '#F3F4F6' : '#FFFFFF';
+  sheet.getRange(nextRow, 1, 1, 9).setBackground(bg);
+
+  return nextRow;
+}
+
+// ─── doGet — يستقبل البيانات كـ query params ─────────────────────────────────
 function doGet(e) {
   try {
-    const p = e.parameter || {};
+    var p = (e && e.parameter) ? e.parameter : {};
 
-    // لو طلب اختبار بدون بيانات
+    // طلب اختبار بدون بيانات
     if (!p.name && !p.whatsapp) {
       return ContentService
         .createTextOutput(JSON.stringify({
           status:  'alive',
-          message: 'CreatorHubPro Sheets Endpoint v2 ✅',
+          message: 'CreatorHubPro Sheets v3 OK',
           time:    new Date().toISOString()
         }))
         .setMimeType(ContentService.MimeType.JSON);
     }
 
-    const lastRow = saveRow(p);
+    var sheet  = getOrCreateSheet();
+    var rowNum = writeRow(sheet, p);
 
     return ContentService
-      .createTextOutput(JSON.stringify({ status: 'ok', row: lastRow }))
+      .createTextOutput(JSON.stringify({ status: 'ok', row: rowNum }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
@@ -105,14 +99,15 @@ function doGet(e) {
   }
 }
 
-// ─── doPost — للتوافق مع أي إرسال POST مستقبلي ──────────────────────────────
+// ─── doPost ───────────────────────────────────────────────────────────────────
 function doPost(e) {
   try {
-    const raw  = e.postData ? e.postData.contents : '{}';
-    const data = JSON.parse(raw);
-    const lastRow = saveRow(data);
+    var raw  = (e && e.postData) ? e.postData.contents : '{}';
+    var data = JSON.parse(raw);
+    var sheet  = getOrCreateSheet();
+    var rowNum = writeRow(sheet, data);
     return ContentService
-      .createTextOutput(JSON.stringify({ status: 'ok', row: lastRow }))
+      .createTextOutput(JSON.stringify({ status: 'ok', row: rowNum }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     return ContentService
@@ -121,19 +116,20 @@ function doPost(e) {
   }
 }
 
-// ─── testInsert — شغّلها من Apps Script للتأكد قبل النشر ────────────────────
+// ─── testInsert — شغّلها للاختبار ─────────────────────────────────────────────
 function testInsert() {
-  const mockData = {
-    timestamp:  '24/2/2026، 4:00 م',
-    name:       'اختبار v2',
+  var sheet = getOrCreateSheet();
+  var rowNum = writeRow(sheet, {
+    timestamp:  new Date().toLocaleString('ar-EG', {timeZone: 'Africa/Cairo'}),
+    name:       'أحمد محمود - اختبار',
     whatsapp:   '+201105449828',
     business:   'كريتور - محتوى شخصي',
     platform:   'Instagram',
     goal:       'جذب عملاء',
     experience: 'لا، بعاني أصلاً في الاستمرارية',
-    source:     'Test Run v2',
+    source:     'Test v3',
     lang:       'عربي'
-  };
-  const row = saveRow(mockData);
-  Logger.log('✅ تم إضافة الصف رقم: ' + row);
+  });
+  Logger.log('✅ تم الكتابة في الصف رقم: ' + rowNum);
+  Logger.log('افتح الـ Sheet وتحقق من الصف ' + rowNum);
 }
