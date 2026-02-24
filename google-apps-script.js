@@ -1,26 +1,20 @@
 /**
  * ╔══════════════════════════════════════════════════════════════╗
- * ║        CreatorHubPro — Google Apps Script                   ║
+ * ║        CreatorHubPro — Google Apps Script  v2               ║
  * ║  يُنسخ هذا الكود في: Extensions > Apps Script > Code.gs    ║
  * ║  Sheet ID: 19O2b1diIOLC2dy-ZWam1f6jThFE1YLS6ja7Yb3j6zRc   ║
  * ╚══════════════════════════════════════════════════════════════╝
  *
- * خطوات النشر:
- *  1. افتح الـ Spreadsheet
- *  2. Extensions > Apps Script
- *  3. احذف الكود الموجود والصق هذا الكود كاملاً
- *  4. احفظ (Ctrl+S)
- *  5. Deploy > New Deployment
- *     - Type: Web App
- *     - Execute as: Me
- *     - Who has access: Anyone
- *  6. انسخ الـ URL الناتج والصقه في app.js داخل CONFIG.sheetsEndpoint
+ * ⚠️ مهم — خطوات إعادة النشر بعد تحديث الكود:
+ *  1. احذف الكود القديم في Code.gs والصق هذا الكود
+ *  2. احفظ (Ctrl+S)
+ *  3. Deploy > Manage Deployments > Edit (✏️) > New Version > Deploy
+ *  4. استخدم نفس الـ URL السابق (لا تحتاج تغيير app.js)
  */
 
-// ── اسم الـ Sheet الذي ستُحفظ فيه البيانات ──
 const SHEET_NAME = 'Leads';
+const SHEET_ID   = '19O2b1diIOLC2dy-ZWam1f6jThFE1YLS6ja7Yb3j6zRc';
 
-// ── عناوين الأعمدة (سيتم إنشاؤها تلقائياً في أول تشغيل) ──
 const HEADERS = [
   'التاريخ والوقت',
   'الاسم',
@@ -33,117 +27,113 @@ const HEADERS = [
   'اللغة'
 ];
 
-/**
- * doPost — يُستدعى عند إرسال الفورم من الموقع (POST request)
- */
-function doPost(e) {
+// ─── دالة مشتركة لحفظ الصف في الـ Sheet ─────────────────────────────────────
+function saveRow(data) {
+  const ss    = SpreadsheetApp.openById(SHEET_ID);
+  let   sheet = ss.getSheetByName(SHEET_NAME);
+
+  // إنشاء الـ Sheet وتنسيقها إذا لم تكن موجودة
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_NAME);
+    const hr = sheet.getRange(1, 1, 1, HEADERS.length);
+    hr.setValues([HEADERS]);
+    hr.setBackground('#4F46E5');
+    hr.setFontColor('#FFFFFF');
+    hr.setFontWeight('bold');
+    hr.setHorizontalAlignment('center');
+    sheet.setFrozenRows(1);
+    sheet.setColumnWidth(1, 160);
+    sheet.setColumnWidth(2, 150);
+    sheet.setColumnWidth(3, 140);
+    sheet.setColumnWidth(4, 180);
+    sheet.setColumnWidth(5, 120);
+    sheet.setColumnWidth(6, 160);
+    sheet.setColumnWidth(7, 260);
+    sheet.setColumnWidth(8, 200);
+    sheet.setColumnWidth(9, 80);
+  }
+
+  const row = [
+    data.timestamp  || new Date().toLocaleString('ar-EG', {timeZone:'Africa/Cairo'}),
+    data.name       || '',
+    data.whatsapp   || '',
+    data.business   || '',
+    data.platform   || '',
+    data.goal       || '',
+    data.experience || '',
+    data.source     || 'CreatorHubPro Landing Page',
+    data.lang       || 'عربي'
+  ];
+
+  sheet.appendRow(row);
+
+  // تلوين الصفوف بالتناوب
+  const lastRow  = sheet.getLastRow();
+  const rowRange = sheet.getRange(lastRow, 1, 1, HEADERS.length);
+  rowRange.setBackground(lastRow % 2 === 0 ? '#F3F4F6' : '#FFFFFF');
+  rowRange.setHorizontalAlignment('right');
+
+  return lastRow;
+}
+
+// ─── doGet — يستقبل البيانات كـ query params (الطريقة الوحيدة مع no-cors) ────
+function doGet(e) {
   try {
-    // تحليل البيانات الواردة
-    const raw  = e.postData ? e.postData.contents : '{}';
-    const data = JSON.parse(raw);
+    const p = e.parameter || {};
 
-    // الوصول إلى الـ Spreadsheet
-    const ss    = SpreadsheetApp.openById('19O2b1diIOLC2dy-ZWam1f6jThFE1YLS6ja7Yb3j6zRc');
-    let   sheet = ss.getSheetByName(SHEET_NAME);
-
-    // إنشاء الـ Sheet إذا لم تكن موجودة
-    if (!sheet) {
-      sheet = ss.insertSheet(SHEET_NAME);
-      sheet.appendRow(HEADERS);
-
-      // تنسيق صف العناوين
-      const headerRange = sheet.getRange(1, 1, 1, HEADERS.length);
-      headerRange.setBackground('#4F46E5');
-      headerRange.setFontColor('#FFFFFF');
-      headerRange.setFontWeight('bold');
-      headerRange.setHorizontalAlignment('center');
-      sheet.setFrozenRows(1);
-
-      // ضبط عرض الأعمدة
-      sheet.setColumnWidth(1, 160); // التاريخ
-      sheet.setColumnWidth(2, 150); // الاسم
-      sheet.setColumnWidth(3, 140); // واتساب
-      sheet.setColumnWidth(4, 180); // النشاط
-      sheet.setColumnWidth(5, 120); // المنصة
-      sheet.setColumnWidth(6, 160); // الهدف
-      sheet.setColumnWidth(7, 260); // الاستمرارية
-      sheet.setColumnWidth(8, 160); // المصدر
-      sheet.setColumnWidth(9, 80);  // اللغة
+    // لو طلب اختبار بدون بيانات
+    if (!p.name && !p.whatsapp) {
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          status:  'alive',
+          message: 'CreatorHubPro Sheets Endpoint v2 ✅',
+          time:    new Date().toISOString()
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
     }
 
-    // بناء صف البيانات
-    const row = [
-      data.timestamp  || new Date().toLocaleString('ar-EG'),
-      data.name       || '',
-      data.whatsapp   || '',
-      data.business   || '',
-      data.platform   || '',
-      data.goal       || '',
-      data.experience || '',
-      data.source     || 'CreatorHubPro Landing Page',
-      data.lang       || 'عربي'
-    ];
+    const lastRow = saveRow(p);
 
-    // إضافة الصف
-    sheet.appendRow(row);
-
-    // تلوين صفوف بالتناوب لسهولة القراءة
-    const lastRow    = sheet.getLastRow();
-    const rowRange   = sheet.getRange(lastRow, 1, 1, HEADERS.length);
-    const rowColor   = (lastRow % 2 === 0) ? '#F3F4F6' : '#FFFFFF';
-    rowRange.setBackground(rowColor);
-
-    // محاذاة RTL للبيانات العربية
-    rowRange.setHorizontalAlignment('right');
-
-    // رد ناجح
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'ok', row: lastRow }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
-    // رد بالخطأ (لأغراض التشخيص)
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'error', message: err.message }))
       .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
-/**
- * doGet — للاختبار السريع عبر المتصفح
- * افتح رابط الـ Web App في المتصفح للتحقق من أنه يعمل
- */
-function doGet(e) {
-  return ContentService
-    .createTextOutput(JSON.stringify({
-      status:  'alive',
-      message: 'CreatorHubPro Sheets Endpoint is running ✅',
-      sheet:   SHEET_NAME,
-      time:    new Date().toISOString()
-    }))
-    .setMimeType(ContentService.MimeType.JSON);
+// ─── doPost — للتوافق مع أي إرسال POST مستقبلي ──────────────────────────────
+function doPost(e) {
+  try {
+    const raw  = e.postData ? e.postData.contents : '{}';
+    const data = JSON.parse(raw);
+    const lastRow = saveRow(data);
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'ok', row: lastRow }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'error', message: err.message }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
 
-/**
- * testInsert — دالة اختبار، شغّلها من Apps Script مباشرة (▶ Run)
- * للتحقق من أن الكتابة إلى الـ Sheet تعمل قبل النشر
- */
+// ─── testInsert — شغّلها من Apps Script للتأكد قبل النشر ────────────────────
 function testInsert() {
-  const mockEvent = {
-    postData: {
-      contents: JSON.stringify({
-        timestamp:  '24/2/2026، 12:00:00 م',
-        name:       'تجربة - أحمد',
-        whatsapp:   '+201111111111',
-        business:   'كريتور - محتوى شخصي',
-        platform:   'Instagram',
-        goal:       'جذب عملاء',
-        experience: 'لا، بعاني أصلاً في الاستمرارية',
-        source:     'Test Run',
-        lang:       'عربي'
-      })
-    }
+  const mockData = {
+    timestamp:  '24/2/2026، 4:00 م',
+    name:       'اختبار v2',
+    whatsapp:   '+201105449828',
+    business:   'كريتور - محتوى شخصي',
+    platform:   'Instagram',
+    goal:       'جذب عملاء',
+    experience: 'لا، بعاني أصلاً في الاستمرارية',
+    source:     'Test Run v2',
+    lang:       'عربي'
   };
-  const result = doPost(mockEvent);
-  Logger.log(result.getContent());
+  const row = saveRow(mockData);
+  Logger.log('✅ تم إضافة الصف رقم: ' + row);
 }

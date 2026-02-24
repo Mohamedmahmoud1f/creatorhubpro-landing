@@ -352,24 +352,14 @@ async function handleFormSubmit(e) {
   // Collect form data
   const formData = collectFormData();
 
-  // ── إرسال البيانات إلى Google Sheets (fire & forget) ──
-  saveToGoogleSheets(formData);
-
-  // Simulate processing
-  await new Promise(resolve => setTimeout(resolve, 1200));
+  // ── إرسال البيانات إلى Google Sheets ──
+  const saved = await saveToGoogleSheets(formData);
+  console.log('[Sheets] result:', saved);
 
   // Show success
   showSuccessMessage();
 
-  // Build WhatsApp message with form data
-  const waMessage = buildWhatsAppMessage(formData);
-
-  // Redirect to WhatsApp after delay
-  setTimeout(() => {
-    const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(waMessage)}`;
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
-    isSubmitting = false;
-  }, CONFIG.redirectDelay);
+  isSubmitting = false;
 }
 
 function collectFormData() {
@@ -467,16 +457,14 @@ Looking forward to hearing from you!`;
  * يرسل بيانات الليد إلى Google Sheets عبر Apps Script Web App
  * يعمل بأسلوب fire-and-forget: لا يوقف تدفق الفورم حتى لو فشل الإرسال
  */
-function saveToGoogleSheets(data) {
+async function saveToGoogleSheets(data) {
   const endpoint = CONFIG.sheetsEndpoint;
 
-  // إذا لم يُضَف الـ endpoint بعد، تجاهل الإرسال بصمت
   if (!endpoint || endpoint === 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
-    console.warn('[Sheets] endpoint غير مُكوَّن — تم تجاهل الإرسال');
-    return;
+    console.warn('[Sheets] endpoint غير مُكوَّن');
+    return 'no-endpoint';
   }
 
-  // خريطة الـ labels لتخزين النص الواضح في الـ Sheet
   const businessMap = {
     creator_personal: 'كريتور - محتوى شخصي',
     business_owner:   'صاحب بيزنس / شركة',
@@ -494,33 +482,34 @@ function saveToGoogleSheets(data) {
   };
 
   const expMap = {
-    no_consistency:     'لا، بعاني أصلاً في الاستمرارية',
-    quality_or_schedule:'ممكن، لكن الجودة أو الانتظام بيقعوا',
-    costly_effort:      'نعم، لكن بياخد وقت ومجهود كبير مني',
+    no_consistency:      'لا، بعاني أصلاً في الاستمرارية',
+    quality_or_schedule: 'ممكن، لكن الجودة أو الانتظام بيقعوا',
+    costly_effort:       'نعم، لكن بياخد وقت ومجهود كبير مني'
   };
 
-  const payload = {
-    timestamp: new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
-    name:      data.name,
-    whatsapp:  data.whatsapp,
-    business:  businessMap[data.business]  || data.business,
-    platform:  data.platform,
-    goal:      goalMap[data.goal]          || data.goal,
-    experience: expMap[data.experience]    || data.experience,
-    source:    'CreatorHubPro Landing Page',
-    lang:      currentLang === 'ar' ? 'عربي' : 'English'
-  };
-
-  // إرسال عبر fetch — no-cors لتجنب مشاكل CORS مع Apps Script
-  fetch(endpoint, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).catch(err => {
-    // خطأ صامت — لا يؤثر على تجربة المستخدم
-    console.warn('[Sheets] فشل الإرسال:', err.message);
+  // ── إرسال عبر GET + query params (الطريقة الوحيدة التي تعمل مع no-cors) ──
+  const params = new URLSearchParams({
+    timestamp:  new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
+    name:       data.name,
+    whatsapp:   data.whatsapp,
+    business:   businessMap[data.business]   || data.business,
+    platform:   data.platform,
+    goal:       goalMap[data.goal]           || data.goal,
+    experience: expMap[data.experience]      || data.experience,
+    source:     'CreatorHubPro Landing Page',
+    lang:       currentLang === 'ar' ? 'عربي' : 'English'
   });
+
+  try {
+    await fetch(`${endpoint}?${params.toString()}`, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+    return 'sent';
+  } catch (err) {
+    console.warn('[Sheets] فشل الإرسال:', err.message);
+    return 'error';
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
