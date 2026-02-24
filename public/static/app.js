@@ -7,7 +7,7 @@
 
 // ─── CONFIG ────────────────────────────────────────
 const CONFIG = {
-  whatsappNumber: '201068400789',
+  whatsappNumber: '201105449828',
   whatsappMsgAr: 'مرحبًا، أرسلت بياناتي عبر الموقع وأرغب في البدء',
   whatsappMsgEn: 'Hello, I submitted my information through the website and would like to start',
   redirectDelay: 2200

@@ -822,10 +822,10 @@ app.get('/', (c) => {
           <a href="#form-section" class="btn btn-primary en-text" style="display:none">
             <i class="fas fa-rocket"></i> Start Your System Now
           </a>
-          <a href="https://wa.me/201068400789?text=مرحبًا%2C%20أرسلت%20بياناتي%20عبر%20الموقع%20وأرغب%20في%20البدء" target="_blank" class="btn btn-wa-outline ar-text">
+          <a href="https://wa.me/201105449828?text=مرحبًا%2C%20أرسلت%20بياناتي%20عبر%20الموقع%20وأرغب%20في%20البدء" target="_blank" class="btn btn-wa-outline ar-text">
             <i class="fab fa-whatsapp"></i> اسأل البروفيسور الآن
           </a>
-          <a href="https://wa.me/201068400789?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20the%20system" target="_blank" class="btn btn-wa-outline en-text" style="display:none">
+          <a href="https://wa.me/201105449828?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20the%20system" target="_blank" class="btn btn-wa-outline en-text" style="display:none">
             <i class="fab fa-whatsapp"></i> Ask the Professor Now
           </a>
         </div>
@@ -1997,11 +1997,11 @@ app.get('/', (c) => {
           </div>
           <p class="scr-full-sub ar-text">يمكنك الانضمام لقائمة الانتظار أو الحجز للدفعة القادمة</p>
           <p class="scr-full-sub en-text" style="display:none">You can join the waitlist or book for the next batch</p>
-          <a href="https://wa.me/201068400789?text=مرحبًا%2C%20أريد%20الانضمام%20لقائمة%20الانتظار%20للدفعة%20القادمة"
+          <a href="https://wa.me/201105449828?text=مرحبًا%2C%20أريد%20الانضمام%20لقائمة%20الانتظار%20للدفعة%20القادمة"
              target="_blank" class="btn btn-primary scr-cta-btn ar-text">
             <i class="fas fa-clock"></i> احجز مكانك في الدفعة القادمة
           </a>
-          <a href="https://wa.me/201068400789?text=Hello%2C%20I%20want%20to%20join%20the%20waitlist%20for%20the%20next%20batch"
+          <a href="https://wa.me/201105449828?text=Hello%2C%20I%20want%20to%20join%20the%20waitlist%20for%20the%20next%20batch"
              target="_blank" class="btn btn-primary scr-cta-btn en-text" style="display:none">
             <i class="fas fa-clock"></i> Join Next Batch Waitlist
           </a>
@@ -2476,11 +2476,11 @@ app.get('/', (c) => {
         <h2 class="en-text" style="display:none">Or Contact Us Directly</h2>
         <p class="ar-text">فريقنا متاح لمساعدتك والإجابة على كل أسئلتك</p>
         <p class="en-text" style="display:none">Our team is ready to help and answer all your questions</p>
-        <a href="https://wa.me/201068400789?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D8%B1%D8%B3%D9%84%D8%AA%20%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%D9%8A%20%D8%B9%D8%A8%D8%B1%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D9%88%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A8%D8%AF%D8%A1"
+        <a href="https://wa.me/201105449828?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D8%B1%D8%B3%D9%84%D8%AA%20%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%D9%8A%20%D8%B9%D8%A8%D8%B1%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D9%88%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A8%D8%AF%D8%A1"
            target="_blank" rel="noopener" class="btn btn-whatsapp ar-text">
           <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
         </a>
-        <a href="https://wa.me/201068400789?text=Hello%2C%20I%20submitted%20my%20information%20through%20the%20website%20and%20would%20like%20to%20start"
+        <a href="https://wa.me/201105449828?text=Hello%2C%20I%20submitted%20my%20information%20through%20the%20website%20and%20would%20like%20to%20start"
            target="_blank" rel="noopener" class="btn btn-whatsapp en-text" style="display:none">
           <i class="fab fa-whatsapp"></i> Chat on WhatsApp
         </a>
@@ -2513,11 +2513,11 @@ app.get('/', (c) => {
           <a href="#form-section" class="btn btn-primary btn-xl en-text" style="display:none">
             <i class="fas fa-rocket"></i> Start Your Journey Now
           </a>
-          <a href="https://wa.me/201068400789?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D8%B1%D8%B3%D9%84%D8%AA%20%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%D9%8A%20%D8%B9%D8%A8%D8%B1%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D9%88%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A8%D8%AF%D8%A1"
+          <a href="https://wa.me/201105449828?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D8%B1%D8%B3%D9%84%D8%AA%20%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%D9%8A%20%D8%B9%D8%A8%D8%B1%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D9%88%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A8%D8%AF%D8%A1"
              target="_blank" rel="noopener" class="btn btn-outline-white ar-text">
             <i class="fab fa-whatsapp"></i> تحدث معنا مباشرة
           </a>
-          <a href="https://wa.me/201068400789?text=Hello%2C%20I%20want%20to%20get%20started"
+          <a href="https://wa.me/201105449828?text=Hello%2C%20I%20want%20to%20get%20started"
              target="_blank" rel="noopener" class="btn btn-outline-white en-text" style="display:none">
             <i class="fab fa-whatsapp"></i> Talk to Us Directly
           </a>
@@ -2553,7 +2553,7 @@ app.get('/', (c) => {
 
           <!-- Social icons -->
           <div class="footer-socials">
-            <a href="https://wa.me/201068400789" target="_blank" rel="noopener" class="fsoc-wa" aria-label="WhatsApp">
+            <a href="https://wa.me/201105449828" target="_blank" rel="noopener" class="fsoc-wa" aria-label="WhatsApp">
               <i class="fab fa-whatsapp"></i>
             </a>
             <a href="https://www.instagram.com/creatorhubpro/" target="_blank" rel="noopener" class="fsoc-ig" aria-label="Instagram">
