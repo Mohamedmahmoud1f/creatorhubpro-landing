@@ -532,49 +532,41 @@ function clearSheetsError() {
   if (el) el.textContent = '';
 }
 
-// ── Core POST using no-cors + text/plain (most reliable for Apps Script) ────────
-// WHY this works:
-//   • Apps Script follow redirects between script.google.com and script.googleusercontent.com
-//   • These redirects break CORS when mode is not 'no-cors'
-//   • Using mode:'no-cors' + Content-Type:'text/plain' = Simple Request, no preflight
-//   • Apps Script reads body via e.postData.contents and parses JSON
-//   • Trade-off: response is opaque (we can't read it), but data IS written to the Sheet
-//   • We treat opaque response (type==='opaque') as success
+// ── Core GET request — MOST RELIABLE for Apps Script (zero CORS issues) ─────────
+// WHY GET works perfectly:
+//   • GET requests are NEVER blocked by CORS preflight
+//   • Apps Script receives all data in e.parameter automatically
+//   • Response IS readable — we get {"status":"ok","row":N} back
+//   • Visible in DevTools Network tab
+//   • No redirect issues whatsoever
 async function attemptPost(endpoint, payload) {
-  const bodyStr = JSON.stringify(payload);
+  // Build query string from payload
+  const params = new URLSearchParams();
+  Object.keys(payload).forEach(k => params.append(k, payload[k] || ''));
+  const url = endpoint + '?' + params.toString();
 
-  console.log('[Sheets] 📤 POST → endpoint:', endpoint);
-  console.log('[Sheets] 📦 JSON body:', bodyStr);
+  console.log('[Sheets] 📤 GET → endpoint:', endpoint);
+  console.log('[Sheets] 📦 Query params:', params.toString());
+  console.log('[Sheets] 🔗 Full URL:', url);
   console.log('[Sheets] 🕐 Fetch start:', new Date().toISOString());
 
-  // 10-second timeout via AbortController
+  // 15-second timeout via AbortController
   const controller = new AbortController();
-  const timeoutId  = setTimeout(() => controller.abort(), 10000);
+  const timeoutId  = setTimeout(() => controller.abort(), 15000);
 
   let resp;
   try {
-    resp = await fetch(endpoint, {
-      method:  'POST',
-      mode:    'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-      body:    bodyStr,
-      signal:  controller.signal
+    resp = await fetch(url, {
+      method: 'GET',
+      signal: controller.signal
     });
   } finally {
     clearTimeout(timeoutId);
   }
 
   console.log('[Sheets] 🕐 Fetch end:', new Date().toISOString());
-  console.log('[Sheets] 📥 Response type:', resp.type, '| status:', resp.status);
+  console.log('[Sheets] 📥 HTTP status:', resp.status, '| ok:', resp.ok);
 
-  // With mode:'no-cors', response is opaque (type === 'opaque')
-  // status will be 0 and body is unreadable — this is NORMAL and means success
-  if (resp.type === 'opaque') {
-    console.log('[Sheets] ✅ Opaque response received — data was sent successfully (no-cors mode)');
-    return { status: 'ok', row: '(opaque - data sent)' };
-  }
-
-  // Fallback for non-opaque responses (shouldn't happen with no-cors, but just in case)
   let json = {};
   try {
     const text = await resp.text();
@@ -582,7 +574,7 @@ async function attemptPost(endpoint, payload) {
     json = JSON.parse(text);
     console.log('[Sheets] ✅ Parsed JSON:', json);
   } catch (_) {
-    console.log('[Sheets] ℹ️ Response not JSON — treating as ok if HTTP ok');
+    console.log('[Sheets] ℹ️ Response not JSON — treating as ok (status:', resp.status, ')');
     json = { status: resp.ok ? 'ok' : 'error', httpStatus: resp.status };
   }
 
