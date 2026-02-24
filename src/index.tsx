@@ -10,7 +10,11 @@ app.get('/', (c) => {
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#07050f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no" />
   <meta name="description" content="حوّل محتواك إلى آلة تجذب العملاء - خدمة مونتاج احترافي + نظام نمو + جلسات توجيه مع البروفيسورة" />
   <meta name="keywords" content="مونتاج فيديو, تعديل فيديو, صانع محتوى, نمو محتوى, كريتور, ريلز, يوتيوب" />
   <meta property="og:title" content="CreatorHubPro | حوّل محتواك إلى آلة تجذب العملاء" />
@@ -24,6 +28,8 @@ app.get('/', (c) => {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/static/styles.css" />
+  <!-- Mobile-first overrides — loaded last to ensure priority -->
+  <link rel="stylesheet" href="/static/mobile.css" media="(max-width: 768px)" />
 </head>
 <body class="font-cairo overflow-x-hidden">
 
@@ -537,6 +543,16 @@ app.get('/', (c) => {
       </div>
     </div>
   </section>
+
+  <!-- MOBILE MID-CTA #1 — after problem, before solution -->
+  <div class="mobile-cta-strip">
+    <a href="#form-section" class="ar-text">
+      <i class="fas fa-rocket"></i> ابدأ الآن — الجلسة الأولى مجانية
+    </a>
+    <a href="#form-section" class="en-text" style="display:none">
+      <i class="fas fa-rocket"></i> Start Now — First Session Free
+    </a>
+  </div>
 
   <!-- ============================
        SOLUTION SECTION
@@ -1224,6 +1240,16 @@ app.get('/', (c) => {
   </section>
   <!-- /bridge-section -->
 
+  <!-- MOBILE MID-CTA #2 — after how it works, before comparison -->
+  <div class="mobile-cta-strip">
+    <a href="https://wa.me/201105449828?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C+%D8%A3%D8%B1%D9%8A%D8%AF+%D9%85%D8%B9%D8%B1%D9%81%D8%A9+%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF" target="_blank" rel="noopener" class="wa-strip ar-text">
+      <i class="fab fa-whatsapp"></i> اسألنا على واتساب الآن
+    </a>
+    <a href="https://wa.me/201105449828" target="_blank" rel="noopener" class="wa-strip en-text" style="display:none">
+      <i class="fab fa-whatsapp"></i> Ask us on WhatsApp
+    </a>
+  </div>
+
   <!-- ============================
        WHY US — COMPARISON
   ============================= -->
@@ -1840,6 +1866,16 @@ app.get('/', (c) => {
       </div>
     </div>
   </section>
+
+  <!-- MOBILE MID-CTA #3 — after packages, before scarcity -->
+  <div class="mobile-cta-strip">
+    <a href="#form-section" class="ar-text">
+      <i class="fas fa-calendar-check"></i> احجز مكالمتك المجانية الآن
+    </a>
+    <a href="#form-section" class="en-text" style="display:none">
+      <i class="fas fa-calendar-check"></i> Book Your Free Call Now
+    </a>
+  </div>
 
   <!-- ============================
        SCARCITY / CAPACITY MODULE
