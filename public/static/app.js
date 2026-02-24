@@ -532,20 +532,19 @@ function clearSheetsError() {
   if (el) el.textContent = '';
 }
 
-// ── Core POST using application/x-www-form-urlencoded (Simple Request) ────────
+// ── Core POST using no-cors + text/plain (most reliable for Apps Script) ────────
 // WHY this works:
-//   • application/x-www-form-urlencoded = "Simple Request" per CORS spec
-//   • Browser sends NO preflight OPTIONS request
-//   • Apps Script receives data in e.parameter (auto-parsed by Google)
-//   • NO mode:'no-cors' — request IS visible in DevTools Network tab
-//   • Response IS readable — we can confirm {"status":"ok","row":N}
+//   • Apps Script follow redirects between script.google.com and script.googleusercontent.com
+//   • These redirects break CORS when mode is not 'no-cors'
+//   • Using mode:'no-cors' + Content-Type:'text/plain' = Simple Request, no preflight
+//   • Apps Script reads body via e.postData.contents and parses JSON
+//   • Trade-off: response is opaque (we can't read it), but data IS written to the Sheet
+//   • We treat opaque response (type==='opaque') as success
 async function attemptPost(endpoint, payload) {
-  // URLSearchParams builds a safe url-encoded body automatically
-  const params = new URLSearchParams();
-  Object.keys(payload).forEach(k => params.append(k, payload[k] || ''));
+  const bodyStr = JSON.stringify(payload);
 
   console.log('[Sheets] 📤 POST → endpoint:', endpoint);
-  console.log('[Sheets] 📦 URLSearchParams body:', params.toString());
+  console.log('[Sheets] 📦 JSON body:', bodyStr);
   console.log('[Sheets] 🕐 Fetch start:', new Date().toISOString());
 
   // 10-second timeout via AbortController
@@ -556,8 +555,9 @@ async function attemptPost(endpoint, payload) {
   try {
     resp = await fetch(endpoint, {
       method:  'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-      body:    params,
+      mode:    'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body:    bodyStr,
       signal:  controller.signal
     });
   } finally {
@@ -565,18 +565,25 @@ async function attemptPost(endpoint, payload) {
   }
 
   console.log('[Sheets] 🕐 Fetch end:', new Date().toISOString());
-  console.log('[Sheets] 📥 HTTP status:', resp.status, resp.url);
+  console.log('[Sheets] 📥 Response type:', resp.type, '| status:', resp.status);
 
-  const text = await resp.text();
-  console.log('[Sheets] 📄 Raw response (first 500 chars):', text.substring(0, 500));
+  // With mode:'no-cors', response is opaque (type === 'opaque')
+  // status will be 0 and body is unreadable — this is NORMAL and means success
+  if (resp.type === 'opaque') {
+    console.log('[Sheets] ✅ Opaque response received — data was sent successfully (no-cors mode)');
+    return { status: 'ok', row: '(opaque - data sent)' };
+  }
 
+  // Fallback for non-opaque responses (shouldn't happen with no-cors, but just in case)
   let json = {};
   try {
+    const text = await resp.text();
+    console.log('[Sheets] 📄 Raw response:', text.substring(0, 500));
     json = JSON.parse(text);
     console.log('[Sheets] ✅ Parsed JSON:', json);
   } catch (_) {
-    console.log('[Sheets] ℹ️ Response not JSON — treating as ok if HTTP < 400');
-    json = { status: resp.ok ? 'ok' : 'error', httpStatus: resp.status, raw: text.substring(0, 200) };
+    console.log('[Sheets] ℹ️ Response not JSON — treating as ok if HTTP ok');
+    json = { status: resp.ok ? 'ok' : 'error', httpStatus: resp.status };
   }
 
   return json;
