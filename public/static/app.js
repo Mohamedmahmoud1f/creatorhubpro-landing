@@ -424,14 +424,12 @@ function buildWhatsAppMessage(data) {
     ar: {
       no_consistency:    'لا، بعاني أصلاً في الاستمرارية',
       quality_or_schedule: 'ممكن، لكن الجودة أو الانتظام بيقعوا',
-      costly_effort:     'نعم، لكن بياخد وقت ومجهود كبير مني',
-      consistent_pro:    'حافظ على نفس الجودة والتنسيق الاحترافي'
+      costly_effort:     'نعم، لكن بياخد وقت ومجهود كبير مني'
     },
     en: {
       no_consistency:    'No, I already struggle with consistency',
       quality_or_schedule: 'Maybe, but quality or schedule tend to drop',
-      costly_effort:     'Yes, but it takes a lot of time and effort',
-      consistent_pro:    'I maintain quality and professional consistency'
+      costly_effort:     'Yes, but it takes a lot of time and effort'
     }
   };
 
@@ -499,7 +497,6 @@ function saveToGoogleSheets(data) {
     no_consistency:     'لا، بعاني أصلاً في الاستمرارية',
     quality_or_schedule:'ممكن، لكن الجودة أو الانتظام بيقعوا',
     costly_effort:      'نعم، لكن بياخد وقت ومجهود كبير مني',
-    consistent_pro:     'حافظ على نفس الجودة والتنسيق الاحترافي'
   };
 
   const payload = {

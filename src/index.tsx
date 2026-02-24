@@ -2418,11 +2418,6 @@ app.get('/', (c) => {
                   <span class="radio-custom"></span>
                   نعم، لكن بياخد وقت ومجهود كبير مني
                 </label>
-                <label class="radio-option ar-text">
-                  <input type="radio" name="experience" value="consistent_pro" required />
-                  <span class="radio-custom"></span>
-                  حافظ على نفس الجودة والتنسيق الاحترافي
-                </label>
               </div>
               <div class="radio-group en-text" style="display:none">
                 <label class="radio-option">
@@ -2440,11 +2435,7 @@ app.get('/', (c) => {
                   <span class="radio-custom"></span>
                   Yes, but it takes a lot of time and effort
                 </label>
-                <label class="radio-option">
-                  <input type="radio" name="experience" value="consistent_pro" required />
-                  <span class="radio-custom"></span>
-                  I maintain quality and professional consistency
-                </label>
+
               </div>
               <span class="field-error" id="experienceError"></span>
             </div>
