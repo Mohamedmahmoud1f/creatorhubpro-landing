@@ -13,7 +13,7 @@ const CONFIG = {
   redirectDelay: 2200,
   // ── Make (Integromat) Webhook URL ────────────────────────────────────────────
   // لتغيير الـ webhook في المستقبل: فقط عدّل السطر التالي
-  makeWebhookUrl: 'PUT_WEBHOOK_URL_HERE'
+  makeWebhookUrl: 'https://hook.us2.make.com/dejcn54d6swc12ij3vlxhkcezh7zm'
 };
 
 // ─── STATE ────────────────────────────────────────
