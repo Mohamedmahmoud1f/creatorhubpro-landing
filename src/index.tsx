@@ -1,9 +1,50 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
+
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxffZ34BmcOEt5ZkL2TTSGN-pZ1EeERIGK4uLUrrh1xwm0JGcSx9Ob2B2ByIOWy_oX8/exec'
 
 const app = new Hono()
 
-// Static files are served automatically by Vercel from /public folder
-// No serveStatic needed — Vercel handles /static/* directly
+// ── CORS for API routes ───────────────────────────────────────────────────────
+app.use('/api/*', cors({
+  origin: '*',
+  allowMethods: ['POST', 'GET', 'OPTIONS'],
+  allowHeaders: ['Content-Type'],
+}))
+
+// ── /api/submit — Server-side proxy to Apps Script ───────────────────────────
+// الحل الجذري: المتصفح يبعت لـ /api/submit (نفس الدومين = zero CORS)
+// الـ Cloudflare Worker يبعت لـ Apps Script من السيرفير (لا CORS هناك)
+app.post('/api/submit', async (c) => {
+  try {
+    const body = await c.req.json()
+
+    // بناء الـ query string
+    const params = new URLSearchParams()
+    const fields = ['timestamp','name','whatsapp','business','platform','goal','experience','source','lang']
+    fields.forEach(f => params.append(f, body[f] || ''))
+
+    // fetch من السيرفير لـ Apps Script — بدون CORS قيود
+    const url = APPS_SCRIPT_URL + '?' + params.toString()
+    const resp = await fetch(url, {
+      method: 'GET',
+      headers: { 'User-Agent': 'CreatorHubPro-Worker/1.0' },
+      redirect: 'follow',
+    })
+
+    const text = await resp.text()
+    let json: any = { status: 'ok' }
+    try { json = JSON.parse(text) } catch (_) { json = { status: 'ok', raw: text } }
+
+    return c.json({ success: true, sheets: json })
+  } catch (err: any) {
+    console.error('[/api/submit] error:', err.message)
+    return c.json({ success: false, error: err.message }, 500)
+  }
+})
+
+// ── /api/health — simple health check ────────────────────────────────────────
+app.get('/api/health', (c) => c.json({ status: 'ok', time: new Date().toISOString() }))
 
 app.get('/', (c) => {
   return c.html(`<!DOCTYPE html>

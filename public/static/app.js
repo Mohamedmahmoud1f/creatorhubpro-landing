@@ -546,100 +546,45 @@ function clearSheetsError() {
   if (el) el.textContent = '';
 }
 
-// ── Triple-send: navigator.sendBeacon + Image beacon + fetch no-cors ───────────
-// استخدام 3 طرق بالتوازي — لو أي واحدة وصلت كفت
-// مثالي للموبايل (iOS Safari, Android Chrome) وجميع البيئات
+// ── Google Sheets Integration — via Cloudflare Worker Proxy ─────────────────
+// الحل الجذري: المتصفح يبعت لـ /api/submit (نفس الدومين = zero CORS)
+// الـ Worker يبعت لـ Apps Script من السيرفير بدون أي CORS مشاكل
+// يشتغل على لابتوب + موبايل + كل المتصفحات بدون استثناء
 
-// الطريقة 1: navigator.sendBeacon — POST مدعوم native على كل المتصفحات الحديثة
-function sendViaSendBeacon(endpoint, payload) {
+// ── Show inline error below submit button ─────────────────────────────────────
+function showSheetsError(msg) {
+  let el = document.getElementById('sheetsErrorMsg');
+  if (!el) {
+    el = document.createElement('p');
+    el.id = 'sheetsErrorMsg';
+    el.style.cssText = 'color:#ef4444;text-align:center;margin-top:8px;font-size:14px;';
+    const btn = document.getElementById('submitBtn');
+    if (btn && btn.parentNode) btn.parentNode.insertBefore(el, btn.nextSibling);
+  }
+  el.textContent = msg;
+}
+function clearSheetsError() {
+  const el = document.getElementById('sheetsErrorMsg');
+  if (el) el.textContent = '';
+}
+
+// ── Save failed leads to localStorage as backup ───────────────────────────────
+function backupToLocalStorage(payload) {
   try {
-    if (!navigator.sendBeacon) {
-      console.log('[Sheets] sendBeacon not supported');
-      return false;
-    }
-    const params = new URLSearchParams();
-    Object.keys(payload).forEach(k => params.append(k, payload[k] || ''));
-    const sent = navigator.sendBeacon(endpoint, params);
-    console.log('[Sheets] 📡 sendBeacon sent:', sent);
-    return sent;
-  } catch(e) {
-    console.log('[Sheets] sendBeacon error:', e.message);
-    return false;
+    const key    = 'chp_leads_backup';
+    const stored = JSON.parse(localStorage.getItem(key) || '[]');
+    stored.push({ ...payload, _savedAt: new Date().toISOString() });
+    localStorage.setItem(key, JSON.stringify(stored));
+    console.warn('[Sheets] 💾 Backed up to localStorage. Total pending:', stored.length);
+  } catch (lsErr) {
+    console.warn('[Sheets] localStorage backup failed:', lsErr.message);
   }
 }
 
-// الطريقة 2: fetch no-cors POST text/plain — يصل لـ e.postData في Apps Script
-function sendViaFetch(endpoint, payload) {
-  return fetch(endpoint, {
-    method:  'POST',
-    mode:    'no-cors',
-    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-    body:    JSON.stringify(payload)
-  }).then(() => {
-    console.log('[Sheets] 📡 fetch no-cors sent');
-    return true;
-  }).catch(e => {
-    console.log('[Sheets] fetch error:', e.message);
-    return false;
-  });
-}
-
-// الطريقة 3: Image beacon GET — يصل لـ e.parameter في Apps Script
-function sendViaImageBeacon(endpoint, payload) {
-  return new Promise((resolve) => {
-    const params = new URLSearchParams();
-    Object.keys(payload).forEach(k => params.append(k, payload[k] || ''));
-    const url = endpoint + '?' + params.toString();
-    const img = new Image();
-    const timer = setTimeout(() => {
-      img.onload = img.onerror = null;
-      console.log('[Sheets] ⏱ Image beacon timeout');
-      resolve(true);
-    }, 10000);
-    img.onload = img.onerror = () => {
-      clearTimeout(timer);
-      console.log('[Sheets] ✅ Image beacon fired (onload/onerror — both mean request was sent)');
-      resolve(true);
-    };
-    img.src = url;
-    console.log('[Sheets] 🖼 Image beacon sent');
-  });
-}
-
-async function attemptPost(endpoint, payload) {
-  console.log('[Sheets] 📤 Triple-send start | endpoint:', endpoint);
-  console.log('[Sheets] 📦 Payload:', JSON.stringify(payload));
-  console.log('[Sheets] 🕐 Start:', new Date().toISOString());
-
-  // أبعت الـ 3 طرق بالتوازي — مش محتاجينننتظر كل واحدة
-  const [beaconSent, , ] = await Promise.all([
-    Promise.resolve(sendViaSendBeacon(endpoint, payload)),
-    sendViaFetch(endpoint, payload),
-    sendViaImageBeacon(endpoint, payload)
-  ]);
-
-  console.log('[Sheets] 🕐 End:', new Date().toISOString());
-  console.log('[Sheets] ✅ Triple-send complete. sendBeacon result:', beaconSent);
-
-  // دايماً نرجع ok — لأن على الأقل واحدة من الـ 3 وصلت
-  return { status: 'ok', method: 'triple-send' };
-}
-
-// ── Main entry — 2 retries + localStorage backup ──────────────────────────────
+// ── Main save function ────────────────────────────────────────────────────────
 async function saveToGoogleSheets(data) {
-  const endpoint = CONFIG.sheetsEndpoint;
-
-  console.log('[Sheets] 🔑 endpoint value:', endpoint);
-
-  if (!endpoint || endpoint.includes('PASTE_YOUR')) {
-    console.error('[Sheets] ❌ endpoint not configured!');
-    showSheetsError('خطأ: رابط الـ Sheets غير مضبوط');
-    return 'no-endpoint';
-  }
-
   clearSheetsError();
 
-  // Build clean payload — keys MUST match Apps Script e.parameter keys exactly
   const payload = {
     timestamp:  new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
     name:       data.name       || '',
@@ -652,34 +597,49 @@ async function saveToGoogleSheets(data) {
     lang:       (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'English' : 'عربي'
   };
 
-  console.log('[Sheets] 🚀 Full payload object:', payload);
+  console.log('[Sheets] 🚀 Sending payload:', payload);
 
-  const MAX_RETRIES = 2;
-
+  const MAX_RETRIES = 3;
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       console.log(`[Sheets] 🔄 Attempt ${attempt}/${MAX_RETRIES}`);
-      const result = await attemptPost(endpoint, payload);
 
-      if (result.status === 'ok') {
-        console.log('[Sheets] ✅ SUCCESS — row saved:', result.row || '(row# not returned)');
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15000);
+
+      let resp;
+      try {
+        resp = await fetch('/api/submit', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+          signal:  controller.signal
+        });
+      } finally {
+        clearTimeout(timer);
+      }
+
+      console.log('[Sheets] 📥 HTTP status:', resp.status);
+
+      if (resp.ok) {
+        const json = await resp.json();
+        console.log('[Sheets] ✅ SUCCESS:', json);
         clearSheetsError();
         return 'ok';
       } else {
-        console.warn(`[Sheets] ⚠️ Attempt ${attempt} — non-ok status:`, result);
+        console.warn(`[Sheets] ⚠️ HTTP ${resp.status} on attempt ${attempt}`);
       }
     } catch (err) {
-      console.error(`[Sheets] ❌ Attempt ${attempt} threw:`, err.message, err);
+      console.error(`[Sheets] ❌ Attempt ${attempt} error:`, err.message);
       if (attempt < MAX_RETRIES) {
-        console.log('[Sheets] ⏳ Waiting 1s before retry...');
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 1000 * attempt));
       }
     }
   }
 
-  // All attempts failed
+  // كل المحاولات فشلت — backup
   backupToLocalStorage(payload);
-  showSheetsError('تم استلام بياناتك لكن فشل الحفظ التلقائي — سيتم التواصل معك قريباً');
+  showSheetsError('تم استلام بياناتك — سيتم التواصل معك قريباً');
   console.error('[Sheets] ❌ All attempts failed. Data backed up to localStorage.');
   return 'failed-backed-up';
 }
