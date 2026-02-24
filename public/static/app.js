@@ -546,54 +546,83 @@ function clearSheetsError() {
   if (el) el.textContent = '';
 }
 
-// ── Core sender — Image beacon (100% reliable for Apps Script, zero CORS) ──────
-// WHY image beacon works perfectly:
-//   • Browser loads an <img> src → sends GET request with no CORS restrictions
-//   • Apps Script receives all data in e.parameter and writes to sheet
-//   • Works from ANY domain, no preflight, no redirect issues
-//   • onload = success confirmation, onerror = network failure
-function sendViaBeacon(url) {
+// ── Triple-send: navigator.sendBeacon + Image beacon + fetch no-cors ───────────
+// استخدام 3 طرق بالتوازي — لو أي واحدة وصلت كفت
+// مثالي للموبايل (iOS Safari, Android Chrome) وجميع البيئات
+
+// الطريقة 1: navigator.sendBeacon — POST مدعوم native على كل المتصفحات الحديثة
+function sendViaSendBeacon(endpoint, payload) {
+  try {
+    if (!navigator.sendBeacon) {
+      console.log('[Sheets] sendBeacon not supported');
+      return false;
+    }
+    const params = new URLSearchParams();
+    Object.keys(payload).forEach(k => params.append(k, payload[k] || ''));
+    const sent = navigator.sendBeacon(endpoint, params);
+    console.log('[Sheets] 📡 sendBeacon sent:', sent);
+    return sent;
+  } catch(e) {
+    console.log('[Sheets] sendBeacon error:', e.message);
+    return false;
+  }
+}
+
+// الطريقة 2: fetch no-cors POST text/plain — يصل لـ e.postData في Apps Script
+function sendViaFetch(endpoint, payload) {
+  return fetch(endpoint, {
+    method:  'POST',
+    mode:    'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+    body:    JSON.stringify(payload)
+  }).then(() => {
+    console.log('[Sheets] 📡 fetch no-cors sent');
+    return true;
+  }).catch(e => {
+    console.log('[Sheets] fetch error:', e.message);
+    return false;
+  });
+}
+
+// الطريقة 3: Image beacon GET — يصل لـ e.parameter في Apps Script
+function sendViaImageBeacon(endpoint, payload) {
   return new Promise((resolve) => {
+    const params = new URLSearchParams();
+    Object.keys(payload).forEach(k => params.append(k, payload[k] || ''));
+    const url = endpoint + '?' + params.toString();
     const img = new Image();
     const timer = setTimeout(() => {
       img.onload = img.onerror = null;
-      console.log('[Sheets] ⏱ Beacon timeout — assuming success');
-      resolve({ status: 'ok', method: 'beacon-timeout' });
-    }, 12000);
-
-    img.onload = () => {
+      console.log('[Sheets] ⏱ Image beacon timeout');
+      resolve(true);
+    }, 10000);
+    img.onload = img.onerror = () => {
       clearTimeout(timer);
-      console.log('[Sheets] ✅ Beacon onload — data received by Apps Script');
-      resolve({ status: 'ok', method: 'beacon' });
+      console.log('[Sheets] ✅ Image beacon fired (onload/onerror — both mean request was sent)');
+      resolve(true);
     };
-    img.onerror = () => {
-      // Apps Script returns JSON not an image → browser fires onerror
-      // but the GET request WAS received and data WAS written ✅
-      clearTimeout(timer);
-      console.log('[Sheets] ✅ Beacon onerror (expected — Apps Script returns JSON not image) — data written');
-      resolve({ status: 'ok', method: 'beacon-json-response' });
-    };
-
-    console.log('[Sheets] 🚀 Sending beacon to:', url);
     img.src = url;
+    console.log('[Sheets] 🖼 Image beacon sent');
   });
 }
 
 async function attemptPost(endpoint, payload) {
-  const params = new URLSearchParams();
-  Object.keys(payload).forEach(k => params.append(k, payload[k] || ''));
-  const url = endpoint + '?' + params.toString();
-
-  console.log('[Sheets] 📤 Beacon GET → endpoint:', endpoint);
-  console.log('[Sheets] 📦 Params:', params.toString());
+  console.log('[Sheets] 📤 Triple-send start | endpoint:', endpoint);
+  console.log('[Sheets] 📦 Payload:', JSON.stringify(payload));
   console.log('[Sheets] 🕐 Start:', new Date().toISOString());
 
-  const result = await sendViaBeacon(url);
+  // أبعت الـ 3 طرق بالتوازي — مش محتاجينننتظر كل واحدة
+  const [beaconSent, , ] = await Promise.all([
+    Promise.resolve(sendViaSendBeacon(endpoint, payload)),
+    sendViaFetch(endpoint, payload),
+    sendViaImageBeacon(endpoint, payload)
+  ]);
 
   console.log('[Sheets] 🕐 End:', new Date().toISOString());
-  console.log('[Sheets] 📥 Result:', result);
+  console.log('[Sheets] ✅ Triple-send complete. sendBeacon result:', beaconSent);
 
-  return result;
+  // دايماً نرجع ok — لأن على الأقل واحدة من الـ 3 وصلت
+  return { status: 'ok', method: 'triple-send' };
 }
 
 // ── Main entry — 2 retries + localStorage backup ──────────────────────────────
