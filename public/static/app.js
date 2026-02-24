@@ -457,59 +457,118 @@ Looking forward to hearing from you!`;
  * يرسل بيانات الليد إلى Google Sheets عبر Apps Script Web App
  * يعمل بأسلوب fire-and-forget: لا يوقف تدفق الفورم حتى لو فشل الإرسال
  */
-async function saveToGoogleSheets(data) {
-  const endpoint = CONFIG.sheetsEndpoint;
+// ─── GOOGLE SHEETS — Production-Ready v4 ─────────────────────────────────────
+// Strategy: POST + CORS (works from browser) with retry + localStorage backup
 
-  if (!endpoint || endpoint === 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
-    console.warn('[Sheets] endpoint غير مُكوَّن');
-    return 'no-endpoint';
-  }
-
-  const businessMap = {
+const LABEL_MAPS = {
+  business: {
     creator_personal: 'كريتور - محتوى شخصي',
     business_owner:   'صاحب بيزنس / شركة',
     coach:            'كوتش / مدرب',
     ecommerce:        'متجر إلكتروني',
     other:            'أخرى'
-  };
-
-  const goalMap = {
+  },
+  goal: {
     followers: 'زيادة المتابعين',
     clients:   'جذب عملاء',
     brand:     'بناء البراند الشخصي',
     sales:     'زيادة المبيعات',
     views:     'زيادة المشاهدات'
-  };
-
-  const expMap = {
+  },
+  experience: {
     no_consistency:      'لا، بعاني أصلاً في الاستمرارية',
     quality_or_schedule: 'ممكن، لكن الجودة أو الانتظام بيقعوا',
     costly_effort:       'نعم، لكن بياخد وقت ومجهود كبير مني'
-  };
+  }
+};
 
-  // ── إرسال عبر GET + query params (الطريقة الوحيدة التي تعمل مع no-cors) ──
-  const params = new URLSearchParams({
-    timestamp:  new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
-    name:       data.name,
-    whatsapp:   data.whatsapp,
-    business:   businessMap[data.business]   || data.business,
-    platform:   data.platform,
-    goal:       goalMap[data.goal]           || data.goal,
-    experience: expMap[data.experience]      || data.experience,
-    source:     'CreatorHubPro Landing Page',
-    lang:       currentLang === 'ar' ? 'عربي' : 'English'
+// ── Save failed leads to localStorage as backup ───────────────────────────────
+function backupToLocalStorage(payload) {
+  try {
+    const key    = 'chp_leads_backup';
+    const stored = JSON.parse(localStorage.getItem(key) || '[]');
+    stored.push({ ...payload, _savedAt: new Date().toISOString() });
+    localStorage.setItem(key, JSON.stringify(stored));
+    console.warn('[Sheets] 💾 Backed up to localStorage. Total pending:', stored.length);
+  } catch (e) {
+    console.warn('[Sheets] localStorage backup failed:', e.message);
+  }
+}
+
+// ── Single attempt to POST to Apps Script ────────────────────────────────────
+// IMPORTANT: Apps Script doesn't handle preflight (OPTIONS).
+// Sending Content-Type: application/json triggers a preflight → blocked.
+// Fix: send body as text/plain + mode:no-cors
+// Apps Script reads it via e.postData.contents and parses it as JSON.
+// Response is opaque with no-cors but data IS written server-side.
+async function attemptPost(endpoint, payload) {
+  const bodyStr = JSON.stringify(payload);
+  console.log('[Sheets] 📤 POST attempt to:', endpoint);
+  console.log('[Sheets] 📦 Payload:', bodyStr);
+
+  await fetch(endpoint, {
+    method:  'POST',
+    mode:    'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
+    body:    bodyStr
   });
 
-  try {
-    await fetch(`${endpoint}?${params.toString()}`, {
-      method: 'GET',
-      mode: 'no-cors'
-    });
-    return 'sent';
-  } catch (err) {
-    console.warn('[Sheets] فشل الإرسال:', err.message);
-    return 'error';
+  // Response is opaque with no-cors — treat every non-exception as success
+  console.log('[Sheets] ✅ Request sent (no-cors, response opaque — data written server-side)');
+  return { status: 'ok' };
+}
+
+// ── Main function — with 2 retries ───────────────────────────────────────────
+async function saveToGoogleSheets(data) {
+  const endpoint = CONFIG.sheetsEndpoint;
+
+  if (!endpoint || endpoint === 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
+    console.warn('[Sheets] ⚠️ endpoint not configured');
+    return 'no-endpoint';
   }
+
+  // Build clean payload
+  const payload = {
+    timestamp:  new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
+    name:       data.name       || '',
+    whatsapp:   data.whatsapp   || '',
+    business:   LABEL_MAPS.business[data.business]     || data.business   || '',
+    platform:   data.platform   || '',
+    goal:       LABEL_MAPS.goal[data.goal]             || data.goal       || '',
+    experience: LABEL_MAPS.experience[data.experience] || data.experience || '',
+    source:     'CreatorHubPro Landing Page',
+    lang:       (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'English' : 'عربي'
+  };
+
+  console.log('[Sheets] 🚀 Sending lead:', payload);
+
+  const MAX_RETRIES = 2;
+
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      console.log(`[Sheets] Attempt ${attempt}/${MAX_RETRIES}`);
+      const result = await attemptPost(endpoint, payload);
+
+      if (result.status === 'ok') {
+        console.log('[Sheets] ✅ Saved to Sheet, row:', result.row);
+        return 'ok';
+      } else {
+        console.warn(`[Sheets] ⚠️ Attempt ${attempt} — status:`, result.status, result.message || '');
+      }
+    } catch (err) {
+      console.warn(`[Sheets] ❌ Attempt ${attempt} failed:`, err.message);
+      if (attempt === MAX_RETRIES) {
+        // All retries failed — backup locally
+        backupToLocalStorage(payload);
+        return 'failed-backed-up';
+      }
+      // Wait 1s before retry
+      await new Promise(r => setTimeout(r, 1000));
+    }
+  }
+
+  backupToLocalStorage(payload);
+  return 'failed-backed-up';
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
