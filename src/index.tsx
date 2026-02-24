@@ -22,16 +22,22 @@ app.get('/', (c) => {
   <meta property="og:type" content="website" />
   <title>CreatorHubPro | حوّل محتواك إلى آلة تجذب العملاء</title>
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts — non-blocking load with display=swap to prevent FOIT -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
+  <!-- FontAwesome — non-blocking async load to prevent render-blocking -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css" /></noscript>
+  <!-- Main stylesheet — includes all mobile overrides. No Tailwind CDN. -->
   <link rel="stylesheet" href="/static/styles.css" />
-  <!-- Mobile-first overrides — loaded last to ensure priority -->
-  <link rel="stylesheet" href="/static/mobile.css" media="(max-width: 768px)" />
 </head>
-<body class="font-cairo overflow-x-hidden">
+<body>
 
   <!-- ============================
        STICKY TOP BAR
@@ -2844,7 +2850,8 @@ app.get('/', (c) => {
     ==================================================== */
     function initHeroCanvas() {
       var canvas = document.getElementById('heroCanvas');
-      if (!canvas || reduced) return;
+      /* Skip canvas on mobile — saves battery and prevents lag on mid-range phones */
+      if (!canvas || reduced || window.innerWidth < 768) return;
 
       var ctx = canvas.getContext('2d');
       var W, H, particles = [];
@@ -3132,12 +3139,22 @@ app.get('/', (c) => {
        Only light effects: glow pulse via CSS, chip hover via CSS.
        This block handles: navbar scroll, smooth scroll, optional navbar active. */
 
-    /* ── Navbar scroll shadow ── */
+    /* ── Navbar scroll shadow + urgency bar auto-hide ── */
     var navbar = document.getElementById('navbar');
+    var urgencyBar = document.querySelector('.sticky-urgency-bar');
+    var lastScrollY = 0;
     if (navbar) {
       window.addEventListener('scroll', function() {
-        if (window.scrollY > 20) navbar.classList.add('scrolled');
+        var sy = window.scrollY;
+        /* Navbar shadow */
+        if (sy > 20) navbar.classList.add('scrolled');
         else navbar.classList.remove('scrolled');
+        /* Hide urgency bar after scrolling 80px down, show again near top */
+        if (urgencyBar) {
+          if (sy > 80) urgencyBar.classList.add('bar-hidden');
+          else urgencyBar.classList.remove('bar-hidden');
+        }
+        lastScrollY = sy;
       }, { passive: true });
     }
 
@@ -3195,30 +3212,37 @@ app.get('/', (c) => {
   <script src="/static/app.js"></script>
 
   <script>
-  /* ── LOGO TYPEWRITER V2 ── */
+  /* ── LOGO TYPEWRITER V2 — mobile-safe, tab-visibility aware ── */
   (function(){
     var el = document.getElementById('lsv2Text');
     if (!el) return;
 
+    /* Skip animation on very small screens — no typewriter on mobile navbar */
+    if (window.innerWidth < 768) { el.textContent = ''; return; }
+
     var arWords = ['محتواك','عملاءك','علامتك','نتائجك'];
     var enWords = ['Content','Clients','Brand','Results'];
 
-    // Detect language
     function isAr(){ return document.documentElement.lang !== 'en'; }
 
     var idx = 0;
-    var typing = false;
+    var activeTimer = null; /* track active timers to prevent overlap */
+    var isRunning = false;
 
     function getWords(){ return isAr() ? arWords : enWords; }
+
+    function clearActive(){
+      if (activeTimer){ clearInterval(activeTimer); clearTimeout(activeTimer); activeTimer = null; }
+    }
 
     function erase(cb){
       var txt = el.textContent || '';
       if (txt.length === 0){ cb(); return; }
       el.style.opacity = '0.7';
-      var t = setInterval(function(){
+      activeTimer = setInterval(function(){
         txt = txt.slice(0, -1);
         el.textContent = txt;
-        if (txt.length === 0){ clearInterval(t); el.style.opacity = '1'; cb(); }
+        if (txt.length === 0){ clearActive(); el.style.opacity = '1'; cb(); }
       }, 55);
     }
 
@@ -3226,30 +3250,44 @@ app.get('/', (c) => {
       var i = 0;
       el.textContent = '';
       el.style.opacity = '1';
-      var t = setInterval(function(){
+      activeTimer = setInterval(function(){
         el.textContent += word[i];
         i++;
-        if (i >= word.length){ clearInterval(t); cb(); }
+        if (i >= word.length){ clearActive(); cb(); }
       }, 80);
     }
 
     function cycle(){
+      if (isRunning) return; /* prevent double-start on tab focus */
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
         el.textContent = getWords()[0];
         return;
       }
+      isRunning = true;
       var words = getWords();
-      setTimeout(function(){
+      activeTimer = setTimeout(function(){
         erase(function(){
           idx = (idx + 1) % words.length;
           type(words[idx], function(){
-            setTimeout(cycle, 2400);
+            isRunning = false;
+            activeTimer = setTimeout(cycle, 2400);
           });
         });
       }, 2800);
     }
 
-    // Start after logo is visible
+    /* Pause when tab is hidden, resume cleanly when visible again */
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden){
+        clearActive();
+        isRunning = false;
+      } else {
+        /* Small delay to let page repaint first */
+        setTimeout(function(){ if (!isRunning) cycle(); }, 400);
+      }
+    });
+
+    /* Start after logo is visible */
     setTimeout(cycle, 1600);
   })();
   </script>
