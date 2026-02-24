@@ -12,7 +12,7 @@ const CONFIG = {
   whatsappMsgEn: 'Hello, I submitted my information through the website and would like to start',
   redirectDelay: 2200,
   // Google Apps Script Web App URL — يُستبدل بعد النشر
-  sheetsEndpoint: 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'
+  sheetsEndpoint: 'https://script.google.com/macros/s/AKfycbz7i9hF3h55Lhf6AQBUNRh7--dVUx0yBgmxgoskijzcFWTkaIWp8A3qVcy7oo-rkIqj/exec'
 };
 
 // ─── STATE ────────────────────────────────────────
