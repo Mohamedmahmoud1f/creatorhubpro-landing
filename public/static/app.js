@@ -10,7 +10,9 @@ const CONFIG = {
   whatsappNumber: '201105449828',
   whatsappMsgAr: 'مرحبًا، أرسلت بياناتي عبر الموقع وأرغب في البدء',
   whatsappMsgEn: 'Hello, I submitted my information through the website and would like to start',
-  redirectDelay: 2200
+  redirectDelay: 2200,
+  // Google Apps Script Web App URL — يُستبدل بعد النشر
+  sheetsEndpoint: 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'
 };
 
 // ─── STATE ────────────────────────────────────────
@@ -350,7 +352,10 @@ async function handleFormSubmit(e) {
   // Collect form data
   const formData = collectFormData();
 
-  // Simulate processing (in production, could send to API)
+  // ── إرسال البيانات إلى Google Sheets (fire & forget) ──
+  saveToGoogleSheets(formData);
+
+  // Simulate processing
   await new Promise(resolve => setTimeout(resolve, 1200));
 
   // Show success
@@ -458,6 +463,70 @@ function buildWhatsAppMessage(data) {
 Looking forward to hearing from you!`;
   }
 }
+
+// ─── GOOGLE SHEETS INTEGRATION ───────────────────────────────────────────────
+/**
+ * يرسل بيانات الليد إلى Google Sheets عبر Apps Script Web App
+ * يعمل بأسلوب fire-and-forget: لا يوقف تدفق الفورم حتى لو فشل الإرسال
+ */
+function saveToGoogleSheets(data) {
+  const endpoint = CONFIG.sheetsEndpoint;
+
+  // إذا لم يُضَف الـ endpoint بعد، تجاهل الإرسال بصمت
+  if (!endpoint || endpoint === 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
+    console.warn('[Sheets] endpoint غير مُكوَّن — تم تجاهل الإرسال');
+    return;
+  }
+
+  // خريطة الـ labels لتخزين النص الواضح في الـ Sheet
+  const businessMap = {
+    creator_personal: 'كريتور - محتوى شخصي',
+    business_owner:   'صاحب بيزنس / شركة',
+    coach:            'كوتش / مدرب',
+    ecommerce:        'متجر إلكتروني',
+    other:            'أخرى'
+  };
+
+  const goalMap = {
+    followers: 'زيادة المتابعين',
+    clients:   'جذب عملاء',
+    brand:     'بناء البراند الشخصي',
+    sales:     'زيادة المبيعات',
+    views:     'زيادة المشاهدات'
+  };
+
+  const expMap = {
+    no_consistency:     'لا، بعاني أصلاً في الاستمرارية',
+    quality_or_schedule:'ممكن، لكن الجودة أو الانتظام بيقعوا',
+    costly_effort:      'نعم، لكن بياخد وقت ومجهود كبير مني',
+    consistent_pro:     'حافظ على نفس الجودة والتنسيق الاحترافي'
+  };
+
+  const payload = {
+    timestamp: new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
+    name:      data.name,
+    whatsapp:  data.whatsapp,
+    business:  businessMap[data.business]  || data.business,
+    platform:  data.platform,
+    goal:      goalMap[data.goal]          || data.goal,
+    experience: expMap[data.experience]    || data.experience,
+    source:    'CreatorHubPro Landing Page',
+    lang:      currentLang === 'ar' ? 'عربي' : 'English'
+  };
+
+  // إرسال عبر fetch — no-cors لتجنب مشاكل CORS مع Apps Script
+  fetch(endpoint, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(err => {
+    // خطأ صامت — لا يؤثر على تجربة المستخدم
+    console.warn('[Sheets] فشل الإرسال:', err.message);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 function showSuccessMessage() {
   const form = document.getElementById('leadForm');
