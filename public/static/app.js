@@ -13,7 +13,8 @@ const CONFIG = {
   redirectDelay: 2200,
   // ── Make (Integromat) Webhook URL ────────────────────────────────────────────
   // لتغيير الـ webhook في المستقبل: فقط عدّل السطر التالي
-  makeWebhookUrl: 'https://hook.us2.make.com/fz0qhi6g7i3fhppq6sufm4h7b8pvan3c'
+  // makeWebhookUrl: 'https://hook.eu1.make.com/hlmfum67m9lsm07j8rt7iecdm527csk5' // dev webhook
+  makeWebhookUrl: 'https://hook.us2.make.com/r443xroidvnvn1fvnljpk7n8vy7eyne5'
 };
 
 // ─── STATE ────────────────────────────────────────
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initForm();
   initSmoothScroll();
   initCounters();
+  initWhatsAppLinks();
 });
 
 // ─── LANGUAGE TOGGLE ──────────────────────────────
@@ -183,7 +185,7 @@ function initStickyCta() {
 // ─── SMOOTH SCROLL ─────────────────────────────────
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
       if (href === '#') return;
 
@@ -340,9 +342,9 @@ async function handleFormSubmit(e) {
   clearSheetsError();
 
   // ── Loading state ──
-  const submitBtn    = document.getElementById('submitBtn');
-  const submitBtnEn  = document.getElementById('submitBtnEn');
-  const btnLoader    = document.getElementById('btnLoader');
+  const submitBtn = document.getElementById('submitBtn');
+  const submitBtnEn = document.getElementById('submitBtnEn');
+  const btnLoader = document.getElementById('btnLoader');
 
   [submitBtn, submitBtnEn].forEach(btn => {
     if (!btn) return;
@@ -370,6 +372,9 @@ async function handleFormSubmit(e) {
   });
   if (btnLoader) btnLoader.style.display = 'none';
 
+  // ── Save form data for WhatsApp pre-fill ──
+  saveLeadToLocal(formData);
+
   // ── Show success (always — even if sheets failed, lead is backed up) ──
   showSuccessMessage();
 
@@ -388,12 +393,12 @@ function collectFormData() {
     name = nameAr.value.trim();
   }
 
-  const whatsapp  = document.getElementById('whatsapp')?.value.trim() || '';
+  const whatsapp = document.getElementById('whatsapp')?.value.trim() || '';
 
   // selects: value is the key (creator_personal, etc.) — LABEL_MAPS will translate it
-  const business  = document.getElementById('business')?.value  || '';
-  const platform  = document.getElementById('platform')?.value  || '';
-  const goal      = document.getElementById('goal')?.value      || '';
+  const business = document.getElementById('business')?.value || '';
+  const platform = document.getElementById('platform')?.value || '';
+  const goal = document.getElementById('goal')?.value || '';
 
   // experience: pick the first checked radio (ar or en group — same values)
   const experience = document.querySelector('input[name="experience"]:checked')?.value || '';
@@ -441,14 +446,14 @@ function buildWhatsAppMessage(data) {
 
   const expLabels = {
     ar: {
-      no_consistency:    'لا، بعاني أصلاً في الاستمرارية',
+      no_consistency: 'لا، بعاني أصلاً في الاستمرارية',
       quality_or_schedule: 'ممكن، لكن الجودة أو الانتظام بيقعوا',
-      costly_effort:     'نعم، لكن بياخد وقت ومجهود كبير مني'
+      costly_effort: 'نعم، لكن بياخد وقت ومجهود كبير مني'
     },
     en: {
-      no_consistency:    'No, I already struggle with consistency',
+      no_consistency: 'No, I already struggle with consistency',
       quality_or_schedule: 'Maybe, but quality or schedule tend to drop',
-      costly_effort:     'Yes, but it takes a lot of time and effort'
+      costly_effort: 'Yes, but it takes a lot of time and effort'
     }
   };
 
@@ -493,22 +498,22 @@ Looking forward to hearing from you!`;
 const LABEL_MAPS = {
   business: {
     creator_personal: 'كريتور - محتوى شخصي',
-    business_owner:   'صاحب بيزنس / شركة',
-    coach:            'كوتش / مدرب',
-    ecommerce:        'متجر إلكتروني',
-    other:            'أخرى'
+    business_owner: 'صاحب بيزنس / شركة',
+    coach: 'كوتش / مدرب',
+    ecommerce: 'متجر إلكتروني',
+    other: 'أخرى'
   },
   goal: {
     followers: 'زيادة المتابعين',
-    clients:   'جذب عملاء',
-    brand:     'بناء البراند الشخصي',
-    sales:     'زيادة المبيعات',
-    views:     'زيادة المشاهدات'
+    clients: 'جذب عملاء',
+    brand: 'بناء البراند الشخصي',
+    sales: 'زيادة المبيعات',
+    views: 'زيادة المشاهدات'
   },
   experience: {
-    no_consistency:      'لا، بعاني أصلاً في الاستمرارية',
+    no_consistency: 'لا، بعاني أصلاً في الاستمرارية',
     quality_or_schedule: 'ممكن، لكن الجودة أو الانتظام بيقعوا',
-    costly_effort:       'نعم، لكن بياخد وقت ومجهود كبير مني'
+    costly_effort: 'نعم، لكن بياخد وقت ومجهود كبير مني'
   }
 };
 
@@ -532,7 +537,7 @@ function clearSheetsError() {
 // ── Backup failed leads to localStorage ───────────────────────────────────────
 function backupToLocalStorage(payload) {
   try {
-    const key    = 'chp_leads_backup';
+    const key = 'chp_leads_backup';
     const stored = JSON.parse(localStorage.getItem(key) || '[]');
     stored.push({ ...payload, _savedAt: new Date().toISOString() });
     localStorage.setItem(key, JSON.stringify(stored));
@@ -576,15 +581,15 @@ async function sendToMakeWebhook(data) {
 
   // ── بناء الـ payload ──────────────────────────────────────────────────────────
   const payload = {
-    timestamp:  new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
-    name:       data.name       || '',
-    whatsapp:   String(data.whatsapp || ''),          // يبقى نص دائماً
-    business:   LABEL_MAPS.business[data.business]     || data.business   || '',
-    platform:   data.platform   || '',
-    goal:       LABEL_MAPS.goal[data.goal]             || data.goal       || '',
+    timestamp: new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
+    name: data.name || '',
+    whatsapp: String(data.whatsapp || ''),          // يبقى نص دائماً
+    business: LABEL_MAPS.business[data.business] || data.business || '',
+    platform: data.platform || '',
+    goal: LABEL_MAPS.goal[data.goal] || data.goal || '',
     experience: LABEL_MAPS.experience[data.experience] || data.experience || '',
-    source:     'CreatorHubPro Landing Page',
-    lang:       (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'English' : 'عربي'
+    source: 'CreatorHubPro Landing Page',
+    lang: (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'English' : 'عربي'
   };
 
   console.log('[Webhook] 🚀 Sending to Make webhook:', webhookUrl);
@@ -602,11 +607,11 @@ async function sendToMakeWebhook(data) {
       let resp;
       try {
         resp = await fetch(webhookUrl, {
-          method:    'POST',
-          headers:   { 'Content-Type': 'application/json' },
-          body:      JSON.stringify(payload),
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
           keepalive: true,          // يضمن إرسال الطلب حتى لو المستخدم غادر الصفحة
-          signal:    controller.signal
+          signal: controller.signal
         });
       } finally {
         clearTimeout(timer);
@@ -637,6 +642,81 @@ async function sendToMakeWebhook(data) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// ─── WHATSAPP PRE-FILL WITH SUBMITTED LEAD DATA ──────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Save submitted lead data for WhatsApp pre-fill ────────────────────────────
+function saveLeadToLocal(data) {
+  try {
+    const lead = {
+      name: data.name || '',
+      whatsapp: data.whatsapp || '',
+      business: LABEL_MAPS.business[data.business] || data.business || '',
+      platform: data.platform || '',
+      goal: LABEL_MAPS.goal[data.goal] || data.goal || '',
+      experience: LABEL_MAPS.experience[data.experience] || data.experience || '',
+      lang: currentLang
+    };
+    localStorage.setItem('chp_submitted_lead', JSON.stringify(lead));
+    console.log('[WhatsApp] 💾 Lead saved for WhatsApp pre-fill');
+  } catch (e) {
+    console.warn('[WhatsApp] Failed to save lead:', e.message);
+  }
+}
+
+function getSubmittedLead() {
+  try {
+    const raw = localStorage.getItem('chp_submitted_lead');
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+function buildLeadWhatsAppMessage(lead) {
+  const isAr = lead.lang === 'ar';
+
+  if (isAr) {
+    return `مرحبًا، أرسلت بياناتي عبر الموقع وأرغب في البدء.
+
+— بياناتي —
+الاسم: ${lead.name}
+واتساب: ${lead.whatsapp}
+النشاط: ${lead.business}
+المنصة: ${lead.platform}
+الهدف: ${lead.goal}
+المستوى: ${lead.experience}
+
+أنتظر التواصل معكم.`;
+  } else {
+    return `Hello, I submitted my information through the website and I'd like to start.
+
+— My Details —
+Name: ${lead.name}
+WhatsApp: ${lead.whatsapp}
+Business: ${lead.business}
+Platform: ${lead.platform}
+Goal: ${lead.goal}
+Level: ${lead.experience}
+
+Looking forward to hearing from you.`;
+  }
+}
+
+// ── Intercept WhatsApp links and pre-fill with user data if available ──────────
+function initWhatsAppLinks() {
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href*="wa.me"]');
+    if (!link) return;
+
+    const lead = getSubmittedLead();
+    if (!lead) return; // no form submitted yet — use default link
+
+    e.preventDefault();
+    const msg = buildLeadWhatsAppMessage(lead);
+    const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank', 'noopener');
+    console.log('[WhatsApp] 📤 Opened with pre-filled lead data');
+  });
+}
 
 function showSuccessMessage() {
   const form = document.getElementById('leadForm');
