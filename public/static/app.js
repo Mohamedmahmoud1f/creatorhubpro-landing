@@ -21,8 +21,27 @@ const CONFIG = {
 let currentLang = 'ar';
 let isSubmitting = false;
 
+// ─── SAVE UTM PARAMS TO SESSION STORAGE ON LOAD ───
+// Captures query params immediately so they survive anchor navigation on mobile
+function saveUtmParams() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    utmKeys.forEach(key => {
+      const val = params.get(key);
+      if (val) {
+        sessionStorage.setItem(key, val);
+        console.log(`[UTM] 💾 Saved ${key}=${val} to sessionStorage`);
+      }
+    });
+  } catch (e) {
+    console.warn('[UTM] Failed to save params:', e.message);
+  }
+}
+
 // ─── DOM READY ────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  saveUtmParams();
   initParticles();
   initNavbar();
   initScrollAnimations();
@@ -588,7 +607,7 @@ async function sendToMakeWebhook(data) {
     platform: data.platform || '',
     goal: LABEL_MAPS.goal[data.goal] || data.goal || '',
     experience: LABEL_MAPS.experience[data.experience] || data.experience || '',
-    source: new URLSearchParams(window.location.search).get('utm_source') || 'CreatorHubPro Landing Page',
+    source: (function () { try { return sessionStorage.getItem('utm_source'); } catch (e) { return null; } })() || 'CreatorHubPro Landing Page',
     lang: (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'English' : 'عربي'
   };
 
