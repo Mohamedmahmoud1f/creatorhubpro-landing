@@ -36,6 +36,16 @@ app.get('/', (c) => {
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css" /></noscript>
   <!-- Main stylesheet — includes all mobile overrides. No Tailwind CDN. -->
   <link rel="stylesheet" href="/static/styles.css" />
+
+  <!-- clarity tracking code -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vnj9kl6scb");
+  </script>
+  <!-- clarity tracking code -->
 </head>
 <body>
 
@@ -54,7 +64,7 @@ app.get('/', (c) => {
     <div class="container nav-inner">
     <div class="logo" style="flex-direction:column;align-items:flex-start;gap:2px;">
     <img src="/brand/cropped.png" alt="CreatorHubPro" class="logo-img" style="width:100px;" />
-    <div class="logo-slogan-v2">
+    <div class="logo-slogan-v2" style="height: 20px;">
           <span class="lsv2-prefix ar-text">نظام ينمّي</span>
           <span class="lsv2-prefix en-text" style="display:none">Grow Your</span>
           <span class="lsv2-pill" id="lsv2Pill">
