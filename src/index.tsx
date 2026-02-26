@@ -53,8 +53,8 @@ app.get('/', (c) => {
   <nav class="navbar" id="navbar">
     <div class="container nav-inner">
     <div class="logo" style="flex-direction:column;align-items:flex-start;gap:2px;">
-    <div class="logo-slogan-v2">
     <img src="/brand/cropped.png" alt="CreatorHubPro" class="logo-img" style="width:100px;" />
+    <div class="logo-slogan-v2">
           <span class="lsv2-prefix ar-text">نظام ينمّي</span>
           <span class="lsv2-prefix en-text" style="display:none">Grow Your</span>
           <span class="lsv2-pill" id="lsv2Pill">
