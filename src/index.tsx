@@ -21,7 +21,7 @@ app.get('/', (c) => {
   <meta property="og:description" content="مش مجرد مونتاج فيديو… نظام متكامل يساعدك تنشر محتوى احترافي وتحوّل المشاهدين إلى عملاء" />
   <meta property="og:type" content="website" />
   <title>CreatorHubPro | حوّل محتواك إلى آلة تجذب العملاء</title>
-  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/brand/2-transparent.png" />
   <!-- DNS prefetch for external resources -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
@@ -52,18 +52,15 @@ app.get('/', (c) => {
   ============================= -->
   <nav class="navbar" id="navbar">
     <div class="container nav-inner">
-      <div class="logo">
-        <span class="logo-icon"><i class="fas fa-film"></i></span>
-        <div class="logo-stack">
-          <span class="logo-text">CreatorHub<span class="accent">Pro</span></span>
-          <div class="logo-slogan-v2">
-            <span class="lsv2-prefix ar-text">نظام ينمّي</span>
-            <span class="lsv2-prefix en-text" style="display:none">Grow Your</span>
-            <span class="lsv2-pill" id="lsv2Pill">
-              <span class="lsv2-cursor"></span>
-              <span class="lsv2-text" id="lsv2Text">محتواك</span>
-            </span>
-          </div>
+    <div class="logo" style="flex-direction:column;align-items:flex-start;gap:2px;">
+    <div class="logo-slogan-v2">
+    <img src="/brand/cropped.png" alt="CreatorHubPro" class="logo-img" style="width:100px;" />
+          <span class="lsv2-prefix ar-text">نظام ينمّي</span>
+          <span class="lsv2-prefix en-text" style="display:none">Grow Your</span>
+          <span class="lsv2-pill" id="lsv2Pill">
+            <span class="lsv2-cursor"></span>
+            <span class="lsv2-text" id="lsv2Text">محتواك</span>
+          </span>
         </div>
       </div>
       <div class="nav-actions">
@@ -2543,8 +2540,7 @@ app.get('/', (c) => {
         <!-- Brand column -->
         <div class="footer-brand-col">
           <div class="footer-logo-wrap">
-            <span class="footer-logo-icon"><i class="fas fa-film"></i></span>
-            <span class="footer-logo-text">CreatorHub<span class="accent">Pro</span></span>
+            <img src="/brand/cropped.png" alt="CreatorHubPro" class="footer-logo-img" style="height:60px;width:auto;" />
           </div>
           <p class="footer-tagline ar-text">نحوّل محتواك إلى آلة تجذب العملاء —<br/>تحرير احترافي + استراتيجية نمو في نظام واحد</p>
           <p class="footer-tagline en-text" style="display:none">We turn your content into a client-attracting machine —<br/>Pro editing + growth strategy in one system</p>
