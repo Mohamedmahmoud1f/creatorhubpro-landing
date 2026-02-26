@@ -588,7 +588,7 @@ async function sendToMakeWebhook(data) {
     platform: data.platform || '',
     goal: LABEL_MAPS.goal[data.goal] || data.goal || '',
     experience: LABEL_MAPS.experience[data.experience] || data.experience || '',
-    source: 'CreatorHubPro Landing Page',
+    source: new URLSearchParams(window.location.search).get('utm_source') || 'CreatorHubPro Landing Page',
     lang: (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'English' : 'عربي'
   };
 
