@@ -1,6 +1,9 @@
 import { Hono } from 'hono'
+import { analyzeApp } from './analyze'
 
 const app = new Hono()
+
+app.route('/', analyzeApp)
 
 // ── /api/health — simple health check ────────────────────────────────────────
 app.get('/api/health', (c) => c.json({ status: 'ok', time: new Date().toISOString() }))

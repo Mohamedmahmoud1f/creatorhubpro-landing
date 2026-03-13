@@ -1,12 +1,16 @@
 {
   "version": 2,
-  "buildCommand": "echo 'no build needed'",
+  "buildCommand": null,
   "outputDirectory": "public",
   "framework": null,
   "rewrites": [
     {
-      "source": "/((?!static/|brand/).*)",
-      "destination": "/index.html"
+      "source": "/(api|account-analysis)(.*)",
+      "destination": "/api/index.ts"
+    },
+    {
+      "source": "/((?!static/|brand/|favicon.ico).*)",
+      "destination": "/api/index.ts"
     }
   ],
   "headers": [
