@@ -250,18 +250,6 @@ function initHeroVisuals() {
             }, 500);
         }, 3000);
     }
-
-    // Phone Tilt
-    const hero = document.getElementById('hero');
-    const phone = document.getElementById('pmPhone');
-    if (hero && phone && window.innerWidth > 768) {
-        hero.addEventListener('mousemove', (e) => {
-            const r = hero.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width - 0.5;
-            const y = (e.clientY - r.top) / r.height - 0.5;
-            phone.style.transform = `rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateY(-5px)`;
-        }, { passive: true });
-    }
 }
 
 // ─── 7. INITIALIZATION ───────────────────────────────
