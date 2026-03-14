@@ -28,7 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Local Styles */}
         <link rel="stylesheet" href="/static/styles.css" />
-        <link rel="stylesheet" href="/static/analysisPage.css" />
       </head>
       <body>
         {children}

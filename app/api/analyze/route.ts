@@ -18,7 +18,7 @@ export async function POST(request: Request) {
             let parsed = username.trim();
 
             // URL parsing
-            if (parsed.includes('[youtube.com/](https://youtube.com/)')) {
+            if (parsed.includes('youtube.com/')) {
                 const parts = parsed.split('/');
                 if (parsed.includes('/channel/')) {
                     parsed = parts[parts.indexOf('channel') + 1];
@@ -145,20 +145,36 @@ export async function POST(request: Request) {
 
             const prompt = `Search for and analyze the ${platform} account: ${cleanHandle}. Return strictly JSON format based on the most recent publicly available data.`;
 
-            const gRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+            const gRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    generationConfig: {
-                        response_mime_type: "application/json"
-                    },
-                    systemInstruction: { 
-                        parts: [{ 
-                            text: `You are a social media analyzer. Use Google Search to find stats for the requested handle. 
-                            Return strictly JSON with this schema: 
-                            {"username": string, "followers": integer, "engagementRate": float, "videos30Days": integer, "insights": {"en": string, "ar": string}, "scores": {"overall": integer, "consistency": integer, "engagement": integer, "strategy": integer}, "benchmark": string}. 
-                            Do not include any text outside the JSON object.` 
-                        }] 
+                    systemInstruction: {
+                        parts: [{
+                            text: `You are a social media analyzer. Use Google Search to find stats for the requested handle.
+                            Return strictly JSON with this schema:
+                            {
+                              "username": string, 
+                              "followers": integer, 
+                              "engagementRate": float, 
+                              "videos30Days": integer, 
+                              "insights": {
+                                "en": "string (Max 2 short sentences of actionable advice)", 
+                                "ar": "string (Max 2 short sentences of actionable advice in Arabic)"
+                              }, 
+                              "scores": {
+                                "overall": integer (strict 0-100 scale), 
+                                "consistency": integer (strict 0-100 scale), 
+                                "engagement": integer (strict 0-100 scale), 
+                                "strategy": integer (strict 0-100 scale)
+                              }, 
+                              "benchmark": "string (Max 3 words, e.g., 'Top 1%' or 'Average')"
+                            }.
+                            CRITICAL INSTRUCTIONS: 
+                            1. Scores MUST be out of 100, not 10. 
+                            2. Insights MUST be extremely brief and punchy.
+                            3. Do not include ANY conversational text, citations, or markdown formatting (like \`\`\`json). Output only the raw JSON string.`
+                        }]
                     },
                     contents: [{ parts: [{ text: prompt }] }],
                     tools: [{ googleSearch: {} }]
@@ -166,23 +182,35 @@ export async function POST(request: Request) {
             });
 
             const gData = await gRes.json();
-            if (gData.error) return NextResponse.json({ error: gData.error.message }, { status: 400 });
+            if (gData.error) {
+                console.error('Gemini API Error Response:', gData.error);
+                return NextResponse.json({ error: gData.error.message }, { status: 400 });
+            }
+
+            if (!gData.candidates || !gData.candidates[0]?.content) {
+                console.error('Gemini API No Content/Safety Block:', JSON.stringify(gData, null, 2));
+                return NextResponse.json({ error: 'Failed to retrieve data. The request may have been blocked.' }, { status: 500 });
+            }
 
             try {
-                const textResponse = gData.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+                let textResponse = gData.candidates[0].content.parts[0].text || "{}";
+                
+                textResponse = textResponse.replace(/```json/gi, '').replace(/```/gi, '').trim();
+
                 const parsedResult = JSON.parse(textResponse);
 
                 return NextResponse.json({
                     success: true,
-                    data: { 
-                        platform: platform.charAt(0).toUpperCase() + platform.slice(1), 
+                    data: {
+                        platform: platform.charAt(0).toUpperCase() + platform.slice(1),
                         avatar: '', 
-                        ...parsedResult 
+                        ...parsedResult
                     }
                 });
             } catch (parseError) {
                 console.error('Gemini JSON Parse Error:', parseError);
-                return NextResponse.json({ error: 'Failed to parse account data.' }, { status: 500 });
+                console.error('Raw Text Received:', gData.candidates?.[0]?.content?.parts?.[0]?.text);
+                return NextResponse.json({ error: 'Failed to parse account data from the AI.' }, { status: 500 });
             }
         }
 
