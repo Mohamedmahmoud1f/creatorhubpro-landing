@@ -1,870 +1,320 @@
 /* =============================================
    CreatorHubPro Landing Page — Main JavaScript
-   Form Logic | WhatsApp Redirect | Animations
    ============================================= */
 
 'use strict';
 
-// ─── CONFIG ────────────────────────────────────────
+// ─── 1. CONFIGURATION ────────────────────────────────
 const CONFIG = {
-  whatsappNumber: '201105449828',
-  whatsappMsgAr: 'مرحبًا، أرسلت بياناتي عبر الموقع وأرغب في البدء',
-  whatsappMsgEn: 'Hello, I submitted my information through the website and would like to start',
-  redirectDelay: 2200,
-  // ── Make (Integromat) Webhook URL ────────────────────────────────────────────
-  // لتغيير الـ webhook في المستقبل: فقط عدّل السطر التالي
-  // makeWebhookUrl: 'https://hook.eu1.make.com/hlmfum67m9lsm07j8rt7iecdm527csk5' // dev webhook
-  makeWebhookUrl: 'https://hook.us2.make.com/r443xroidvnvn1fvnljpk7n8vy7eyne5'
+    whatsappNumber: '201105449828',
+    makeWebhookUrl: 'https://hook.us2.make.com/r443xroidvnvn1fvnljpk7n8vy7eyne5',
+    redirectDelay: 2200
 };
 
-// ─── STATE ────────────────────────────────────────
-let currentLang = 'ar';
+const LABEL_MAPS = {
+    business: {
+        creator_personal: 'كريتور - محتوى شخصي',
+        business_owner: 'صاحب بيزنس / شركة',
+        coach: 'كوتش / مدرب',
+        ecommerce: 'متجر إلكتروني',
+        other: 'أخرى'
+    },
+    goal: {
+        followers: 'زيادة المتابعين',
+        clients: 'جذب عملاء',
+        brand: 'بناء البراند الشخصي',
+        sales: 'زيادة المبيعات',
+        views: 'زيادة المشاهدات'
+    },
+    experience: {
+        no_consistency: 'لا، بعاني أصلاً في الاستمرارية',
+        quality_or_schedule: 'ممكن، لكن الجودة أو الانتظام بيقعوا',
+        costly_effort: 'نعم، لكن بياخد وقت ومجهود كبير مني'
+    }
+};
+
+// ─── 2. STATE & UTMS ─────────────────────────────────
+let currentLang = document.documentElement.lang || 'ar';
 let isSubmitting = false;
 
-// ─── SAVE UTM PARAMS TO SESSION STORAGE ON LOAD ───
-// Captures query params immediately so they survive anchor navigation on mobile
 function saveUtmParams() {
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
-    utmKeys.forEach(key => {
-      const val = params.get(key);
-      if (val) {
-        sessionStorage.setItem(key, val);
-        console.log(`[UTM] 💾 Saved ${key}=${val} to sessionStorage`);
-      }
+    try {
+        const params = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
+            const val = params.get(key);
+            if (val) sessionStorage.setItem(key, val);
+        });
+    } catch (e) { console.warn('[UTM] Error:', e.message); }
+}
+
+// ─── 3. LANGUAGE TOGGLE (Next.js Global Bridge) ──────
+window.toggleLang = function() {
+    currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+    const isEn = (currentLang === 'en');
+
+    // Update Root Attributes
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = isEn ? 'ltr' : 'rtl';
+    document.body.classList.toggle('en-active', isEn);
+
+    // Update Toggle Button Text
+    const langBtn = document.getElementById('langToggle');
+    if (langBtn) langBtn.textContent = isEn ? 'AR' : 'EN';
+
+    // Toggle Visibility of all marked elements
+    document.querySelectorAll('.ar-text').forEach(el => el.style.display = isEn ? 'none' : '');
+    document.querySelectorAll('.en-text').forEach(el => el.style.display = isEn ? '' : 'none');
+
+    // Fix specific input/select overlaps
+    document.querySelectorAll('input.ar-text, input.en-text, select.ar-text, select.en-text').forEach(inp => {
+        if (inp.classList.contains('ar-text')) inp.style.display = isEn ? 'none' : '';
+        if (inp.classList.contains('en-text')) inp.style.display = isEn ? '' : 'none';
     });
-  } catch (e) {
-    console.warn('[UTM] Failed to save params:', e.message);
-  }
-}
+};
 
-// ─── DOM READY ────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  saveUtmParams();
-  initParticles();
-  initNavbar();
-  initScrollAnimations();
-  initStickyCta();
-  initForm();
-  initSmoothScroll();
-  initCounters();
-  initWhatsAppLinks();
-});
+// ─── 4. FORM & WEBHOOK LOGIC ─────────────────────────
+async function handleFormSubmit(e) {
+    e.preventDefault();
+    if (isSubmitting) return;
 
-// ─── LANGUAGE TOGGLE ──────────────────────────────
-function toggleLang() {
-  currentLang = currentLang === 'ar' ? 'en' : 'ar';
-  const html = document.documentElement;
-  const langBtn = document.getElementById('langToggle');
-  const arEls = document.querySelectorAll('.ar-text');
-  const enEls = document.querySelectorAll('.en-text');
+    const fields = ['name', 'whatsapp', 'business', 'platform', 'goal'];
+    const results = fields.map(f => validateField(f));
+    const expValid = validateExperience();
 
-  if (currentLang === 'en') {
-    html.setAttribute('lang', 'en');
-    html.setAttribute('dir', 'ltr');
-    document.body.classList.add('en-active');
-    langBtn.textContent = 'AR';
-    arEls.forEach(el => el.style.display = 'none');
-    enEls.forEach(el => el.style.display = '');
-    // Fix inputs visibility (avoid duplicates showing)
-    document.querySelectorAll('input.ar-text, input.en-text').forEach(inp => {
-      if (inp.classList.contains('ar-text')) inp.style.display = 'none';
-      if (inp.classList.contains('en-text')) inp.style.display = '';
-    });
-  } else {
-    html.setAttribute('lang', 'ar');
-    html.setAttribute('dir', 'rtl');
-    document.body.classList.remove('en-active');
-    langBtn.textContent = 'EN';
-    arEls.forEach(el => el.style.display = '');
-    enEls.forEach(el => el.style.display = 'none');
-    document.querySelectorAll('input.ar-text, input.en-text').forEach(inp => {
-      if (inp.classList.contains('ar-text')) inp.style.display = '';
-      if (inp.classList.contains('en-text')) inp.style.display = 'none';
-    });
-  }
-}
+    if (results.some(r => !r) || !expValid) {
+        document.querySelector('.error, .field-error.visible')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+    }
 
-// Expose globally
-window.toggleLang = toggleLang;
-
-// ─── PARTICLES ──────────────────────────────────────
-function initParticles() {
-  const container = document.getElementById('particles');
-  if (!container) return;
-
-  const count = window.innerWidth < 768 ? 18 : 36;
-
-  for (let i = 0; i < count; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-
-    const size = Math.random() * 3 + 2;
-    const left = Math.random() * 100;
-    const delay = Math.random() * 12;
-    const duration = Math.random() * 10 + 8;
-    const opacity = Math.random() * 0.3 + 0.1;
-
-    // Alternate between purple and accent colors
-    const colors = [
-      'rgba(168, 85, 247, 0.6)',
-      'rgba(245, 158, 11, 0.4)',
-      'rgba(124, 58, 237, 0.5)',
-      'rgba(16, 185, 129, 0.3)'
-    ];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-
-    particle.style.cssText = `
-      width: ${size}px;
-      height: ${size}px;
-      left: ${left}%;
-      background: ${color};
-      opacity: ${opacity};
-      animation-duration: ${duration}s;
-      animation-delay: -${delay}s;
-    `;
-
-    container.appendChild(particle);
-  }
-}
-
-// ─── NAVBAR SCROLL ─────────────────────────────────
-function initNavbar() {
-  const navbar = document.getElementById('navbar');
-  if (!navbar) return;
-
-  const onScroll = () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-}
-
-// ─── SCROLL ANIMATIONS ─────────────────────────────
-function initScrollAnimations() {
-  const elements = document.querySelectorAll('.animate-on-scroll');
-  if (!elements.length) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          // Stagger animations within same section
-          const siblings = entry.target.parentElement
-            ? Array.from(entry.target.parentElement.querySelectorAll('.animate-on-scroll'))
-            : [];
-          const siblingIndex = siblings.indexOf(entry.target);
-          const delay = siblingIndex * 100;
-
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, delay);
-
-          observer.unobserve(entry.target);
+    isSubmitting = true;
+    
+    // UI Loading State
+    const btnAr = document.getElementById('submitBtn');
+    const btnEn = document.getElementById('submitBtnEn');
+    const loader = document.getElementById('btnLoader');
+    
+    [btnAr, btnEn].forEach(btn => {
+        if (btn) {
+            btn.disabled = true;
+            const span = btn.querySelector('span');
+            if (span) span.textContent = (currentLang === 'ar' ? 'جارٍ الإرسال...' : 'Sending...');
         }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-  );
-
-  elements.forEach(el => observer.observe(el));
-}
-
-// ─── STICKY CTA ────────────────────────────────────
-function initStickyCta() {
-  const stickyCta = document.getElementById('stickyCta');
-  if (!stickyCta) return;
-
-  let ticking = false;
-
-  const checkVisibility = () => {
-    const scrollY = window.scrollY;
-    const windowH = window.innerHeight;
-    const docH = document.body.scrollHeight;
-    const nearBottom = scrollY + windowH > docH - 200;
-
-    // Show after scrolling 400px but hide near footer
-    if (scrollY > 400 && !nearBottom) {
-      stickyCta.classList.add('visible');
-    } else {
-      stickyCta.classList.remove('visible');
-    }
-    ticking = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(checkVisibility);
-      ticking = true;
-    }
-  }, { passive: true });
-}
-
-// ─── SMOOTH SCROLL ─────────────────────────────────
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href === '#') return;
-
-      const target = document.querySelector(href);
-      if (!target) return;
-
-      e.preventDefault();
-      const offset = 80; // navbar height
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-
-      window.scrollTo({ top, behavior: 'smooth' });
     });
-  });
-}
+    if (loader) loader.style.display = 'inline-block';
 
-// ─── COUNTER ANIMATION ─────────────────────────────
-function initCounters() {
-  const statNums = document.querySelectorAll('.stat-num');
-
-  const animateCounter = (el) => {
-    const text = el.textContent.trim();
-    const suffix = text.replace(/[\d.]/g, '');
-    const target = parseFloat(text.replace(/[^\d.]/g, ''));
-
-    if (isNaN(target)) return;
-
-    const duration = 1800;
-    const start = performance.now();
-
-    const update = (now) => {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = target * eased;
-
-      el.textContent = (current >= 10 ? Math.round(current) : current.toFixed(1)) + suffix;
-
-      if (progress < 1) requestAnimationFrame(update);
+    const formData = collectFormData();
+    
+    // Send to Webhook
+    const payload = {
+        timestamp: new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
+        name: formData.name,
+        whatsapp: String(formData.whatsapp),
+        business: LABEL_MAPS.business[formData.business] || formData.business,
+        platform: formData.platform,
+        goal: LABEL_MAPS.goal[formData.goal] || formData.goal,
+        experience: LABEL_MAPS.experience[formData.experience] || formData.experience,
+        source: sessionStorage.getItem('utm_source') || 'CreatorHubPro Landing Page',
+        lang: (currentLang === 'en' ? 'English' : 'عربي')
     };
 
-    requestAnimationFrame(update);
-  };
+    try {
+        await fetch(CONFIG.makeWebhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            keepalive: true
+        });
+    } catch (err) {
+        console.error('Webhook failed, saving locally:', err);
+    }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  statNums.forEach(el => observer.observe(el));
+    // Save for WhatsApp redirect & Success UI
+    saveLeadToLocal(formData);
+    showSuccessMessage();
+    isSubmitting = false;
 }
 
-// ─── FORM ─────────────────────────────────────────
-function initForm() {
-  const form = document.getElementById('leadForm');
-  if (!form) return;
+function validateField(id) {
+    // Check for language-specific IDs (name vs name_en)
+    const input = document.getElementById(id) || document.getElementById(id + '_en');
+    const error = document.getElementById(id + 'Error');
+    if (!input || input.offsetParent === null) return true; // Skip if hidden
 
-  // Real-time validation on blur
-  const fields = ['name', 'whatsapp', 'business', 'platform', 'goal'];
-  fields.forEach(fieldId => {
-    const input = document.getElementById(fieldId);
-    if (input) {
-      input.addEventListener('blur', () => validateField(fieldId));
-      input.addEventListener('input', () => clearFieldError(fieldId));
+    const val = input.value.trim();
+    let msg = '';
+    const isAr = (currentLang === 'ar');
+
+    if (!val) msg = isAr ? 'هذا الحقل مطلوب' : 'Required';
+    else if (id === 'whatsapp' && !/^[\+]?[0-9\s\-]{8,17}$/.test(val)) msg = isAr ? 'رقم غير صحيح' : 'Invalid number';
+
+    if (msg) {
+        input.classList.add('error');
+        if (error) { error.textContent = msg; error.classList.add('visible'); }
+        return false;
     }
-  });
-
-  form.addEventListener('submit', handleFormSubmit);
-}
-
-function validateField(fieldId) {
-  const input = document.getElementById(fieldId);
-  const error = document.getElementById(fieldId + 'Error');
-  if (!input) return true;
-
-  const value = input.value.trim();
-  let errorMsg = '';
-
-  const isAr = currentLang === 'ar';
-
-  if (!value) {
-    errorMsg = isAr ? 'هذا الحقل مطلوب' : 'This field is required';
-  } else if (fieldId === 'whatsapp') {
-    const phoneRegex = /^[\+]?[0-9\s\-]{8,17}$/;
-    if (!phoneRegex.test(value)) {
-      errorMsg = isAr ? 'أدخل رقم واتساب صحيح' : 'Enter a valid WhatsApp number';
-    }
-  } else if (fieldId === 'name' && value.length < 2) {
-    errorMsg = isAr ? 'الاسم قصير جداً' : 'Name is too short';
-  }
-
-  if (errorMsg) {
-    input.classList.add('error');
-    if (error) {
-      error.textContent = errorMsg;
-      error.classList.add('visible');
-    }
-    return false;
-  } else {
-    input.classList.remove('error');
-    if (error) error.classList.remove('visible');
     return true;
-  }
-}
-
-function clearFieldError(fieldId) {
-  const input = document.getElementById(fieldId);
-  const error = document.getElementById(fieldId + 'Error');
-  if (input) input.classList.remove('error');
-  if (error) error.classList.remove('visible');
 }
 
 function validateExperience() {
-  const radios = document.querySelectorAll('input[name="experience"]');
-  const checked = Array.from(radios).some(r => r.checked);
-  const error = document.getElementById('experienceError');
-  const isAr = currentLang === 'ar';
-
-  if (!checked) {
-    if (error) {
-      error.textContent = isAr ? 'الرجاء اختيار مستوى الخبرة' : 'Please select your experience level';
-      error.classList.add('visible');
+    const checked = !!document.querySelector('input[name="experience"]:checked');
+    const error = document.getElementById('experienceError');
+    if (!checked && error) {
+        error.classList.add('visible');
+        error.textContent = (currentLang === 'ar' ? 'الرجاء اختيار مستوى الخبرة' : 'Please select experience');
     }
-    return false;
-  }
-  if (error) error.classList.remove('visible');
-  return true;
-}
-
-async function handleFormSubmit(e) {
-  e.preventDefault();
-  if (isSubmitting) return;
-
-  console.log('[Form] ▶ handleFormSubmit triggered');
-
-  // ── Validate ──
-  const fieldsToValidate = ['name', 'whatsapp', 'business', 'platform', 'goal'];
-  const fieldResults = fieldsToValidate.map(f => validateField(f));
-  const experienceValid = validateExperience();
-
-  if (fieldResults.some(r => !r) || !experienceValid) {
-    const firstError = document.querySelector('.error, .field-error.visible');
-    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-
-  isSubmitting = true;
-  clearSheetsError();
-
-  // ── Loading state ──
-  const submitBtn = document.getElementById('submitBtn');
-  const submitBtnEn = document.getElementById('submitBtnEn');
-  const btnLoader = document.getElementById('btnLoader');
-
-  [submitBtn, submitBtnEn].forEach(btn => {
-    if (!btn) return;
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
-    const sp = btn.querySelector('span');
-    if (sp) sp.textContent = currentLang === 'ar' ? 'جارٍ الإرسال...' : 'Sending...';
-  });
-  if (btnLoader) btnLoader.style.display = 'inline-block';
-
-  // ── Collect & send ──
-  const formData = collectFormData();
-  console.log('[Form] 📋 Collected form data:', formData);
-
-  const saved = await sendToMakeWebhook(formData);
-  console.log('[Form] 📊 sendToMakeWebhook result:', saved);
-
-  // ── Re-enable button ──
-  [submitBtn, submitBtnEn].forEach(btn => {
-    if (!btn) return;
-    btn.disabled = false;
-    btn.style.opacity = '1';
-    const sp = btn.querySelector('span');
-    if (sp) sp.textContent = currentLang === 'ar' ? 'أرسل بياناتي الآن' : 'Submit Now';
-  });
-  if (btnLoader) btnLoader.style.display = 'none';
-
-  // ── Save form data for WhatsApp pre-fill ──
-  saveLeadToLocal(formData);
-
-  // ── Show success (always — even if sheets failed, lead is backed up) ──
-  showSuccessMessage();
-
-  isSubmitting = false;
-  console.log('[Form] ✅ Submission complete. Webhook result:', saved);
+    return checked;
 }
 
 function collectFormData() {
-  // name: there are two inputs (ar: #name, en: #name_en) — pick the visible one
-  const nameAr = document.getElementById('name');
-  const nameEn = document.getElementById('name_en');
-  let name = '';
-  if (nameEn && nameEn.offsetParent !== null && nameEn.value.trim()) {
-    name = nameEn.value.trim();
-  } else if (nameAr) {
-    name = nameAr.value.trim();
-  }
+    const nameEn = document.getElementById('name_en');
+    const nameAr = document.getElementById('name');
+    const name = (nameEn && nameEn.offsetParent !== null && nameEn.value) ? nameEn.value : nameAr?.value;
 
-  const whatsapp = document.getElementById('whatsapp')?.value.trim() || '';
-
-  // selects: value is the key (creator_personal, etc.) — LABEL_MAPS will translate it
-  const business = document.getElementById('business')?.value || '';
-  const platform = document.getElementById('platform')?.value || '';
-  const goal = document.getElementById('goal')?.value || '';
-
-  // experience: pick the first checked radio (ar or en group — same values)
-  const experience = document.querySelector('input[name="experience"]:checked')?.value || '';
-
-  console.log('[Form] collectFormData →', { name, whatsapp, business, platform, goal, experience });
-  return { name, whatsapp, business, platform, goal, experience };
-}
-
-function buildWhatsAppMessage(data) {
-  const isAr = currentLang === 'ar';
-
-  const businessLabels = {
-    ar: {
-      creator_personal: 'كريتور - محتوى شخصي',
-      business_owner: 'صاحب بيزنس / شركة',
-      coach: 'كوتش / مدرب',
-      ecommerce: 'متجر إلكتروني',
-      other: 'أخرى'
-    },
-    en: {
-      creator_personal: 'Creator - Personal Content',
-      business_owner: 'Business / Company Owner',
-      coach: 'Coach / Trainer',
-      ecommerce: 'E-commerce Store',
-      other: 'Other'
-    }
-  };
-
-  const goalLabels = {
-    ar: {
-      followers: 'زيادة المتابعين',
-      clients: 'جذب عملاء',
-      brand: 'بناء البراند الشخصي',
-      sales: 'زيادة المبيعات',
-      views: 'زيادة المشاهدات'
-    },
-    en: {
-      followers: 'Grow Followers',
-      clients: 'Attract Clients',
-      brand: 'Build Personal Brand',
-      sales: 'Increase Sales',
-      views: 'Increase Views'
-    }
-  };
-
-  const expLabels = {
-    ar: {
-      no_consistency: 'لا، بعاني أصلاً في الاستمرارية',
-      quality_or_schedule: 'ممكن، لكن الجودة أو الانتظام بيقعوا',
-      costly_effort: 'نعم، لكن بياخد وقت ومجهود كبير مني'
-    },
-    en: {
-      no_consistency: 'No, I already struggle with consistency',
-      quality_or_schedule: 'Maybe, but quality or schedule tend to drop',
-      costly_effort: 'Yes, but it takes a lot of time and effort'
-    }
-  };
-
-  const lang = isAr ? 'ar' : 'en';
-
-  if (isAr) {
-    return `مرحبًا، أرسلت بياناتي عبر الموقع وأرغب في البدء 🚀
-
-📋 *بياناتي:*
-👤 الاسم: ${data.name}
-📱 واتساب: ${data.whatsapp}
-💼 النشاط: ${businessLabels.ar[data.business] || data.business}
-📲 المنصة: ${data.platform}
-🎯 الهدف: ${goalLabels.ar[data.goal] || data.goal}
-📊 المستوى: ${expLabels.ar[data.experience] || data.experience}
-
-أنتظر التواصل معكم!`;
-  } else {
-    return `Hello, I submitted my information through the website and I'd like to start 🚀
-
-📋 *My Details:*
-👤 Name: ${data.name}
-📱 WhatsApp: ${data.whatsapp}
-💼 Business: ${businessLabels.en[data.business] || data.business}
-📲 Platform: ${data.platform}
-🎯 Goal: ${goalLabels.en[data.goal] || data.goal}
-📊 Level: ${expLabels.en[data.experience] || data.experience}
-
-Looking forward to hearing from you!`;
-  }
-}
-
-// ─── MAKE (INTEGROMAT) WEBHOOK INTEGRATION ───────────────────────────────────
-//
-// الحل الجذري والنهائي:
-//   • الفورم يبعت JSON مباشرةً لـ Make webhook
-//   • Make يوزّع البيانات على Google Sheets وأي خدمة ثانية
-//   • يشتغل من كل جهاز (لابتوب + موبايل) بدون أي مشاكل CORS
-//   • لتغيير الـ webhook: CONFIG.makeWebhookUrl في أعلى الملف
-// ─────────────────────────────────────────────────────────────────────────────
-
-const LABEL_MAPS = {
-  business: {
-    creator_personal: 'كريتور - محتوى شخصي',
-    business_owner: 'صاحب بيزنس / شركة',
-    coach: 'كوتش / مدرب',
-    ecommerce: 'متجر إلكتروني',
-    other: 'أخرى'
-  },
-  goal: {
-    followers: 'زيادة المتابعين',
-    clients: 'جذب عملاء',
-    brand: 'بناء البراند الشخصي',
-    sales: 'زيادة المبيعات',
-    views: 'زيادة المشاهدات'
-  },
-  experience: {
-    no_consistency: 'لا، بعاني أصلاً في الاستمرارية',
-    quality_or_schedule: 'ممكن، لكن الجودة أو الانتظام بيقعوا',
-    costly_effort: 'نعم، لكن بياخد وقت ومجهود كبير مني'
-  }
-};
-
-// ── Show / clear inline error below submit button ─────────────────────────────
-function showSheetsError(msg) {
-  let el = document.getElementById('sheetsErrorMsg');
-  if (!el) {
-    el = document.createElement('p');
-    el.id = 'sheetsErrorMsg';
-    el.style.cssText = 'color:#ef4444;text-align:center;margin-top:8px;font-size:14px;';
-    const btn = document.getElementById('submitBtn');
-    if (btn && btn.parentNode) btn.parentNode.insertBefore(el, btn.nextSibling);
-  }
-  el.textContent = msg;
-}
-function clearSheetsError() {
-  const el = document.getElementById('sheetsErrorMsg');
-  if (el) el.textContent = '';
-}
-
-// ── Backup failed leads to localStorage ───────────────────────────────────────
-function backupToLocalStorage(payload) {
-  try {
-    const key = 'chp_leads_backup';
-    const stored = JSON.parse(localStorage.getItem(key) || '[]');
-    stored.push({ ...payload, _savedAt: new Date().toISOString() });
-    localStorage.setItem(key, JSON.stringify(stored));
-    console.warn('[Webhook] 💾 Backed up to localStorage. Total pending:', stored.length);
-  } catch (lsErr) {
-    console.warn('[Webhook] localStorage backup failed:', lsErr.message);
-  }
-}
-
-/**
- * sendToMakeWebhook — الدالة الرئيسية لإرسال بيانات الفورم إلى Make webhook
- *
- * @param {object} data — بيانات الفورم الخام من collectFormData()
- * @returns {Promise<'ok'|'failed-backed-up'>}
- *
- * الـ payload المُرسَل (JSON):
- * {
- *   timestamp:  "24/2/2026, 10:30:00 م",   // توقيت القاهرة
- *   name:       "أحمد محمد",
- *   whatsapp:   "01234567890",              // نص بدون تحويل
- *   business:   "كريتور - محتوى شخصي",      // مترجَم من LABEL_MAPS
- *   platform:   "instagram",
- *   goal:       "جذب عملاء",               // مترجَم من LABEL_MAPS
- *   experience: "لا، بعاني أصلاً في الاستمرارية",
- *   source:     "CreatorHubPro Landing Page",
- *   lang:       "عربي" | "English"
- * }
- */
-async function sendToMakeWebhook(data) {
-  clearSheetsError();
-
-  // ── webhook URL من CONFIG ─────────────────────────────────────────────────────
-  // لتغيير الـ webhook في المستقبل: عدّل CONFIG.makeWebhookUrl في أعلى الملف
-  const webhookUrl = CONFIG.makeWebhookUrl;
-
-  if (!webhookUrl || webhookUrl === 'PUT_WEBHOOK_URL_HERE') {
-    console.error('[Webhook] ❌ makeWebhookUrl غير محدد في CONFIG');
-    showSheetsError('حصل خطأ في الإعداد، جرّب تاني');
-    return 'failed-backed-up';
-  }
-
-  // ── بناء الـ payload ──────────────────────────────────────────────────────────
-  const payload = {
-    timestamp: new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
-    name: data.name || '',
-    whatsapp: String(data.whatsapp || ''),          // يبقى نص دائماً
-    business: LABEL_MAPS.business[data.business] || data.business || '',
-    platform: data.platform || '',
-    goal: LABEL_MAPS.goal[data.goal] || data.goal || '',
-    experience: LABEL_MAPS.experience[data.experience] || data.experience || '',
-    source: (function () { try { return sessionStorage.getItem('utm_source'); } catch (e) { return null; } })() || 'CreatorHubPro Landing Page',
-    lang: (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'English' : 'عربي'
-  };
-
-  console.log('[Webhook] 🚀 Sending to Make webhook:', webhookUrl);
-  console.log('[Webhook] 📋 Payload:', JSON.stringify(payload, null, 2));
-
-  const MAX_RETRIES = 2;
-  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-    try {
-      console.log(`[Webhook] 🔄 Attempt ${attempt}/${MAX_RETRIES}`);
-
-      // ── AbortController لـ timeout 10 ثواني ────────────────────────────────
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 10000);
-
-      let resp;
-      try {
-        resp = await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          keepalive: true,          // يضمن إرسال الطلب حتى لو المستخدم غادر الصفحة
-          signal: controller.signal
-        });
-      } finally {
-        clearTimeout(timer);
-      }
-
-      console.log('[Webhook] 📥 HTTP status:', resp.status);
-
-      if (resp.ok) {
-        console.log('[Webhook] ✅ تم الإرسال بنجاح إلى Make');
-        clearSheetsError();
-        return 'ok';
-      } else {
-        console.warn(`[Webhook] ⚠️ HTTP ${resp.status} on attempt ${attempt}`);
-      }
-    } catch (err) {
-      console.error(`[Webhook] ❌ Attempt ${attempt} error:`, err.message);
-      if (attempt < MAX_RETRIES) {
-        await new Promise(r => setTimeout(r, 1000));
-      }
-    }
-  }
-
-  // ── كل المحاولات فشلت ─────────────────────────────────────────────────────────
-  backupToLocalStorage(payload);
-  showSheetsError('حصل خطأ، جرّب تاني');
-  console.error('[Webhook] ❌ All attempts failed. Data backed up to localStorage.');
-  return 'failed-backed-up';
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// ─── WHATSAPP PRE-FILL WITH SUBMITTED LEAD DATA ──────────────────────────────
-// ─────────────────────────────────────────────────────────────────────────────
-
-// ── Save submitted lead data for WhatsApp pre-fill ────────────────────────────
-function saveLeadToLocal(data) {
-  try {
-    const lead = {
-      name: data.name || '',
-      whatsapp: data.whatsapp || '',
-      business: LABEL_MAPS.business[data.business] || data.business || '',
-      platform: data.platform || '',
-      goal: LABEL_MAPS.goal[data.goal] || data.goal || '',
-      experience: LABEL_MAPS.experience[data.experience] || data.experience || '',
-      lang: currentLang
+    return {
+        name: name?.trim() || '',
+        whatsapp: document.getElementById('whatsapp')?.value.trim() || '',
+        business: document.getElementById('business')?.value || '',
+        platform: document.getElementById('platform')?.value || '',
+        goal: document.getElementById('goal')?.value || '',
+        experience: document.querySelector('input[name="experience"]:checked')?.value || ''
     };
-    localStorage.setItem('chp_submitted_lead', JSON.stringify(lead));
-    console.log('[WhatsApp] 💾 Lead saved for WhatsApp pre-fill');
-  } catch (e) {
-    console.warn('[WhatsApp] Failed to save lead:', e.message);
-  }
-}
-
-function getSubmittedLead() {
-  try {
-    const raw = localStorage.getItem('chp_submitted_lead');
-    return raw ? JSON.parse(raw) : null;
-  } catch { return null; }
-}
-
-function buildLeadWhatsAppMessage(lead) {
-  const isAr = lead.lang === 'ar';
-
-  if (isAr) {
-    return `مرحبًا، أرسلت بياناتي عبر الموقع وأرغب في البدء.
-
-— بياناتي —
-الاسم: ${lead.name}
-واتساب: ${lead.whatsapp}
-النشاط: ${lead.business}
-المنصة: ${lead.platform}
-الهدف: ${lead.goal}
-المستوى: ${lead.experience}
-
-أنتظر التواصل معكم.`;
-  } else {
-    return `Hello, I submitted my information through the website and I'd like to start.
-
-— My Details —
-Name: ${lead.name}
-WhatsApp: ${lead.whatsapp}
-Business: ${lead.business}
-Platform: ${lead.platform}
-Goal: ${lead.goal}
-Level: ${lead.experience}
-
-Looking forward to hearing from you.`;
-  }
-}
-
-// ── Intercept WhatsApp links and pre-fill with user data if available ──────────
-function initWhatsAppLinks() {
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a[href*="wa.me"]');
-    if (!link) return;
-
-    const lead = getSubmittedLead();
-    if (!lead) return; // no form submitted yet — use default link
-
-    e.preventDefault();
-    const msg = buildLeadWhatsAppMessage(lead);
-    const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank', 'noopener');
-    console.log('[WhatsApp] 📤 Opened with pre-filled lead data');
-  });
 }
 
 function showSuccessMessage() {
-  const form = document.getElementById('leadForm');
-  const success = document.getElementById('formSuccess');
-
-  if (form) {
-    form.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-    form.style.opacity = '0';
-    form.style.transform = 'translateY(-20px)';
-    setTimeout(() => {
-      form.style.display = 'none';
-      if (success) {
+    const form = document.getElementById('leadForm');
+    const success = document.getElementById('formSuccess');
+    if (form) form.style.display = 'none';
+    if (success) {
         success.style.display = 'block';
-        success.style.animation = 'fadeUp 0.6s ease both';
-      }
-    }, 400);
-  }
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 }
 
-// ─── VIDEO PLACEHOLDER INTERACTIONS ────────────────
-// (removed: .video-placeholder no longer in DOM)
+// ─── 5. WHATSAPP PERSISTENCE ─────────────────────────
+function saveLeadToLocal(data) {
+    const lead = {
+        ...data,
+        businessLabel: LABEL_MAPS.business[data.business] || data.business,
+        goalLabel: LABEL_MAPS.goal[data.goal] || data.goal,
+        expLabel: LABEL_MAPS.experience[data.experience] || data.experience,
+        lang: currentLang
+    };
+    localStorage.setItem('chp_submitted_lead', JSON.stringify(lead));
+}
 
-// ─── PACKAGE CARD HOVER EFFECTS ────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.package-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      if (!card.classList.contains('package-featured')) {
-        card.style.borderColor = 'rgba(124, 58, 237, 0.5)';
-      }
+function initWhatsAppIntercept() {
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href*="wa.me"]');
+        if (!link) return;
+
+        const raw = localStorage.getItem('chp_submitted_lead');
+        if (!raw) return;
+
+        e.preventDefault();
+        const lead = JSON.parse(raw);
+        const isAr = (lead.lang === 'ar');
+        const msg = isAr 
+            ? `مرحبًا، أرسلت بياناتي عبر الموقع وأرغب في البدء.\n\nالاسم: ${lead.name}\nالنشاط: ${lead.businessLabel}\nالهدف: ${lead.goalLabel}`
+            : `Hello, I submitted my info via the website and want to start.\n\nName: ${lead.name}\nBusiness: ${lead.businessLabel}\nGoal: ${lead.goalLabel}`;
+
+        window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
     });
-    card.addEventListener('mouseleave', () => {
-      if (!card.classList.contains('package-featured')) {
-        card.style.borderColor = '';
-      }
-    });
-  });
-});
+}
 
-// ─── PROBLEM CARDS ENTRANCE ─────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const problemCards = document.querySelectorAll('.problem-card');
-  problemCards.forEach((card, index) => {
-    card.style.transitionDelay = `${index * 80}ms`;
-  });
-});
+// ─── 6. UI ANIMATIONS (Scarcity, Typewriter, Scroll) ──
+function initScarcityModule() {
+    const SCR_CONFIG = { current: 16, max: 20 };
+    const module = document.getElementById('scr-module');
+    if (!module) return;
 
-// ─── PHONE MOCKUP — REEL STATS COUNTER ─────────────
-// (removed: .reel-stats no longer in DOM — replaced by .pm-* dashboard)
+    const pct = Math.round((SCR_CONFIG.current / SCR_CONFIG.max) * 100);
+    const fill = document.getElementById('scr-bar-fill');
+    if (fill) setTimeout(() => fill.style.width = pct + '%', 800);
+    
+    document.querySelectorAll('#scr-current, #scr-current-en').forEach(el => { el.textContent = SCR_CONFIG.current; });
+    document.querySelectorAll('#scr-pct, #scr-pct-en').forEach(el => { el.textContent = pct + '%'; });
+}
 
-// ─── FORM FIELD FOCUS EFFECTS ─────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const inputs = document.querySelectorAll('.form-group input, .form-group select');
-  inputs.forEach(input => {
-    const group = input.closest('.form-group');
-    if (!group) return;
-
-    input.addEventListener('focus', () => {
-      group.style.transition = 'transform 0.2s ease';
-      group.style.transform = 'scale(1.01)';
-    });
-
-    input.addEventListener('blur', () => {
-      group.style.transform = '';
-    });
-  });
-});
-
-// ─── STICKY CTA PULSE ANIMATION ───────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const stickyCta = document.getElementById('stickyCta');
-  if (!stickyCta) return;
-
-  // Add pulse to the button periodically
-  setInterval(() => {
-    const btn = stickyCta.querySelector('.sticky-cta-btn');
-    if (btn && stickyCta.classList.contains('visible')) {
-      btn.style.animation = 'none';
-      requestAnimationFrame(() => {
-        btn.style.animation = '';
-      });
+function initHeroVisuals() {
+    // Typewriter
+    const typewriter = document.getElementById('lsv2Text');
+    if (typewriter && window.innerWidth > 768) {
+        const words = (currentLang === 'ar' ? ['محتواك', 'عملاءك', 'علامتك', 'نتائجك'] : ['Content', 'Clients', 'Brand', 'Results']);
+        let i = 0;
+        setInterval(() => {
+            typewriter.style.opacity = '0';
+            setTimeout(() => {
+                typewriter.textContent = words[i];
+                typewriter.style.opacity = '1';
+                i = (i + 1) % words.length;
+            }, 500);
+        }, 3000);
     }
-  }, 8000);
-});
 
-// ─── URGENCY COUNTDOWN (SLOTS) ────────────────────
-// (removed: .coaching-urgency no longer in DOM — scarcity handled by scr-module)
+    // Phone Tilt
+    const hero = document.getElementById('hero');
+    const phone = document.getElementById('pmPhone');
+    if (hero && phone && window.innerWidth > 768) {
+        hero.addEventListener('mousemove', (e) => {
+            const r = hero.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            phone.style.transform = `rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateY(-5px)`;
+        }, { passive: true });
+    }
+}
 
-// ─── COMPARISON SECTION HIGHLIGHT ─────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const compareUs = document.querySelector('.compare-us');
-  if (!compareUs) return;
+// ─── 7. INITIALIZATION ───────────────────────────────
+function boot() {
+    saveUtmParams();
+    initWhatsAppIntercept();
+    initHeroVisuals();
+    
+    // Navbar Scroll Shadow
+    const navbar = document.getElementById('navbar');
+    const urgencyBar = document.querySelector('.sticky-urgency-bar');
+    window.addEventListener('scroll', () => {
+        const sy = window.scrollY;
+        if (navbar) navbar.classList.toggle('scrolled', sy > 40);
+        if (urgencyBar) urgencyBar.classList.toggle('bar-hidden', sy > 80);
+    }, { passive: true });
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        compareUs.style.animation = 'none';
-        compareUs.style.boxShadow = '0 0 60px rgba(124, 58, 237, 0.35)';
-      }
-    });
-  }, { threshold: 0.4 });
+    // Global Scroll Observer for Entrance Animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                if (entry.target.id === 'scr-module') initScarcityModule();
+                // Trust counters
+                if (entry.target.classList.contains('trust-badge')) {
+                    const num = entry.target.querySelector('.trust-num');
+                    if (num) {
+                        const target = parseInt(num.dataset.target);
+                        let cur = 0;
+                        const inv = setInterval(() => {
+                            cur += Math.ceil(target/20);
+                            if (cur >= target) { cur = target; clearInterval(inv); }
+                            num.textContent = cur;
+                        }, 50);
+                    }
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
 
-  observer.observe(compareUs);
-});
+    document.querySelectorAll('.animate-on-scroll, .trust-badge, #scr-module').forEach(el => observer.observe(el));
 
-// ─── LAZY-LOAD HEAVY ELEMENTS ─────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  // Defer FontAwesome if it hasn't loaded in time
-  const faLink = document.querySelector('link[href*="fontawesome"]');
-  if (faLink) {
-    faLink.setAttribute('media', 'print');
-    faLink.setAttribute('onload', "this.media='all'");
-  }
-});
+    // Form Listener
+    const form = document.getElementById('leadForm');
+    if (form) form.addEventListener('submit', handleFormSubmit);
+}
 
-// ─── KEYBOARD ACCESSIBILITY ───────────────────────
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    // Close any modals or overlays if present
-  }
-});
+// Support both standard load and Next.js Script strategy
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+} else {
+    boot();
+}
 
-// ─── PERFORMANCE: REQUESTANIMATIONFRAME SCROLL ───
-let scrollTimer = null;
-window.addEventListener('scroll', () => {
-  if (scrollTimer) return;
-  scrollTimer = requestAnimationFrame(() => {
-    scrollTimer = null;
-    // Handled via individual listeners
-  });
-}, { passive: true });
-
-console.log('%c CreatorHubPro 🚀 ', 'background: #7c3aed; color: white; font-size: 16px; font-weight: bold; padding: 8px 16px; border-radius: 4px;');
+console.log('%c CreatorHubPro 🚀 System Online ', 'background: #7c3aed; color: white; padding: 8px 16px; border-radius: 4px; font-weight: bold;');
