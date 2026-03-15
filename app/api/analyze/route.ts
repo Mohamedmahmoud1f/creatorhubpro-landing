@@ -8,6 +8,7 @@ export async function POST(request: Request) {
         const body = await request.json();
         const platform = body.platform;
         let username = body.username;
+        const category = body.category || 'Other';
 
         if (!username) {
             return NextResponse.json({ error: 'Username or URL is required' }, { status: 400 });
@@ -112,9 +113,6 @@ export async function POST(request: Request) {
                 ? (((totalRecentLikes / validEngagementVideos) + (totalRecentComments / validEngagementVideos)) / (totalRecentViews / validEngagementVideos)) * 100
                 : (subCount > 0 ? ((parseInt(stats.viewCount || '0') / parseInt(stats.videoCount || '1')) / subCount) * 10 : 0);
 
-            const engagementInsightEn = erRaw > 4 ? "Your audience is highly active. Great hook potential!" : erRaw < 1 ? "Your content isn't sparking conversation. We need to work on your CTAs." : "Average engagement. We can optimize your hooks to push this higher.";
-            const engagementInsightAr = erRaw > 4 ? "جمهورك متفاعل جداً. فرصة ممتازة لزيادة تأثير فيديوهاتك!" : erRaw < 1 ? "المحتوى لا يثير النقاشات بشكل كافٍ. نحتاج للعمل على نداءات اتخاذ الإجراء (CTAs)." : "تفاعل متوسط. يمكننا تحسين الثواني الأولى لزيادة التفاعل.";
-
             let consistencyScore = Math.min(100, Math.round((last30DaysCount / 8) * 100));
             if (consistencyScore === 0 && parseInt(stats.videoCount || '0') > 50) consistencyScore = 20;
 
@@ -123,6 +121,40 @@ export async function POST(request: Request) {
             const overallScore = Math.round((consistencyScore + engagementScore + strategyScore) / 3) || 10;
 
             let benchmark = overallScore >= 80 ? 'Top 5%' : overallScore >= 60 ? 'Top 25%' : overallScore >= 40 ? 'Top 50%' : 'Bottom 50%';
+
+            // Generate YouTube Insights dynamically via Gemini using the real fetched stats
+            let insightEn = erRaw > 4 ? "Your audience is highly active. Great hook potential!" : erRaw < 1 ? "Your content isn't sparking conversation. We need to work on your CTAs." : "Average engagement. We can optimize your hooks to push this higher.";
+            let insightAr = erRaw > 4 ? "جمهورك متفاعل جداً. فرصة ممتازة لزيادة تأثير فيديوهاتك!" : erRaw < 1 ? "المحتوى لا يثير النقاشات بشكل كافٍ. نحتاج للعمل على نداءات اتخاذ الإجراء (CTAs)." : "تفاعل متوسط. يمكننا تحسين الثواني الأولى لزيادة التفاعل.";
+
+            try {
+                const ytPrompt = `Analyze the YouTube channel: '${snippet.title || parsed}' in the Content Category: '${category}'. 
+                Current Stats: ${subCount} subscribers, ${erRaw.toFixed(2)}% engagement rate, ${last30DaysCount} videos uploaded in the last 30 days. 
+                Provide exactly 2 short, punchy sentences of actionable advice based on these metrics. 
+                Return STRICTLY JSON format: {"en": "advice in english", "ar": "advice in arabic"}. 
+                Do not include markdown blocks or conversational text.`;
+
+                const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: ytPrompt }] }]
+                    })
+                });
+
+                const aiData = await aiRes.json();
+                if (aiData.candidates && aiData.candidates[0]?.content) {
+                    let textResponse = aiData.candidates[0].content.parts[0].text;
+                    textResponse = textResponse.replace(/```json/gi, '').replace(/```/gi, '').trim();
+                    const parsedInsights = JSON.parse(textResponse);
+                    if (parsedInsights.en && parsedInsights.ar) {
+                        insightEn = parsedInsights.en;
+                        insightAr = parsedInsights.ar;
+                    }
+                }
+            } catch (err) {
+                console.error("YouTube AI Insights Error:", err);
+                // Graceful degradation: keeps the default insights if the AI fails
+            }
 
             return NextResponse.json({
                 success: true,
@@ -133,7 +165,7 @@ export async function POST(request: Request) {
                     followers: subCount,
                     engagementRate: erRaw,
                     videos30Days: last30DaysCount,
-                    insights: { en: engagementInsightEn, ar: engagementInsightAr },
+                    insights: { en: insightEn, ar: insightAr },
                     scores: { overall: overallScore, consistency: consistencyScore, engagement: engagementScore, strategy: strategyScore },
                     benchmark
                 }
@@ -143,7 +175,8 @@ export async function POST(request: Request) {
         } else if (platform === 'tiktok' || platform === 'instagram') {
             let cleanHandle = username.trim().replace(/^@/, '');
 
-            const prompt = `Search for and analyze the ${platform} account: ${cleanHandle}. Return strictly JSON format based on the most recent publicly available data.`;
+            // Updated prompt to include Content Category and strict fallback instructions
+            const prompt = `Search for and analyze the ${platform} account: ${cleanHandle} in the Content Category: '${category}'. Return strictly JSON format based on the most recent publicly available data.`;
 
             const gRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
                 method: 'POST',
@@ -151,7 +184,8 @@ export async function POST(request: Request) {
                 body: JSON.stringify({
                     systemInstruction: {
                         parts: [{
-                            text: `You are a social media analyzer. Use Google Search to find stats for the requested handle.
+                            text: `You are a social media analyzer. Try to use Google Search to find stats for the requested handle.
+                            CRITICAL FALLBACK RULE: If you cannot find live data via search, you MUST fallback to your internal training data and provide your best estimates for followers, engagement, and video counts. You MUST ALWAYS return valid JSON data. Never return an error or empty stats.
                             Return strictly JSON with this schema:
                             {
                               "username": string, 
@@ -159,8 +193,8 @@ export async function POST(request: Request) {
                               "engagementRate": float, 
                               "videos30Days": integer, 
                               "insights": {
-                                "en": "string (Max 2 short sentences of actionable advice)", 
-                                "ar": "string (Max 2 short sentences of actionable advice in Arabic)"
+                                "en": "string (Max 2 short sentences of actionable advice based on their category)", 
+                                "ar": "string (Max 2 short sentences of actionable advice based on their category in Arabic)"
                               }, 
                               "scores": {
                                 "overall": integer (strict 0-100 scale), 
@@ -172,7 +206,7 @@ export async function POST(request: Request) {
                             }.
                             CRITICAL INSTRUCTIONS: 
                             1. Scores MUST be out of 100, not 10. 
-                            2. Insights MUST be extremely brief and punchy.
+                            2. Insights MUST be extremely brief, punchy, and relevant to their specific content category.
                             3. Do not include ANY conversational text, citations, or markdown formatting (like \`\`\`json). Output only the raw JSON string.`
                         }]
                     },
@@ -194,7 +228,7 @@ export async function POST(request: Request) {
 
             try {
                 let textResponse = gData.candidates[0].content.parts[0].text || "{}";
-                
+
                 textResponse = textResponse.replace(/```json/gi, '').replace(/```/gi, '').trim();
 
                 const parsedResult = JSON.parse(textResponse);
@@ -203,7 +237,7 @@ export async function POST(request: Request) {
                     success: true,
                     data: {
                         platform: platform.charAt(0).toUpperCase() + platform.slice(1),
-                        avatar: '', 
+                        avatar: '',
                         ...parsedResult
                     }
                 });

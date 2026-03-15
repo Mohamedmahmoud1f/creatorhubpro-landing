@@ -10,6 +10,14 @@ const DICTIONARY = {
     title: "Analyze Any ",
     titleGradient: "Social Account",
     subtitle: "Get instant insights into any creator's profile — followers, engagement, and more.",
+    categoryLabel: "Content Category",
+    categories: {
+      Education: "Education",
+      Business: "Business",
+      Entertainment: "Entertainment",
+      Personal: "Personal Brand",
+      Other: "Other"
+    },
     placeholder: "Enter Channel URL or @handle...",
     analyze: "Analyze",
     hint: "Enter a handle (e.g. @mrbeast) or paste a channel URL.",
@@ -31,6 +39,14 @@ const DICTIONARY = {
     title: "حلل حسابك ",
     titleGradient: "مجاناً",
     subtitle: "احصل على تحليل فوري لأي حساب — متابعين، تفاعل، جودة محتوى وأكثر.",
+    categoryLabel: "فئة المحتوى",
+    categories: {
+      Education: "تعليم",
+      Business: "أعمال",
+      Entertainment: "ترفيه",
+      Personal: "علامة تجارية شخصية",
+      Other: "أخرى"
+    },
     placeholder: "أدخل رابط القناة أو اسم المستخدم...",
     analyze: "تحليل",
     hint: "أدخل معرف الحساب (مثل @mrbeast) أو رابط القناة",
@@ -53,6 +69,7 @@ export default function AnalyzerPage() {
   const [lang, setLang] = useState<'en' | 'ar'>('ar');
   const [step, setStep] = useState(1);
   const [platform, setPlatform] = useState('youtube');
+  const [category, setCategory] = useState('Education');
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any>(null);
@@ -75,7 +92,7 @@ export default function AnalyzerPage() {
       const res = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ platform, username }),
+        body: JSON.stringify({ platform, username, category }),
       });
       const result = await res.json();
       if (result.success) {
@@ -138,16 +155,33 @@ export default function AnalyzerPage() {
               ))}
             </div>
 
-            <form onSubmit={handleAnalyze} className="search-box-wrap">
-              <input
-                type="text"
-                className="search-input"
-                placeholder={t.placeholder}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <button type="submit" className="search-btn">{t.analyze}</button>
+            <form onSubmit={handleAnalyze}>
+              <div className="input-group">
+                <label className="input-label">{t.categoryLabel}</label>
+                <select
+                  className="category-select"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option value="Education">{t.categories.Education}</option>
+                  <option value="Business">{t.categories.Business}</option>
+                  <option value="Entertainment">{t.categories.Entertainment}</option>
+                  <option value="Personal">{t.categories.Personal}</option>
+                  <option value="Other">{t.categories.Other}</option>
+                </select>
+              </div>
+
+              <div className="search-box-wrap">
+                <input
+                  type="text"
+                  className="search-input"
+                  placeholder={t.placeholder}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+                <button type="submit" className="search-btn">{t.analyze}</button>
+              </div>
             </form>
           </div>
         )}
