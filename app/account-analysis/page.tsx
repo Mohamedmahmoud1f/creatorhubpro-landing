@@ -24,7 +24,7 @@ const DICTIONARY = {
     scanning: "Scanning Account...",
     connecting: "Connecting to API...",
     ready: "Report is Ready!",
-    unlockDesc: "We have analyzed your channel in detail! We’ve evaluated your consistency, engagement rates, and assigned a strategy score. Enter your details now to unlock the 'Expert Analysis' and view the full report.",
+    unlockDesc: `We have analyzed your account's overall performance and identified key strengths and growth opportunities.\n\n• Content Posting Consistency\n• Engagement Quality\n• Account Strategy Rating\n\nAnalysis based on content evaluation models used by the CreatorHubPro team.`,
     unlockBtn: "Unlock Full Report",
     consistency: "Consistency",
     engagement: "Engagement",
@@ -53,7 +53,7 @@ const DICTIONARY = {
     scanning: "جاري فحص الحساب...",
     connecting: "جاري الاتصال...",
     ready: "اكتمل التقرير!",
-    unlockDesc: "قمنا بتحليل نقاط القوة والضعف للقناة، وحساب معدلات الاستمرارية، والتفاعل، ودرجة الاستراتيجية. أدخل بياناتك أدناه لفتح تقرير التحليل الخبير الكامل واكتشاف النتائج.",
+    unlockDesc: `قمنا بتحليل الأداء العام لحسابك واكتشاف أهم نقاط القوة والفرص المتاحة للنمو.\n\n• معدل الإستمرارية فى النشر\n• جودة التفاعل\n• تقييم استراتيجية الحساب\n\nتحليل مبني على نماذج تحليل المحتوى المستخدمة لدى فريق CreatorHubPro.`,
     unlockBtn: "فتح التقرير الكامل",
     consistency: "الاستمرارية",
     engagement: "جودة التفاعل",
@@ -121,8 +121,6 @@ export default function AnalyzerPage() {
     e.preventDefault();
 
     try {
-      // We don't necessarily need to 'await' if we want speed, 
-      // but it's safer to ensure it sends.
       fetch('/api/save-to-sheet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -250,7 +248,7 @@ export default function AnalyzerPage() {
             </div>
 
             <h3 className="ready-title">{t.ready}</h3>
-            <p className="gate-desc">{t.unlockDesc}</p>
+            <p className="gate-desc" style={{ whiteSpace: 'pre-line' }}>{t.unlockDesc}</p>
 
             <form className="gate-form" onSubmit={handleGateSubmit}>
               <input
