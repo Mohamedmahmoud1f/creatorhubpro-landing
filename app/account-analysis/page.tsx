@@ -24,7 +24,7 @@ const DICTIONARY = {
     scanning: "Scanning Account...",
     connecting: "Connecting to API...",
     ready: "Report is Ready!",
-    unlockDesc: "We've analyzed this channel's strengths and weaknesses. Enter your details to unlock the full report.",
+    unlockDesc: "We have analyzed your channel in detail! We’ve evaluated your consistency, engagement rates, and assigned a strategy score. Enter your details now to unlock the 'Expert Analysis' and view the full report.",
     unlockBtn: "Unlock Full Report",
     consistency: "Consistency",
     engagement: "Engagement",
@@ -53,7 +53,7 @@ const DICTIONARY = {
     scanning: "جاري فحص الحساب...",
     connecting: "جاري الاتصال...",
     ready: "اكتمل التقرير!",
-    unlockDesc: "قمنا بتحليل نقاط القوة والضعف للقناة. أدخل بياناتك أدناه لفتح التقرير الكامل.",
+    unlockDesc: "قمنا بتحليل نقاط القوة والضعف للقناة، وحساب معدلات الاستمرارية، والتفاعل، ودرجة الاستراتيجية. أدخل بياناتك أدناه لفتح تقرير التحليل الخبير الكامل واكتشاف النتائج.",
     unlockBtn: "فتح التقرير الكامل",
     consistency: "الاستمرارية",
     engagement: "جودة التفاعل",
@@ -74,6 +74,9 @@ export default function AnalyzerPage() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // New state for Google Sheets lead capture
+  const [gateData, setGateData] = useState({ name: '', email: '' });
 
   const t = DICTIONARY[lang];
 
@@ -113,6 +116,33 @@ export default function AnalyzerPage() {
     }
   };
 
+  // New function to save to Google Sheets and move to Step 4
+  const handleGateSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      // We don't necessarily need to 'await' if we want speed, 
+      // but it's safer to ensure it sends.
+      fetch('/api/save-to-sheet', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: gateData.name,
+          email: gateData.email,
+          platform,
+          username: data.username,
+          category,
+          followers: data.followers,
+          scores: data.scores
+        }),
+      });
+    } catch (err) {
+      console.error("Sheet save error:", err);
+    }
+
+    setStep(4);
+  };
+
   return (
     <div className={`analyzer-body ${lang === 'ar' ? 'rtl' : 'ltr'}`}>
 
@@ -127,8 +157,9 @@ export default function AnalyzerPage() {
 
       <nav className="navbar">
         <div className="container nav-inner">
-          {/* Replaced with a text logo just in case the image is missing, swap back to your img if needed */}
-          <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}><img src="./brand/cropped.png" style={{ height: "40px" }} /></div>
+          <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+            <img src="./brand/cropped.png" style={{ height: "40px" }} alt="logo" />
+          </div>
           <button className="lang-toggle" onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}>
             {lang === 'en' ? 'العربية' : 'EN'}
           </button>
@@ -221,9 +252,23 @@ export default function AnalyzerPage() {
             <h3 className="ready-title">{t.ready}</h3>
             <p className="gate-desc">{t.unlockDesc}</p>
 
-            <form className="gate-form" onSubmit={(e) => { e.preventDefault(); setStep(4); }}>
-              <input type="text" placeholder="Name" className="gate-input" required />
-              <input type="email" placeholder="Email" className="gate-input" required />
+            <form className="gate-form" onSubmit={handleGateSubmit}>
+              <input
+                type="text"
+                placeholder={lang === 'en' ? "Name" : "الاسم"}
+                className="gate-input"
+                required
+                value={gateData.name}
+                onChange={(e) => setGateData({ ...gateData, name: e.target.value })}
+              />
+              <input
+                type="email"
+                placeholder={lang === 'en' ? "Email" : "البريد الإلكتروني"}
+                className="gate-input"
+                required
+                value={gateData.email}
+                onChange={(e) => setGateData({ ...gateData, email: e.target.value })}
+              />
               <button className="gate-btn search-btn">🚀 {t.unlockBtn}</button>
             </form>
           </div>
