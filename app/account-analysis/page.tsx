@@ -170,7 +170,7 @@ export default function AnalyzerPage() {
           <div className="step active fade-in">
             <div className="ah-badge">✨ {t.badge}</div>
             <h1 className="ah-title">{t.title}<span className="ah-gradient">{t.titleGradient}</span></h1>
-            <p className="ah-subtitle">{t.subtitle}</p>
+            <p className="ah-subtitle hero-line-gradient">{t.subtitle}</p>
 
             <div className="platform-toggles">
               {['instagram', 'tiktok', 'youtube'].map((p) => (
@@ -209,7 +209,7 @@ export default function AnalyzerPage() {
                   onChange={(e) => setUsername(e.target.value)}
                   required
                 />
-                <button type="submit" className="search-btn">{t.analyze}</button>
+                <button type="submit" className="search-btn ">{t.analyze}</button>
               </div>
             </form>
           </div>

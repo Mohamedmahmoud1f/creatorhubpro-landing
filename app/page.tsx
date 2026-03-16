@@ -1722,6 +1722,63 @@ export default function Home() {
         </div>
       </div>
       <!-- /brd-prof-box -->
+<!-- cta to account-analysis tool -->
+   <section class="tool-redirect-section" style="padding: 100px 0; position: relative; overflow: hidden;">
+  
+  <div class="tool-bg-glow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 300px; background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%); z-index: 0; pointer-events: none;"></div>
+
+  <div class="container" style="position: relative; z-index: 1; text-align: center;">
+    
+    <div class="tool-glass-card" style="background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 60px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+      
+      <div class="hero-live-badge" style="margin: 0 auto 25px; background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.2);">
+        <span class="live-dot"></span>
+        <span class="ar-text">أداة تحليل مجانية</span>
+        <span class="en-text" style="display:none">Free Analysis Tool</span>
+      </div>
+
+      <h2 class="hero-v2-headline ar-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 20px; line-height: 1.2;">
+        اختبر محتواك <span class="hero-line-gradient">بمعايير عالمية</span>
+      </h2>
+      <h2 class="hero-v2-headline en-text" style="display:none; font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 20px; line-height: 1.2;">
+        Test Your Content <span class="hero-line-gradient">Against Global Standards</span>
+      </h2>
+
+      <p class="hero-v2-sub ar-text" style="max-width: 650px; margin: 0 auto 40px; color: rgba(255,255,255,0.7); font-size: 1.1rem;">
+        لا تترك نموك للصدفة. استخدم نظام الذكاء الاصطناعي الخاص بنا للحصول على تقرير مفصل عن أداء فيديوهاتك وكيفية تحويل المشاهدات إلى أرباح.
+      </p>
+      <p class="hero-v2-sub en-text" style="display:none; max-width: 650px; margin: 0 auto 40px; color: rgba(255,255,255,0.7); font-size: 1.1rem;">
+        Don't leave growth to chance. Use our AI-driven system to get a detailed report on your video performance and how to turn views into revenue.
+      </p>
+
+      <div class="hero-v2-cta" style="justify-content: center; gap: 15px;">
+        <a href="/account-analysis" class="btn btn-hero-primary ar-text" style="padding: 18px 40px; font-size: 1.1rem;">
+          <span class="btn-glow-ring"></span>
+          <i class="fas fa-bolt"></i>
+          <span>ابدأ الفحص المجاني الآن</span>
+        </a>
+        <a href="/account-analysis" class="btn btn-hero-primary en-text" style="display:none; padding: 18px 40px; font-size: 1.1rem;">
+          <span class="btn-glow-ring"></span>
+          <i class="fas fa-bolt"></i>
+          <span>Start Free Scan Now</span>
+        </a>
+      </div>
+
+      <div style="margin-top: 30px; display: flex; align-items: center; justify-content: center; gap: 15px; opacity: 0.6;">
+         <span style="height: 1px; width: 40px; background: linear-gradient(to right, transparent, white);"></span>
+         <p class="hero-cta-note ar-text" style="margin: 0;">
+           <i class="fas fa-check-circle" style="color: #10b981;"></i> بدون تسجيل دخول
+         </p>
+         <p class="hero-cta-note en-text" style="display:none; margin: 0;">
+           <i class="fas fa-check-circle" style="color: #10b981;"></i> No Login Required
+         </p>
+         <span style="height: 1px; width: 40px; background: linear-gradient(to left, transparent, white);"></span>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
 
       <!-- ══════════════════════════════════
            PART 4 — PACKAGE BRIDGE
@@ -2466,6 +2523,16 @@ export default function Home() {
         </div>
       </div>
     </div>
+    <div class="container" style="text-align: center; padding-top: 40px;">
+      <p class="ar-text" style="color: rgba(255,255,255,0.6)">
+          غير متأكد من الباقة المناسبة؟ 
+          <a href="/account-analysis" style="color: #a78bfa; text-decoration: underline; margin-right: 8px;">جرب أداة التحليل أولاً</a>
+      </p>
+      <p class="en-text" style="display:none; color: rgba(255,255,255,0.6)">
+          Not sure which package fits? 
+          <a href="/account-analysis" style="color: #a78bfa; text-decoration: underline; margin-left: 8px;">Try the analysis tool first</a>
+      </p>
+  </div>
   </section>
 
   <!-- MOBILE MID-CTA #3 — after packages, before scarcity -->
