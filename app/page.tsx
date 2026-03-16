@@ -1745,10 +1745,10 @@ export default function Home() {
       </h2>
 
       <p class="hero-v2-sub ar-text" style="max-width: 650px; margin: 0 auto 40px; color: rgba(255,255,255,0.7); font-size: 1.1rem;">
-        لا تترك نموك للصدفة. استخدم نظام الذكاء الاصطناعي الخاص بنا للحصول على تقرير مفصل عن أداء فيديوهاتك وكيفية تحويل المشاهدات إلى أرباح.
+       لا تترك نموك للصدفة. استخدم نظام تقييم خبراء Creatorhubpro المبني على مقاييس صناعة المحتوى المعتمدة للحصول على تقرير مفصل عن أداء حسابك وكيفية تحويل المشاهدات إلى أرباح.
       </p>
       <p class="hero-v2-sub en-text" style="display:none; max-width: 650px; margin: 0 auto 40px; color: rgba(255,255,255,0.7); font-size: 1.1rem;">
-        Don't leave growth to chance. Use our AI-driven system to get a detailed report on your video performance and how to turn views into revenue.
+        Don't grow by accident. Leverage Creatorhubpro’s industry-backed expert audit to analyze your performance and transform your views into revenue.
       </p>
 
       <div class="hero-v2-cta" style="justify-content: center; gap: 15px;">
