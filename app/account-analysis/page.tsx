@@ -32,7 +32,8 @@ const DICTIONARY = {
     expertTitle: "Expert Analysis",
     bookBtn: "Book Free Strategy Session",
     rank: "Rank",
-    subs: "Subscribers"
+    subs: "Subscribers",
+    experimentalMsg: "TikTok & Instagram analysis is under development.\nWe're currently enhancing results accuracy.\nFor the best experience, use the YouTube version."
   },
   ar: {
     badge: "أداة تحليل الحسابات",
@@ -61,7 +62,8 @@ const DICTIONARY = {
     expertTitle: "تحليل البروفيسور",
     bookBtn: "احجز جلسة استشارة مجانية",
     rank: "التصنيف",
-    subs: "مشترك"
+    subs: "مشترك",
+    experimentalMsg: "تحليل تيك توك وإنستجرام قيد التطوير،\nنعمل حالياً على تحسين دقة النتائج.\nللحصول على أفضل تحليل، استخدم يوتيوب"
   }
 };
 
@@ -75,7 +77,6 @@ export default function AnalyzerPage() {
   const [data, setData] = useState<any>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // New state for Google Sheets lead capture
   const [gateData, setGateData] = useState({ name: '', email: '' });
 
   const t = DICTIONARY[lang];
@@ -116,7 +117,6 @@ export default function AnalyzerPage() {
     }
   };
 
-  // New function to save to Google Sheets and move to Step 4
   const handleGateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -313,6 +313,19 @@ export default function AnalyzerPage() {
           </div>
         )}
       </main>
+
+      {/* DYNAMIC MOVING WARNING */}
+      {(platform === 'tiktok' || platform === 'instagram') && (
+        <div className="experimental-warning fade-in-up">
+          <div className="warning-content">
+            <span className="moving-border"></span>
+            <div className="warning-inner">
+              <i className="fas fa-flask"></i>
+              <p>{t.experimentalMsg}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
