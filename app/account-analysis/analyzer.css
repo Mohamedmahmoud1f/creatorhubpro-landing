@@ -703,13 +703,30 @@
 /* Mobile adjustments */
 @media (max-width: 600px) {
     .experimental-warning {
-        left: 15px;
-        right: 15px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
         bottom: 20px;
-        max-width: none;
+        width: calc(100% - 30px);
+        max-width: 420px;
+    }
+
+    .rtl .experimental-warning {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+
+    .warning-content {
+        width: 100%;
     }
 
     .warning-inner {
         padding: 12px 16px;
+    }
+
+    .moving-border {
+        animation: none;
+        opacity: 0.4;
     }
 }
