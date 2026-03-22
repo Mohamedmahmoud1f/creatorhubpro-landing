@@ -2263,10 +2263,11 @@ export default function Home() {
             <li><i class="fas fa-check"></i> <span>10 بوسترات سوشيال ميديا بتصميم جذاب</span></li>
             <li><i class="fas fa-check"></i> <span>تحسين جودة الصوت والصورة</span></li>
             <li><i class="fas fa-check"></i> <span>تسليم سريع ومنظم</span></li>
-            <li><i class="fas fa-check"></i> <span>تعديل واحد لكل فيديو</span></li>
+            <li><i class="fas fa-check"></i> <span>مراجعة احترافية لكل فيديو </span></li>
+            <li><i class="fas fa-check"></i> <span>نظام متابعة وتواصل متكامل</span></li>
             <li><i class="fas fa-check"></i> <span>خطة المحتوى الأساسية (PDF + خطة الشهر الأول)</span></li>
             <li><i class="fas fa-check"></i> <span>20 قالب Hook جاهز للاستخدام</span></li>
-            <li><i class="fas fa-check"></i> <span>إطار كتابة الكابشن البسيط</span></li>
+            <li><i class="fas fa-check"></i> <span>إطار كتابة الكابشن</span></li>
             <li><i class="fas fa-check"></i> <span>هيكل الفيديو الجاهز (مقدمة / جسم / CTA)</span></li>
             <li><i class="fas fa-check"></i> <span>تقويم محتوى شهري جاهز للاستخدام</span></li>
           </ul>
@@ -2275,10 +2276,11 @@ export default function Home() {
             <li><i class="fas fa-check"></i> <span>10 Social Media Posters — Creative Design</span></li>
             <li><i class="fas fa-check"></i> <span>Audio & Visual Quality Enhancement</span></li>
             <li><i class="fas fa-check"></i> <span>Fast & Organized Delivery</span></li>
-            <li><i class="fas fa-check"></i> <span>1 Revision per Video</span></li>
+            <li><i class="fas fa-check"></i> <span>Professional review for each video</span></li>
+            <li><i class="fas fa-check"></i> <span>Full communication and follow-up system</span></li>
             <li><i class="fas fa-check"></i> <span>Content Starter Blueprint (PDF + Month 1 Plan)</span></li>
             <li><i class="fas fa-check"></i> <span>20 Ready-to-Use Hook Templates</span></li>
-            <li><i class="fas fa-check"></i> <span>Simple Caption Framework</span></li>
+            <li><i class="fas fa-check"></i> <span>Caption Framework</span></li>
             <li><i class="fas fa-check"></i> <span>Ready Video Structure (Intro / Body / CTA)</span></li>
             <li><i class="fas fa-check"></i> <span>Monthly Content Calendar (Ready to Use)</span></li>
           </ul>
