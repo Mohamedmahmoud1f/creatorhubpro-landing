@@ -651,7 +651,9 @@ export default function Home() {
   <nav class="navbar" id="navbar">
     <div class="container nav-inner">
     <div class="logo" style="flex-direction:column;align-items:flex-start;gap:2px;">
+    <a href="#hero">
     <img src="/brand/cropped.png" alt="CreatorHubPro" class="logo-img" style="width:100px;" />
+    </a>
     <div class="logo-slogan-v2" style="height: 20px;">
           <span class="lsv2-prefix ar-text">نظام ينمّي</span>
           <span class="lsv2-prefix en-text" style="display:none">Grow Your</span>

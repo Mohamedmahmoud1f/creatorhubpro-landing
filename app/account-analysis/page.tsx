@@ -155,9 +155,9 @@ export default function AnalyzerPage() {
 
       <nav className="navbar">
         <div className="container nav-inner">
-          <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+          <Link href="/" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
             <img src="./brand/cropped.png" style={{ height: "40px" }} alt="logo" />
-          </div>
+          </Link>
           <button className="lang-toggle" onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}>
             {lang === 'en' ? 'العربية' : 'EN'}
           </button>
