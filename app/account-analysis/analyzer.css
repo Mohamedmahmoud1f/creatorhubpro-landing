@@ -730,3 +730,11 @@
         opacity: 0.4;
     }
 }
+
+.serviceUnderMentainancer {
+    background-color: tomato    ;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 15px 0;
+    text-align: center;
+}

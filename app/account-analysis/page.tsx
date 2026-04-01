@@ -184,7 +184,9 @@ export default function AnalyzerPage() {
               ))}
             </div>
 
-            <form onSubmit={handleAnalyze}>
+            <form 
+            // onSubmit={handleAnalyze}
+            >
               <div className="input-group">
                 <label className="input-label">{t.categoryLabel}</label>
                 <select
@@ -200,6 +202,7 @@ export default function AnalyzerPage() {
                 </select>
               </div>
 
+                <p className="serviceUnderMentainancer">Service is under mentainance</p>
               <div className="search-box-wrap">
                 <input
                   type="text"
