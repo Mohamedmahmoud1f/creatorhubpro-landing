@@ -21,11 +21,12 @@ export async function POST(req: Request) {
         // Ensure you have a sheet named 'Sheet1' or change the range below
         const response = await sheets.spreadsheets.values.append({
             spreadsheetId: process.env.GOOGLE_SHEET_ID,
-            range: 'Leeds!A:I',
+            range: 'Leeds!A1', // Start looking from the top-left
             valueInputOption: 'USER_ENTERED',
+            insertDataOption: 'INSERT_ROWS', // This forces a new row to be created
             requestBody: {
                 values: [[
-                    new Date().toISOString(), // Date
+                    new Date().toISOString(),
                     name,
                     email,
                     platform,
