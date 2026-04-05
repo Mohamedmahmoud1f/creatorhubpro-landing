@@ -2241,7 +2241,7 @@ export default function Home() {
           <!-- Price -->
           <div class="pkg-price-wrap">
             <div class="pkg-price">
-              <span class="price-num">3,990</span>
+              <span class="price-num">بعد الخصم 3,990</span>
               <span class="price-currency ar-text">جنيه</span>
               <span class="price-currency en-text" style="display:none">EGP</span>
             </div>
