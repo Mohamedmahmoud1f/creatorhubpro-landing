@@ -2082,7 +2082,7 @@ export default function Home() {
             </div>
             <div>
               <h3 class="cmp-title-win">CreatorHubPro System</h3>
-              <p class="cmp-pos-line cmp-pos-win ar-text">مش خدمة… ده نظام بيشتغل معاك</p>
+              <p class="cmp-pos-line cmp-pos-win ar-text">مش خدمة مونتاج فقط… ده نظام بيشتغل معاك</p>
               <p class="cmp-pos-line cmp-pos-win en-text" style="display:none">Not a service… a system that works with you</p>
             </div>
           </div>
