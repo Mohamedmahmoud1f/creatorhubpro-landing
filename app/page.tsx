@@ -2269,7 +2269,7 @@ export default function Home() {
             <li><i class="fas fa-check"></i> <span>نظام متابعة وتواصل متكامل</span></li>
             <li><i class="fas fa-check"></i> <span>خطة المحتوى الأساسية (Excel + خطة محتوى الشهر الأول)</span></li>
             <li><i class="fas fa-check"></i> <span>كتيب 100 Hook جاهز مجرّب تقدر تستخدمه فورا حسب نوع محتواك</span></li>
-            <li><i class="fas fa-check"></i> <span>إطار كتابة الكابشن</span></li>
+            <li><i class="fas fa-check"></i> <span>كابشن جاهزة لمدة شهر تقدر تستخدمها وتعدّل عليها بسهولة</span></li>
             <li><i class="fas fa-check"></i> <span>نموذج فيديو جاهز يخلّيك عارف تقول إيه في أول 3 ثواني، تكمل بإيه، وتختم إزاي (مقدمة / جسم / CTA)</span></li>
             <li><i class="fas fa-check"></i> <span>جدول نشر جاهز ومنظم</span></li>
           </ul>
