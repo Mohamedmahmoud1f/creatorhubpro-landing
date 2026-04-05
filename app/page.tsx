@@ -1192,7 +1192,7 @@ export default function Home() {
       </div>
 
       <h2 class="section-title ar-text">
-        مش خدمة…<br/><span class="gradient-text">ده نظام كامل لنمو محتواك</span>
+         مش خدمة مونتاج فقط…<br/><span class="gradient-text">ده نظام كامل لنمو محتواك</span>
       </h2>
       <h2 class="section-title en-text" style="display:none">
         Not a Service…<br/><span class="gradient-text">A Complete System for Your Content Growth</span>
