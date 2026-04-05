@@ -986,7 +986,7 @@ export default function Home() {
         <div class="ab2-headline-block">
           <h2 class="ab2-headline ar-text">
             مشكلتك مش في المحتوى…
-            <span class="ab2-headline-accent">مشكلتك إن محدش بيشوفه.</span>
+            <span class="ab2-headline-accent">مشكلتك إنك مش بتكسب منه.</span>
           </h2>
           <h2 class="ab2-headline en-text" style="display:none">
             Your problem isn't the content…
@@ -1033,7 +1033,7 @@ export default function Home() {
           <p class="ab2-service-text ar-text">
             نحن بنقدّم <span class="ab2-service-hl">مونتاج فيديو احترافي</span>…
             <br class="ab2-br-mobile"/>
-            لكن بهدف واحد: <strong>نتيجة.</strong>
+            لكن بهدف واحد: <strong>تكسب عميل</strong>
           </p>
           <p class="ab2-service-text en-text" style="display:none">
             We provide <span class="ab2-service-hl">professional video editing</span>…
