@@ -2265,7 +2265,7 @@ export default function Home() {
             <li><i class="fas fa-check"></i> <span>10 بوسترات سوشيال ميديا بهويتك البصرية</span></li>
             <li><i class="fas fa-check"></i> <span>تحسين جودة الصوت والصورة</span></li>
             <li><i class="fas fa-check"></i> <span>تسليم سريع ومنظم</span></li>
-            <li><i class="fas fa-check"></i> <span>مراجعة احترافية بعد كل فيديو </span></li>
+            <li><i class="fas fa-check"></i> <span>تقييم شامل لحسابك</span></li>
             <li><i class="fas fa-check"></i> <span>نظام متابعة وتواصل متكامل</span></li>
             <li><i class="fas fa-check"></i> <span>خطة المحتوى الأساسية (Excel + خطة محتوى الشهر الأول)</span></li>
             <li><i class="fas fa-check"></i> <span>كتيب 100 Hook جاهز مجرّب تقدر تستخدمه فورا حسب نوع محتواك</span></li>
