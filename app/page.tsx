@@ -2340,6 +2340,7 @@ export default function Home() {
           <div class="pkg-block-title ar-text"><i class="fas fa-film"></i> المحتوى والتصميم</div>
           <div class="pkg-block-title en-text" style="display:none"><i class="fas fa-film"></i> Content & Design</div>
           <ul class="pkg-features ar-text">
+            <li><i class="fas fa-check"></i> <span>كل مميزات باقة Start</span></li>
             <li><i class="fas fa-check"></i> <span>25 فيديو قصير بمونتاج احترافي متقدم</span></li>
             <li><i class="fas fa-check"></i> <span>25 بوستر سوشيال ميديا بتصميم احترافي</span></li>
             <li><i class="fas fa-check"></i> <span>25 غلاف فيديو (Thumbnail) احترافي</span></li>
