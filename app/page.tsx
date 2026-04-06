@@ -2262,16 +2262,16 @@ export default function Home() {
           <!-- Features — Arabic only -->
           <ul class="pkg-features ar-text">
             <li><i class="fas fa-check"></i> <span>10 فيديوهات قصيرة (Reels / Shorts) بمونتاج احترافي</span></li>
-            <li><i class="fas fa-check"></i> <span>10 بوسترات سوشيال ميديا بهويتك البصرية</span></li>
-            <li><i class="fas fa-check"></i> <span>تحسين جودة الصوت والصورة</span></li>
+            <li><i class="fas fa-check"></i> <span>10 بوسترات تدعم الفيديو وتزود التفاعل عليه بهويتك البصرية</span></li>
+            <li><i class="fas fa-check"></i> <span>تحسين جودة الفيديو علشان يظهر بشكل احترافي</span></li>
             <li><i class="fas fa-check"></i> <span>تسليم سريع ومنظم</span></li>
             <li><i class="fas fa-check"></i> <span>كتيبات تعليمية لأسرار صناعة المحتوى</span></li>
-            <li><i class="fas fa-check"></i> <span>تقييم شامل لحسابك</span></li>
-            <li><i class="fas fa-check"></i> <span>نظام متابعة وتواصل متكامل</span></li>
-            <li><i class="fas fa-check"></i> <span>خطة المحتوى الأساسية (Excel + خطة محتوى الشهر الأول)</span></li>
+            <li><i class="fas fa-check"></i> <span>مراجعة حسابك لمعرفة إيه يتعدل فورًا</span></li>
+            <li><i class="fas fa-check"></i> <span>نظام متابعة وتواصل داخل منصة ديسكورد</span></li>
+            <li><i class="fas fa-check"></i> <span>خطة محتوى متكاملة توضح تنشر إيه خلال أول شهر</span></li>
             <li><i class="fas fa-check"></i> <span>كتيب 100 Hook جاهز مجرّب تقدر تستخدمه فورا حسب نوع محتواك</span></li>
-            <li><i class="fas fa-check"></i> <span>كابشن جاهزة لمدة شهر تقدر تستخدمها وتعدّل عليها بسهولة</span></li>
-            <li><i class="fas fa-check"></i> <span>نموذج فيديو جاهز يخلّيك عارف تقول إيه في أول 3 ثواني، تكمل بإيه، وتختم إزاي (مقدمة / جسم / CTA)</span></li>
+            <li><i class="fas fa-check"></i> <span>كابشن جاهزة لمحتواك تقدر تستخدمها وتعدّل عليها بسهولة</span></li>
+            <li><i class="fas fa-check"></i> <span>نموذج فيديو جاهز يخلّيك عارف تقول إيه في أول 3 ثواني، تكمل بإيه، وتختم إزاي</span></li>
             <li><i class="fas fa-check"></i> <span>جدول نشر جاهز ومنظم</span></li>
           </ul>
           <ul class="pkg-features en-text" style="display:none">
@@ -2345,8 +2345,8 @@ export default function Home() {
             <li><i class="fas fa-check"></i> <span>25 بوستر سوشيال ميديا بتصميم احترافي</span></li>
             <li><i class="fas fa-check"></i> <span>25 غلاف فيديو (Thumbnail) احترافي</span></li>
             <li><i class="fas fa-check"></i> <span>تحسين الهوك ورفع معدل المشاهدة</span></li>
-            <li><i class="fas fa-check"></i> <span>توصيات احترافية مضمونة للتطور</span></li>
-            <li><i class="fas fa-check"></i> <span>تحديثات لأحدث تطورات الخوارزميات</span></li>
+            <li><i class="fas fa-check"></i> <span> توجيه عملي على محتواك الحالي لتطويره</span></li>
+            <li><i class="fas fa-check"></i> <span>تحديثات مستمرة لأحدث تطورات الخوارزميات</span></li>
           </ul>
           <ul class="pkg-features en-text" style="display:none">
             <li><i class="fas fa-check"></i> <span>25 Short Videos — Advanced Pro Editing</span></li>
@@ -2366,9 +2366,9 @@ export default function Home() {
               <li><i class="fas fa-star"></i> <span>جلسات استشارية منتظمة لتطوير المحتوى</span></li>
               <li><i class="fas fa-star"></i> <span>رد مستمر على الاستفسارات والأسئلة</span></li>
               <li><i class="fas fa-star"></i> <span>توجيه مباشر لزيادة المبيعات والنمو</span></li>
-              <li><i class="fas fa-star"></i> <span>Content Strategy Call مع البروفيسور</span></li>
+              <li><i class="fas fa-star"></i> <span>مكالمة تساعدك تختار محتوى أقرب للتفاعل والنتيجة مع البروفيسور</span></li>
               <li><i class="fas fa-star"></i> <span>تحليل حساب العميل (Audit)</span></li>
-              <li><i class="fas fa-star"></i> <span>Competitor Breakdown</span></li>
+              <li><i class="fas fa-star"></i> <span>معرفة ما يحقق نتائج لدى منافسينك وتطبيقه على محتواك</span></li>
               <li><i class="fas fa-star"></i> <span>Hook Optimization System</span></li>
               <li><i class="fas fa-star"></i> <span>Caption Writing + CTA Optimization</span></li>
               <li><i class="fas fa-star"></i> <span>A/B Testing للأفكار</span></li>
