@@ -2711,7 +2711,7 @@ export default function Home() {
         <!-- T1 -->
         <div class="testimonial-card animate-on-scroll">
           <div class="testi-stars">★★★★★</div>
-          <p class="ar-text testi-quote">"كنت بصور فيديوهات من موبايلي ومحدش بيشوفها… بعد ما بدأت معاهم بقى عندي ناس بتتواصل معايا وتسأل عن شغلي. الفيديو اتغيّر تماماً."</p>
+          <p class="ar-text testi-quote">"كنت بصور فيديوهات من موبايلي ومحدش بيشوفها… بعد ما بدأت معاهم بقى عندي ناس بتتواصل معايا وتسأل عن شغلي. الفيديو اتغير تماماً."</p>
           <p class="en-text testi-quote" style="display:none">"I was recording videos on my phone and nobody watched them… after starting with them people started reaching out asking about my work. The video quality changed completely."</p>
           <div class="testimonial-author">
             <div class="author-avatar av-purple">م</div>
@@ -2771,7 +2771,7 @@ export default function Home() {
         <!-- T5 -->
         <div class="testimonial-card animate-on-scroll">
           <div class="testi-stars">★★★★★</div>
-          <p class="ar-text testi-quote">"أنا مش خبير في التصوير ومش عارف المونتاج… بس معاهم حسيت إن عندي فريق بيشتغل معايا. أول ريلز عمله وصل لـ 8 آلاف مشاهدة."</p>
+          <p class="ar-text testi-quote">"أنا مش خبير في التصوير ومش عارف المونتاج… بس معاهم حسيت إن عندي فريق بيشتغل معايا. أول ريلز عملته وصل لـ 8 آلاف مشاهدة."</p>
           <p class="en-text testi-quote" style="display:none">"I'm no expert in filming or editing… but with them I felt like I had a team working with me. The first reel we made reached 8,000 views."</p>
           <div class="testimonial-author">
             <div class="author-avatar av-pink">ر</div>
@@ -2794,13 +2794,13 @@ export default function Home() {
         <!-- T6 -->
         <div class="testimonial-card animate-on-scroll">
           <div class="testi-stars">★★★★★</div>
-          <p class="ar-text testi-quote">"كنت بنزل محتوى بانتظام بس التفاعل واقف… جلسة واحدة مع البروفيسور غيّرت طريقة تفكيري في الهوك والأول ثواني. التفاعل زاد 3 مرات في شهر."</p>
+          <p class="ar-text testi-quote">"كنت بنزل محتوى بانتظام بس التفاعل واقف… جلسة واحدة مع البروفيسور غيرت طريقة تفكيري في الهوك والأول ثواني. التفاعل زاد 3 مرات في شهر."</p>
           <p class="en-text testi-quote" style="display:none">"I was posting consistently but engagement was flat… one session with the Professor changed how I think about hooks and the first seconds. Engagement tripled in a month."</p>
           <div class="testimonial-author">
             <div class="author-avatar av-teal">ي</div>
             <div class="author-info">
               <strong>ياسمين</strong>
-              <span class="ar-text">بتعمل فيديوهات تعليمية وعايزة تكبّر</span>
+              <span class="ar-text">بتعمل فيديوهات تعليمية وعايزة تكبر</span>
               <span class="en-text" style="display:none">Creates educational videos and wants to grow</span>
             </div>
           </div>
@@ -2809,7 +2809,7 @@ export default function Home() {
         <!-- T7 -->
         <div class="testimonial-card animate-on-scroll">
           <div class="testi-stars">★★★★★</div>
-          <p class="ar-text testi-quote">"كنت شايل كل حاجة لوحدي — التصوير والمونتاج والبوستات… بقيت بسلّم الخام وأستلم المحتوى جاهز. بقى عندي وقت أفكر في النمو بدل ما أتعب في التنفيذ."</p>
+          <p class="ar-text testi-quote">"كنت شايل كل حاجة لوحدي — التصوير والمونتاج والبوستات… بقيت بسلم الخام وأستلم المحتوى جاهز. بقى عندي وقت أفكر في النمو بدل ما أتعب في التنفيذ."</p>
           <p class="en-text testi-quote" style="display:none">"I was doing everything alone — filming, editing, posting… now I hand over the raw footage and receive ready content. I have time to think about growth instead of getting exhausted in execution."</p>
           <div class="testimonial-author">
             <div class="author-avatar av-indigo">ط</div>
@@ -2824,7 +2824,7 @@ export default function Home() {
         <!-- T8 -->
         <div class="testimonial-card animate-on-scroll">
           <div class="testi-stars">★★★★★</div>
-          <p class="ar-text testi-quote">"عندي بيزنس صغير وكنت بجرب السوشيال بدون خطة… البروفيسور فهّمني إزاي أحوّل المشاهدات لعملاء فعليين. دلوقتي بيجيلي استفسارات كل يوم من الريلز."</p>
+          <p class="ar-text testi-quote">"عندي بيزنس صغير وكنت بجرب السوشيال بدون خطة… البروفيسور فهّمني إزاي أحول المشاهدات لعملاء فعليين. دلوقتي بيجيلي استفسارات كل يوم من الريلز."</p>
           <p class="en-text testi-quote" style="display:none">"I have a small business and was trying social media with no plan… the Professor showed me how to turn views into actual clients. Now I get inquiries every day from reels."</p>
           <div class="testimonial-author">
             <div class="author-avatar av-amber">ن</div>
@@ -2839,7 +2839,7 @@ export default function Home() {
         <!-- T9 -->
         <div class="testimonial-card animate-on-scroll">
           <div class="testi-stars">★★★★★</div>
-          <p class="ar-text testi-quote">"كنت بعمل محتوى على تيك توك وعايز أكبر بس مش عارف كيف… لأول مرة حسيت إن في حد بيوجهني صح. وصلت لـ 20 ألف متابع في شهرين بس."</p>
+          <p class="ar-text testi-quote">"كنت بعمل محتوى على تيك توك وعايز أكبر بس مش عارفه ازاى… لأول مرة حسيت إن في حد بيوجهني صح. وصلت لـ 20 ألف متابع في شهرين بس."</p>
           <p class="en-text testi-quote" style="display:none">"I was making TikTok content and wanted to grow but didn't know how… for the first time I felt like someone was guiding me right. Reached 20K followers in just two months."</p>
           <div class="testimonial-author">
             <div class="author-avatar av-rose">ل</div>
