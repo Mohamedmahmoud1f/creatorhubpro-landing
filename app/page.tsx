@@ -725,7 +725,7 @@ export default function Home() {
         <!-- System tagline -->
         <div class="hero-tagline ar-text">
           <i class="fas fa-infinity"></i>
-          مش مجرد مونتاج… هذا نظام نمو كامل
+          مش مجرد مونتاج… لكن نظام نمو كامل
         </div>
         <div class="hero-tagline en-text" style="display:none">
           <i class="fas fa-infinity"></i>
@@ -1122,14 +1122,14 @@ export default function Home() {
           <div class="problem-icon"><i class="fas fa-film"></i></div>
           <h3 class="ar-text">المونتاج مش جذاب</h3>
           <h3 class="en-text" style="display:none">Weak Editing</h3>
-          <p class="ar-text">فيديو ضعيف = الناس تسحب وتمشي في الثواني الأولى</p>
+          <p class="ar-text">فيديو ضعيف = الناس تتفرج وتمشي في الثواني الأولى</p>
           <p class="en-text" style="display:none">Poor editing = people scroll away in the first seconds</p>
         </div>
         <div class="problem-card animate-on-scroll">
           <div class="problem-icon"><i class="fas fa-compass"></i></div>
           <h3 class="ar-text">مفيش توجيه</h3>
           <h3 class="en-text" style="display:none">No Guidance</h3>
-          <p class="ar-text">بتشتغل لوحدك وملقيش حد يقولك الطريق الصح</p>
+          <p class="ar-text">بتشتغل لوحدك ومفيش خطة واضحة</p>
           <p class="en-text" style="display:none">Working alone with no one guiding you in the right direction</p>
         </div>
         <div class="problem-card animate-on-scroll">
@@ -2099,7 +2099,7 @@ export default function Home() {
               <span class="cmp-check-icon"><i class="fas fa-check"></i></span>
               <div>
                 <strong>كل فيديو ليه دور في زيادة التفاعل أو المبيعات</strong>
-                <span>مش بنعمل محتوى — بنبني مسار بيوصّل للعميل</span>
+                <span>مش بنعمل محتوى فقط - بنبني مسار بيوصّل للعميل</span>
               </div>
             </li>
             <li>
