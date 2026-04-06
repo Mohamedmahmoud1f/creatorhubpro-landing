@@ -2345,7 +2345,7 @@ export default function Home() {
             <li><i class="fas fa-check"></i> <span>25 بوستر سوشيال ميديا بتصميم احترافي</span></li>
             <li><i class="fas fa-check"></i> <span>25 غلاف فيديو (Thumbnail) احترافي</span></li>
             <li><i class="fas fa-check"></i> <span>تحسين الهوك ورفع معدل المشاهدة</span></li>
-            <li><i class="fas fa-check"></i> <span> توجيه عملي على محتواك الحالي لتطويره</span></li>
+            <li><i class="fas fa-check"></i> <span>  توجيه عملي على محتواك الحالي لتطويره مع خبراء صناعة المحتوى</span></li>
             <li><i class="fas fa-check"></i> <span>تحديثات مستمرة لأحدث تطورات الخوارزميات</span></li>
           </ul>
           <ul class="pkg-features en-text" style="display:none">
@@ -2362,12 +2362,12 @@ export default function Home() {
             <div class="pkg-block-title ar-text"><i class="fas fa-graduation-cap"></i> مع البروفيسور</div>
             <div class="pkg-block-title en-text" style="display:none"><i class="fas fa-graduation-cap"></i> With the Professor — Exclusive USP</div>
             <ul class="pkg-features pkg-features-usp ar-text">
-              <li><i class="fas fa-star"></i> <span>بثوث تعليمية مباشرة مع البروفيسور</span></li>
+              <li><i class="fas fa-star"></i> <span>بث مباشر تعليمي مباشرة مع البروفيسور</span></li>
               <li><i class="fas fa-star"></i> <span>جلسات استشارية منتظمة لتطوير المحتوى</span></li>
-              <li><i class="fas fa-star"></i> <span>رد مستمر على الاستفسارات والأسئلة</span></li>
+              <li><i class="fas fa-star"></i> <span>رد مستمر فى بث مباشر على الاستفسارات والأسئلة</span></li>
               <li><i class="fas fa-star"></i> <span>توجيه مباشر لزيادة المبيعات والنمو</span></li>
-              <li><i class="fas fa-star"></i> <span>مكالمة تساعدك تختار محتوى أقرب للتفاعل والنتيجة مع البروفيسور</span></li>
-              <li><i class="fas fa-star"></i> <span>تحليل حساب العميل (Audit)</span></li>
+              <li><i class="fas fa-star"></i> <span>جلسة مع البروفيسور تساعدك تختار محتوى أقرب للتفاعل والنتيجة </span></li>
+              <li><i class="fas fa-star"></i> <span>تحليل وتحسين حساباتك (Audit)</span></li>
               <li><i class="fas fa-star"></i> <span>معرفة ما يحقق نتائج لدى منافسينك وتطبيقه على محتواك</span></li>
               <li><i class="fas fa-star"></i> <span>Hook Optimization System</span></li>
               <li><i class="fas fa-star"></i> <span>Caption Writing + CTA Optimization</span></li>
