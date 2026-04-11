@@ -725,7 +725,7 @@ export default function Home() {
         <!-- System tagline -->
         <div class="hero-tagline ar-text">
           <i class="fas fa-infinity"></i>
-          مش مجرد مونتاج… لكن نظام نمو كامل
+          مش محتاج استوديو ولا فريق تصوير — صوّر محتواك بالموبايل، وإحنا نتولى الخطة والمونتاج والتحسين
         </div>
         <div class="hero-tagline en-text" style="display:none">
           <i class="fas fa-infinity"></i>
