@@ -725,17 +725,20 @@ export default function Home() {
         <!-- System tagline -->
         <div class="hero-tagline ar-text">
           <i class="fas fa-infinity"></i>
-          مش محتاج استوديو ولا فريق تصوير — صوّر محتواك بالموبايل، وإحنا نتولى الخطة والمونتاج والتحسين
+             مش محتاج استوديو ولا فريق تصوير
+              صوّر بالموبايل بس… وإحنا نتولى الباقي
         </div>
-        <div class="hero-tagline en-text" style="display:none">
+<div class="hero-tagline en-text" style="display:none">
           <i class="fas fa-infinity"></i>
           Not just editing… this is a complete growth system
         </div>
 
         <!-- Sub description -->
         <p class="hero-v2-sub ar-text">
-          نظام متكامل يجمع بين <strong>المونتاج الاحترافي</strong> و<strong>التوجيه الاستراتيجي</strong>
-          <br/>ليحوّل مشاهديك إلى عملاء حقيقيين — كل شهر أحسن من اللي قبله
+                      نظام متكامل يجمع بين <strong>المونتاج الاحترافي</strong> و<strong>من التحليل والخطة والأفكار
+            لحد السكربت والمونتاج والتصميم ومتابعة النتائج</strong>
+                      <br/>مش مجرد مونتاج… ده سيستم كامل بيحوّل محتواك لعملاء
+            وبيتطوّر معاك شهر بعد شهر   
         </p>
         <p class="hero-v2-sub en-text" style="display:none">
           A complete system combining <strong>professional editing</strong> and <strong>strategic coaching</strong>
