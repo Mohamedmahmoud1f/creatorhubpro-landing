@@ -1034,7 +1034,7 @@ export default function Home() {
         <!-- ⑤ Service clarification -->
         <div class="ab2-service">
           <p class="ab2-service-text ar-text">
-            نحن بنقدّم <span class="ab2-service-hl">مونتاج فيديو احترافي</span>…
+            احنا بنقدّم <span class="ab2-service-hl">مونتاج فيديو احترافي</span>…
             <br class="ab2-br-mobile"/>
             لكن بهدف واحد: <strong>تكسب عميل</strong>
           </p>
