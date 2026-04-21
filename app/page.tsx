@@ -2266,15 +2266,12 @@ export default function Home() {
           <ul class="pkg-features ar-text">
             <li><i class="fas fa-check"></i> <span>10 فيديوهات قصيرة (Reels / Shorts) بمونتاج احترافي</span></li>
             <li><i class="fas fa-check"></i> <span>10 بوسترات تدعم الفيديو وتزود التفاعل عليه بهويتك البصرية</span></li>
-            <li><i class="fas fa-check"></i> <span>تحسين جودة الفيديو علشان يظهر بشكل احترافي</span></li>
-            <li><i class="fas fa-check"></i> <span>تسليم سريع ومنظم</span></li>
             <li><i class="fas fa-check"></i> <span>كتيبات تعليمية لأسرار صناعة المحتوى</span></li>
             <li><i class="fas fa-check"></i> <span>مراجعة حسابك لمعرفة إيه يتعدل فورًا</span></li>
             <li><i class="fas fa-check"></i> <span>نظام متابعة وتواصل داخل منصة ديسكورد</span></li>
-            <li><i class="fas fa-check"></i> <span>خطة محتوى متكاملة توضح تنشر إيه خلال أول شهر</span></li>
+            <li><i class="fas fa-check"></i> <span>نساعدك فى إعداد خطة محتوى متكاملة توضح تنشر إيه خلال أول شهر</span></li>
             <li><i class="fas fa-check"></i> <span>كتيب 100 Hook جاهز مجرّب تقدر تستخدمه فورا حسب نوع محتواك</span></li>
-            <li><i class="fas fa-check"></i> <span>كابشن جاهزة لمحتواك تقدر تستخدمها وتعدّل عليها بسهولة</span></li>
-            <li><i class="fas fa-check"></i> <span>نموذج فيديو جاهز يخلّيك عارف تقول إيه في أول 3 ثواني، تكمل بإيه، وتختم إزاي</span></li>
+            <li><i class="fas fa-check"></i> <span>إعداد سكربت مخصص لمحتواك يناسب كل مقطع </span></li>
           </ul>
           <ul class="pkg-features en-text" style="display:none">
             <li><i class="fas fa-check"></i> <span>10 Short Videos (Reels / Shorts) — Pro Editing</span></li>
