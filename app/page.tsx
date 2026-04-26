@@ -2269,7 +2269,7 @@ export default function Home() {
             <li><i class="fas fa-check"></i> <span>كتيبات تعليمية لأسرار صناعة المحتوى</span></li>
             <li><i class="fas fa-check"></i> <span>مراجعة حسابك لمعرفة إيه يتعدل فورًا</span></li>
             <li><i class="fas fa-check"></i> <span>نظام متابعة وتواصل داخل منصة ديسكورد</span></li>
-            <li><i class="fas fa-check"></i> <span>إعداد خطة محتوى متكاملة توضح تنشر </span></li>
+            <li><i class="fas fa-check"></i> <span>  إعداد خطة محتوى متكاملة توضح تنشر إية</span></li>
             <li><i class="fas fa-check"></i> <span>كتيب 100 Hook جاهز تقدر تستخدمه فورا حسب نوع محتواك</span></li>
             <li><i class="fas fa-check"></i> <span>إعداد سكربت وأفكار مخصصه لمحتواك تناسب كل مقطع </span></li>
           </ul>
